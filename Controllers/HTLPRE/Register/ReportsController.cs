@@ -18,27 +18,39 @@ using GUIStd.Models;
 using MGUIBAAPI.Models.HTLPRE;
 using System.Collections.Generic;
 using GUIStd.DAL.AllNewHTL.Models.Private.RoomsAnalysis;
+using GUIStd.DAL.AllNewGUI.Models.Private.HTL.vHTRGM09;
 
 #endregion
 
 namespace MGUIBAAPI.Controllers.HTLPRE
 {
-	/// <summary>
-	/// 報表資料控制器
-	/// </summary>
-	[Route("htlpre/[controller]")]
-	public class ReportsController : GUIAppAuthController
-	{
-		#region " 私用屬性 "
+    /// <summary>
+    /// 報表資料控制器
+    /// </summary>
+    [Route("htlpre/[controller]")]
+    public class ReportsController : GUIAppAuthController
+    {
+        #region " 私用屬性 "
 
-		/// <summary>
-		/// 商業邏輯物件屬性
-		/// </summary>
-		private BlRoomsAnalysis BlRoomsAnalysis => new BlRoomsAnalysis(ClientContent);
         /// <summary>
         /// 商業邏輯物件屬性
         /// </summary>
-        private BlPreCheckIn BlPreCheckIn => new BlPreCheckIn(ClientContent);
+        private BlRoomsAnalysis BlRoomsAnalysis => new BlRoomsAnalysis(ClientContent);
+
+        /// <summary>
+        /// 帳單明細表商業邏輯物件屬性
+        /// </summary>
+        private BlAccountDetailReport BlAccountDetailReport => new BlAccountDetailReport(ClientContent);
+
+        /// <summary>
+        /// 科目彙總表商業邏輯物件屬性
+        /// </summary>
+        private BlAccountSummaryReport BlAccountSummaryReport => new BlAccountSummaryReport(ClientContent);
+
+        /// <summary>
+        /// 發票明細表商業邏輯物件屬性
+        /// </summary>
+        private BlInvoiceDetailReport BlInvoiceDetailReport => new BlInvoiceDetailReport(ClientContent);
         #endregion
 
         #region " 共用函式 - 查詢資料 "
@@ -48,12 +60,44 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// </summary>
         /// <returns>平面圖資料集合</returns>
         [HttpGet("FloorPlan")]
-		public IEnumerable<MdFloorPlan> GetFloorPlan()
-		{
-                return BlRoomsAnalysis.GetFloorPlanData();
+        public IEnumerable<MdFloorPlan> GetFloorPlan()
+        {
+            return BlRoomsAnalysis.GetFloorPlanData();
 
-		}
+        }
 
-		#endregion
-	}
+        /// <summary>
+        /// 查詢帳單明細表資料
+        /// </summary>
+        /// <param name="queryParams">查詢條件</param>
+        /// <returns>帳單明細表資料集合</returns>
+        [HttpPost("AccountDetail")]
+        public IEnumerable<MdAccountDetailReport> AccountDetail([FromBody] MdAccountDetailReportQuery queryParams)
+        {
+            return BlAccountDetailReport.Query(queryParams);
+        }
+
+        /// <summary>
+        /// 查詢科目彙總表資料
+        /// </summary>
+        /// <param name="queryParams">查詢條件</param>
+        /// <returns>科目彙總表資料集合</returns>
+        [HttpPost("AccountSummary")]
+        public IEnumerable<MdAccountSummaryReport> AccountSummary([FromBody] MdAccountDetailReportQuery queryParams)
+        {
+            return BlAccountSummaryReport.Query(queryParams);
+        }
+
+        /// <summary>
+        /// 查詢發票明細表資料
+        /// </summary>
+        /// <param name="queryParams">查詢條件</param>
+        /// <returns>發票明細表資料集合</returns>
+        [HttpPost("InvoiceDetail")]
+        public IEnumerable<MdInvoiceDetailReport> InvoiceDetail([FromBody] MdInvoiceDetailReportQuery queryParams)
+        {
+            return BlInvoiceDetailReport.Query(queryParams);
+        }
+        #endregion
+    }
 }
