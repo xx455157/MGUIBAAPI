@@ -1,6 +1,7 @@
 #region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 #endregion
 
@@ -15,7 +16,6 @@ using GUIStd.BLL.AllNewHTL.Private;
 using GUIStd.DAL.AllNewHTL.Models.Private.Register;
 using GUIStd.DAL.AllNewHTL.Models;
 using GUIStd.Models;
-using MGUIBAAPI.Models.HTLPRE;
 using System.Collections.Generic;
 using GUIStd.DAL.AllNewHTL.Models.Private.RoomsAnalysis;
 using GUIStd.DAL.AllNewGUI.Models.Private.HTL.vHTRGM09;
@@ -51,6 +51,11 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// 發票明細表商業邏輯物件屬性
         /// </summary>
         private BlInvoiceDetailReport BlInvoiceDetailReport => new BlInvoiceDetailReport(ClientContent);
+
+        /// <summary>
+        /// 空房庫存預測表商業邏輯物件屬性
+        /// </summary>
+        private BlVacantForecastReport BlVacantForecastReport => new BlVacantForecastReport(ClientContent);
         #endregion
 
         #region " 共用函式 - 查詢資料 "
@@ -98,6 +103,18 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         {
             return BlInvoiceDetailReport.Query(queryParams);
         }
+
+        /// <summary>
+        /// 查詢空房庫存預測表資料
+        /// </summary>
+        /// <param name="queryParams">查詢條件</param>
+        /// <returns>空房庫存預測表資料集合</returns>
+        [HttpPost("VacantForecast")]
+        public IEnumerable<MdVacantForecastReport> VacantForecast([FromBody] MdVacantForecastReportQuery queryParams)
+        {
+            return BlVacantForecastReport.Query(queryParams);
+        }
+
         #endregion
     }
 }
