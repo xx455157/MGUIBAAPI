@@ -1,0 +1,21 @@
+﻿<h2>@ViewData["Title"]</h2>
+<br />
+<address>
+	<strong>@ViewData["cAddress"]</strong>@ViewData["Address"]
+	<br />
+	<strong>@ViewData["cPhone"]</strong>@ViewData["Phone"]
+</address>
+<address>
+	<strong>@ViewData["cEMail"]</strong><a href="mailto:@ViewData["EMail"]">@ViewData["EMail"]</a>
+</address>
+
+<style>
+	body {
+		font-family: "Microsoft JhengHei", "Segoe UI Light", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+	}
+
+	h2 {
+		font-weight: bold;
+	}
+</style>
+

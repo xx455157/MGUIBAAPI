@@ -1,0 +1,5 @@
+檔案名稱				函式名稱			功能描述
+FoliosController.cs			GetDataForCheckOut		取得尚未退房的房間資料(未實作)
+FoliosController.cs			GetRowForPayment		取得房間帳單資料
+FoliosController.cs			Insert				轉入帳務資料
+FoliosController.cs			InsertFolio			新增帳匣(未實作)

@@ -1,0 +1,11 @@
+檔案名稱	        		函式名稱			功能描述
+AccountsController.cs			GetHelp				取得會計科目代碼資料(未實作)
+BkDateController.cs			GetHelp				取得會計日期資料
+CodesController.cs			GetHelp				取得代碼資料
+CodesController.cs			GetDataForCountry		取得國家代碼資料
+CompaniesController.cs			GetRow				取得合約公司基本資料
+CompaniesController.cs			GetDataForCompanySource		依照業務碼分類取得合約公司清單
+CompaniesController.cs			GetData				使用多個條件模糊查詢合約公司，並取得清單(目前找不到使用地方先暫停使用，待需要時再做調整)
+CompaniesController.cs			GetData2			取得全部合約公司
+ConfigsController.cs			GetHelp				取得系統參數資料
+ServicesController.cs			GetHelp				取得服務資料

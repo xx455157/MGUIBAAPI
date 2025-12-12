@@ -1,0 +1,5 @@
+檔案名稱					函式名稱				功能描述
+OrdersController.cs				GetPosDateTableData			餐廳取餐資料資料控制器
+RecipeController.cs				GetData					餐廳食譜資料控制器
+RecipeController.cs				GetData					取得餐飲分析資料
+ReservationsController.cs			GetPosDateTableData			餐廳桌況資料資料控制器

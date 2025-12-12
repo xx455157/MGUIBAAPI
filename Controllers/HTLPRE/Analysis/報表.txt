@@ -1,0 +1,9 @@
+檔案名稱				函式名稱					功能描述
+BookingsController.cs			GetRoomTypes					取得日期範圍的住房率資料
+BookingsController.cs			GetReservation					使用訂單號碼查詢訂單
+BookingsController.cs			GetReservations					取得該日期的訂單資料
+BookingsController.cs			GetRoomRates					查詢房價選項
+BookingsController.cs			GetDataForRoomSalesQuantity			取得日期範圍的房型銷售預測數量
+BookingsController.cs			GetDataForRoomSalesInventory			取得日期範圍的房型庫存預測數量
+BookingsController.cs			Insert						訂房資料寫入
+BookingsController.cs			Update						訂房資料更新

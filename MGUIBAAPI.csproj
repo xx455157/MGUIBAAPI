@@ -1,0 +1,461 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Product>GoldenUp Mobile Business Analysis WebAPI</Product>
+    <Company>GoldenUp Information</Company>
+    <Authors>GoldenUp</Authors>
+    <PackageId>MGUIBAAPI</PackageId>
+    <Copyright>Copyright © 2021</Copyright>
+    <Description>GoldenUp Mobile Business Analysis WebAPI</Description>
+    <NeutralLanguage>English (United States)</NeutralLanguage>
+    <AssemblyName>MGUIBAAPI</AssemblyName>
+    <RootNamespace>MGUIBAAPI</RootNamespace>
+    <IsServiceFabricServiceProject>True</IsServiceFabricServiceProject>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <UserSecretsId>3D029402-1EE8-4C38-BD56-E15558D6C559</UserSecretsId>
+    <LangVersion>7.1</LangVersion>
+    <Configurations>Debug;Release;Azure</Configurations>
+    <AssemblyVersion>25.11.1201.0</AssemblyVersion>
+    <FileVersion>25.11.1201.0</FileVersion>
+    <Version>25.11.1201.0</Version>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\netcoreapp2.2\MGUIBAAPI.xml</DocumentationFile>
+    <OutputPath>bin\</OutputPath>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>bin\netcoreapp2.2\MGUIBAAPI.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>bin\netcoreapp2.2\MGUIBAAPI.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\General\**" />
+    <Compile Remove="Controllers\GUI\**" />
+    <Compile Remove="Controllers\HTLPRE\**" />
+    <Compile Remove="Controllers\HTL\**" />
+    <Compile Remove="Controllers\IV\**" />
+    <Compile Remove="Controllers\NetGUI\**" />
+    <Compile Remove="Controllers\Pattern\**" />
+    <Compile Remove="Controllers\TRAINING\**" />
+    <Compile Remove="Models\Training\**" />
+    <Compile Remove="ViewModels\**" />
+    <Compile Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <Compile Remove="wwwroot\lib\jquery-validation\**" />
+    <Content Remove="Controllers\General\**" />
+    <Content Remove="Controllers\GUI\**" />
+    <Content Remove="Controllers\HTLPRE\**" />
+    <Content Remove="Controllers\HTL\**" />
+    <Content Remove="Controllers\IV\**" />
+    <Content Remove="Controllers\NetGUI\**" />
+    <Content Remove="Controllers\Pattern\**" />
+    <Content Remove="Controllers\TRAINING\**" />
+    <Content Remove="Models\Training\**" />
+    <Content Remove="ViewModels\**" />
+    <Content Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <Content Remove="wwwroot\lib\jquery-validation\**" />
+    <EmbeddedResource Remove="Controllers\General\**" />
+    <EmbeddedResource Remove="Controllers\GUI\**" />
+    <EmbeddedResource Remove="Controllers\HTLPRE\**" />
+    <EmbeddedResource Remove="Controllers\HTL\**" />
+    <EmbeddedResource Remove="Controllers\IV\**" />
+    <EmbeddedResource Remove="Controllers\NetGUI\**" />
+    <EmbeddedResource Remove="Controllers\Pattern\**" />
+    <EmbeddedResource Remove="Controllers\TRAINING\**" />
+    <EmbeddedResource Remove="Models\Training\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-validation\**" />
+    <None Remove="Controllers\General\**" />
+    <None Remove="Controllers\GUI\**" />
+    <None Remove="Controllers\HTLPRE\**" />
+    <None Remove="Controllers\HTL\**" />
+    <None Remove="Controllers\IV\**" />
+    <None Remove="Controllers\NetGUI\**" />
+    <None Remove="Controllers\Pattern\**" />
+    <None Remove="Controllers\TRAINING\**" />
+    <None Remove="Models\Training\**" />
+    <None Remove="ViewModels\**" />
+    <None Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <None Remove="wwwroot\lib\jquery-validation\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\AS\Private\vASR01Controller.cs" />
+    <Compile Remove="Controllers\AS\Private\vASR02Controller.cs" />
+    <Compile Remove="Controllers\AS\Private\vASR03Controller.cs" />
+    <Compile Remove="Controllers\AS\Private\vASR04Controller.cs" />
+    <Compile Remove="Controllers\AS\Private\vASR05Controller.cs" />
+    <Compile Remove="Controllers\AS\Private\vASR06Controller.cs" />
+    <Compile Remove="Controllers\AS\Private\vASR07Controller.cs" />
+    <Compile Remove="Controllers\AS\Private\vASR08Controller.cs" />
+    <Compile Remove="Controllers\AS\Private\vASR09Controller.cs" />
+    <Compile Remove="Controllers\AS\Private\vASR10Controller.cs" />
+    <Compile Remove="Controllers\GUIControllerBase.cs" />
+    <Compile Remove="Features\Configuration.cs" />
+    <Compile Remove="Features\LineBot.cs" />
+    <Compile Remove="Features\PushMessage.cs" />
+    <Compile Remove="Hubs\HTLPRE\TestHub.cs" />
+    <Compile Remove="Models\ApiAppSettings.cs" />
+    <Compile Remove="Models\AppSettings.cs" />
+    <Compile Remove="Models\DBProfile.cs" />
+    <Compile Remove="Models\DBSettings.cs" />
+    <Compile Remove="Models\TimeInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\General\DonQianKiosk\AvailableRoomsController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\BookingController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\BookingCxnlController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\BookingRoomDetailController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\CarController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\CardController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\FilesController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\HotelController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\InvoiceController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\PaymentController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\RoomStatusController.cs" />
+    <Compile Include="Controllers\General\DonQianKiosk\ServiceItemsController.cs" />
+    <Compile Include="Controllers\General\DunQianRMS\BookingsController.cs" />
+    <Compile Include="Controllers\General\DunQianRMS\HotelsController.cs" />
+    <Compile Include="Controllers\General\DunQianRMS\PricesController.cs" />
+    <Compile Include="Controllers\General\DunQianRMS\QueueJobsController.cs" />
+    <Compile Include="Controllers\General\DunQianRMS\RoomsController.cs" />
+    <Compile Include="Controllers\General\HTLPRE\CodesController.cs" />
+    <Compile Include="Controllers\General\HTLPRE\CurrencyController.cs" />
+    <Compile Include="Controllers\General\HTLPRE\Register\CheckInController.cs" />
+    <Compile Include="Controllers\General\HTLPRE\Register\ReservationInfoController.cs" />
+    <Compile Include="Controllers\General\Pattern\BkDateController.cs" />
+    <Compile Include="Controllers\General\Pattern\BookingsController.cs" />
+    <Compile Include="Controllers\General\Pattern\CodesController.cs" />
+    <Compile Include="Controllers\GUI\AnnounceController.cs" />
+    <Compile Include="Controllers\GUI\CompaniesController.cs" />
+    <Compile Include="Controllers\GUI\ConfigsController.cs" />
+    <Compile Include="Controllers\GUI\CustomersController.cs" />
+    <Compile Include="Controllers\GUI\DepartmentsController.cs" />
+    <Compile Include="Controllers\GUI\EformController.cs" />
+    <Compile Include="Controllers\GUI\EmployeesController.cs" />
+    <Compile Include="Controllers\GUI\EventsController.cs" />
+    <Compile Include="Controllers\GUI\FilesController.cs" />
+    <Compile Include="Controllers\GUI\FlowStagesController.cs" />
+    <Compile Include="Controllers\GUI\FormDataController.cs" />
+    <Compile Include="Controllers\GUI\MessagesController.cs" />
+    <Compile Include="Controllers\GUI\NumberRulesController.cs" />
+    <Compile Include="Controllers\GUI\Private\vEFP01Controller.cs" />
+    <Compile Include="Controllers\GUI\Private\vMCF10Controller.cs" />
+    <Compile Include="Controllers\GUI\UserGroupsController.cs" />
+    <Compile Include="Controllers\HTLPRE\Accounting\CheckOutController.cs" />
+    <Compile Include="Controllers\HTLPRE\Accounting\FoliosController.cs" />
+    <Compile Include="Controllers\HTLPRE\AccountsController.cs" />
+    <Compile Include="Controllers\HTLPRE\Analysis\RoomsController.cs" />
+    <Compile Include="Controllers\HTLPRE\Banquets\EventsController.cs" />
+    <Compile Include="Controllers\HTLPRE\BkDateController.cs" />
+    <Compile Include="Controllers\HTLPRE\CodesController.cs" />
+    <Compile Include="Controllers\HTLPRE\CompaniesController.cs" />
+    <Compile Include="Controllers\HTLPRE\ConfigsController.cs" />
+    <Compile Include="Controllers\HTLPRE\History\GuestController.cs" />
+    <Compile Include="Controllers\HTLPRE\HouseKeeping\MaidController.cs" />
+    <Compile Include="Controllers\HTLPRE\HouseKeeping\MinibarAmenitiesController.cs" />
+    <Compile Include="Controllers\HTLPRE\InvoicesController.cs" />
+    <Compile Include="Controllers\HTLPRE\Private\vHTFCM06Controller.cs" />
+    <Compile Include="Controllers\HTLPRE\Private\vHTGRM01Controller.cs" />
+    <Compile Include="Controllers\HTLPRE\Private\vHTRGM01Controller.cs" />
+    <Compile Include="Controllers\HTLPRE\Private\vHTRGM11Controller.cs" />
+    <Compile Include="Controllers\HTLPRE\Private\vPOSSetupController.cs" />
+    <Compile Include="Controllers\HTLPRE\Private\vQRCodeLangsController.cs" />
+    <Compile Include="Controllers\HTLPRE\QRCode\LangsController.cs" />
+    <Compile Include="Controllers\HTLPRE\Register\CheckInController.cs" />
+    <Compile Include="Controllers\HTLPRE\Register\ReportsController.cs" />
+    <Compile Include="Controllers\HTLPRE\Register\ReservationInfoController.cs" />
+    <Compile Include="Controllers\HTLPRE\Register\RoomsController.cs" />
+    <Compile Include="Controllers\HTLPRE\Register\RoomStaysController.cs" />
+    <Compile Include="Controllers\HTLPRE\Register\ShiftsController.cs" />
+    <Compile Include="Controllers\HTLPRE\Reservations\BookingsController.cs" />
+    <Compile Include="Controllers\HTLPRE\Reservations\PackagesController.cs" />
+    <Compile Include="Controllers\HTLPRE\Reservations\RoomBlocksController.cs" />
+    <Compile Include="Controllers\HTLPRE\Restaurant\OrdersController.cs" />
+    <Compile Include="Controllers\HTLPRE\Restaurant\RecipeController.cs" />
+    <Compile Include="Controllers\HTLPRE\Restaurant\ReservationsController.cs" />
+    <Compile Include="Controllers\HTLPRE\ServicesController.cs" />
+    <Compile Include="Controllers\HTL\AccountsController.cs" />
+    <Compile Include="Controllers\HTL\CodesController.cs" />
+    <Compile Include="Controllers\HTL\ConfigsController.cs" />
+    <Compile Include="Controllers\HTL\DataAsyncs\DataAsyncsController.cs" />
+    <Compile Include="Controllers\HTL\Members\MembersController.cs" />
+    <Compile Include="Controllers\HTL\Members\SysMemberController.cs" />
+    <Compile Include="Controllers\HTL\PerformancesController.cs" />
+    <Compile Include="Controllers\HTL\VouchersController.cs" />
+    <Compile Include="Controllers\IV\ConfigsController.cs" />
+    <Compile Include="Controllers\IV\RequisitionsController.cs" />
+    <Compile Include="Controllers\IV\WarehousesController.cs" />
+    <Compile Include="Controllers\NetGUI\AttachmentsController.cs" />
+    <Compile Include="Controllers\NetGUI\AuthProgramsController.cs" />
+    <Compile Include="Controllers\NetGUI\BasicCodesController.cs" />
+    <Compile Include="Controllers\NetGUI\BusinessesController.cs" />
+    <Compile Include="Controllers\NetGUI\ClientConfigsController.cs" />
+    <Compile Include="Controllers\NetGUI\CompaniesController.cs" />
+    <Compile Include="Controllers\NetGUI\ConfigsController.cs" />
+    <Compile Include="Controllers\NetGUI\CustomersController.cs" />
+    <Compile Include="Controllers\NetGUI\EmployeesController.cs" />
+    <Compile Include="Controllers\NetGUI\FlowsController.cs" />
+    <Compile Include="Controllers\NetGUI\SystemsController.cs" />
+    <Compile Include="Controllers\Pattern\ChartsController.cs" />
+    <Compile Include="Controllers\Pattern\CustomersController.cs" />
+    <Compile Include="Controllers\Pattern\EmployeesController.cs" />
+    <Compile Include="Controllers\Pattern\Private\vSCR01Controller.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controllers\HTLPRE\Register\登記.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="jose-jwt" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="NSwag.Annotations" Version="12.0.14" />
+    <PackageReference Include="NSwag.Core" Version="12.0.14" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="4.5.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+    <PackageReference Include="Z.Dapper.Plus" Version="7.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
+    <None Update="Aspose.Cells.NET.lic">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Aspose.Words.NET.lic">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Customer.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\A10程式重覆清單.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\ASP.NetCore.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\DoughnutChart.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\favicon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\GLMenu.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\IE11支援.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\Lang.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\line.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\RESTAPI.tiff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\Sample.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\stop.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\UniCode版多語系支援說明.tif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\Video.avi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\Video.mov">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\Video.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\Video.wmv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\WIN8 MENU.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\程式開發生命週期流程圖.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\自訂Menu出貨資料庫維護流程.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Export\開發網站部署流程.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Shared - Copy.Azure.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Shared.Azure.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Shared.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Token.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\WS.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\HTLPRE\Reports\" />
+    <Folder Include="Controllers\NetPY\" />
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Controllers\HTLPRE\RoomsController.csbak" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GUICore.Web">
+      <HintPath>..\..\..\Packages\BIN\netcoreapp2.2\GUICore.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewAS">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewAS.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewGL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewGL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewGUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewHTL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewHTL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewIV">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewIV.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewPY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewPY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.GUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.GUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.HT2020">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.HT2020.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.OA">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.OA.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.PY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.PY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewAS">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewAS.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewAS.Constant">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewAS.Constant.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewGL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewGL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewGUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewHTL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewHTL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewIV">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewIV.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewPY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewPY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.Base">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.GUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.GUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.HT2020">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.HT2020.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.OA">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.OA.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.PY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.PY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewAS">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewAS.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewGL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewGL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewGUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewHTL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewHTL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewPY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewPY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBGUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBOA">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBOA.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBPY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBPY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.Excel">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.Lang">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.Lang.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangAS">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangAS.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangGL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangGL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangHTL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangHTL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangOA">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangOA.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangPY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangPY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.Security">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.Security.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

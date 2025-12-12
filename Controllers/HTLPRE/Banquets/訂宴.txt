@@ -1,0 +1,7 @@
+檔案名稱				函式名稱			功能描述
+EventsController.cs			GetDataByDate			以日期取得當日有效宴會檢曆
+EventsController.cs			GetDataByDate			以日期+狀態取得宴會檢曆
+EventsController.cs			GetDataEventType		取得訂宴活動類別
+EventsController.cs			GetDataRooms			取得廳別底下的宴會場地
+EventsController.cs			GetDataSales			取得訂宴業務員
+EventsController.cs			GetRow				取得宴會詳細資料

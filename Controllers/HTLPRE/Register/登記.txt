@@ -1,0 +1,9 @@
+檔案名稱				函式名稱			功能描述
+CheckInController.cs			GetData				取得當日入住清單
+CheckInController.cs			GetDataForEffectRVList		取得有效訂房清單
+CheckInController.cs			GetRow				取得唯一的住客資料
+CheckInController.cs			Update				修改資料
+CheckInController.cs			UpdateForCheckIn		入住作業(未實作)
+CheckOutController.cs			GetData				退房查詢(未實作)
+CheckOutController.cs			UpdateForCheckOut		退房作業(未實作)
+ReservationInfoController.cs		GetCol				訂房須知資料控制器

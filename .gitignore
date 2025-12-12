@@ -82,5 +82,21 @@ Content/Logs/*.txt
 ## User-specific files
 appsettings.Development.json.user
 
+## IDE and Editor files
+.vscode/
+.config/
 
+## License and Key files
+*.lic
+*.Key
+Content/Files/*.Key
+
+## Backup and Copy files
+*.csbak
+* - Copy.cs
+* - Copy.*
+
+## Temporary files
+*.tmp
+*.temp
 

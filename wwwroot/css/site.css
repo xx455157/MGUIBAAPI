@@ -1,0 +1,106 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+.site-name {
+    color: #7CDCFE !important;
+    font-weight: bold !important;
+    font-size: 18px;
+}
+
+/* 版號 */
+#version {
+    top: -12px;
+    position: relative;
+    background-color: #E55F2A;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+
+    .image-full {
+        width: 100%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .navbar-expand-lg > .container, .navbar-expand-lg > .container-fluid, .navbar-expand-lg > .container-sm, .navbar-expand-lg > .container-md, .navbar-expand-lg > .container-lg, .navbar-expand-lg > .container-xl {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding: 15px;
+    }
+}
+
+.navbar {
+    background-color: #222 !important;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.navbar-toggler {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.navbar-collapse {
+    border-top: 1px solid rgb(16, 16, 16);
+    margin-right: -15px;
+    margin-left: -15px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
+}
+
+.navbar-nav.mr-auto {
+    padding-left: 15px;
+}
+
+.badge {
+    color: #fff;
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+h2, .h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 16px;
+    border-left: 5px solid #eee;
+}
