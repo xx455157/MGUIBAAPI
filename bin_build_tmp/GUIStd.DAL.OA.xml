@@ -1,0 +1,669 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd.DAL.OA</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.DAL.OA.Private.DaCallReport">
+            <summary>
+            Call Report資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.Private.DaCallReport.ClientContent">
+            <summary>
+            目前請求的前端資訊模型物件
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.Private.DaCallReport.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Private.DaCallReport.DaoSINI">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.Private.DaCallReport.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.OA.Private.DaCallReport.GetData(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            取得符合條件的所有客戶資料的分頁頁次資料
+            </summary>
+            <param name="OA0301">公司別</param>
+            <param name="OA0310">拜訪客戶</param>
+            <param name="OA0305s">拜訪日期(起)</param>
+            <param name="OA0305e">拜訪日期(迄)</param>
+            <param name="OA0332s">下次拜訪日期(起)</param>
+            <param name="OA0332e">下次拜訪日期(迄)</param>
+            <param name="pageNo">查詢頁次</param>
+            <param name="rowsPerPage">輸出一頁筆數</param>
+            <param name="lang">語系</param>
+            <returns>客戶泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.Private.DaCallReport.GetDataCount(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32@)">
+            <summary>
+            取得符合條件的所有Call Report資料的總筆數
+            </summary>
+            <param name="OA0301">公司別</param>
+            <param name="OA0310">拜訪客戶</param>
+            <param name="OA0305s">拜訪日期(起)</param>
+            <param name="OA0305e">拜訪日期(迄)</param>
+            <param name="OA0332s">下次拜訪日期(起)</param>
+            <param name="OA0332e">下次拜訪日期(迄)</param>
+            <param name="funcName">功能名稱</param>
+            <param name="rowsPerPage">輸出一頁筆數</param>
+            <returns>符合條件的總筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.Private.DaCallReport.GetRow(System.String,System.String,System.String)">
+            <summary>
+            取得唯一的Call Report資料
+            </summary>
+            <param name="OA0301">公司別</param>
+            <param name="OA0302">Call No.</param>
+            <param name="lang">語系</param>
+            <returns>Call Report模型物件</returns>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA03">
+            <summary>
+            SRN明細/Call Report資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA03.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA03.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA03.#ctor(GUIStd.Models.MdClientInfo,System.Data.SqlClient.SqlConnection@,System.Data.SqlClient.SqlTransaction@)">
+            <summary>
+            建構子：建立資料庫連線並開始一個交易
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+            <param name="cn">輸出資料庫連線物件</param>
+            <param name="trans">輸出資料庫交易物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA03.IsExist(System.String,System.String)">
+            <summary>
+            資料是否存在
+            </summary>
+            <param name="OA0301">公司別</param>
+            <param name="OA0302">Call No.</param>
+            <returns>資料是否存在</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA03.InsertTrans(System.Data.SqlClient.SqlTransaction,GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.OA.Models.MdCallReportDetail)">
+            <summary>
+            交易式新增資料
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="obj">Call Report資料模型物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA03.UpdateTrans(System.Data.SqlClient.SqlTransaction,GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.OA.Models.MdCallReportDetail)">
+            <summary>
+            交易式修改資料
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="obj">Call Report資料模型物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA03.DeleteTrans(System.Data.SqlClient.SqlTransaction,System.String,System.String)">
+            <summary>
+            交易式刪除資料
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="OA0301">公司別</param>
+            <param name="OA0302">Call No.</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA04">
+            <summary>
+            SRN交辦明細資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA04.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA04.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA05">
+            <summary>
+            EPR資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA05.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA05.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA06">
+            <summary>
+            備註資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA06.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA06.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA06.IsExist(System.String,System.String,System.String,System.String)">
+            <summary>
+            資料是否存在
+            </summary>
+            <param name="OA0601">公司別</param>
+            <param name="OA0602">類別(SRN)</param>
+            <param name="OA0603">狀態(QUE/ANS/COM)</param>
+            <param name="OA0604">Call No.</param>
+            <returns>資料是否存在</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA06.InsertTrans(System.Data.SqlClient.SqlTransaction,GUIStd.DAL.Base.Models.MdTimeInfo,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            交易式新增資料
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="OA0601">公司別</param>
+            <param name="OA0602">類別(SRN)</param>
+            <param name="OA0603">狀態(QUE/ANS/COM)</param>
+            <param name="OA0604">Call No.</param>
+            <param name="OA0605">Memo</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA06.UpdateTrans(System.Data.SqlClient.SqlTransaction,GUIStd.DAL.Base.Models.MdTimeInfo,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            交易式修改資料
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="OA0601">公司別</param>
+            <param name="OA0602">類別(SRN)</param>
+            <param name="OA0603">狀態(QUE/ANS/COM)</param>
+            <param name="OA0604">Call No.</param>
+            <param name="OA0605">Memo</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA06.DeleteTrans(System.Data.SqlClient.SqlTransaction,System.String,System.String,System.String,System.String)">
+            <summary>
+            交易式刪除資料
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="OA0601">公司別</param>
+            <param name="OA0602">類別(SRN)</param>
+            <param name="OA0603">狀態(QUE/ANS/COM)</param>
+            <param name="OA0604">Call No.</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA07">
+            <summary>
+            單據編號資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA07.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA07.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA08">
+            <summary>
+            SRN/EPR取號資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA08.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA08.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA09">
+            <summary>
+            XXXX資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA09.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA09.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA10">
+            <summary>
+            SRN交退件資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA10.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA10.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA11">
+            <summary>
+            XXXX資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA11.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA11.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA12">
+            <summary>
+            業務機會存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA12.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA12.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA12.IsExist(System.Decimal)">
+            <summary>
+            資料是否存在
+            </summary>
+            <param name="OA1201">Key</param>
+            <returns>資料是否存在</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA12.GetRow(System.Decimal,System.String)">
+            <summary>
+            取得業務機會資料
+            </summary>
+            <param name="OA1201">Key</param>
+            <param name="lang">語系</param>
+            <returns>系統參數代碼模型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA12.GetHelp(System.String)">
+            <summary>
+            取得業務機會輔助資料
+            </summary>
+            <param name="OA1202">客戶代碼</param>
+            <returns>業務機會資料模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA12.Insert(GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.OA.Models.MdBusinessOppty,System.Decimal@)">
+            <summary>
+            新增資料
+            </summary>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="obj">業務機會資料模型物件</param>
+            <param name="OA1201">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA12.Update(GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.OA.Models.MdBusinessOppty)">
+            <summary>
+            修改資料
+            </summary>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="obj">業務機會資料模型物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA12.Delete(System.Decimal)">
+            <summary>
+            刪除資料
+            </summary>
+            <param name="OA1201">Key</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.DAL.OA.DaOA13">
+            <summary>
+            XXXX資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.OA.DaOA13.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.OA.DaOA13.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="T:GUIStd.DAL.OA.Models.Private.CallReport.MdCallReport">
+            <summary>
+            Call Report資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.Private.CallReport.MdCallReport.OA0605_QUE">
+            <summary>
+            拜訪內容
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.Private.CallReport.MdCallReport.OA0605_ANS">
+            <summary>
+            公司指示
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.OA.Models.Private.CallReport.MdCallReport_p">
+            <summary>
+            Call Report資料分頁模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.Private.CallReport.MdCallReport_p.OA03s">
+            <summary>
+            Call Report資料泛型集合物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.Private.CallReport.MdCallReport_p.Paging">
+            <summary>
+            分頁資訊物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.OA.Models.MdCallReportDetail">
+            <summary>
+            Call Report明細模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA03001">
+            <summary>
+            建檔日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA03002">
+            <summary>
+            建檔時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA03003">
+            <summary>
+            建檔裝置
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA03004">
+            <summary>
+            建檔人
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA03005">
+            <summary>
+            異動日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA03006">
+            <summary>
+            異動時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA03007">
+            <summary>
+            異動裝置
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA03008">
+            <summary>
+            異動人
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0301">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0302">
+            <summary>
+            Call No.
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0303">
+            <summary>
+            提出日
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0305">
+            <summary>
+            拜訪日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0307">
+            <summary>
+            業務機會
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0309">
+            <summary>
+            拜訪方式
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0310">
+            <summary>
+            拜訪客戶
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0310n">
+            <summary>
+            客戶名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0311">
+            <summary>
+            拜訪對象
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0312">
+            <summary>
+            連絡電話
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0313">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0316">
+            <summary>
+            產品別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0318">
+            <summary>
+            業務員ID
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0318n">
+            <summary>
+            業務員名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0330">
+            <summary>
+            拜訪狀態
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0331">
+            <summary>
+            計費方式
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdCallReportDetail.OA0332">
+            <summary>
+            下次拜訪日期
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.OA.Models.MdBusinessOppty">
+            <summary>
+            業務機會明細模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA12001">
+            <summary>
+            建檔日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA12002">
+            <summary>
+            建檔時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA12003">
+            <summary>
+            建檔裝置
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA12004">
+            <summary>
+            建檔人
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA12005">
+            <summary>
+            異動日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA12006">
+            <summary>
+            異動時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA12007">
+            <summary>
+            異動裝置
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA12008">
+            <summary>
+            異動人
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1201">
+            <summary>
+            PKey
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1202">
+            <summary>
+            客戶編號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1202n">
+            <summary>
+            客戶名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1203">
+            <summary>
+            機會標題
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1204">
+            <summary>
+            機會說明
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1205">
+            <summary>
+            預算
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1206">
+            <summary>
+            預計成交日
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1207">
+            <summary>
+            主辦業務員
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1208">
+            <summary>
+            現況
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1209">
+            <summary>
+            客戶主辦人
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1210">
+            <summary>
+            關鍵情資
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1211">
+            <summary>
+            直接成本總金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1212">
+            <summary>
+            直接成本分項說明
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1213">
+            <summary>
+            勝算
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1214">
+            <summary>
+            商業類型
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.OA.Models.MdBusinessOppty.OA1215">
+            <summary>
+            結案報告提交
+            </summary>
+        </member>
+    </members>
+</doc>

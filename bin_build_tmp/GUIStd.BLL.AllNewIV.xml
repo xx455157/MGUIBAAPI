@@ -1,0 +1,389 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd.BLL.AllNewIV</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.BLL.AllNewIV.Private.BlRequisition">
+            <summary>
+            存取請購資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessApprovalFlow(GUIStd.DAL.AllNewIV.Models.Private.RequestEntry.MdRequisition_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.String)">
+            <summary>
+            處理簽核流程
+            </summary>
+            <param name="obj">新增請購資料模型</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="rqEmployeeID">目前請求的前端資訊物件</param>
+            <returns>新增簽核流程成功或失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessApprovalFlowByLevel(GUIStd.DAL.AllNewIV.Models.Private.RequestEntry.MdRequisition_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.String)">
+            <summary>
+            處理簽核流程-依部門層級
+            </summary>
+            <param name="obj">新增請購資料模型</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="rqEmployeeID">目前請求的前端資訊物件</param>
+            <returns>新增簽核流程成功或失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessUrgent(GUIStd.DAL.AllNewIV.Models.Private.RequestEntry.MdRequisition_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Int32,System.String)">
+            <summary>
+            急件發出催簽訊息
+            </summary>
+            <param name="obj">新增請購資料模型</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="A8901">A89 PKEY</param>
+            <param name="B8304">請購類別名稱</param>
+            <returns>A89 PKEY</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessAgent(GUIStd.DAL.Base.Models.MdTimeInfo,System.Int32,System.String,System.String)">
+            <summary>
+            處理代理人 S140605050
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="A8901">A89 PKEY</param>
+            <param name="companyId">公司別</param>
+            <param name="flowId">流程代號</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessApprovaled(GUIStd.DAL.AllNewIV.Models.Private.RequestEntry.MdRequisition_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Int32,System.String,System.String)">
+            <summary>
+            修改為已核淮
+            </summary>
+            <param name="obj">新增請購資料模型</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="A8901">A89 PKEY</param>
+            <param name="rqEmployeeID">請購人</param>
+            <param name="B8304">請購類別名稱</param>
+            <returns>A89 PKEY</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessInsertA89(GUIStd.DAL.AllNewIV.Models.Private.RequestEntry.MdRequisition_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.String,System.String,System.String)">
+            <summary>
+            處理新增簽核階段
+            </summary>
+            <param name="obj">新增請購資料模型</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="A8915">目前簽核人</param>
+            <param name="A8908">請購類別名稱</param>
+            <param name="A8907">申請人</param>
+            <returns>A89 PKEY</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessInsertA87(GUIStd.DAL.AllNewIV.Models.Private.RequestEntry.MdRequisitionFlow,GUIStd.DAL.Base.Models.MdTimeInfo,System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            處理新增簽核紀錄
+            </summary>
+            <param name="reqflow">簽核流程資料模型</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="A8706">簽核人</param>
+            <param name="B4816">請購類別名稱</param>
+            <param name="firstApproval">第一位簽核者</param>
+            <param name="A8901">A89 PKEY</param>
+            <param name="A8733">簽核人所屬部門主管的部門</param>
+            <returns>傳送訊息成功或失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessInsertA87ByApproved(GUIStd.DAL.Base.Models.MdTimeInfo,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            S131223026 處理新增簽核紀錄 For 送簽即核准
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="A8706">簽核人</param>
+            <param name="B4816">請購類別名稱</param>
+            <param name="A8901">A89 PKEY</param>
+            <param name="A8733">簽核人所屬部門主管的部門</param>
+            <returns>傳送訊息成功或失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessInsertA87ByLevel(GUIStd.DAL.Base.Models.MdTimeInfo,System.Int32,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            處理新增簽核紀錄
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="A8704">序號</param>
+            <param name="A8711">階段</param>
+            <param name="A8712">照會</param>
+            <param name="A8706">簽核人</param>
+            <param name="B4816">請購類別名稱</param>
+            <param name="firstApproval">第一位簽核者</param>
+            <param name="A8901">A89 PKEY</param>
+            <param name="A8733">簽核人所屬部門主管的部門</param>
+            <param name="findUpLevel">申請人即為主管時，未產生任何流程的狀況</param>
+            <returns>傳送訊息成功或失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessSendMessage(GUIStd.DAL.AllNewIV.Models.Private.RequestEntry.MdRequisition_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            處理傳送訊息
+            </summary>
+            <param name="obj">新增請購資料模型</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="A8706">請購人</param>
+            <param name="rqTypeName">請購類別名稱</param>
+            <param name="A8901">A89 PKEY</param>
+            <param name="status">照會類別</param>
+            <returns>傳送訊息成功或失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.GetRequisitionData(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            取得請購資料
+            </summary>
+            <param name="B4701">公司別</param>
+            <param name="B4702">部門別</param>
+            <param name="B4706">倉庫別</param>
+            <param name="B4803">出貨日期</param>
+            <param name="language">語系</param>
+            <returns>程式資料模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.GetRequisitionData2(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            取得請購資料-by 請購單號
+            </summary>
+            <param name="B4801">公司別</param>
+            <param name="B4802">部門別</param>
+            <param name="B4818">倉庫別</param>
+            <param name="B4803">出貨日期</param>
+            <param name="B4813">請購單號</param>
+            <param name="language">語系</param>
+            <returns>程式資料模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.GetRequisitionRecords(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            取得請購紀錄
+            </summary>
+            <param name="B4801">公司別</param>
+            <param name="B4802">部門</param>
+            <param name="B48001s">請購日期起值</param>
+            <param name="B48001e">請購日期迄值</param>
+            <param name="B4813s">請款單號起值</param>
+            <param name="B4813e">請款單號迄值</param>
+            <param name="B4818">請款類別</param>
+            <param name="B4802Filter">部門(篩選)</param>
+            <param name="B4826s">簽核現況</param>
+            <param name="language">語系</param>
+            <param name="B8306s">轉單方式</param>
+            <param name="addUserId">請購人</param>
+            <returns>請購紀錄模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.GetRequisitionRecords2(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            取得請款紀錄
+            </summary>
+            <param name="B4801">公司別</param>
+            <param name="B4802">部門</param>
+            <param name="B4803s">請款日期起值</param>
+            <param name="B4803e">請款日期迄值</param>
+            <param name="B4813s">請款單號起值</param>
+            <param name="B4813e">請款單號迄值</param>
+            <param name="B4818">請款類別</param>
+            <param name="B4802Filter">部門(篩選)</param>
+            <param name="B4826s">簽核現況</param>
+            <param name="language">語系</param>
+            <param name="B8306s">轉單方式</param>
+            <param name="addUserId">請購人</param>
+            <param name="B4808s">供應商起值</param>
+            <param name="B4808e">供應商迄值</param>
+            <returns>請購紀錄模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.GetRequisitionRecords3(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            取得請購請款紀錄(不進行)
+            </summary>
+            <param name="B4802">部門別</param>
+            <param name="A8907">申請人</param>
+            <param name="A8902s">申請日期起</param>
+            <param name="A8902e">申請日期迄</param>
+            <param name="A8911s">核准日期起</param>
+            <param name="A8911e">核准日期迄</param>
+            <param name="B4813s">請款單號起</param>
+            <param name="B4813e">請款單號迄</param>
+            <param name="B4826">簽核狀態</param>
+            <param name="language">語系</param>
+            <returns>請購紀錄模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.GetRequisitionFlows(System.String,System.String,System.String,System.Decimal)">
+            <summary>
+            取得簽核流程
+            </summary>
+            <param name="B4801">公司別</param>
+            <param name="B4818">請購類別</param>
+            <param name="language">語系</param>
+            <param name="amounts">請購合計金額</param>
+            <returns>請購紀錄模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.GetDeptbyUserId(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            取得所屬主管之部門與原屬部門
+            </summary>
+            <param name="userId">員工編號</param>
+            <param name="language">語言C/E</param>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>部門資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.GetDeptbyRecords(System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            取得請購紀錄中的部門清單
+            </summary>
+            <param name="userId">員工編號</param>
+            <param name="language">語言C/E</param>
+            <param name="dataTypes"></param>轉單方式
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>部門資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessInsert(GUIStd.DAL.AllNewIV.Models.Private.RequestEntry.MdRequisition_w,GUIStd.Models.MdClientInfo,System.String@)">
+            <summary>
+            處理新增作業
+            </summary>
+            <param name="obj">新增請購資料模型</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <param name="rqno">回傳請款單號</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessUpdate(GUIStd.DAL.AllNewIV.Models.Private.RequestEntry.MdRequisition_w,GUIStd.Models.MdClientInfo)">
+            <summary>
+            處理修改作業
+            </summary>
+            <param name="obj">代碼資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessUpdatebyReject(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewIV.Models.Private.RequestEntry.MdRequisition_reject_u},GUIStd.Models.MdClientInfo)">
+            <summary>
+            處理修改作業
+            </summary>
+            <param name="obj">請購請款資料(不進行)模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlRequisition.ProcessDelete(System.String,System.String,System.Boolean,GUIStd.Models.MdClientInfo)">
+            <summary>
+            處理刪除作業
+            </summary>
+            <param name="companyId">公司別</param>
+            <param name="rqNo">請款單號</param>
+            <param name="isCancelApproval">是否為取消送簽</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewIV.Private.BlWarehouse">
+            <summary>
+            存取倉庫資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlWarehouse.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlWarehouse.GetWarehouse(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            取得請款/請購代碼資料
+            </summary>
+            <param name="A0801">員工編號</param>
+            <param name="A0824">公司別</param>
+            <param name="A0804">部門別</param>
+            <param name="Language">語系</param>
+            <param name="B8306s">轉單方式</param>
+            <returns>倉庫資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlWarehouse.GetWarehouse2(System.String,System.String,System.Boolean)">
+            <summary>
+            取得請款/請購代碼資料
+            </summary>
+            <param name="Language">語系</param>
+            <param name="B8306s">轉單方式</param>
+            <param name="IncludeEmptyRow">是否包含空白列</param>
+            <returns>倉庫資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.Private.BlWarehouse.IsExist(System.String,System.String,System.String,System.String)">
+            <summary>
+            判斷資料是否已存在
+            </summary>
+            <param name="B8301">公司別</param>
+            <param name="B8302">請購類別</param>
+            <param name="B8501">部門</param>
+            <param name="language">語系</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewIV.BlSINI">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.BlSINI.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.BlSINI.DoCheck(GUIStd.Enums.State,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewIV.Models.MdConfig})">
+            <summary>
+            異動資料前的欄位檢核
+            </summary>
+            <param name="state">作業狀態</param>
+            <param name="obj">程式資料模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.BlSINI.IsExist(System.String,System.String,System.String)">
+            <summary>
+            判斷資料是否已存在
+            </summary>
+            <param name="section">section</param>
+            <param name="topic">topic</param>
+            <param name="language">language</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.BlSINI.GetData``1(System.String,System.String,System.String)">
+            <summary>
+            取得config資料
+            </summary>
+            <param name="section">section</param>
+            <param name="topic">topic</param>
+            <param name="language">language</param>
+            <returns>config模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.BlSINI.ProcessInsert(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewIV.Models.MdConfig})">
+            <summary>
+            處理新增作業
+            </summary>
+            <param name="obj">程式資料模型物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.BlSINI.ProcessUpdate2(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewIV.Models.MdConfig},System.String,System.String,System.String)">
+            <summary>
+            處理新增作業
+            </summary>
+            <param name="obj">obj</param>
+            <param name="sectionLike">sectionlike</param>
+             <param name="section">section</param>
+              <param name="topicLike">topiclike</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.BlSINI.ProcessUpdate(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewIV.Models.MdConfig})">
+            <summary>
+            處理修改作業
+            </summary>
+            <param name="obj">程式資料模型物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.BlSINI.ProcessDelete(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewIV.Models.MdConfig})">
+            <summary>
+            處理刪除作業
+            </summary>
+            <param name="obj">obj</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewIV.BlSINI.ProcessDelete2(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewIV.Models.MdConfig},System.String,System.String,System.String)">
+            <summary>
+            處理刪除作業 更改過後版本1/17 未完成
+            </summary>
+            <param name="obj">obj</param>
+            <returns>受影響的資料列</returns>
+        </member>
+    </members>
+</doc>

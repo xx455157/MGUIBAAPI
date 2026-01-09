@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd.Security</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.Security.Models.MdJwtAuthorization">
+            <summary>
+            JWT 授權資訊類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Security.Models.MdJwtAuthorization.UserId">
+            <summary>
+            登入帳號
+            </summary>
+        </member>
+        <member name="P:GUIStd.Security.Models.MdJwtAuthorization.SystemUserId">
+            <summary>
+            系統使用者帳號
+            </summary>
+        </member>
+        <member name="P:GUIStd.Security.Models.MdJwtAuthorization.DeviceUid">
+            <summary>
+            裝置唯一識別碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.Security.Models.MdJwtAuthorization.ExpiredDate">
+            <summary>
+            授權逾時日
+            </summary>
+        </member>
+        <member name="T:GUIStd.Security.RijndaelEncrypt">
+            <summary>
+            系統 Rijndael 加解密物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.Security.RNGCrypto">
+            <summary>
+            系統 RNGCrypto 加解密物件
+            </summary>
+        </member>
+        <member name="M:GUIStd.Security.RNGCrypto.BytesToHex(System.Byte[])">
+            <summary>
+            將位元陣列轉成十六進位文字
+            </summary>
+            <param name="bytes">位元陣列</param>
+            <returns>十六進位文字</returns>
+        </member>
+        <member name="M:GUIStd.Security.RNGCrypto.HexToBytes(System.String)">
+            <summary>
+            將十六進位文字轉成位元陣列
+            </summary>
+            <param name="hexStr">十六進位文字</param>
+            <returns>位元陣列</returns>
+        </member>
+        <member name="M:GUIStd.Security.RNGCrypto.GetRandomNum(System.Int32,System.Int32)">
+            <summary>
+            取得指定數值範圍的隨機數值
+            </summary>
+            <param name="minNum">最小正整數</param>
+            <param name="maxNum">最大正整數</param>
+            <returns>隨機正整數</returns>
+        </member>
+        <member name="M:GUIStd.Security.RNGCrypto.CreateKey(System.Int32)">
+            <summary>
+            產生十六進位密碼
+            </summary>
+            <param name="numBytes">位元陣列長度</param>
+            <returns>十六進位文字</returns>
+        </member>
+        <member name="M:GUIStd.Security.RNGCrypto.CreateDecryptionKey(System.Int32)">
+            <summary>
+            建立 Web.Config machineKey 中的 decryptionKey
+            The valid values for decryptionKey is 8 or 24
+            </summary>
+            <param name="numBytes">位元陣列長度</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Security.RNGCrypto.CreateValidationKey(System.Int32)">
+            <summary>
+            建立 Web.Config machineKey 中的 validationKey
+            The valid values for validationKey is 20 or 64
+            </summary>
+            <param name="numBytes">位元陣列長度</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Security.RNGCrypto.GetRandomFixedChars(System.Int32)">
+            <summary>
+            取得指定長度指定字元範圍的隨機字元
+            For Generate REST API Authentication Key
+            </summary>
+            <param name="numChars">文字長度</param>
+            <returns>隨機文字</returns>
+        </member>
+        <member name="T:GUIStd.Security.ThirdParty.QREncrypterWrapper">
+            <summary>
+             台灣財政部提供的發票 QRCode 加解密包裝物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.Security.ThirdParty.QREncrypterWrapper.QREncrypter">
+            <summary>
+            QRCode 加解密物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.Security.Token">
+            <summary>
+            系統 Token 加解密物件
+            </summary>
+        </member>
+        <member name="F:GUIStd.Security.Token.mKey">
+            <summary>
+            產生雜湊簽章的 KEY
+            </summary>
+        </member>
+        <member name="M:GUIStd.Security.Token.#ctor(System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="keyOrKeyFileName">雜湊簽章的文字金錀或金錀檔</param>
+        </member>
+        <member name="M:GUIStd.Security.Token.ReadKeyFile(System.String)">
+            <summary>
+            讀取雜湊簽章金錀
+            </summary>
+            <param name="keyOrKeyFileName">文字金錀或金錀檔</param>
+        </member>
+        <member name="M:GUIStd.Security.Token.Encode(System.Object)">
+            <summary>
+            加密 payload 當 token 使用的函式
+            </summary>
+            <param name="payload">加密前的資料，可能是文字或 Model 物件</param>
+            <returns>加密後的字串</returns>
+        </member>
+        <member name="M:GUIStd.Security.Token.Decode``1(System.String)">
+            <summary>
+            解密 token 的泛型函式
+            </summary>
+            <param name="token">加密後的文字</param>
+            <returns>解密後序列化的泛型物件</returns>
+        </member>
+        <member name="M:GUIStd.Security.Token.GenerateAPIAccessToken(System.String,System.String,System.String)">
+            <summary>
+            生成授權存取 API 的令牌，以月為單位
+            </summary>
+            <param name="loginId">登入帳號</param>
+            <param name="deviceUid">裝置 ID</param>
+            <param name="systemUserId">系統使用者帳號</param>
+            <returns>Access Token 字串</returns>
+        </member>
+    </members>
+</doc>

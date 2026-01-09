@@ -1,0 +1,897 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd.BLL.AllNewGUI</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.BLL.AllNewGUI.Private.BlEform">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.Private.BlEform.DaoEform">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.SendPushSignMessage(System.Decimal,System.String,System.String,System.String)">
+            <summary>
+            新增催簽資料
+            </summary>
+            <returns>返回D5的PKey</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.GetEFormsAuthEdit">
+            <summary>
+            程式登入預設之模型集合物件
+            </summary>
+            <returns>程式登入預設之模型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.GetEFormsAuthQuery">
+            <summary>
+            取得可"查詢"之電子表單,依類別分類之模型集合物件
+            </summary>
+            <returns>可用電子表單依類別分類之模型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.GetRow(System.String,System.String)">
+            <summary>
+            取得電子表單的相關資料
+            </summary>
+            <param name="EF0101">公司別</param>
+            <param name="EF0102">表單代碼</param>
+            <returns>單筆表單顯示資料模型</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.GetRow(System.String,System.String,System.Decimal)">
+            <summary>
+            取得電子表單檢視所需物件
+            </summary>
+            <param name="EF0101">公司別</param>
+            <param name="EF0102">表單代碼</param>
+            <param name="A8901">PKey</param>
+            <returns>檢視電子表單模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.GetFiles(System.String,System.String,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.Private.GUI.EForm.MdOptFile})">
+            <summary>
+            取得電子表單題目的圖片物件
+            </summary>
+            <param name="EF0301">公司別</param>
+            <param name="EF0302">表單代碼</param>
+            <param name="objs">不含圖片附件模型物件</param>
+            <returns>含圖片附件內容模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.GetFiles(System.String,System.String,System.Decimal)">
+            <summary>
+            取得電子表單上傳之檔案物件
+            </summary>
+            <param name="EF0201">公司別</param>
+            <param name="EF0202">表單代碼</param>
+            <param name="A8901">簽呈PKey</param>
+            <returns>上傳附件內容模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.GetData(System.String,GUIStd.DAL.AllNewGUI.Models.MdQuery,System.Int32)">
+            <summary>
+            取得電子表單的相關資料
+            </summary>
+            <param name="funcName">功能名稱</param>
+            <param name="obj">查詢條件物件</param>
+            <param name="pageNo">查詢頁次</param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.ProcessPushSign(GUIStd.DAL.AllNewGUI.Models.MdAttachment)">
+            <summary>
+            催簽作業
+            </summary>
+            <param name="obj">簽呈的模型物件</param>
+            <returns>返回催簽通知的PKey清單</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlEform.ProcessCxlApproved(System.Decimal)">
+            <summary>
+            修改為製作中(撤簽)
+            </summary>
+            <param name="A8901">A89 PKEY</param>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.Private.BlFormData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlFormData.GetDirectory``2(System.String,System.String,System.String)">
+            <summary>
+            [非同步]條列主機目錄資料，並以指定模型類別回傳
+            </summary>
+            <typeparam name="T">目錄模型類別，需繼承MdDirInfo</typeparam>
+            <typeparam name="U">檔案模型類別，需繼承MdFileInfo</typeparam>
+            <param name="path">條列目錄路徑</param>
+            <param name="minEditDate">目錄底下檔案最小修改日期</param>
+            <param name="maxEditDate">目錄底下檔案最大修改日期</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlFormData.FileSave(GUIStd.Models.MdBase64Image,System.String,System.Boolean,System.String)">
+            <summary>
+            [非同步]處理前端上傳圖檔的儲存作業，若檔案存在則覆蓋
+            </summary>
+            <param name="file">上傳的單一檔案介面物件</param>
+            <param name="savePath">檔案存放路徑</param>
+            <param name="overWrite">是否覆蓋檔案</param>
+            <param name="writeTime">強制設定檔案建檔、修改的時間</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.Private.BlJobAgents">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlJobAgents.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlJobAgents.GetQueryData(GUIStd.DAL.AllNewGUI.Models.Private.GUI.JobAgents.MdQueryParams,System.String,System.Int32)">
+            <summary>
+            查詢 工作代理人 資料
+            </summary>
+            <param name="query">查詢參數</param>
+            <param name="funcName">功能名稱</param>
+            <param name="pageNo">查詢頁次</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlJobAgents.GetDetail(GUIStd.DAL.AllNewGUI.Models.Private.GUI.JobAgents.MdQueryResult)">
+            <summary>
+            查詢 工作代理人 明細資料
+            </summary>
+            <param name="dataKey">查詢參數</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlJobAgents.IsExistDetail(GUIStd.DAL.AllNewGUI.Models.Private.GUI.JobAgents.MdDetailHead)">
+            <summary>
+            判斷 工作代理人 資料是否已存在
+            </summary>
+            <param name="dataKey">查詢參數</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlJobAgents.GetRespFlow(System.String)">
+            <summary>
+            查詢 負責的簽核流程
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlJobAgents.UpdateDetail(GUIStd.DAL.AllNewGUI.Models.Private.GUI.JobAgents.MdDetailUpdate)">
+            <summary>
+            更新 工作代理人 資料
+            </summary>
+            <param name="detail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlJobAgents.DeleteDetail(GUIStd.DAL.AllNewGUI.Models.Private.GUI.JobAgents.MdDetailHead)">
+            <summary>
+            刪除 工作代理人 資料
+            </summary>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.Private.BlMCF10">
+            <summary>
+            vMCF10 輔助資料商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.Private.BlMCF10.DaoA06">
+            <summary>
+            群組資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.Private.BlMCF10.DaoA08">
+            <summary>
+            員工資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.Private.BlMCF10.DaoA12">
+            <summary>
+            系統資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlMCF10.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.Private.BlMCF10.GetUIData">
+            <summary>
+            取得 vMCF10 頁面所需的輔助資料
+            </summary>
+            <returns>vMCF10 輔助資料模型物件</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA01">
+            <summary>
+            存取公司別資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.BlA01.DaoA01">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA01.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA01.GetHelp(System.Boolean,System.Boolean,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            取得公司別輔助資料
+            </summary>
+            <param name="fullName">是否顯示公司全名,否的話顯示簡稱</param>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <param name="system">系統別 GL、IV、PY、AS</param>
+            <param name="authorized">是否檢核授權</param>
+            <returns>公司別資料代碼模型集合物件</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA02">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.BlA02.DaoA02">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA02.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA02.GetHelpByPosId(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            取得代碼的所有資料
+            </summary>
+            <param name="A0224">體系代碼</param>
+            <param name="language">語言C/E</param>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA02.GetHelpByCompId(System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            取得代碼的所有資料
+            </summary>
+            <param name="A0220">公司別</param>
+            <param name="language">語言C/E</param>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <param name="excludeCancelDate">是否包含取消日期有值</param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA02.GetSHelp(System.String,System.String,System.Int32,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            取得部門分頁頁次的輔助資料
+            </summary>
+            <param name="queryText">編號或名稱必需包含傳入的參數值</param>
+            <param name="funcName">功能名稱</param>
+            <param name="pageNo">查詢頁次</param>
+            <param name="fullName">是否顯示全名</param>
+            <param name="sortByName">是否依名稱排序</param>
+            <param name="companyId">只呈現指定公司別或公司別空白的部門</param>
+            <returns>分頁資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA02.GetAuthDetps(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            取得授權部門的輔助資料 S140313030
+            </summary>
+            <param name="empId">員工編號</param>
+            <param name="fullName">取全名</param>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA02.GetDataForPosByPage(System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            取得首頁活動資料
+            </summary>
+            <param name="posType">體系代碼</param>
+            <param name="language">語言C/E</param>
+            <param name="pageNo">頁碼</param>
+            <param name="pgName">程式名稱</param>
+            <param name="imgPath">圖片路徑</param>
+            <returns>首頁資料集合物件</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA03">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA03.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA03.GetData(System.String,System.String)">
+            <summary>
+            取得傳票編號設定
+            </summary>
+            <param name="A0301"></param>
+            <param name="A0303"></param>
+            <returns>傳票編號原則設定模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA03.IsExist(System.String,System.String)">
+            <summary>
+            判斷資料是否已存在
+            </summary>
+            <param name="A0302">傳票種類</param>
+            <param name="A0303">公司別</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA03.Insert(GUIStd.DAL.AllNewGUI.Models.MdNumberRule)">
+            <summary>
+            處理新增作業
+            </summary>
+            <param name="obj">傳票編號原則物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA03.Delete(System.String,System.String,System.String,System.String)">
+            <summary>
+            處理刪除作業
+            </summary>
+            <param name="A0302"></param>
+            <param name="A0303"></param>
+            <param name="A0304"></param>
+            <param name="A0305"></param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA06">
+            <summary>
+            存取群組資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.BlA06.DaoA06">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA06.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA06.ProcessInsert(GUIStd.DAL.AllNewGUI.Models.MdCode)">
+            <summary>
+            新增群組資料
+            </summary>
+            <param name="obj">群組資料模型物件</param>
+            <returns>影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA06.ProcessUpdate(System.String,GUIStd.DAL.AllNewGUI.Models.MdCode)">
+            <summary>
+            修改群組資料
+            </summary>
+            <param name="groupId">群組代號</param>
+            <param name="obj">群組資料模型物件</param>
+            <returns>影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA06.ProcessDelete(System.String)">
+            <summary>
+            刪除群組資料
+            </summary>
+            <param name="groupId">群組代號</param>
+            <returns>影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA06.ProcessCopy(System.String,System.String,System.String)">
+            <summary>
+            複製群組權限資料（從來源群組複製到目的群組）
+            </summary>
+            <param name="fromGroupId">來源群組代號</param>
+            <param name="toGroupId">目的群組代號</param>
+            <param name="toGroupName">目的群組名稱（可選）</param>
+            <returns>影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA07">
+            <summary>
+            存取群組授權程式資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.BlA07.DaoA07">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA07.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA07.ProcessUpdateAuth(System.String,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdProgramAuth})">
+            <summary>
+            更新群組程式授權（批次處理）
+            </summary>
+            <param name="A0701">群組代號</param>
+            <param name="programs">程式授權資料集合</param>
+            <returns>影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA08">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.BlA08.DaoA08">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA08.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GUIStd.BLL.AllNewGUI.BlA08.GetSHelp_User(System.String,System.String,System.Int32,System.String,System.String)" -->
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA08.GetSHelp(System.String,System.String,System.Int32,System.Boolean)">
+            <summary>
+            取得客戶分頁頁次的輔助資料
+            </summary>
+            <param name="queryText">編號或名稱必需包含傳入的參數值</param>
+            <param name="funcName">功能名稱</param>
+            <param name="pageNo">查詢頁次</param>
+            <param name="sortByName">是否依名稱排序</param>
+            <returns>分頁資料模型物件</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA10">
+            <summary>
+            程式商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.BlA10.DaoA10">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA10.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA10.GetSystemCategories(System.String)">
+            <summary>
+            取得指定系統的系統功能代碼清單
+            </summary>
+            <param name="A1003">系統代號</param>
+            <returns>系統功能代碼模型集合物件</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GUIStd.BLL.AllNewGUI.BlA10.GetSHelp(System.Int32,System.String,System.String,System.String,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:GUIStd.BLL.AllNewGUI.BlA10.GetGroupPrograms(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)" -->
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA16">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.BlA16.DaoA16">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA16.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA16.GetHelp(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            取得代碼的所有資料
+            </summary>
+            <param name="A1613s">資料類別</param>
+            <param name="language">語言C/E</param>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA16.GetSHelp(System.String,System.String,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            取得部門分頁頁次的輔助資料
+            </summary>
+            <param name="queryText">編號或名稱必需包含傳入的參數值</param>
+            <param name="funcName">功能名稱</param>
+            <param name="pageNo">查詢頁次</param>
+            <param name="fullName">是否顯示全名</param>
+            <param name="sortByName">是否依名稱排序</param>
+            <returns>分頁資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA16.GetData(System.String)">
+            <summary>
+            取得客戶資料
+            </summary>
+            <param name="A1601">客戶編號</param>
+            <returns>客戶資料模型泛型集合</returns>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.BlA28.DaoA28">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="F:GUIStd.BLL.AllNewGUI.BlA28.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA28.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA28.GetData(GUIStd.DAL.AllNewGUI.Models.MdPackages_q,System.Int32,System.String)">
+            <summary>
+            取得查詢資料
+            </summary>
+            <param name="request">查詢請求參數</param>
+            <param name="pageNo">查詢頁次</param>
+            <param name="funcName">功能名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA28.Update(GUIStd.DAL.AllNewGUI.Models.Share.A28.MdPackages_w)">
+            <summary>
+            修改單筆資料
+            </summary>
+            <param name="request">請求參數</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA28.Delete(System.String)">
+            <summary>
+            刪除單筆資料
+            </summary>
+            <param name="packageId">專案編號</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA62">
+            <summary>
+            群組成員商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.BlA62.DaoA62">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA62.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA62.GetMembers(System.String)">
+            <summary>
+            取得指定群組的成員清單
+            </summary>
+            <param name="A6201">群組代號</param>
+            <returns>使用者資料模型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA62.ProcessInsert(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            新增群組成員資料（單筆或多筆）
+            </summary>
+            <param name="A6201">群組代號</param>
+            <param name="A6202s">員工代號集合</param>
+            <returns>影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA62.ProcessDelete(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            刪除群組成員資料（單筆或多筆）
+            </summary>
+            <param name="A6201">群組代號</param>
+            <param name="A6202s">員工代號集合</param>
+            <returns>影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA86">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA86.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA86.GetData(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            取得首頁公告資料
+            </summary>
+            <param name="categoryId">類別</param>
+            <param name="startDate">起始日期</param>
+            <param name="endDate">結束日期</param>
+            <param name="departmentId">部門別</param>
+            <param name="content">內容</param>
+            <param name="funcName">程式名稱</param>
+            <param name="pageNo">分頁</param>
+            <returns>首頁資料集合物件</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA87">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA87.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA87.GetData(System.Decimal,System.String)">
+            <summary>
+            取得簽核流程
+            </summary>
+            <param name="A87035">A8901</param>
+            <param name="A8702">資料別</param>
+            <returns>簽核流程模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA89">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA89.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA89.DefaultEFormModel(GUIStd.DAL.AllNewGUI.Models.MdPetition_3,System.Boolean)">
+            <summary>
+            預設電子表單欄位
+            </summary>
+            <param name="obj">請購簽核流程物件</param>
+            <param name="isSend">是否為送簽, 反之為存檔</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA89.GetRow(System.Decimal)">
+            <summary>
+            取得單筆簽呈內容
+            </summary>
+            <param name="A8901">PKey</param>
+            <returns>簽呈的模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA89.ProcessInsert(GUIStd.DAL.AllNewGUI.Models.MdPetition_3,System.Boolean,System.Decimal@)">
+            <summary>
+            處理新增作業
+            </summary>
+            <param name="obj">請購簽核流程物件</param>
+            <param name="isSend">是否為送簽, 反之為存檔</param>
+            <param name="A8901">輸出PKey</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA89.ProcessUpdate(GUIStd.DAL.AllNewGUI.Models.MdPetition_3,System.Decimal,System.Boolean)">
+            <summary>
+            處理新增作業
+            </summary>
+            <param name="obj">請購簽核流程物件</param>
+            <param name="A8901o">PKey</param>
+            <param name="isSend">是否為送簽, 反之為存檔</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA89.ProcessDelete(System.Decimal)">
+            <summary>
+            處理刪除作業
+            </summary>
+            <param name="A8901o">PKey</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA90">
+            <summary>
+            存取活動資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA90.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA90.GetData(GUIStd.Models.MdClientInfo,System.String,System.String,System.String)">
+            <summary>
+            取得首頁活動資料
+            </summary>
+            <param name="A9004">活動類別Banner=1, New=2, Hot=3</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <param name="pgName">程式名稱</param>
+            <param name="imgPath">圖片路徑</param>
+            <returns>首頁資料集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA90.GetDataByPage(GUIStd.Models.MdClientInfo,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            取得首頁活動資料
+            </summary>
+            <param name="eventType">活動類別(banners,news,hots)</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <param name="pageNo">頁碼</param>
+            <param name="pgName">程式名稱</param>
+            <param name="imgPath">圖片路徑</param>
+            <returns>首頁資料集合物件</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlA95">
+            <summary>
+            存取活動資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA95.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA95.GetHelpApprover(System.Boolean)">
+            <summary>
+            取得原簽核人輔助資料
+            </summary>
+            <param name="includeEmptyRow">是否包含空白列查詢參數</param>
+            <returns>簽核人模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlA95.GetSHelpApprover(System.String,System.String,System.Int32)">
+            <summary>
+            取得部門員工分頁頁次的輔助資料
+            </summary>
+            <param name="queryText">編號或名稱必需包含傳入的參數值</param>
+            <param name="funcName">功能名稱</param>
+            <param name="pageNo">查詢頁次</param>
+            <returns>分頁資料模型物件</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlB01">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlB01.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlB01.GetData(System.String)">
+            <summary>
+            取得單據編號設定
+            </summary>
+            <param name="B0101"></param>
+            <returns>單據編號設定模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlB01.IsExist(System.String,System.String,System.String)">
+            <summary>
+            判斷資料是否已存在
+            </summary>
+            <param name="B0101">公司別</param>
+            <param name="B0102">字軌</param>
+            <param name="B0103">異動別</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlB01.Insert(GUIStd.DAL.AllNewGUI.Models.MdTXNumberRule)">
+            <summary>
+            處理新增作業
+            </summary>
+            <param name="obj">傳票編號原則物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlB01.Delete(System.String,System.String)">
+            <summary>
+            處理刪除作業
+            </summary>
+            <param name="B0101"></param>
+            <param name="B0102"></param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlB01.Update(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            處理修改作業
+            </summary>
+            <param name="B0101o">公司別</param>
+            <param name="B0102o">字軌</param>
+            <param name="B0103">異動別</param>
+            <param name="B0104">編號原則</param>
+            <param name="B0105">類別</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlB13">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlB13.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlB13.GetCompanyCount(System.String)">
+            <summary>
+            檢核倉庫對應館別
+            </summary>
+            <param name="B1302">部門別</param>
+             <returns>公司別陣列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlD5">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlD5.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlEF03">
+            <summary>
+            存取公司別資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewGUI.BlEF03.DaoEF03">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlEF03.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlEF03.GetRow(System.String,System.String,System.String,System.Int32,System.Byte[]@,System.String@)">
+            <summary>
+            取得唯一附件檔
+            </summary>
+            <param name="EF0301">公司別</param>
+            <param name="EF0302">電子表單代碼</param>
+            <param name="EF0303">電子表單題目選項代碼</param>
+            <param name="EF0305">電子表單題選項目子序號</param>
+            <param name="fileContent">位元陣列的檔案內容</param>
+            <param name="fileName">包含副檔名的檔案名稱</param>
+            <returns>附件檔案內容模型物件</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.BlSINI">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlSINI.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.BlSINI.GetData``1(System.String,System.String,System.String)">
+            <summary>
+            取得config資料
+            </summary>
+            <param name="section">section</param>
+            <param name="topic">topic</param>
+            <param name="language">language</param>
+            <returns>config模型泛型集合</returns>
+            
+        </member>
+        <member name="T:GUIStd.BLL.AllNewGUI.TW.BlQRCodeINV">
+            <summary>
+            商業邏輯共用函式類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.BLL.AllNewGUI.TW.BlQRCodeINV.QREncrypter">
+            <summary>
+            QRCode 加解密物件
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewGUI.TW.BlQRCodeINV.AESEncrypt(GUIStd.DAL.AllNewGUI.Models.TW.MdQRCodeINV)">
+            <summary>
+            將發票資料進行加密
+            </summary>
+            <param name="model">客戶編號</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

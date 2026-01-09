@@ -1,0 +1,3324 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd.DAL.AllNewPY</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.DAL.AllNewPY.AllNewPYBase2">
+            <summary>
+            AllNewPY 資料庫存取抽象基底類別，無法實體化，可衍生其他類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.AllNewPYBase2.ClientContent">
+            <summary>
+            目前請求的前端資訊模型物件
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.AllNewPYBase2.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.AllNewPYBase2.#ctor(GUIStd.Models.MdClientInfo,System.Data.SqlClient.SqlConnection@,System.Data.SqlClient.SqlTransaction@)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+            <param name="cn">輸出資料庫連線物件</param>
+            <param name="trans">輸出資料庫交易物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.AllNewPYBase2.#ctor(GUIStd.Models.MdClientInfo,GUIStd.Enums.RelatedDB)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+            <param name="db">使用的關聯資料庫列舉值</param>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr">
+            <summary>
+            年度考勤核准設定資料存取類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.DaoSINI">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.GetAnnualAttApprBasicData">
+            <summary>
+            取得年度事病假核給設定資料（輕量化查詢）
+            </summary>
+            <returns>年度事病假核給設定模型物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.GetAnnualLeaveConfigData">
+            <summary>
+            取得特休假核給設定資料（輕量化查詢）
+            </summary>
+            <returns>特休假核給設定模型物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.GetDailyAutoApprovalCompanySettings">
+            <summary>
+            取得每日自動核給公司設定
+            </summary>
+            <returns>每日自動核給公司設定清單</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.GetHRMailSettings">
+            <summary>
+            取得 HR Mail 設定資料 (AllNewPYAgent_Mail 區段)
+            </summary>
+            <returns>HR Mail 設定清單</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.GetOvertimeConfigData">
+            <summary>
+            取得加班考勤設定資料
+            </summary>
+            <returns>加班考勤設定模型物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.UpdateAnnualAttApprConfig(GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr)">
+            <summary>
+            更新年度考勤核准組態設定
+            </summary>
+            <param name="config">年度考勤核准組態設定模型物件</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.UpdateAnnualLeaveConfig(GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig)">
+            <summary>
+            更新特休假核給設定
+            </summary>
+            <param name="config">特休假核給設定模型物件</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.UpdateDailyAutoApprovalCompanySettings(System.String[])">
+            <summary>
+            更新每日自動核給公司設定
+            </summary>
+            <param name="companyIds">公司代碼陣列</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.UpdateHRMailSettings(GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.HRMailSetting[])">
+            <summary>
+            更新 HR Mail 設定
+            </summary>
+            <param name="hrMailSettings">HR Mail 設定陣列</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaAnnualAttAppr.UpdateOvertimeConfig(GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig)">
+            <summary>
+            更新加班考勤設定
+            </summary>
+            <param name="config">加班考勤設定模型物件</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DAO.Private.DaCompanyOrgStruct">
+            <summary>
+            部門組織結構存取類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaCompanyOrgStruct.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaCompanyOrgStruct.GetCompanyOrgStruct(System.String)">
+            <summary>
+            取得該部門的下層部門
+            </summary>
+            <param name="departmentId">部門別</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DAO.Private.DaDeptAtts">
+            <summary>
+            員工排班資料存取類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.DAO.Private.DaDeptAtts.DaoSINI">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaDeptAtts.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaDeptAtts.GetDataCount(GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsQuery,System.String,System.Int32@)">
+            <summary>
+            取得部門出勤報表筆數
+            </summary>
+            <param name="query">員工編號</param>
+            <param name="funcName">功能名稱</param>
+            <param name="rowsPerPage">輸出一頁筆數</param>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DAO.Private.DaPersonalAttend">
+            <summary>
+            員工排班資料存取類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.DAO.Private.DaPersonalAttend.DaoSINI">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaPersonalAttend.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaPersonalAttend.GetDataCount(GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendQuery,System.String,System.Int32@)">
+            <summary>
+            取得部門出勤報表筆數
+            </summary>
+            <param name="query">員工編號</param>
+            <param name="funcName">功能名稱</param>
+            <param name="rowsPerPage">輸出一頁筆數</param>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DAO.Private.DaPYP53">
+            <summary>
+            PYP53 補充保費程式預設資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DAO.Private.DaPYP53.ClientContent">
+            <summary>
+            目前請求的前端資訊模型物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.DAO.Private.DaPYP53.DaoSINI">
+            <summary>
+            SINI 資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaPYP53.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaPYP53.GetSINIData">
+            <summary>
+            取得 SINI 相關資料
+            </summary>
+            <returns>SINI 資料模型物件</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DAO.Private.DaShifts">
+            <summary>
+            員工排班資料存取類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaShifts.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Private.DaShifts.GetShiftInfo(System.String,System.String)">
+            <summary>
+            取得員工排班資料(含容許打卡時間)
+            </summary>
+            <param name="AO01">員工編號</param>
+            <param name="AO02">排班日期</param>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DAO.Share.DaPG">
+            <summary>
+            發薪日期資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DAO.Share.DaPG.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DAO.Share.DaPG.ClientContent">
+            <summary>
+            目前請求的前端資訊模型物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.DAO.Share.DaPG.DaoSINI">
+            <summary>
+            SINI 資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaPG.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaPG.BuildWhereClause(System.String,System.String)">
+            <summary>
+            建立查詢條件子句
+            </summary>
+            <param name="PG01">公司別</param>
+            <param name="payrollDate">發薪日期 (YYYYMMDD) - 可選</param>
+            <returns>WHERE 子句和參數清單</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaPG.GetCol(System.String,System.String)">
+            <summary>
+            根據公司別和發薪日期取得歸屬年度 (PG10)
+            </summary>
+            <param name="PG01">公司別</param>
+            <param name="PG0234">發薪日期 (YYYYMMDD 格式，如 "20230805")</param>
+            <returns>歸屬年度 (PG10)，查無資料則回傳空字串</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaPG.GetDataCount(System.String,System.String,System.String,System.Int32@)">
+            <summary>
+            取得分頁發薪日期資料筆數
+            </summary>
+            <param name="PG01">公司別</param>
+            <param name="payrollDate">發薪日期 (YYYYMMDD) - 可選</param>
+            <param name="funcName">功能名稱</param>
+            <param name="rowsPerPage">輸出每頁筆數</param>
+            <returns>符合條件的資料總筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaPG.GetData(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            取得分頁發薪日期資料
+            </summary>
+            <param name="PG01">公司別</param>
+            <param name="payrollDate">發薪日期 (YYYYMMDD) - 可選</param>
+            <param name="pageNo">頁次</param>
+            <param name="rowsPerPage">每頁筆數</param>
+            <returns>發薪日期模型集合</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DAO.Share.DaPT">
+            <summary>
+            人事記錄檔資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DAO.Share.DaPT.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DAO.Share.DaPT.ClientContent">
+            <summary>
+            目前請求的前端資訊模型物件
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaPT.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaPT.GetHealthInsuranceRecords(System.String,System.String,System.String,System.String)">
+            <summary>
+            查詢人事記錄檔 - 健保加退保或調整記錄
+            </summary>
+            <param name="PA05">身份證字號</param>
+            <param name="startDate">起始日期</param>
+            <param name="endDate">截止日期</param>
+            <param name="PT04Codes">記錄代碼清單 (多個用逗號分隔)</param>
+            <returns>人事記錄資料集合</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DAO.Share.DaSM">
+            <summary>
+            假日設定資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.ClientContent">
+            <summary>
+            目前請求的前端資訊模型物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.DaoSINI">
+            <summary>
+            SINI 資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.GetHolidayConfig">
+            <summary>
+            取得假日設定資料
+            </summary>
+            <returns>假日設定模型物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.GetDataCount(System.String,System.String,System.String,System.String,System.Int32@)">
+            <summary>
+            取得分頁休假日設定資料筆數
+            </summary>
+            <param name="SM01s">開始日期 (YYYYMMDD)</param>
+            <param name="SM01e">結束日期 (YYYYMMDD)</param>
+            <param name="SM02">假日類型 (B:國定假日、C:休息日、D:例假日) - 可選</param>
+            <param name="funcName">功能名稱</param>
+            <param name="rowsPerPage">輸出每頁筆數</param>
+            <returns>符合條件的資料總筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.GetData(System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            取得分頁休假日設定資料
+            </summary>
+            <param name="SM01s">開始日期 (YYYYMMDD)</param>
+            <param name="SM01e">結束日期 (YYYYMMDD)</param>
+            <param name="SM02">假日類型 (B:國定假日、C:休息日、D:例假日) - 可選</param>
+            <param name="pageNo">頁次</param>
+            <param name="rowsPerPage">每頁筆數</param>
+            <returns>休假日設定模型集合</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.GetHolidayStatus(System.String)">
+            <summary>
+            查詢指定日期的假日資料
+            </summary>
+            <param name="date">日期 (SM01)</param>
+            <returns>假日資料狀態 (SM02)</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.Update(System.String,GUIStd.DAL.AllNewPY.Models.MdHolidaySchedule)">
+            <summary>
+            更新假日設定資料
+            </summary>
+            <param name="SM01">日期 (SM01)</param>
+            <param name="obj">假日設定資料模型物件</param>
+            <returns>影響的資料筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.Delete(System.String)">
+            <summary>
+            刪除假日設定資料
+            </summary>
+            <param name="SM01">日期 (SM01)</param>
+            <returns>影響的資料筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.SaveHolidayConfig(GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings)">
+            <summary>
+            存檔假日設定資料
+            </summary>
+            <param name="obj">存檔請求物件</param>
+            <returns>影響的資料筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.InsertRestAndWeekendDays(System.Int32,System.Int32,GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings)">
+            <summary>
+            新增休息日、例假日資料
+            </summary>
+            <param name="startYear">開始年度</param>
+            <param name="endYear">結束年度</param>
+            <param name="config">假日設定配置</param>
+            <returns>影響的資料筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.InsertHolidaysForYears(System.Int32,System.Int32,System.Collections.Generic.List{GUIStd.DAL.AllNewGUI.Models.MdCode},System.String)">
+            <summary>
+            新增假日資料
+            </summary>
+            <param name="startYear">開始年度</param>
+            <param name="endYear">結束年度</param>
+            <param name="holidays">假日清單</param>
+            <param name="color">顏色</param>
+            <returns>影響的資料筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.InsertHolidayRecord(System.String,System.String,System.String,System.String)">
+            <summary>
+            新增假日記錄
+            </summary>
+            <param name="SM01">日期 (SM01)</param>
+            <param name="SM02">狀態 (SM02)</param>
+            <param name="SM03">備註 (SM03)</param>
+            <param name="SM04">顏色 (SM04)</param>
+            <returns>影響的資料筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DAO.Share.DaSM.UpdateSINIHolidayConfig(GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings)">
+            <summary>
+            更新 SINI 資料表中的假日設定
+            </summary>
+            <param name="config">假日設定配置</param>
+            <returns>影響的資料筆數</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Private.DaCalculation">
+            <summary>
+            補充保費計算資料存取類別 (Private)
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.BuildWhereClause(System.String,System.String,System.String,System.String)">
+            <summary>
+            建立查詢條件
+            </summary>
+            <param name="PXA01">公司別</param>
+            <param name="PXA03">發薪日期</param>
+            <param name="PXA05">計算類別</param>
+            <param name="PXA02">員工身份證字號</param>
+            <returns>查詢條件和參數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetDataCount(System.String,System.String,System.String,System.String,System.String,System.Int32@)">
+            <summary>
+            取得分頁補充保費資料筆數
+            </summary>
+            <param name="PXA01">公司別</param>
+            <param name="PXA03">發薪日期</param>
+            <param name="PXA05">計算類別</param>
+            <param name="PXA02">員工身份證字號</param>
+            <param name="funcName">功能名稱</param>
+            <param name="rowsPerPage">輸出每頁筆數</param>
+            <returns>符合條件的資料總筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetData(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            取得分頁補充保費資料
+            </summary>
+            <param name="PXA01">公司別</param>
+            <param name="PXA03">發薪日期</param>
+            <param name="PXA05">計算類別</param>
+            <param name="PXA02">員工身份證字號</param>
+            <param name="pageNo">頁次</param>
+            <param name="rowsPerPage">每頁筆數</param>
+            <returns>補充保費資料模型集合</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetOpenData(System.String,System.String,System.String,System.String)">
+            <summary>
+            取得補充保費開檔資料 (不分頁) - 查詢發薪資料 PB 表
+            </summary>
+            <param name="PXA01">公司別</param>
+            <param name="PXA03">發薪日期</param>
+            <param name="PXA05">計算類別</param>
+            <param name="PXA02">員工身份證字號</param>
+            <returns>發薪資料模型集合</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.CalculateSupplementalInsurance(System.String,System.String,System.String,System.String)">
+            <summary>
+            計算補充保費 - 回傳計算結果 (不寫入資料庫)
+            完全比照 VB6 MoveDB2Spread_PB() 邏輯
+            </summary>
+            <param name="PXA01">公司別清單(逗號分隔)</param>
+            <param name="PXA03">發薪日期(YYYYMMDD)</param>
+            <param name="PXA05">計算類別(選填，用於過濾支薪代碼)</param>
+            <param name="PXA02">員工身份證字號(選填)</param>
+            <returns>計算結果集合</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.SaveCalculationResults(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance},System.String,System.String,System.String,System.String)">
+            <summary>
+            儲存補充保費計算結果 - 批次寫入資料庫
+            </summary>
+            <param name="calculationResults">計算結果集合</param>
+            <param name="PXA01">公司別清單(逗號分隔)</param>
+            <param name="PXA03">發薪日期(YYYYMMDD)</param>
+            <param name="PXA05">計算類別</param>
+            <param name="PXA02">員工身份證字號(選填)</param>
+            <returns>成功寫入的資料筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.AssignSequenceNumbers(System.Collections.Generic.List{GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance})">
+            <summary>
+            為計算結果分配序號
+            按 PXA01, PXA02, PXA03 分組，每組從 1 開始編號
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.AggregateCalculationResults(System.Collections.Generic.List{GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance})">
+            <summary>
+            匯總計算結果 - 比照 GetData 的 GROUP BY 邏輯
+            按 PXA01, PXA02, PXA03, PXA05, PXA06, PXA07 分組
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.QueryHealthFeeParameters(System.String)">
+            <summary>
+            查詢健保補充保費參數 (Public方法)
+            比照 VB6: Get_HealthFee
+            </summary>
+            <param name="nowDate">計算日期 (YYYYMMDD)</param>
+            <returns>補充保費參數模型</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Private.DaCalculation.EmployeeDetailRecord">
+            <summary>
+            員工明細記錄 (比照 VB6 的 Spd_Tmp 暫存)
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.CalculateGroupSummary(System.Collections.Generic.List{GUIStd.DAL.AllNewPY.Private.DaCalculation.EmployeeDetailRecord},System.Double,System.Double,System.String,System.String,System.ValueTuple{System.Double,System.Double,System.Double,System.Double},System.String,System.String)">
+            <summary>
+            彙總計算補充保費 (比照 VB6 的 Movetmp2Spd_PYP53)
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.IsCompanyMatched(System.String,System.String,System.String)">
+            <summary>
+            判斷公司別是否匹配
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.CheckHealthData(System.String,System.String,System.String,System.String@,System.String@,System.Double@,System.String,System.Boolean,System.String)">
+            <summary>
+            Keep員工於當月實際健保加退保日及健保投保金額
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.ExtractCompanyFromPT051(System.String)">
+            <summary>
+            從 PT051 解析出公司別
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.Check_NoPartTime(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            判斷是否為非兼職(正職)
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetCalculationTypeName(System.String)">
+            <summary>
+            取得計算類別名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.DetermineCalculationType(System.String)">
+            <summary>
+            根據支薪代碼 (PC07) 判斷計算類別
+            </summary>
+            <param name="PC07">支薪代碼</param>
+            <returns>計算類別 (1-6)</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetHealthFeeParameters(System.String)">
+            <summary>
+            取得補充保費相關參數
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetPayTypeCodesByCalculationType(System.String)">
+            <summary>
+            取得計算類別對應的支薪代碼
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetHealthInsuranceCodes">
+            <summary>
+            取得健保異動記錄代碼
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetPreviousAmount(System.String,System.String,System.String,System.String)">
+            <summary>
+            取得前期累計金額 (比照 VB6 的 GetPrvsAmt)
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetPayrollParameters">
+            <summary>
+            取得發薪資料參數 (PB12 和 PC03)
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetMaxSequenceNumber(System.String,System.String)">
+            <summary>
+            取得最大流水號（依公司+發薪日期）
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.DeleteOldCalculationData(System.String,System.String,System.String,System.String)">
+            <summary>
+            刪除舊的計算資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.DeleteOldPayrollData(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            刪除舊的發薪資料 (PB表)
+            比照 VB6 Delete_Process_PB 邏輯
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.InsertCalculationResult(GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance,System.Int32)">
+            <summary>
+            寫入計算結果
+            </summary>
+            <param name="data">補充保費資料</param>
+            <param name="sequenceNumber">序號</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.InsertPayrollResult(GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance,System.String,System.Double,System.String)">
+            <summary>
+            寫入發薪資料 (PB表)
+            </summary>
+            <param name="data">補充保費資料</param>
+            <param name="PB12">支薪代碼</param>
+            <param name="PC03">乘數</param>
+            <param name="payrollDate">發薪日期 (YYYYMMDD)</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.GetNextPB13(System.String,System.String,System.String,System.String)">
+            <summary>
+            取得下一個 PB13 序號 (比照 VB6 GetPB13 邏輯)
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.Private.DaCalculation.EnsureUniqueSequence(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            確保序號唯一性 (比照 VB6 CheckNoExitst)
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DaAA">
+            <summary>
+            考勤紀錄資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DaAA.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAA.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAA.IsExist(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            忽略部門別檢查有無重複考勤
+            </summary>
+            <param name="AA01">公司別</param>
+            <param name="AA02">保留碼，固定Z</param>
+            <param name="AA03">員工身分證號</param>
+            <param name="AA04">考勤日期</param>
+            <param name="AA05">考勤代碼</param>
+            <returns>是否存在考勤紀錄</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAA.IsExist(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            檢查有無重複考勤
+            </summary>
+            <param name="AA01">公司別</param>
+            <param name="AA02">保留碼，固定Z</param>
+            <param name="AA03">員工身分證號</param>
+            <param name="AA04">考勤日期</param>
+            <param name="AA05">考勤代碼</param>
+            <param name="AA16">班別</param>
+            <returns>是否存在考勤紀錄</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAA.IsExist(System.String,System.String,System.String,System.String,System.String,System.String[])">
+            <summary>
+            檢查有無重複考勤
+            </summary>
+            <param name="AA01">公司別</param>
+            <param name="AA02">保留碼，固定Z</param>
+            <param name="AA03">員工身分證號</param>
+            <param name="AA04">考勤日期</param>
+            <param name="AA05">考勤代碼</param>
+            <param name="AA16s">班別代碼陣列</param>
+            <returns>是否存在考勤紀錄</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAA.IsExist(System.String,System.String,System.String,System.String,System.String,System.String[],System.String,System.String)">
+            <summary>
+            檢查有無重複考勤
+            </summary>
+            <param name="AA01">公司別</param>
+            <param name="AA02">保留碼，固定Z</param>
+            <param name="AA03">員工身分證號</param>
+            <param name="AA04">考勤日期</param>
+            <param name="AA05">考勤代碼</param>
+            <param name="AA16Pres">班別代碼模糊比對陣列</param>
+            <param name="AA22Pre">假單編號DW02</param>
+            <param name="AA23">來源</param>
+            <returns>是否存在考勤紀錄</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAA.GetMaxAA16ForAllowance(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="AA01">公司別</param>
+            <param name="AA02">保留碼，固定Z</param>
+            <param name="AA03">員工身分證號</param>
+            <param name="AA04">考勤日期</param>
+            <param name="AA05">考勤代碼</param>
+            <param name="AA24">扣抵考勤代碼</param>
+            <param name="AA16Prefix">班別前綴字軌</param>
+            <returns>最大班別</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAA.GetData(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            取得考勤紀錄
+            </summary>
+            <param name="AA01">公司別</param>
+            <param name="AA02">保留碼，固定Z</param>
+            <param name="AA03">員工身分證號</param>
+            <param name="AA04">考勤日期</param>
+            <param name="AA05">考勤代碼</param>
+            <returns>考勤紀錄泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAA.Insert(GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.AllNewPY.Models.MdAttendance_w)">
+            <summary>
+            產生考勤紀錄
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="obj">考勤紀錄資料模型</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAA.InsertOther(GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.AllNewPY.Models.MdAttendance_w)">
+            <summary>
+            自動編制AA16流水號並產生考勤紀錄
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="obj">考勤紀錄資料模型</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAA.UpdateAmt(GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.AllNewPY.Models.MdAttendance_w)">
+            <summary>
+            修改考勤紀錄時數
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="obj">考勤紀錄資料模型</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DaAB">
+            <summary>
+            考勤代碼資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DaAB.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAB.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAB.GetRow(System.String)">
+            <summary>
+            查詢考勤代碼基本資料
+            </summary>
+            <param name="AB03">考勤代碼</param>
+            <returns>考勤代碼資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAB.GetHelp(System.Boolean,System.Boolean)">
+            <summary>
+            取得考勤代碼輔助資料
+            </summary>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>考勤代碼資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAB.GetHelpWithCategory(System.Boolean,System.Boolean)">
+            <summary>
+            取得帶類別的考勤代碼輔助資料
+            </summary>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>帶類別的考勤代碼資料模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DaAO">
+            <summary>
+            員工排班資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DaAO.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAO.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAO.GetData(System.String,System.String)">
+            <summary>
+            取得員工排班資料
+            </summary>
+            <param name="AO01">員工編號</param>
+            <param name="AO02">排班日期</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAO.MergeShiftToLeave(GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.AllNewPY.Models.MdShift_w)">
+            <summary>
+            使用MergeInto重整員工當日排班為排假
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="obj">排班紀錄資料模型</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAO.UpdateAO20(GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.AllNewPY.Models.MdShift_w,System.String@)">
+            <summary>
+            更新排班紀錄的關聯請假單號(For忘卡)
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="obj">排班紀錄資料模型</param>
+            <param name="AO05">依照AO10更新的AO05(輸出)</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DaAQ">
+            <summary>
+            打卡資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DaAQ.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAQ.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAQ.GetRow(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            取得打卡紀錄資料模型物件
+            </summary>
+            <param name="AQ06">員工編號</param>
+            <param name="AQ09">打卡日期</param>
+            <param name="AQ02">打卡類別</param>
+            <param name="AQ08">班別代號</param>
+            <param name="AQ10">標準時間</param>
+            <returns>打卡紀錄資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAQ.GetRow(System.String,System.String,System.String,System.String)">
+            <summary>
+            取得打卡紀錄資料模型物件
+            </summary>
+            <param name="AQ06">員工編號</param>
+            <param name="AQ09">打卡日期</param>
+            <param name="AQ02">打卡類別</param>
+            <param name="AQ08">班別代號</param>
+            <returns>打卡紀錄資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAQ.GetData(System.String,System.String,System.String,System.String[])">
+            <summary>
+            使用標準時間抓取打卡紀錄
+            </summary>
+            <param name="AQ06">員工編號</param>
+            <param name="AQ09">打卡日期</param>
+            <param name="AQ08">班別代號</param>
+            <param name="AQ10s">打卡標準時間</param>
+            <returns>打卡紀錄資料模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAQ.GetData(System.String,System.String,System.String)">
+            <summary>
+            使用班別代碼抓取打卡紀錄
+            </summary>
+            <param name="AQ06">員工編號</param>
+            <param name="AQ09">打卡日期</param>
+            <param name="AQ08">班別代號</param>
+            <returns>打卡紀錄資料模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAQ.GetData(System.String,System.String)">
+            <summary>
+            取得員工打卡資料
+            </summary>
+            <param name="AQ06">員編</param>
+            <param name="AQ09">日期(yyyyMMdd)</param>
+            <returns>打卡資訊模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAQ.IsExists(System.String,System.String,System.String)">
+            <summary>
+            打卡紀錄是否存在
+            </summary>
+            <param name="AQ01">打卡時間yyyyMMddHHmm</param>
+            <param name="AQ02">打卡類別</param>
+            <param name="AQ03">卡號</param>
+            <returns>是否存在</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAQ.UpdateAQ32(GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.AllNewPY.Models.MdPunch_w,System.String@)">
+            <summary>
+            更新打卡紀錄的關聯請假單號(For忘卡)
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="obj">打卡資料模型</param>
+            <param name="AQ02">打卡類別</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaAQ.Insert(GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.AllNewPY.Models.MdPunch_w)">
+            <summary>
+            寫入打卡紀錄
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="obj">打卡資料模型</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DaPA">
+            <summary>
+            員工基本資料存取類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPA.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPA.GetParsedMultiResult(Dapper.SqlMapper.GridReader,System.Data.SqlClient.SqlConnection)">
+            <summary>
+            由多結果資料集，剖析後取得的集合物件
+            </summary>
+            <param name="multiResult">多結果資料集</param>
+            <param name="cn">資料庫連線物件，在取回資料後主動關閉</param>
+            <returns>客戶資料模型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPA.GetHelp(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            取得員工清單輔助資料
+            </summary>
+            <param name="PA01">公司別</param>
+            <param name="language">語系C/E</param>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>員工資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPA.GetEmployee(System.String,System.String,System.Boolean)">
+            <summary>
+            取得員工資料
+            </summary>
+            <param name="PA06">員編</param> 
+            <param name="PA01">公司別</param>
+            <param name="includeSocialId">是否包含身分證號</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPA.GetEmployeeWithPosition(System.String,System.Boolean)">
+            <summary>
+            取得包含
+            </summary>
+            <param name="PA06"></param> 
+            <param name="withPA05">是否帶有身分證字號</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPA.GetEmployeeBySocialId(System.String,System.String)">
+            <summary>
+            用身分證號取得員工資料
+            </summary>
+            <param name="PA05">身分證號</param>
+            <param name="language">語言別</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPA.GetSubDeptEmployees(System.String)">
+            <summary>
+            取得歸屬部門的員工資料
+            </summary>
+            <param name="departmentId">部門別</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPA.GetEmployeeDataCount(System.String,System.String,System.String,System.String,System.Int32@)">
+            <summary>
+            取得員工資料總筆數
+            </summary>
+            <param name="companyId">公司別</param>
+            <param name="payrollDate">發薪日期 (YYYYMMDD)</param>
+            <param name="queryText">查詢文字 (員工姓名、編號、身分證字號)</param>
+            <param name="funcName">功能名稱</param>
+            <param name="rowsPerPage">每頁筆數</param>
+            <returns>總筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPA.GetEmployeeData(System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            取得分頁員工資料
+            </summary>
+            <param name="companyId">公司別</param>
+            <param name="payrollDate">發薪日期 (YYYYMMDD)</param>
+            <param name="queryText">查詢文字 (員工姓名、編號、身分證字號)</param>
+            <param name="pageNo">頁次</param>
+            <param name="rowsPerPage">每頁筆數</param>
+            <returns>員工資料集合</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DaPC">
+            <summary>
+            員工基本資料存取類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPC.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPC.GetHelp(System.Boolean,System.Boolean)">
+            <summary>
+            取得支薪代碼輔助資料
+            </summary>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>支薪代碼資料模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DaPF">
+            <summary>
+            員工基本支薪存取類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPF.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPF.GetData(System.String)">
+            <summary>
+            取得基本支薪資料
+            </summary>
+            <param name="id">身分證字號</param>
+            <returns>基本支薪資料模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DaPXA">
+            <summary>
+            補充保費資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DaPXA.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DaPXA.ClientContent">
+            <summary>
+            目前請求的前端資訊模型物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.DaPXA.DaoSINI">
+            <summary>
+            SINI 資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPXA.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPXA.BuildWhereClause(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            建構查詢條件的 SQL 字串
+            </summary>
+            <param name="PXA01">公司別</param>
+            <param name="PXA03">發薪日期</param>
+            <param name="PXA05">計算類別</param>
+            <param name="PXA02">員工身份證字號</param>
+            <param name="PXA07">員工編號</param>
+            <returns>查詢條件 SQL 字串和參數清單</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPXA.GetDataCount(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32@)">
+            <summary>
+            取得分頁補充保費資料筆數
+            </summary>
+            <param name="PXA01">公司別</param>
+            <param name="PXA03">發薪日期</param>
+            <param name="PXA05">計算類別</param>
+            <param name="PXA02">員工身份證字號</param>
+            <param name="PXA07">員工編號</param>
+            <param name="funcName">功能名稱</param>
+            <param name="rowsPerPage">輸出每頁筆數</param>
+            <returns>符合條件的資料總筆數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPXA.GetData(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            取得分頁補充保費資料
+            </summary>
+            <param name="PXA01">公司別</param>
+            <param name="PXA03">發薪日期</param>
+            <param name="PXA05">計算類別</param>
+            <param name="PXA02">員工身份證字號</param>
+            <param name="PXA07">員工編號</param>
+            <param name="pageNo">頁次</param>
+            <param name="rowsPerPage">每頁筆數</param>
+            <returns>補充保費資料模型集合</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.DaPZ">
+            <summary>
+            實際工時資料存取類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.DAL.AllNewPY.DaPZ.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPZ.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaPZ.Merge(GUIStd.DAL.Base.Models.MdTimeInfo,GUIStd.DAL.AllNewPY.Models.MdWorkHour_w)">
+            <summary>
+            更新實際工時紀錄，當存在時僅更新PZ07、PZ08、PZ14、PZ15
+            </summary>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="obj">修改打卡資料模型</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.DaSINI.WorkHoursField">
+            <summary>
+            工時使用哪個欄位 S140313030 
+            參考 mPYM03 呼叫 BLLComponent.BLLAllNewPY.SINI.GetWorkHoursField() 寫法
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaSINI.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.DaSINI.GetHolidayCode">
+            <summary>
+            取得一例一休特殊假別代碼(國、例、休)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.CompanyOrgStruct.MdCompanyOrgStruct">
+            <summary>
+            部門組織結構樹
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.CompanyOrgStruct.MdCompanyOrgStruct.A0201">
+            <summary>
+            部門抬頭
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.CompanyOrgStruct.MdCompanyOrgStruct.A0202">
+            <summary>
+            部門抬頭
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.CompanyOrgStruct.MdCompanyOrgStruct.A02A03">
+            <summary>
+            主管ID
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.CompanyOrgStruct.MdCompanyOrgStruct.A0206">
+            <summary>
+            主管名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.CompanyOrgStruct.MdCompanyOrgStruct.qty">
+            <summary>
+            部門統計數字
+            </summary> 
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.CompanyOrgStruct.MdCompanyOrgStruct.A0220">
+            <summary>
+            主管名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.CompanyOrgStruct.MdCompanyOrgStruct.A0102">
+            <summary>
+            主管名稱
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsQuery">
+            <summary>
+            部門出勤查詢參數
+            S140313030
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsQuery.Dept">
+            <summary>
+            部門編號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsQuery.QueryDate">
+            <summary>
+            查詢日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsQuery.IncResigned">
+            <summary>
+            含已離職
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport">
+            <summary>
+            部門出勤查詢結果
+            S140313030
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.RowNo">
+            <summary>
+            rowIndex
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.ShiftNo">
+            <summary>
+            排班班別、假別名稱、臨時班班別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.EmployeeName">
+            <summary>
+            員工名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.EmployeeId">
+            <summary>
+            員工編號
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.StandardDatetime1T" -->
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.StandardDatetime1O">
+            <summary>
+            第一段標準下班時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.StandardDatetime2T">
+            <summary>
+            第二段標準上班時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.StandardDatetime2O">
+            <summary>
+            第二段標準下班時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.PunchDatetime1T">
+            <summary>
+            第一段上班打卡時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.PunchDatetime1O">
+            <summary>
+            第一段下班打卡時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.PunchDatetime2T">
+            <summary>
+            第二段上班打卡時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.PunchDatetime2O">
+            <summary>
+            第二段下班打卡時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.LeaveInfo">
+            <summary>
+            請假資料
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.WorkingHours">
+            <summary>
+            工時時數
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.WorkingHourDept">
+            <summary>
+            工時部門
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport.IsResign">
+            <summary>
+            已離職 : 1, 否則 ''
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport_p">
+            <summary>
+            部門出勤查詢結果
+            S140313030
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport_p.deptAtts">
+            <summary>
+            部門出勤查詢結果 泛型集合物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.DeptAtts.MdDeptAttsReport_p.Paging">
+            <summary>
+            分頁資訊物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.MdPayment">
+            <summary>
+            基本支薪
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdPayment.PF06a">
+            <summary>
+            加項/減項
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdPayment.fromDB">
+            <summary>
+            是否來源於資料庫
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr">
+            <summary>
+            年度事病假核給設定模型（專門負責事病假設定）
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr.AttApprovalDate">
+            <summary>
+            考勤核准日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr.PersonalLeaveGive">
+            <summary>
+            個人假別給假代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr.PersonalLeaveGiveQty">
+            <summary>
+            個人假別給假數量
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr.PersonalLeaveVoid">
+            <summary>
+            個人假別作廢代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr.SickLeaveGive">
+            <summary>
+            病假給假代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr.SickLeaveGiveQty">
+            <summary>
+            病假給假數量
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr.SickLeaveVoid">
+            <summary>
+            病假作廢代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr.MenstrualLeaveGive">
+            <summary>
+            生理假給假代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr.MenstrualLeaveGiveQty">
+            <summary>
+            生理假給假數量
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualAttAppr.MenstrualLeaveVoid">
+            <summary>
+            生理假作廢代碼
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig">
+            <summary>
+            特休假核給設定模型（整合版本 - 包含特休假設定、每日自動核給公司設定、HR Mail設定）
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.AnnualLeaveApprovalDate">
+            <summary>
+            特休假核給日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.AnnualLeaveGive">
+            <summary>
+            特休假代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.AnnualLeaveHour">
+            <summary>
+            每日核定數量(日/時)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.ChkSelect">
+            <summary>
+            核給方式 (1=轉補休, 2=轉薪)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.PYAgentSet">
+            <summary>
+            員工自行決定 (2=員工自行決定)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.AnnualLeaveVoid">
+            <summary>
+            沖銷代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.AnnualLeaveToPay">
+            <summary>
+            轉薪資代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.AnnualLeaveToCompenBreak">
+            <summary>
+            轉補休代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.DailyAutoApprovalCompany">
+            <summary>
+            每日自動核給公司設定（公司代碼陣列）
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.HRMailSettings">
+            <summary>
+            HR Mail 設定（公司別與 Email 對應關係）
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.HRMailSetting">
+            <summary>
+            HR Mail 設定模型（內部類別）
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.HRMailSetting.CompanyId">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdAnnualLeaveConfig.HRMailSetting.Email">
+            <summary>
+            Email 地址
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig">
+            <summary>
+            加班考勤設定模型（整合版本 - 包含加班轉薪、加班轉補休、臨時幫工加班轉薪）
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.OvertimeTransfer">
+            <summary>
+            加班轉薪
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.WorkdayWithin2Hours">
+            <summary>
+            工作日 2小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.WorkdayExceed2Hours">
+            <summary>
+            工作日 超過2小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.WorkdayExceed4Hours">
+            <summary>
+            工作日 超過4小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.RestDayWithin2Hours">
+            <summary>
+            休息日 2小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.RestDay2To8Hours">
+            <summary>
+            休息日 2到8小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.RestDayExceed8Hours">
+            <summary>
+            休息日 超過8小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.RegularHolidayWithin8Hours">
+            <summary>
+            例假日 8小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.RegularHolidayExceed8Hours">
+            <summary>
+            例假日 超過8小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.RegularHolidayCompensatoryLeave">
+            <summary>
+            例假日 核定補休
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.NationalHolidayWithin8Hours">
+            <summary>
+            國定假日 8小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.NationalHoliday8To10Hours">
+            <summary>
+            國定假日 8到10小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.NationalHolidayExceed10Hours">
+            <summary>
+            國定假日 超過10小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.OvertimeCompensatoryLeave">
+            <summary>
+            加班轉補休
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryWorkdayWithin2Hours">
+            <summary>
+            加班轉補休 - 工作日 2小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryWorkdayExceed2Hours">
+            <summary>
+            加班轉補休 - 工作日 超過2小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryWorkdayExceed4Hours">
+            <summary>
+            加班轉補休 - 工作日 超過4小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryRestDayWithin2Hours">
+            <summary>
+            加班轉補休 - 休息日 2小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryRestDay2To8Hours">
+            <summary>
+            加班轉補休 - 休息日 2到8小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryRestDayExceed8Hours">
+            <summary>
+            加班轉補休 - 休息日 超過8小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryRegularHolidayWithin8Hours">
+            <summary>
+            加班轉補休 - 例假日 8小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryRegularHolidayExceed8Hours">
+            <summary>
+            加班轉補休 - 例假日 超過8小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryNationalHolidayWithin8Hours">
+            <summary>
+            加班轉補休 - 國定假日 8小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryNationalHoliday8To10Hours">
+            <summary>
+            加班轉補休 - 國定假日 8到10小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.CompensatoryNationalHolidayExceed10Hours">
+            <summary>
+            加班轉補休 - 國定假日 超過10小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempOvertimeTransfer">
+            <summary>
+            臨時幫工加班轉薪
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempWorkdayWithin2Hours">
+            <summary>
+            臨時幫工加班轉薪 - 工作日 2小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempWorkdayExceed2Hours">
+            <summary>
+            臨時幫工加班轉薪 - 工作日 超過2小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempWorkdayExceed4Hours">
+            <summary>
+            臨時幫工加班轉薪 - 工作日 超過4小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempRestDayWithin2Hours">
+            <summary>
+            臨時幫工加班轉薪 - 休息日 2小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempRestDay2To8Hours">
+            <summary>
+            臨時幫工加班轉薪 - 休息日 2到8小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempRestDayExceed8Hours">
+            <summary>
+            臨時幫工加班轉薪 - 休息日 超過8小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempRegularHolidayWithin8Hours">
+            <summary>
+            臨時幫工加班轉薪 - 例假日 8小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempRegularHolidayExceed8Hours">
+            <summary>
+            臨時幫工加班轉薪 - 例假日 超過8小時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempRegularHolidayCompensatoryLeave">
+            <summary>
+            臨時幫工加班轉薪 - 例假日 核定補休
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempNationalHolidayWithin8Hours">
+            <summary>
+            臨時幫工加班轉薪 - 國定假日 8小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempNationalHoliday8To10Hours">
+            <summary>
+            臨時幫工加班轉薪 - 國定假日 8到10小時內
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdOvertimeConfig.TempNationalHolidayExceed10Hours">
+            <summary>
+            臨時幫工加班轉薪 - 國定假日 超過10小時
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendQuery">
+            <summary>
+            個人考勤查詢參數
+            S140313034
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendQuery.EmpID">
+            <summary>
+            員工編號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendQuery.StartDate">
+            <summary>
+            查詢起日
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendQuery.EndDate">
+            <summary>
+            查詢迄日
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport">
+            <summary>
+            個人考勤查詢結果
+            S140313034
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport.RowNo">
+            <summary>
+            rowIndex
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport.AA04">
+            <summary>
+            生效日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport.AA05">
+            <summary>
+            異動代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport.AA14">
+            <summary>
+            部門別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport.AA22">
+            <summary>
+            備註
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport.AA10">
+            <summary>
+            計算量
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport.AB06">
+            <summary>
+            單位名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport.AA011">
+            <summary>
+            使用截止日
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport.DeptName">
+            <summary>
+            部門名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport.AttName">
+            <summary>
+            考勤名稱
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport_p">
+            <summary>
+            個人考勤查詢結果
+            S140313034
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport_p.PersonalAtts">
+            <summary>
+            部門出勤查詢結果 泛型集合物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PersonalAttend.MdPersonalAttendReport_p.Paging">
+            <summary>
+            分頁資訊物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.PYP53.MdPYP53Defaults">
+            <summary>
+            PYP53 預設資料模型
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PYP53.MdPYP53Defaults.CompanyOptions">
+            <summary>
+            公司別選項
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PYP53.MdPYP53Defaults.CalculationTypes">
+            <summary>
+            計算類別選項
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PYP53.MdPYP53Defaults.PaymentCodes">
+            <summary>
+            補充保費代碼選項
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PYP53.MdPYP53Defaults.CalculationTypeMapping">
+            <summary>
+            計算類別對應所得類別
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.PYP53.MdPYP53SINIData">
+            <summary>
+            PYP53 SINI 資料模型
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PYP53.MdPYP53SINIData.CalculationTypes">
+            <summary>
+            計算類別選項
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PYP53.MdPYP53SINIData.PaymentCodes">
+            <summary>
+            補充保費代碼選項
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.PYP53.MdPYP53SINIData.CalculationTypeMapping">
+            <summary>
+            計算類別對應所得類別
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.MdHolidyCode">
+            <summary>
+            特殊假日假別類別資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdHolidyCode.nationalHolidayCode">
+            <summary>
+            國定假日假別代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdHolidyCode.restdayCode">
+            <summary>
+            休息日假別代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdHolidyCode.generalHolidayCode">
+            <summary>
+            例假日假別代碼
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo">
+            <summary>
+            班別資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.AO01">
+            <summary>
+            員工ID
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.AO08">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.AO08o">
+            <summary>
+            公司名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.AO04">
+            <summary>
+            部門別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.AO04o">
+            <summary>
+            部門別名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.AO02">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.AO03">
+            <summary>
+            班別代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.AL02">
+            <summary>
+            應計工時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.AO15">
+            <summary>
+            請假記號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.LeaveName">
+            <summary>
+            假別名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShiftInfo.Shifts">
+            <summary>
+            排班資訊
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Private.MdShift_r">
+            <summary>
+            班別資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShift_r.AO05">
+            <summary>
+            上班/下班
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShift_r.AO06">
+            <summary>
+            容許時間起(HHmm)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShift_r.AO07">
+            <summary>
+            容許時間迄(HHmm)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShift_r.AO10">
+            <summary>
+            標準時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShift_r.AO10t">
+            <summary>
+            上班/下班時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShift_r.AO14">
+            <summary>
+            標準上班時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Private.MdShift_r.punchRange">
+            <summary>
+            打卡容許範圍
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdAttendance">
+            <summary>
+            考勤紀錄模型
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA01">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA03">
+            <summary>
+            員工身分證號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA04">
+            <summary>
+            考勤日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA05">
+            <summary>
+            考勤代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA06">
+            <summary>
+            序號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA10">
+            <summary>
+            考勤計算量
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA11">
+            <summary>
+            獎懲數量
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA12">
+            <summary>
+            扣抵類別代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA13">
+            <summary>
+            考勤類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA14">
+            <summary>
+            部門代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA15">
+            <summary>
+            員工編號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA16">
+            <summary>
+            班別代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA17">
+            <summary>
+            發布日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA18">
+            <summary>
+            日期起
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA19">
+            <summary>
+            時間起
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA20">
+            <summary>
+            日期迄
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA21">
+            <summary>
+            請假時間迄
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA22">
+            <summary>
+            備註
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA23">
+            <summary>
+            來源
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA24">
+            <summary>
+            扣抵代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance.AA25">
+            <summary>
+            扣抵數量
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdAttendance_w">
+            <summary>
+            考勤紀錄寫入模型
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA01">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA02">
+            <summary>
+            "Z"保留
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA03">
+            <summary>
+            員工身分證號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA04">
+            <summary>
+            考勤日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA05">
+            <summary>
+            考勤代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA06">
+            <summary>
+            序號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA10">
+            <summary>
+            考勤計算量
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA11">
+            <summary>
+            獎懲數量
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA12">
+            <summary>
+            扣抵類別代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA13">
+            <summary>
+            考勤類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA14">
+            <summary>
+            部門代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA15">
+            <summary>
+            員工編號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA16">
+            <summary>
+            班別代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA17">
+            <summary>
+            發布日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA18">
+            <summary>
+            日期起
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA19">
+            <summary>
+            時間起
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA20">
+            <summary>
+            日期迄
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA21">
+            <summary>
+            請假時間迄
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA22">
+            <summary>
+            備註
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA23">
+            <summary>
+            來源
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA24">
+            <summary>
+            扣抵代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.AA25">
+            <summary>
+            扣抵數量
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendance_w.Unit">
+            <summary>
+            請假單位
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdAttendCode">
+            <summary>
+            考勤代碼模型
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendCode.AB01">
+            <summary>
+            考勤類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendCode.AB02">
+            <summary>
+            扣抵類別(1=加項、2=減項)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendCode.AB03">
+            <summary>
+            考勤代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendCode.AB04">
+            <summary>
+            換算比例
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendCode.AB05">
+            <summary>
+            考勤名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendCode.AB06">
+            <summary>
+            單位
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendCode.AB07">
+            <summary>
+            扣抵代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdAttendCode.AB08">
+            <summary>
+            扣抵比例
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdCodeWithCategory">
+            <summary>
+            帶類別的共用輔助資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdCodeWithCategory.Id">
+            <summary>
+            代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdCodeWithCategory.Name">
+            <summary>
+            說明
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdCodeWithCategory.Category">
+            <summary>
+            類別
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdPunchRange">
+            <summary>
+            班別打卡容許範圍資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunchRange.AN01">
+            <summary>
+            班別代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunchRange.AN02">
+            <summary>
+            上班/下班
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunchRange.AN08">
+            <summary>
+            班別日別(0:當日,1:隔日,2:前日)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunchRange.AN07">
+            <summary>
+            標準時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunchRange.AN04">
+            <summary>
+            容許時間起(HHMM)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunchRange.AN03">
+            <summary>
+            容許時間起日別(0:當日,1:隔日,2:前日)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunchRange.AN06">
+            <summary>
+            容許時間迄(HHMM)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunchRange.AN05">
+            <summary>
+            容許時間迄日別(0:當日,1:隔日,2:前日)
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdShift">
+            <summary>
+            班別資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AO02">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AO03">
+            <summary>
+            班別代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AO05">
+            <summary>
+            上班/下班
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AO06">
+            <summary>
+            容許時間起(yyyyMMddHHmm)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AO07">
+            <summary>
+            容許時間迄(yyyyMMddHHmm)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AO10">
+            <summary>
+            標準時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AO14">
+            <summary>
+            標準上班時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AO10t">
+            <summary>
+            上班/下班時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AO12">
+            <summary>
+            休息分鐘數
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AO15">
+            <summary>
+            請假記號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.PunchRange">
+            <summary>
+            打卡容許範圍
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift.AL02">
+            <summary>
+            應計工時
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdShift_w">
+            <summary>
+            班別資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO08">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO01">
+            <summary>
+            員工編號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO02">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO03">
+            <summary>
+            班別代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO04">
+            <summary>
+            部門代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO05">
+            <summary>
+            上班/下班
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO06">
+            <summary>
+            容許時間起
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO07">
+            <summary>
+            容許時間迄
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO09">
+            <summary>
+            假別對應的國定假日日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO10">
+            <summary>
+            標準時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO14">
+            <summary>
+            標準上班時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO15">
+            <summary>
+            請假記號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdShift_w.AO20">
+            <summary>
+            已申請忘卡單號
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdPunch">
+            <summary>
+            打卡資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ11">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ11o">
+            <summary>
+            公司名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ07">
+            <summary>
+            部門別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ07o">
+            <summary>
+            部門名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ06">
+            <summary>
+            員編
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ08">
+            <summary>
+            班別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ01d">
+            <summary>
+            打卡日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ01t">
+            <summary>
+            打卡時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ02">
+            <summary>
+            打卡類別(1:上班 2:下班 3:到店 4:離店)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ02o">
+            <summary>
+            打卡說明
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ03">
+            <summary>
+            卡號(MO員編)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ05">
+            <summary>
+            處理結果
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ05o">
+            <summary>
+            處理說明
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ10">
+            <summary>
+            歸屬標準時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ10t">
+            <summary>
+            歸屬時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ20">
+            <summary>
+            地理位置
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ21">
+            <summary>
+            緯度
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch.AQ22">
+            <summary>
+            經度
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdPunch_w">
+            <summary>
+            打卡資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ01">
+            <summary>
+            打卡時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ02">
+            <summary>
+            打卡類別(1:上班 2:下班 3:到店 4:離店)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ03">
+            <summary>
+            卡號(MO員編)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ11">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ07">
+            <summary>
+            部門別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ06">
+            <summary>
+            員編
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ09">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ08">
+            <summary>
+            班別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ05">
+            <summary>
+            處理結果
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ10">
+            <summary>
+            歸屬標準時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ17">
+            <summary>
+            打卡來源
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ20">
+            <summary>
+            地理位置
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ21">
+            <summary>
+            緯度
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ22">
+            <summary>
+            經度
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.AQ32">
+            <summary>
+            已申請忘卡單號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPunch_w.EmployeeSocialId">
+            <summary>
+            員工身分證號
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdEmployee">
+            <summary>
+            共用員工資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee.PA01">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee.PA02">
+            <summary>
+            部門別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee.PA02o">
+            <summary>
+            部門名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee.PA03">
+            <summary>
+            中文姓名
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee.PA04">
+            <summary>
+            英文姓名
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee.PA05">
+            <summary>
+            員工身分證號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee.PA06">
+            <summary>
+            員工編號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee.PA31">
+            <summary>
+            職等
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee.PA32">
+            <summary>
+            職務ID
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee.Position">
+            <summary>
+            職務資訊
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdEmployee_p">
+            <summary>
+            分頁員工資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee_p.Employees">
+            <summary>
+            員工資料泛型集合物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdEmployee_p.Paging">
+            <summary>
+            分頁資訊物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdPayCode">
+            <summary>
+            共用員工資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPayCode.PC01">
+            <summary>
+            支薪代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPayCode.PC02">
+            <summary>
+            支薪名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPayCode.PC03">
+            <summary>
+            加減項代碼(1:加,2:減)
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdBasicPayment">
+            <summary>
+            基本薪資資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdBasicPayment.PF05">
+            <summary>
+            支薪代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdBasicPayment.PC02">
+            <summary>
+            支薪名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdBasicPayment.PF03">
+            <summary>
+            發薪期別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdBasicPayment.PF02">
+            <summary>
+            部門別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdBasicPayment.PF02o">
+            <summary>
+            部門名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdBasicPayment.PC03">
+            <summary>
+            加減項代碼(1:加,2:減)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdBasicPayment.PF06">
+            <summary>
+            支薪金額
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Share.PG.MdPG">
+            <summary>
+            PG 發薪日期基礎模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PG.MdPG.PG01">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PG.MdPG.PG02">
+            <summary>
+            發薪年
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PG.MdPG.PG03">
+            <summary>
+            發薪月
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PG.MdPG.PG04">
+            <summary>
+            發薪日
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PG.MdPG.PG10">
+            <summary>
+            歸屬年度
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PG.MdPG.PayDate">
+            <summary>
+            發薪日期 (YYYYMMDD 格式)
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Share.PG.MdPG_p">
+            <summary>
+            PG發薪日期資料分頁模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PG.MdPG_p.PayDates">
+            <summary>
+            發薪日期資料泛型集合物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PG.MdPG_p.Paging">
+            <summary>
+            分頁資訊物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT">
+            <summary>
+            人事記錄檔資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT01">
+            <summary>
+            身份證字號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT02">
+            <summary>
+            異動日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT03">
+            <summary>
+            異動時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT04">
+            <summary>
+            記錄代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT051">
+            <summary>
+            異動說明(1)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT052">
+            <summary>
+            異動說明(2)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT06">
+            <summary>
+            異動前記錄
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT07">
+            <summary>
+            異動後結果
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT08">
+            <summary>
+            異動前金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT09">
+            <summary>
+            異動後金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.PT.MdPT.PT10">
+            <summary>
+            公司別(WinForm)
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings">
+            <summary>
+            假日設定配置模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings.FieldSINIMapping">
+            <summary>
+            欄位與SINI資料表映射對照表
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings.Year">
+            <summary>
+            年度
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings.FixedHolidays">
+            <summary>
+            固定假日清單
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings.NonFixedHolidays">
+            <summary>
+            非固定假日清單
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings.MandatoryDayOff">
+            <summary>
+            強制休假設定
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings.NationalHoliday">
+            <summary>
+            國定假日設定
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidayConfigSettings.RestDay">
+            <summary>
+            休息日設定
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidaySetting">
+            <summary>
+            假日設定模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidaySetting.Color">
+            <summary>
+            顏色代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.Share.SM.MdHolidaySetting.Date">
+            <summary>
+            日期設定
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdPosition">
+            <summary>
+            共用職級資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPosition.PM01">
+            <summary>
+            職等
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPosition.PM02">
+            <summary>
+            職務ID
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPosition.PM03">
+            <summary>
+            職務名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPosition.PM05">
+            <summary>
+            職務名稱(英)
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdHealthFeeParametersResult">
+            <summary>
+            健保補充保費參數查詢結果模型
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHealthFeeParametersResult.Success">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHealthFeeParametersResult.Message">
+            <summary>
+            錯誤訊息（若 Success=false）
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHealthFeeParametersResult.UpperLimit">
+            <summary>
+            上限金額 (PXA10)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHealthFeeParametersResult.LowerLimit">
+            <summary>
+            下限金額 (PXA11)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHealthFeeParametersResult.MinimumWage">
+            <summary>
+            最低工資 (PXA12)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHealthFeeParametersResult.Rate">
+            <summary>
+            本期保費費率 (PXA14)
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdPXA">
+            <summary>
+            補充保費資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA01">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA02">
+            <summary>
+            員工身份證字號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA03">
+            <summary>
+            發薪日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA04">
+            <summary>
+            序號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA05">
+            <summary>
+            計算類別(1.超額獎金/2.兼職所得/3.執行業務收入/4.股利所得/5.租金收入/6.利息所得)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA06">
+            <summary>
+            部門別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA07">
+            <summary>
+            員工編號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA09">
+            <summary>
+            所得金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA10">
+            <summary>
+            上限金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA11">
+            <summary>
+            下限金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA12">
+            <summary>
+            最低工資(兼職收入才填入)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA13">
+            <summary>
+            可扣抵投保金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA14">
+            <summary>
+            本期保費費率
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA15">
+            <summary>
+            計算金額(計算費基)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA16">
+            <summary>
+            補充保費金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA17">
+            <summary>
+            免扣補充保費類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA27">
+            <summary>
+            原計算金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA28">
+            <summary>
+            原補充保費金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA29">
+            <summary>
+            原可扣抵投保金額
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA33">
+            <summary>
+            前期累計獎金
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdPXA.PXA34">
+            <summary>
+            超額獎金
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance">
+            <summary>
+            補充保費查詢結果資料模型類別 (包含關聯資料)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance.PA03">
+            <summary>
+            員工中文姓名 (來自PA表)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance.DepartmentName">
+            <summary>
+            部門名稱 (需要從部門資料表查詢)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance.CalculationTypeName">
+            <summary>
+            所得類別名稱 (從 SINI CountPayType_PYP53 查詢)
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsuranceSaveRequest">
+            <summary>
+            補充保費儲存請求資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsuranceSaveRequest.CalculationResults">
+            <summary>
+            計算結果集合
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsuranceSaveRequest.CompanyId">
+            <summary>
+            公司別清單(逗號分隔)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsuranceSaveRequest.PayrollDate">
+            <summary>
+            發薪日期(YYYYMMDD)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsuranceSaveRequest.CalculationType">
+            <summary>
+            計算類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsuranceSaveRequest.EmployeeSocialId">
+            <summary>
+            員工身份證字號(選填)
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance_p">
+            <summary>
+            補充保費分頁查詢結果資料模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance_p.SupplementalInsurances">
+            <summary>
+            補充保費資料集合
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdSupplementalInsurance_p.Paging">
+            <summary>
+            分頁資訊物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w">
+            <summary>
+            每日工時紀錄模型
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ01">
+            <summary>
+            公司別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ02">
+            <summary>
+            排班日期
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ03">
+            <summary>
+            員工身分證號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ04">
+            <summary>
+            班別代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ05">
+            <summary>
+            部門代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ06">
+            <summary>
+            員工編號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ07">
+            <summary>
+            實際工時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ08">
+            <summary>
+            給薪工時
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ13">
+            <summary>
+            起始時間(HHmm)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ14">
+            <summary>
+            截止時間(HHmm)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdWorkHour_w.PZ15">
+            <summary>
+            備註
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdHolidaySchedule">
+            <summary>
+            休假日設定模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHolidaySchedule.SM01">
+            <summary>
+            日期 (YYYYMMDD)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHolidaySchedule.SM02">
+            <summary>
+            狀態 (B:國定假日、C:休息日、D:例假日)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHolidaySchedule.SM03">
+            <summary>
+            備註 (說明該日為哪個國定節日)
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHolidaySchedule.SM04">
+            <summary>
+            顏色
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.Models.MdHolidaySchedules_p">
+            <summary>
+            休假日設定資料分頁模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHolidaySchedules_p.SMs">
+            <summary>
+            休假日設定資料泛型集合物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.Models.MdHolidaySchedules_p.Paging">
+            <summary>
+            分頁資訊物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.TSQL.AA">
+            <summary>
+            員工排班 T-SQL 指令類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AA.#ctor(GUIStd.DAL.SQLBase)">
+            <param name="dbInfo">資料庫資訊</param>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.TSQL.AA.InsertOther">
+            <summary>
+            AA16自動產生流水號
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.TSQL.AA.GetAAs">
+            <summary>
+            依照AA01、AA02、AA03、AA04、AA05查詢多筆考勤紀錄
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AA.AAVTForDW(System.String)">
+            <summary>
+            宣告員工排班資料表變數
+            </summary>
+            <param name="pAA">排班資料表變數參數名稱</param>
+            <returns>TSQL指令</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AA.SumAA11ForDW(System.String,System.String,System.String,System.String)">
+            <summary>
+            寫入資料表變數TSQL指令
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.TSQL.AO">
+            <summary>
+            員工排班 T-SQL 指令類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AO.#ctor(GUIStd.DAL.SQLBase)">
+            <param name="dbInfo">資料庫資訊</param>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.TSQL.AO.MergeShiftToLeave">
+            <summary>
+            使用MergeInto重整員工當日排班
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AO.AOTVWithRange(System.String)">
+            <summary>
+            員工排班資料表變數(含容許打卡時間)
+            </summary>
+            <param name="pAO">排班資料表變數參數名稱</param>
+            <returns>TSQL指令</returns>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AO.InsertAOTVWithRange(System.String,System.String)">
+            <summary>
+            寫入資料表變數TSQL指令
+            </summary>
+            <param name="language">前端UI語系</param>
+            <param name="pAO">資料表變數參數名稱</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AO.AutoFixAO14(System.String)">
+            <summary>
+            自動修正資料表變數中，未設定標準上班時間的排班
+            </summary>
+            <param name="pAO">資料表變數參數名稱</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AO.AOTV(System.String)">
+            <summary>
+            宣告員工排班資料表變數
+            </summary>
+            <param name="pAO">排班資料表變數參數名稱</param>
+            <returns>TSQL指令</returns>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.TSQL.AO.UpdateAO20">
+            <summary>
+            更新忘卡申請單號到員工排班紀錄
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AO.GetShiftsByDateWithRange(System.String,System.String,System.String,System.String)">
+            <summary>
+            取得員工排班資料(含容許打卡時間)
+            </summary>
+            <param name="language">前端UI語系</param>
+            <param name="pAO">資料表變數參數名稱</param>
+            <param name="pAO01">員工代號參數名稱</param>
+            <param name="pAO02">日期參數名稱</param>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AO.GetMissingPunchs(System.String,System.Boolean,System.String,System.String)">
+            <summary>
+            查詢望打卡紀錄
+            </summary>
+            <param name="language">前端UI語系</param>
+            <param name="selCount"></param>
+            <param name="pAO">資料表變數參數名稱</param>
+            <param name="pagingClause">分業控制Where條件</param>
+            <returns>TSQL指令</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.TSQL.AQ">
+            <summary>
+            員工打卡 T-SQL 指令類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AQ.#ctor(GUIStd.DAL.SQLBase)">
+            <summary>
+            建構子
+            </summary>
+            <param name="dbInfo">資料庫資訊</param>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.TSQL.AQ.UpdateAQ32">
+            <summary>
+            更新忘卡申請單號到臨時班打卡紀錄
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.AQ.GetPunchData(System.String)">
+            <summary>
+            取得打卡資訊TSQL指令
+            </summary>
+            <param name="language">語系</param>
+            <returns>TSQL指令字串</returns>
+        </member>
+        <member name="T:GUIStd.DAL.AllNewPY.TSQL.PZ">
+            <summary>
+            實際工時 T-SQL 指令類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.AllNewPY.TSQL.PZ.#ctor(GUIStd.DAL.SQLBase)">
+            <param name="dbInfo">資料庫資訊</param>
+        </member>
+        <member name="P:GUIStd.DAL.AllNewPY.TSQL.PZ.MergePZ">
+            <summary>
+            更新每日工時紀錄，當存在時僅更新PZ07、PZ08、PZ14、PZ15
+            </summary>
+        </member>
+    </members>
+</doc>

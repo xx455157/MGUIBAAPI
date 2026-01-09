@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd.BLL.AllNewGL</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.BLL.AllNewPY.Private.BlProfitLoss">
+            <summary>
+            存取 損益表 的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewPY.Private.BlProfitLoss.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="F:GUIStd.BLL.AllNewPY.Private.BlProfitLoss.BrkRow.GrossProfit">
+            <summary>
+            銷貨毛利
+            </summary>
+        </member>
+        <member name="F:GUIStd.BLL.AllNewPY.Private.BlProfitLoss.BrkRow.NetProfit">
+            <summary>
+            營業淨利
+            </summary>
+        </member>
+        <member name="F:GUIStd.BLL.AllNewPY.Private.BlProfitLoss.BrkRow.ProfitBeforeTax">
+            <summary>
+            稅前淨利
+            </summary>
+        </member>
+        <member name="F:GUIStd.BLL.AllNewPY.Private.BlProfitLoss.BrkRow.ProfitAfterTax">
+            <summary>
+            稅後淨利
+            </summary>
+        </member>
+        <member name="F:GUIStd.BLL.AllNewPY.Private.BlProfitLoss.BrkRow.CurrentNetGain">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewPY.Private.BlProfitLoss.DaoProfitLoss">
+            <summary>
+            資料存取物件屬性
+            </summary>        
+        </member>
+        <member name="M:GUIStd.BLL.AllNewPY.Private.BlProfitLoss.MakeReport(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGL.Models.Private.ProfitLoss.MdCompaniesDetail})">
+            <summary>
+            產出Vue顯示用的資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewPY.Private.BlProfitLoss.GetDataCompanies(GUIStd.DAL.AllNewGL.Models.Private.ProfitLoss.MdQueryCompanies)">
+            <summary>
+            讀取集團損益表
+            </summary>
+            <param name="para">查詢參數</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

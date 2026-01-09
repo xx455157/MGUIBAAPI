@@ -1,0 +1,2516 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.Attributes.DADate">
+            <summary>
+            自訂日期驗證宣告式屬性類別，以自資源檔中取出錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DADate.SetErrorMessage">
+            <summary>
+            設定錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DADate.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DADate.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            驗證日期是否合法
+            </summary>
+            <param name="value">日期字串</param>
+            <param name="validationContext">驗證內容物件</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Attributes.DADisplayName">
+            <summary>
+            自訂欄位名稱顯示宣告式屬性類別，以自資源檔中取出錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DADisplayName.GetDisplayName">
+            <summary>
+            取得顯示名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DADisplayName.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DADisplayName.#ctor(System.String,GUIStd.Enums.ResourceLang,GUIStd.Enums.ResourceCulture)">
+            <summary>
+            建構子
+            </summary>
+            <param name="resourceKey">資源鍵</param>
+            <param name="resourceLang">系統資源檔名稱</param>
+            <param name="culture">資源文化類型</param>
+        </member>
+        <member name="P:GUIStd.Attributes.DADisplayName.Culture">
+            <summary>
+            資源語系
+            </summary>
+        </member>
+        <member name="P:GUIStd.Attributes.DADisplayName.ResourceLang">
+            <summary>
+            系統資源檔名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.Attributes.DADisplayName.ResourceKey">
+            <summary>
+            資源鍵
+            </summary>
+        </member>
+        <member name="P:GUIStd.Attributes.DADisplayName.DisplayName">
+            <summary>
+            資料驗證錯誤的顯示名稱
+            </summary>
+        </member>
+        <member name="T:GUIStd.Attributes.DADisplayNames">
+            <summary>
+            自訂欄位名稱顯示宣告式屬性類別，以自資源檔中取出錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DADisplayNames.ParseParameters(System.Object[])">
+            <summary>
+            解析屬性參數並轉換為強型別的資源參數元組陣列
+            </summary>
+            <param name="parameters">
+            原始參數陣列，預期格式為每3個一組
+            </param>
+            <returns>解析後的強型別參數陣列</returns>
+        </member>
+        <member name="M:GUIStd.Attributes.DADisplayNames.GetDisplayNames">
+            <summary>
+            取得顯示名稱(由多組資源組串而成)
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DADisplayNames.#ctor(System.Object[])">
+            <summary>
+            建構子，接收原始參數並進行解析
+            <para>- 單一資源設定</para>
+            <para>[DADisplayNamesAttribute("StartTime", Enums.ResourceLang.Lang, Enums.ResourceCulture.Auto)]</para>
+            <para>- 多組資源設定</para>
+            <para>[DADisplayNamesAttribute(</para>
+            <para>    "PanelDescpt_StartTime", Enums.ResourceLang.Lang, Enums.ResourceCulture.Auto,</para>
+            <para>    "PanelDescpt_TimeEnd", Enums.ResourceLang.Lang, Enums.ResourceCulture.Auto,</para>
+            <para>)]</para>
+            </summary>
+            <param name="parameters">
+            原始參數陣列，每3個參數為一組，分別代表：
+            <para>- 資源鍵值 (string)</para>
+            <para>- 系統資源檔名稱 (Enums.ResourceLang)</para>
+            <para>- 資源文化類型 (Enums.ResourceCulture)</para>
+            </param>
+        </member>
+        <member name="P:GUIStd.Attributes.DADisplayNames.Parameters">
+            <summary>
+            儲存原始參數元組陣列
+            </summary>
+        </member>
+        <member name="P:GUIStd.Attributes.DADisplayNames.DisplayName">
+            <summary>
+            資料驗證錯誤的顯示名稱
+            </summary>
+        </member>
+        <member name="T:GUIStd.Attributes.DAEmailAddress">
+            <summary>
+            自訂E-Mail Address宣告式屬性類別，以自資源檔中取出錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAEmailAddress.SetErrorMessage">
+            <summary>
+            設定錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAEmailAddress.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAEmailAddress.IsValid(System.Object)">
+            <summary>
+            驗證 E-Mail Address 是否合法
+            </summary>
+            <param name="value">E-Mail Address</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Attributes.DAEnumDataType">
+            <summary>
+            自訂列舉型態宣告式屬性類別，以自資源檔中取出錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAEnumDataType.SetErrorMessage">
+            <summary>
+            設定錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAEnumDataType.#ctor(System.Type)">
+            <summary>
+            建構子
+            </summary>
+            <param name="enumType"></param>
+        </member>
+        <member name="P:GUIStd.Attributes.DAEnumDataType.EnumType">
+            <summary>
+            列舉型別
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAEnumDataType.IsValid(System.Object)">
+            <summary>
+            驗證列舉值是否合法
+            </summary>
+            <param name="value">列舉值</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Attributes.DAMaxLength">
+            <summary>
+            自訂欄位最大長度宣告式屬性類別，以自資源檔中取出錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMaxLength.SetErrorMessage">
+            <summary>
+            設定錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMaxLength.#ctor(System.Int32)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMaxLength.#ctor(System.Int32,System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="defaultLength">資源檔不存在時的預設值</param>
+            <param name="resourceFldLenKey">資源鍵</param>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMaxLength.#ctor(System.Int32,System.String,GUIStd.Enums.ResourceFldLen)">
+            <summary>
+            建構子
+            </summary>
+            <param name="defaultLength">資源檔不存在時的預設值</param>
+            <param name="resourceFldLenKey">資源鍵</param>
+            <param name="resourceFldLen">系統欄位資源檔名稱</param>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMaxLength.IsValid(System.Object)">
+            <summary>
+            覆寫最大長度的檢驗函式
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Attributes.DAMdRangeRequired">
+            <summary>
+            自訂泛型型態範圍驗證的宣告式屬性類別，以自資源檔中取出錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMdRangeRequired.#ctor(GUIStd.Enums.RangeRequiredMode,System.Boolean)">
+            <summary>
+            建構子
+            </summary>
+            <param name="mode">範圍必需輸入的模式</param>
+            <param name="isDateString">是否為日期時間資料</param>
+        </member>
+        <member name="T:GUIStd.Attributes.DAMinLength">
+            <summary>
+            自訂欄位最短長度宣告式屬性類別，以自資源檔中取出錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMinLength.SetErrorMessage">
+            <summary>
+            設定錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMinLength.#ctor(System.Int32)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMinLength.#ctor(System.Int32,System.String)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMinLength.#ctor(System.Int32,System.String,GUIStd.Enums.ResourceFldLen)">
+            <summary>
+            建構子
+            </summary>
+            <param name="defaultLength">資源檔不存在時的預設值</param>
+            <param name="resourceFldLenKey">資源鍵</param>
+            <param name="resourceFldLen">系統欄位資源檔名稱</param>
+        </member>
+        <member name="M:GUIStd.Attributes.DAMinLength.IsValid(System.Object)">
+            <summary>
+            覆寫最短長度的檢驗函式
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Attributes.DARange">
+            <summary>
+            自訂數值欄位值範圍的宣告式屬性類別，以自資源檔中取出錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DARange.SetErrorMessage">
+            <summary>
+            設定錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DARange.#ctor(System.Int32,System.Int32)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DARange.#ctor(System.Double,System.Double)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DARange.IsValid(System.Object)">
+            <summary>
+            覆寫必要欄位的檢驗函式
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Attributes.DARequired">
+            <summary>
+            自訂必要欄位宣告式屬性類別，以自資源檔中取出錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DARequired.SetErrorMessage(System.String)">
+            <summary>
+            設定錯誤訊息
+            </summary>
+        </member>
+        <member name="M:GUIStd.Attributes.DARequired.IsValid(System.Object)">
+            <summary>
+            覆寫必要欄位的檢驗函式
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Base64EncoderHelper">
+            <summary>
+            基於 Base64 加解密類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.Base64EncoderHelper.Encode(System.String)">
+            <summary>
+            加密文字
+            </summary>
+            <param name="content">欲加密文字</param>
+            <returns>加密後文字</returns>
+        </member>
+        <member name="M:GUIStd.Base64EncoderHelper.Decode(System.String)">
+            <summary>
+            解密文字
+            </summary>
+            <param name="content">欲解密文字</param>
+            <returns>解密後文字</returns>
+        </member>
+        <member name="T:GUIStd.CamelCaseJsonSerializerSettings">
+            <summary>
+            使用小駝峰式命名原則命名屬性名稱的 JSON 物件序列化設定類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.CamelCaseJsonSerializerSettings.#ctor(System.Boolean,Newtonsoft.Json.JsonConverter[])">
+            <summary>
+            建構子
+            </summary>
+            <param name="ignoreNullValue">忽略 Null 值的屬性</param>
+            <param name="customConverters">自訂反序列化物件轉換對應邏輯的物件陣列</param>
+        </member>
+        <member name="T:GUIStd.Common">
+            <summary>
+            系統共用函式類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.ImageBase64StringDataMatchPattern">
+            <summary>
+            用於規則運算式中的樣板格式字串，以取得圖片資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.Common.SendDataUsingWebRequest(System.String,System.Byte[],GUIStd.Common.RequestDataType,System.Net.ICredentials,GUIStd.Common.RequestMethod,System.Collections.Hashtable)">
+            <summary>
+            傳送 XML/JSON 文件至遠端 Web 服務
+            </summary>
+            <param name="requestUrl">請求的服務網址</param>
+            <param name="text">傳送至後端服務的 Byte Array 型態資料</param>
+            <param name="dataType">傳遞的資料型態</param>
+            <param name="credential">身份驗證物件</param>
+            <param name="httpMethod">請求方法</param>
+            <param name="headers">請求要加入標題的雜湊表</param>
+            <returns>前端請求物件</returns>
+        </member>
+        <member name="M:GUIStd.Common.GetBase64StringImageData(System.String)">
+            <summary>
+            擷取 Base64 文字格式中的純圖片內容資料
+            </summary>
+            <param name="base64String">以 Base64 文字格式表達的圖片資料</param>
+            <returns>字串</returns>
+        </member>
+        <member name="T:GUIStd.Common.RequestDataType">
+            <summary>
+            Web Services資料傳輸使用的資料型態
+            </summary>
+        </member>
+        <member name="T:GUIStd.Common.RequestMethod">
+            <summary>
+            Web Services資料傳輸使用的請求方法
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.CurrentDateTime">
+            <summary>
+            取得未格式化的目前日期時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.FormatedCurrentTime">
+            <summary>
+            取得含時差的格式化目前時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.FormatedUTCCurrentTime">
+            <summary>
+            取得國際標準時間的格式化目前時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.LocalMachineName">
+            <summary>
+            取得本機名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.CultureEN">
+            <summary>
+            系統支援語系名稱：英文
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.CultureTC">
+            <summary>
+            系統支援語系名稱：繁中
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.CultureSC">
+            <summary>
+            系統支援語系名稱：簡中
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.MIMETypeApplication">
+            <summary>
+            網際網路傳輸的內容型態(MIME Type)：Application 類型
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.MIMETypeImage">
+            <summary>
+            網際網路傳輸的內容型態(MIME Type)：Image 類型
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.MIMETypeVideo">
+            <summary>
+            網際網路傳輸的內容型態(MIME Type)：Video 類型
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.DownLoadSVGMIMEType">
+            <summary>
+            下載 SVG 檔案時使用的 MIME Type
+            由於 jQuery 下載 SVG 檔案時會導致 parseerror 的錯誤，因此，必需改用 text/plain 的內容型態才可成功下載
+            </summary>
+        </member>
+        <member name="P:GUIStd.Common.DownLoadMIMEType">
+            <summary>
+            下載檔案通用的 MIME Type
+            </summary>
+        </member>
+        <member name="M:GUIStd.Common.CreateDirectory(System.String)">
+            <summary>
+            建立檔案所在的目錄（如果目錄不存在）
+            </summary>
+            <param name="fileName">完整檔案路徑</param>
+        </member>
+        <member name="M:GUIStd.Common.GetCurrentDate">
+            <summary>
+            取得目前日期
+            </summary>
+            <returns>字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.GetCurrentTime(System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            取得目前時間
+            </summary>
+            <param name="hasMilliseconds">是否包含毫秒或微秒</param>
+            <param name="useMicroseconds">是否使用微秒單位</param>
+            <param name="includeFormat">是否包含格式</param>
+            <returns>字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.ConvertJavaEscapeChar(System.String)">
+            <summary>
+            文字轉換為 JavaScript 保留字元
+            </summary>
+            <param name="str">訊息文字</param>
+            <returns>字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.CodePointToString(System.Int32,System.Boolean)">
+            <summary>
+            將 UniCode 代碼以 \u 文字型態表示
+            </summary>
+            <param name="code">UniCode 字元碼</param>
+            <param name="outputExpression">以 \u 格式輸出 UniCode 字元</param>
+            <returns>字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.ConvertUniCodeRepresentation2Char(System.String)">
+            <summary>
+            從 Unicode 的字元表示式轉換回 Unicdoe 字元
+            如：\u26A0 字元表示式轉換回 ⚠ 字元
+            </summary>
+            <param name="str">含 Unicode 字元表示式的字串</param>
+            <returns>轉換回 Unicdoe 字元的字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.SendJSON2WebAPI(System.String,System.String,System.Collections.Hashtable,GUIStd.Common.RequestMethod)">
+            <summary>
+            傳送 JSON 至遠端 Web 服務
+            </summary>
+            <param name="requestUrl">請求的服務網址</param>
+            <param name="jsonText">傳送至後端服務的 JSON 文字</param>
+            <param name="headers">請求要加入標題的雜湊表</param>
+            <param name="httpMethod">請求方法</param>
+            <returns>前端請求物件</returns>
+        </member>
+        <member name="M:GUIStd.Common.IsWebRequestSuccess(System.Net.WebRequest)">
+            <summary>
+            判斷是否成功發送前端請求
+            </summary>
+            <param name="request">前端請求物件</param>
+            <returns>回應物件</returns>
+        </member>
+        <member name="M:GUIStd.Common.GetWebRequestError(System.Net.WebRequest)">
+            <summary>
+            取得前端請求發送失敗的錯誤資訊
+            </summary>
+            <param name="request">前端請求物件</param>
+            <returns>失敗資訊物件</returns>
+        </member>
+        <member name="M:GUIStd.Common.GetWebResponseText(System.Net.HttpWebResponse)">
+            <summary>
+            取得遠端 Web 服務處理前端請求後的回應資料
+            </summary>
+            <param name="response">前端請求的回應物件</param>
+            <returns>回應字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.GetWebResponseText(System.Net.WebRequest)">
+            <summary>
+            取得遠端 Web 服務處理前端請求後的回應資料
+            </summary>
+            <param name="request">前端請求物件</param>
+            <returns>回應字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.SerializeJsonObjUsingCamelCase(System.Object)">
+            <summary>
+            使用小駝峰命名原則序列化 JSON 物件
+            </summary>
+            <param name="jsonObj">JSON 物件</param>
+            <returns>物件序列化後的字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.SerializeJsonObjUsingCamelCase(System.Object,System.Boolean)">
+            <summary>
+            使用小駝峰命名原則序列化 JSON 物件
+            </summary>
+            <param name="jsonObj">JSON 物件</param>
+            <param name="ignoreNullValue">忽略 Null 值的屬性</param>
+            <returns>物件序列化後的字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.SerializeJsonObjUsingCamelCase(System.Object,System.Boolean,Newtonsoft.Json.JsonConverter[])">
+            <summary>
+            使用小駝峰命名原則序列化 JSON 物件
+            </summary>
+            <param name="jsonObj">JSON 物件</param>
+            <param name="ignoreNullValue">忽略 Null 值的屬性</param>
+            <param name="customConverters">自訂反序列化物件轉換對應邏輯的物件陣列</param>
+            <returns>物件序列化後的字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.Cvr2String(System.Object,System.Boolean,System.String)">
+            <summary>
+            將任意型態資料轉換為文字
+            </summary>
+            <param name="obj">任意型態資料</param>
+            <param name="ignoreSpace">是否去掉前後空白字元</param>
+            <param name="returnValueWhenParseError">轉換失敗回傳的文字</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.CvrStr2Dec(System.Object)">
+            <summary>
+            將文字轉換為Decimal
+            </summary>
+            <param name="obj">任意型態資料</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.CvrStr2Dec(System.Object,System.Int32)">
+            <summary>
+            將文字轉換為Decimal
+            </summary>
+            <param name="obj">任意型態資料</param>
+            <param name="numDigits">小數位數</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.CvrStr2Dec(System.Object,System.Int32,GUIStd.Enums.CarryMethod)">
+            <summary>
+            將文字轉換為Decimal
+            </summary>
+            <param name="obj">任意型態資料</param>
+            <param name="numDigits">小數位數</param>
+            <param name="carryMethod">小數進位方式</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.CvrStr2Int(System.Object)">
+            <summary>
+            將文字轉換為Integer
+            </summary>
+            <param name="obj">任意型態資料</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.CvrStr2Dbl(System.String,System.Int32)">
+            <summary>
+            將文字轉換成Double數值（指定小數位數）
+            </summary>
+        </member>
+        <member name="M:GUIStd.Common.CvrStr2Dbl(System.String)">
+            <summary>
+            將文字轉換成Double數值
+            </summary>
+        </member>
+        <member name="M:GUIStd.Common.CvrStr2Dbl(System.Object)">
+            <summary>
+            將物件轉換成Double數值
+            </summary>
+        </member>
+        <member name="M:GUIStd.Common.CvrStr2Dbl(System.Object,System.Int32)">
+            <summary>
+            將物件轉換成Double數值（指定小數位數）
+            </summary>
+        </member>
+        <member name="M:GUIStd.Common.CvrStr2Dbl(System.Object,System.Object,System.Int32)">
+            <summary>
+            計算兩個物件的除法結果（指定小數位數）
+            </summary>
+        </member>
+        <member name="M:GUIStd.Common.CvrValue2GenericType``1(System.Object)">
+            <summary>
+            將資料轉換為傳入的泛型型別
+            </summary>
+            <typeparam name="T">傳入的泛型型別</typeparam>
+            <param name="value">要轉型的來源資料</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.CvrStr2Date(System.String)">
+            <summary>
+            文字日期轉成日期物件型態
+            </summary>
+            <param name="dateStr">文字西曆日期</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.GetDiffDays(System.String,System.String)">
+            <summary>
+            取得差異天數
+            </summary>
+            <param name="sDate">文字起始日期</param>
+            <param name="eDate">文字迄止日期</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.GetDiffMonths(System.String,System.String)">
+            <summary>
+            取得差異月份
+            </summary>
+            <param name="sDate">文字起始日期</param>
+            <param name="eDate">文字迄止日期</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.GetDiffTimes(System.String,System.String,System.String,System.String,GUIStd.Enums.TimePeriod)">
+            <summary>
+            取得兩個時間的差值
+            </summary>
+            <param name="sDate">起始日期</param>
+            <param name="eDate">起始時間</param>
+            <param name="sTime">截止日期</param>
+            <param name="eTime">截止時間</param>
+            <param name="periodUnit">時間運算區間</param>
+            <returns>回傳時間差.計算天數、小時、分鐘差,計算結果為小數1位</returns>
+        </member>
+        <member name="M:GUIStd.Common.GetUniLenStr(System.String,System.Int32)">
+            <summary>
+            取得文字指定起始位置之後的資料
+            </summary>
+            <param name="source">來源文字</param>
+            <param name="start">起始位置</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.GetUniLenStr(System.String,System.Int32,System.Int32)">
+            <summary>
+            取得文字指定起始位置及指定文字長度的資料
+            </summary>
+            <param name="source">來源文字</param>
+            <param name="start">起始位置</param>
+            <param name="len">取得文字的長度</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.GetImageFormat(System.String)">
+            <summary>
+            取得圖檔的格式列舉值
+            </summary>
+            <param name="fileName">圖檔名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.ImageToBase64String(System.Byte[],GUIStd.Enums.ImageFormat)">
+            <summary>
+            將 Binary 格式圖片轉換為 Base64String 格式
+            </summary>
+            <param name="fileBytes">Binary 格式的圖片內容</param>
+            <param name="imageFormat">圖片格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.ImageToBase64String(GUIStd.Models.MdBase64Image)">
+            <summary>
+            將系統共用圖檔模型物件中的圖片轉換為 Base64String 格式
+            </summary>
+            <param name="model">系統共用的圖檔模型</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.ImageToBase64String(System.String,GUIStd.Enums.ImageFormat)">
+            <summary>
+            將圖片檔轉換為 Base64String 格式
+            </summary>
+            <param name="fileName">圖檔名稱</param>
+            <param name="imageFormat">圖片格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.ImageToBase64String(System.String)">
+            <summary>
+            將圖片檔轉換為 Base64String 格式
+            </summary>
+            <param name="fileName">圖檔名稱</param>
+            <returns>base64string格式的圖片字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.GetUriImage(System.String)">
+            <summary>
+            取得網路圖片
+            </summary>
+            <param name="imageUri">圖片網址</param>
+            <returns>圖片 Byte Array</returns>
+        </member>
+        <member name="M:GUIStd.Common.ImageToStream(System.Drawing.Image)">
+            <summary>
+            將圖片 Byte Array 轉換為圖片物件
+            </summary>
+            <param name="image">圖片的 Byte Array</param>
+            <returns>圖片物件</returns>
+        </member>
+        <member name="M:GUIStd.Common.ImageConvert(System.Byte[])">
+            <summary>
+            將圖片 Byte Array 轉換為圖片物件
+            </summary>
+            <param name="imgBytes">圖片的 Byte Array</param>
+            <returns>圖片物件</returns>
+        </member>
+        <member name="M:GUIStd.Common.GetZoomImage(System.Drawing.Image,System.Int32,System.Int32)">
+            <summary>
+            取得圖片指定高度及寬度的縮圖 (單位：像素)
+            </summary>
+            <param name="srcImage">原始圖片</param>
+            <param name="thumbWidth">縮圖寬度</param>
+            <param name="thumbHeight">縮圖高度</param>
+            <returns>縮放後的圖片</returns>
+        </member>
+        <member name="M:GUIStd.Common.ThumbnailCallback">
+            <summary>
+            縮圖回調方法
+            </summary>
+        </member>
+        <member name="M:GUIStd.Common.StreamToByteArray(System.IO.Stream)">
+            <summary>
+            將資料流轉成 Byte Array
+            </summary>
+            <param name="input">資料流物件</param>
+            <returns>Byte Array</returns>
+        </member>
+        <member name="M:GUIStd.Common.GetModelProperities(System.Object)">
+            <summary>
+            取得模型物件的屬性欄位集合
+            </summary>
+            <param name="modelType">模型物件</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.CloneObject(System.Object)">
+            <summary>
+            Clone 物件
+            來源物件類別需加入 [Serializable] 屬性宣告
+            </summary>
+            <param name="obj">來源物件</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.CloneObject(System.Object,System.String[])">
+            <summary>
+            Clone 物件
+            來源物件類別需加入 [Serializable] 屬性宣告
+            </summary>
+            <param name="obj">來源物件</param>
+            <param name="ignoreFieldsName">不進行複寫的屬性成員名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.GetPagingIndexStart(System.Int32,System.Int32)">
+            <summary>
+            取得頁次的第一筆資料列列號
+            </summary>
+            <param name="pageNo">查詢頁次</param>
+            <param name="rowsPerPage">輸出一頁筆數</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.GetPagingIndexEnd(System.Int32,System.Int32)">
+            <summary>
+            取得頁次的最後一筆資料列列號
+            </summary>
+            <param name="pageNo">查詢頁次</param>
+            <param name="rowsPerPage">輸出一頁筆數</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.GetDirectoryInfo(System.String,System.String,System.Boolean,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            [非同步]條列主機特定目錄與檔案詳細資料
+            </summary>
+            <param name="path">要條列的目錄路徑</param>
+            <param name="parent">該目錄的上層目錄</param>
+            <param name="includeSubFolder">是否連同子目錄一同條列</param>
+            <param name="minEditDate">目錄底下檔案最小修改日期</param>
+            <param name="maxEditDate">目錄底下檔案最大修改日期</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.GetDirectoryInfo``2(System.String,System.String,System.Boolean,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            [非同步]條列主機特定目錄與檔案詳細資料
+            </summary>
+            <typeparam name="T">目錄模型類別，需繼承MdDirInfo</typeparam>
+            <typeparam name="U">檔案模型類別，需繼承MdFileInfo</typeparam>
+            <param name="path">要條列的目錄路徑</param>
+            <param name="parent">該目錄的上層目錄</param>
+            <param name="includeSubFolder">是否連同子目錄一同條列</param>
+            <param name="minEditDate">目錄底下檔案最小修改日期</param>
+            <param name="maxEditDate">目錄底下檔案最大修改日期</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.SaveFile(System.Byte[],System.String,System.IO.FileMode)">
+            <summary>
+            [非同步]將位元組陣列寫入檔案
+            </summary>
+            <param name="data">位元組陣列</param>
+            <param name="filePath">檔案存檔完整路徑</param>
+            <param name="mode">存檔模式</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.SaveFileSync(System.Byte[],System.String,System.IO.FileMode)">
+            <summary>
+            [同步]將位元組陣列寫入檔案
+            </summary>
+            <param name="data">位元組陣列</param>
+            <param name="filePath">檔案存檔完整路徑</param>
+            <param name="mode">存檔模式</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.RemoveFile(System.String,System.String[])">
+            <summary>
+            [非同步]檔案刪除
+            </summary>
+            <param name="rootPath">要刪除檔案所在的目錄</param>
+            <param name="fileNames">要刪除的檔案名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.Base64StringToImage(System.String)">
+            <summary>
+            將 Base64String 格式轉換為 Binary 格式的圖片格式
+            </summary>
+            <param name="base64Img">Base64String 格式的圖片內容</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.Base64StringToImage(System.String,System.String)">
+            <summary>
+            將 Base64String 格式的圖片儲存至實體檔案
+            </summary>
+            <param name="base64Img">Base64String 格式的圖片內容</param>
+            <param name="saveToFileName">存放至硬碟中的圖片檔名</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.WriteToFileStream(System.Byte[],System.String,System.IO.FileMode)">
+            <summary>
+            使用同步方式寫入檔案
+            </summary>
+            <param name="data">Byte Array 型庇的檔案資料</param>
+            <param name="fileName">儲存的檔名</param>
+            <param name="fileMode">檔案的建立模式，預設為新建或覆蓋已存在的檔案</param>
+        </member>
+        <member name="M:GUIStd.Common.WriteToFileStreamAsync(System.Byte[],System.String,System.IO.FileMode)">
+            <summary>
+            使用非同步方式寫入檔案
+            </summary>
+            <param name="data">Byte Array 型態的檔案資料</param>
+            <param name="fileName">儲存的檔名</param>
+            <param name="fileMode">檔案的建立模式，預設為新建或覆蓋已存在的檔案</param>
+        </member>
+        <member name="M:GUIStd.Common.ReadFileToStreamAsync(System.String)">
+            <summary>
+            使用非同步方式讀取檔案並以資料流型態回傳
+            </summary>
+            <param name="fileName">儲存的檔名</param>
+        </member>
+        <member name="M:GUIStd.Common.IsValidJsonString(System.String)">
+            <summary>
+            判斷字串是否為合法的 JSON 字串
+            </summary>
+            <param name="text">文字</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.CompressJSON(System.String)">
+            <summary>
+            壓縮 JSON 字串
+            </summary>
+            <param name="text">原生 JSON 字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.GetCalculateDate(System.String,System.Int32,GUIStd.Enums.DatePeriod)">
+            <summary>
+            做日期的加減運算,傳回西曆格式
+            </summary>
+            <param name="date">要計算的日期，使用西曆格式</param>
+            <param name="period">要加減的數字</param>
+            <param name="countWay">使用的計算單位</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.DateIn(System.DateTime)">
+            <summary>
+            將日期格式轉為 8 碼西曆格式
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.DateIn(GUIStd.Enums.DateFlag,System.String)">
+            <summary>
+            將日期字串去格式且轉為西曆格式
+            </summary>
+            <param name="dateFlag">日期字串的格式</param>
+            <param name="dateValue">日期字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.DateOut(GUIStd.Enums.DateFlag,System.String)">
+            <summary>
+            根據日期標誌將日期轉換為不同格式
+            </summary>
+            <param name="toDateFlag">日期格式 (西曆或民國曆)</param>
+            <param name="dateVar">輸入的西曆日期字串</param>
+            <returns>轉換後的日期字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.DateOut(System.String)">
+            <summary>
+            轉換至系統設定日期，目前強制為西曆
+            </summary>
+            <param name="dateVar">輸入的西曆日期字串</param>
+            <returns>格式化後的日期字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.ClonePropertiesValue(System.Object,System.Object)">
+            <summary>
+            將來源模型屬性值複製到目標模型具有相同屬性的成員中
+            </summary>
+            <param name="source">來源模型物件</param>
+            <param name="target">目標模型物件</param>
+        </member>
+        <member name="M:GUIStd.Common.ToArray(Microsoft.Extensions.Primitives.StringValues)">
+            <summary>
+            將 StringValues 型態轉換為陣列型態
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Common.TryDeserializeJsonToArray(System.String,System.Type,System.Array@)">
+            <summary>
+            將 JSON 陣列字串輸出為 Array 型態物件
+            </summary>
+            <param name="jsonString">JSON 陣列字串</param>
+            <param name="elementType">陣列元素的型別</param>
+            <param name="result">輸出的 Array 型態物件</param>
+            <returns>是否轉型成功</returns>
+        </member>
+        <member name="M:GUIStd.Common.TimeFormat(System.String)">
+            <summary>
+            時間格式化函式
+            </summary>
+            <param name="timeVar">輸入的時間字串（格式可能為 HHmmssfff、HHmmss、HHmm 等）</param>
+            <returns>格式化後的時間字串（HH:mm:ss.fff 或 HH:mm:ss 或 HH:mm）</returns>
+        </member>
+        <member name="M:GUIStd.Common.DateOutFormat(System.String)">
+            <summary>
+            將日期字串格式化為標準格式 (使用預設日期標誌)
+            </summary>
+            <param name="dateVar">輸入的日期字串 (格式應為連續數字，如20231225)</param>
+            <returns>格式化後的日期字串 (格式為YYYY/MM/DD)</returns>
+        </member>
+        <member name="M:GUIStd.Common.DateOutFormat(System.Object)">
+            <summary>
+            將物件轉換為字串後格式化為標準日期格式 (使用預設日期標誌)
+            </summary>
+            <param name="dateStr">日期物件</param>
+            <returns>格式化後的日期字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.DateOutFormat(GUIStd.Enums.DateFlag,System.String)">
+            <summary>
+            根據指定日期標誌將日期字串格式化為標準格式
+            </summary>
+            <param name="toDateFlag">日期格式列舉值 (西曆或民國曆)</param>
+            <param name="dateVar">輸入的日期字串</param>
+            <returns>格式化後的日期字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.DateFormat(System.Object)">
+            <summary>
+            將物件轉換為字串後進行日期格式化
+            </summary>
+            <param name="dateVar">日期物件</param>
+            <returns>格式化後的日期字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.DateFormat(System.String,System.Boolean)">
+            <summary>
+            基本日期格式化 (預設格式為年/月/日)
+            </summary>
+            <param name="dateVar">日期字串 (格式應為連續數字，如20211231)</param>
+            <param name="shortDate">是否使用簡短格式 (去除前導零)</param>
+            <returns>格式化後的日期字串</returns>
+        </member>
+        <member name="M:GUIStd.Common.DateFormat(System.String,GUIStd.Enums.DateType,GUIStd.Enums.DateType,System.Boolean)">
+            <summary>
+            進階日期格式化 (可指定輸入/輸出的日期類型)
+            </summary>
+            <param name="dateVar">日期字串</param>
+            <param name="outputDateType">輸出的日期格式類型</param>
+            <param name="sourceDateType">輸入的日期格式類型 (預設為年月日)</param>
+            <param name="shortDate">是否使用簡短格式 (去除前導零)</param>
+            <returns>格式化後的日期字串</returns>
+        </member>
+        <member name="T:GUIStd.Config">
+            <summary>
+            系統應用程式組態設定物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.Config.IsAnsiDBDefault">
+            <summary>
+            DB 是否使用 ANSI 文字型別的預設值
+            </summary>
+        </member>
+        <member name="P:GUIStd.Config.AppSettings">
+            <summary>
+            基底類別應用程式組態設定共用屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.Config.RequestInfo">
+            <summary>
+            基底類別前端請求資訊組態設定共用屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.Config.FindRelatedDB(GUIStd.Enums.RelatedDB)">
+            <summary>
+            取得關聯系統資料庫類別
+            </summary>
+            <returns>類別</returns>
+        </member>
+        <member name="M:GUIStd.Config.FindRelatedDB(System.Int32,GUIStd.Enums.RelatedDB)">
+            <summary>
+            取得關聯系統資料庫類別
+            </summary>
+            <param name="dbPos">資料庫位置</param>
+            <param name="relatedDB">系統關聯資料庫列舉值</param>
+            <returns>類別</returns>
+        </member>
+        <member name="M:GUIStd.Config.FindRelatedDBPath(GUIStd.Enums.RelatedDB)">
+            <summary>
+            取得關聯系統資料庫連線路徑
+            </summary>
+            <returns>字串</returns>
+        </member>
+        <member name="M:GUIStd.Config.FindRelatedDBPath(System.Int32,GUIStd.Enums.RelatedDB)">
+            <summary>
+            取得關聯系統資料庫連線路徑
+            </summary>
+            <param name="dbPos">資料庫位置</param>
+            <param name="relatedDB">系統關聯資料庫列舉值</param>
+            <returns>字串</returns>
+        </member>
+        <member name="T:GUIStd.Config`1">
+            <summary>
+            系統應用程式組態設定泛型物件
+            </summary>
+        </member>
+        <member name="F:GUIStd.Config`1.mAppSettingsSection">
+            <summary>
+            系統應用程式組態設定片段
+            </summary>
+        </member>
+        <member name="F:GUIStd.Config`1.mLoggingSection">
+            <summary>
+            系統記錄組態設定片段
+            </summary>
+        </member>
+        <member name="F:GUIStd.Config`1.mRequestInfoSection">
+            <summary>
+            前端請求資訊組態設定片段
+            </summary>
+        </member>
+        <member name="F:GUIStd.Config`1.mAppSettings">
+            <summary>
+            應用程式組態設定
+            </summary>
+        </member>
+        <member name="M:GUIStd.Config`1.SetDBKeyFile">
+            <summary>
+            設定應用程式組態類別中資料庫加密密碼檔的函式
+            </summary>
+        </member>
+        <member name="P:GUIStd.Config`1.AppSettings">
+            <summary>
+            應用程式組態設定共用屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.Config`1.AppSettingsSection">
+            <summary>
+            系統應用程式組態設定片段共用屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.Config`1.LoggingSection">
+            <summary>
+            系統記錄組態設定片段共用屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.Config`1.RequestInfoSection">
+            <summary>
+            前端請求資訊組態設定片段共用屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.Config`1.Initialize(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            初始化系統組態設定物件函式
+            </summary>
+            <param name="configuration">系統組態設定物件</param>
+        </member>
+        <member name="T:GUIStd.CurrentRequest">
+            <summary>
+            取得目前前端使用者的相關資訊物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.CurrentRequest.ClientsInfo">
+            <summary>
+            存放目前所有請求的前端資訊
+            </summary>
+        </member>
+        <member name="M:GUIStd.CurrentRequest.Set(System.String,GUIStd.Models.MdClientBase)">
+            <summary>
+            加入目前請求的前端資訊
+            </summary>
+            <param name="requestId">用在跟踪日誌中表示此請求的唯一識別碼</param>
+            <param name="info">前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.CurrentRequest.Get(System.String)">
+            <summary>
+            取得請求的前端資訊
+            </summary>
+            <param name="requestId">用在跟踪日誌中表示此請求的唯一識別碼</param>
+            <returns>前端資訊模型物件</returns>
+        </member>
+        <member name="M:GUIStd.CurrentRequest.Remove(System.String)">
+            <summary>
+            刪除請求的前端資訊
+            </summary>
+            <param name="requestId">用在跟踪日誌中表示此請求的唯一識別碼</param>
+            <returns>前端資訊模型物件</returns>
+        </member>
+        <member name="T:GUIStd.Enums">
+            <summary>
+            系統共用列舉物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.DateType">
+            <summary>
+            日期型態
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.DateFlag">
+            <summary>
+            日期格式
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.ResourceCulture">
+            <summary>
+            系統支援語系
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.ResourceLang">
+            <summary>
+            系統詞庫資源檔
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.ResourceFldLen">
+            <summary>
+            系統欄位輸入長度資源檔
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.RelatedDB">
+            <summary>
+            關聯系統資料庫的系統列舉
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.ExceptionMessageType">
+            <summary>
+            取得 Exception 錯誤資訊的型態
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.State">
+            <summary>
+            作業狀態
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.CarryMethod">
+            <summary>
+            小數進位方式
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.DatePeriod">
+            <summary>
+            日期運算的可用區間
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.TimePeriod">
+            <summary>
+            時間運算的可用區間
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.ImageFormat">
+            <summary>
+            常用的圖片格式
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.ExceptionCode">
+            <summary>
+            系統錯誤代碼
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.WebSystem">
+            <summary>
+            系統
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.ReportType">
+            <summary>
+            報表類型
+            </summary>
+        </member>
+        <member name="F:GUIStd.Enums.ReportType.Excel">
+            <summary>
+            EXCEL報表
+            </summary>
+        </member>
+        <member name="F:GUIStd.Enums.ReportType.ExcelToPDF">
+            <summary>
+            EXCEL轉成PDF報表
+            </summary>
+        </member>
+        <member name="F:GUIStd.Enums.ReportType.Word">
+            <summary>
+            WORD報表
+            </summary>
+        </member>
+        <member name="F:GUIStd.Enums.ReportType.WordToPDF">
+            <summary>
+            WORD轉成PDF報表
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.ReportFormat">
+            <summary>
+            報表格式
+            </summary>
+        </member>
+        <member name="T:GUIStd.Enums.RangeRequiredMode">
+            <summary>
+            範圍起迄必輸模式
+            </summary>
+        </member>
+        <member name="F:GUIStd.Enums.RangeRequiredMode.Both">
+            <summary>
+            起迄必填及範圍檢查
+            </summary>
+        </member>
+        <member name="F:GUIStd.Enums.RangeRequiredMode.StartOnly">
+            <summary>
+            只檢查起始值
+            </summary>
+        </member>
+        <member name="F:GUIStd.Enums.RangeRequiredMode.EndOnly">
+            <summary>
+            只檢查截止值
+            </summary>
+        </member>
+        <member name="F:GUIStd.Enums.RangeRequiredMode.CheckRangeOnly">
+            <summary>
+            只檢查範圍
+            </summary>
+        </member>
+        <member name="T:GUIStd.ReportTypeExtensions">
+            <summary>
+             報表類型列舉的擴充函式類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.ReportTypeExtensions.IsPDF(GUIStd.Enums.ReportType)">
+            <summary>
+            是否為 PDF 報表類型
+            </summary>
+        </member>
+        <member name="T:GUIStd.AuthorizeException">
+            <summary>
+            自訂授權例外物件
+            </summary>
+        </member>
+        <member name="M:GUIStd.AuthorizeException.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.AuthorizeException.#ctor(System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="message">錯誤訊息</param>
+        </member>
+        <member name="M:GUIStd.AuthorizeException.#ctor(System.String,System.Exception)">
+            <summary>
+            建構子
+            </summary>
+            <param name="message">錯誤訊息</param>
+            <param name="innerException">內部例外物件</param>
+        </member>
+        <member name="T:GUIStd.CustomException">
+            <summary>
+            自訂例外物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.CustomException.Code">
+            <summary>
+            錯誤代碼
+            </summary>
+        </member>
+        <member name="M:GUIStd.CustomException.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.CustomException.#ctor(System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="message">錯誤訊息</param>
+        </member>
+        <member name="M:GUIStd.CustomException.#ctor(System.Int32,System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="code">錯誤代碼</param>
+            <param name="message">錯誤訊息</param>
+        </member>
+        <member name="M:GUIStd.CustomException.#ctor(System.Collections.Generic.List{System.String})">
+            <summary>
+            建構子
+            </summary>
+            <param name="messages">錯誤訊息集合</param>
+        </member>
+        <member name="M:GUIStd.CustomException.#ctor(System.String,System.Exception)">
+            <summary>
+            建構子
+            </summary>
+            <param name="message">錯誤訊息</param>
+            <param name="innerException">內部例外物件</param>
+        </member>
+        <member name="M:GUIStd.CustomException.#ctor(System.Int32,System.String,System.Exception)">
+            <summary>
+            建構子
+            </summary>
+            <param name="code">錯誤代碼</param>
+            <param name="message">錯誤訊息</param>
+            <param name="innerException">內部例外物件</param>
+        </member>
+        <member name="T:GUIStd.Extensions.ByteArrayExtension">
+            <summary>
+            Byte Arrays 擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.Extensions.ByteArrayExtension.ToStream(System.Byte[])">
+            <summary>
+            將位元陣列轉 Stream
+            </summary>
+            <param name="source">來源位元陣列</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Extensions.DateTimeExtension">
+            <summary>
+            日期時間擴充方法的類別
+            </summary>
+        </member>
+        <member name="T:GUIStd.Extensions.EnumExtension">
+            <summary>
+            enum 擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.Extensions.EnumExtension.GetDisplayName(System.Enum)">
+            <summary>
+            取得列舉的 DisplayName，沒有設定則返回欄位名稱
+            </summary>
+            <param name="source">來源列舉</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.EnumExtension.ContainsName(System.Type,System.String)">
+            <summary>
+            依 DisplayName 或 FieldName 判斷列舉值是否存在
+            </summary>
+            <param name="enumType">Enum 類型</param>
+            <param name="name">列舉值名稱</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Extensions.IEnumerableExtension">
+            <summary>
+            集合擴充方法的類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.Extensions.IEnumerableExtension.IsNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            泛型集合物件是否為 Null 或空值
+            </summary>
+            <typeparam name="T">泛型型別</typeparam>
+            <param name="source">泛型集合物件</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.IEnumerableExtension.ToArrayOrNull``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            當泛型集合物件長度為 0 時回傳 null，否則回傳泛型集合陣列
+            </summary>
+            <typeparam name="T">泛型型別</typeparam>
+            <param name="source">泛型集合物件</param>
+            <returns>泛型陣列</returns>
+        </member>
+        <member name="T:GUIStd.Extensions.ModelExtension">
+            <summary>
+            Model 擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.Extensions.ModelExtension.CopyPropsValueFrom``2(``1,``0)">
+            <summary>
+            複製模型屬性值
+            </summary>
+            <typeparam name="TSource">來源模型物件型別</typeparam>
+            <typeparam name="TTarget">目的模型物件型別</typeparam>
+            <param name="target">目的模型物件</param>
+            <param name="source">來源模型物件</param>
+        </member>
+        <member name="T:GUIStd.Extensions.PropertyInfoArrayExtension">
+            <summary>
+            PropertyInfo Arrays 擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.Extensions.PropertyInfoArrayExtension.TryGetProperty(System.Reflection.PropertyInfo[],System.String,System.Reflection.PropertyInfo@)">
+            <summary>
+            取得屬性成員
+            </summary>
+            <param name="source">來源屬性資訊陣列</param>
+            <param name="propName">尋找的屬性名稱</param>
+            <param name="propObj">回傳找到的屬性物件或 NULL 值</param>
+            <returns>屬性成員是否存在</returns>
+        </member>
+        <member name="M:GUIStd.Extensions.PropertyInfoArrayExtension.TryGetJsonPropertyName(System.Reflection.PropertyInfo[],System.String,System.String@)">
+            <summary>
+            取得屬性成員的 JsonProperty 自訂宣告式屬性中的 PropertyName Value
+            </summary>
+            <param name="source">來源屬性陣列</param>
+            <param name="propName">尋找的屬性名稱</param>
+            <param name="jsonPropName">>回傳 JSON 屬性名稱</param>
+            <returns>JSON 屬性是否存在</returns>
+        </member>
+        <member name="T:GUIStd.Extensions.PropertyInfoExtension">
+            <summary>
+            PropertyInfo 擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.Extensions.PropertyInfoExtension.TryGetJsonPropertyName(System.Reflection.PropertyInfo,System.String@)">
+            <summary>
+            取得屬性成員的 JsonProperty 自訂宣告式屬性中的 PropertyName Value
+            </summary>
+            <param name="source">來源屬性資訊物件</param>
+            <param name="jsonPropName">尋找的 JSON 屬性名稱</param>
+            <returns>JSON 屬性是否存在</returns>
+        </member>
+        <member name="T:GUIStd.Extensions.StringExtension">
+            <summary>
+            string 擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.IsInt(System.String,System.Globalization.NumberStyles)">
+            <summary>
+            判斷字串是否為整數的擴充函式
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="styles">數值樣式列舉值的位元組合</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.IsDecimal(System.String,System.Globalization.NumberStyles)">
+            <summary>
+            判斷字串是否為數值的擴充函式
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="styles">數值樣式列舉值的位元組合</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.IsNumber(System.String)">
+            <summary>
+            文字是否為數值
+            </summary>
+            <param name="source">來源字串</param>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.IsDateValidate(System.String)">
+            <summary>
+            判斷字串是否為日期
+            </summary>
+            <param name="source">來源字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.EqualsIgnoreCase(System.String,System.String)">
+            <summary>
+            不區分大小寫判斷文字是否相同
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="value">比對字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.LikeStart(System.String,System.String)">
+            <summary>
+            判斷是否為起始文字
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="value">比對字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.LikeEnd(System.String,System.String)">
+            <summary>
+            判斷是否為結尾文字
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="value">比對字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.LikeContain(System.String,System.String)">
+            <summary>
+            判斷是否包含文字
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="value">比對字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.LikePattern(System.String,System.String)">
+            <summary>
+            判斷文字是否符合正則表達式
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="pattern">用以比對的正則表達式模型字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.Split(System.String,System.String,System.String@,System.String@)">
+            <summary>
+            以分隔字元將字串拆分為左右兩個子字串
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="separator">用以分隔來源字串的字元文字</param>
+            <param name="leftText">分隔字元的左側字串</param>
+            <param name="rightText">分隔字元的右側字串</param>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.Left(System.String,System.Int32)">
+            <summary>
+            由左側取得指定長度的文字
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="length">取得文字的長度</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.Right(System.String,System.Int32)">
+            <summary>
+            由右側取得指定長度的文字
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="length">取得文字的長度</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.Mid(System.String,System.Int32,System.Int32)">
+            <summary>
+            由指定位置取得指定長度的文字
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="startIndex">從零開始的起始字元位置</param>
+            <param name="length">取得文字的長度</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.ToText(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            文字格式化，去除前、後空白、轉大寫
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="toUpperCase">是否轉大寫</param>
+            <param name="trimStart">是否去除前空白</param>
+            <param name="trimEnd">是否去除後空白</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.ToDateTime(System.String)">
+            <summary>
+            由日期文字轉換為DateTime物件，僅接受yyyyMMdd或yyyyMMddHHmmss
+            </summary>
+            <param name="source">來源字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.Repeat(System.String,System.Int32)">
+            <summary>
+            產生重複次數的文字
+            </summary>
+            <param name="source">要重複的文字</param>
+            <param name="count">重複文字的次數</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.CalculateDate(System.String,System.Int32,GUIStd.Enums.DatePeriod)">
+            <summary>
+            對日期進行加減運算
+            </summary>
+            <param name="source">八碼西曆日期</param>
+            <param name="count">進行計算的計數</param>
+            <param name="calWay">進行計算採用的日期單位。可選擇：Year、Mohth、Day</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.ToDateOut(System.String)">
+            <summary>
+            將西曆日期轉為民國年
+            </summary>
+            <param name="source">八碼西曆日期</param>
+            <returns>國曆日期</returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.ToJSNewLine(System.String)">
+            <summary>
+            將換行符號以 \n 替代
+            </summary>
+            <param name="source">來源字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.ToCamelCase(System.String)">
+            <summary>
+            將字串轉換為小駝峰式命名
+            </summary>
+            <param name="source">來源字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Extensions.StringExtension.EmptyDefault(System.String,System.String)">
+            <summary>
+            若字串變數為空或空字串，則以defaultValue帶入
+            </summary>
+            <param name="source">來源字串</param>
+            <param name="defaultValue">字串預設值</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Localization">
+            <summary>
+            系統語系物件
+            </summary>
+        </member>
+        <member name="F:GUIStd.Localization.mRM">
+            <summary>
+            Keep 已建立的資源管理物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.Localization.CultureEN">
+            <summary>
+            英文語系變數
+            </summary>
+        </member>
+        <member name="P:GUIStd.Localization.CultureTC">
+            <summary>
+            繁中語系變數
+            </summary>
+        </member>
+        <member name="P:GUIStd.Localization.CultureSC">
+            <summary>
+            簡中語系變數
+            </summary>
+        </member>
+        <member name="M:GUIStd.Localization.GetRMInstance(System.String)">
+            <summary>
+            取得資源管理物件
+            </summary>
+            <param name="lang">資源檔名稱</param>
+            <returns>資源管理物件</returns>
+        </member>
+        <member name="M:GUIStd.Localization.CvrCulture2String(GUIStd.Enums.ResourceCulture)">
+            <summary>
+            轉換文化型態列舉值至字串
+            </summary>
+            <param name="culture">系統支援語系列舉值</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Localization.GetValue(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            取得資源檔中的資料
+            </summary>
+            <param name="lang">資源檔名稱</param>
+            <param name="name">資源的名稱</param>
+            <param name="forJavaScriptAlert">資源內容是否供 JavaScript Alert 使用</param>
+            <param name="notFoundReturnName">沒有找到是否回傳名稱</param>
+            <returns>字串</returns>
+        </member>
+        <member name="M:GUIStd.Localization.GetValue(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            取得資源檔中的資料
+            </summary>
+            <param name="cultureName">系統支援語系名稱</param>
+            <param name="lang">資源檔名稱</param>
+            <param name="name">資源的名稱</param>
+            <param name="forJavaScriptAlert">資源內容是否供 JavaScript Alert 使用</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Localization.GetValue(GUIStd.Enums.ResourceCulture,GUIStd.Enums.ResourceLang,System.String,System.Boolean)">
+            <summary>
+            取得資源檔中的資料
+            </summary>
+            <param name="cultureName">系統支援語系列舉值</param>
+            <param name="lang">資源檔名稱</param>
+            <param name="name">資源的名稱</param>
+            <param name="forJavaScriptAlert">資源內容是否供 JavaScript Alert 使用</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Localization.GetValue(System.String,System.Boolean)">
+            <summary>
+            取得共用資源檔中的資料
+            </summary>
+            <param name="name">資源的名稱</param>
+            <param name="forJavaScriptAlert">資源內容是否供 JavaScript Alert 使用</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Localization.GetValue(GUIStd.Enums.ResourceLang,System.String,System.Boolean)">
+            <summary>
+            取得資源檔中的資料
+            </summary>
+            <param name="lang">系統詞庫資源檔列舉值</param>
+            <param name="name">資源的名稱</param>
+            <param name="forJavaScriptAlert">資源內容是否供 JavaScript Alert 使用</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.Localization.GetValue(GUIStd.Enums.ResourceFldLen,System.String,System.Boolean)">
+            <summary>
+            取得資源檔中的資料
+            </summary>
+            <param name="fldLen">系統欄位輸入長度資源檔列舉值</param>
+            <param name="name">資源的名稱</param>
+            <param name="forJavaScriptAlert">資源內容是否供 JavaScript Alert 使用</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.Logging">
+            <summary>
+            系統記錄組態設定物件
+            </summary>
+        </member>
+        <member name="F:GUIStd.Logging.mSettings">
+            <summary>
+            記錄類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.Logging.mStorageType">
+            <summary>
+            使用的記錄保存型態
+            </summary>
+        </member>
+        <member name="F:GUIStd.Logging.mLogger">
+            <summary>
+            記錄器物件
+            </summary>
+        </member>
+        <member name="T:GUIStd.Logging.EnumsStorageType">
+            <summary>
+            記錄保存型態的列舉
+            </summary>
+        </member>
+        <member name="P:GUIStd.Logging.Settings">
+            <summary>
+            記錄類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Logging.StorageType">
+            <summary>
+            使用的記錄保存型態
+            </summary>
+        </member>
+        <member name="P:GUIStd.Logging.Logger">
+            <summary>
+            記錄器物件
+            </summary>
+        </member>
+        <member name="M:GUIStd.Logging.Initialize``1(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            初始化系統記錄組態設定物件泛型函式
+            </summary>
+            <typeparam name="TAPSet">應用程式組態設定類別</typeparam>
+            <param name="loggerFactory">記錄器工廠物件</param>
+        </member>
+        <member name="T:GUIStd.Models.MdApiHelp">
+            <summary>
+            API 輔助文件資訊類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdApiHelp.Version">
+            <summary>
+            版本
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdApiHelp.Title">
+            <summary>
+            API Web Site 標題
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdApiHelp.Description">
+            <summary>
+            API Web Site 說明
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdAppSettings">
+            <summary>
+            應用程式設定類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.KeyFile">
+            <summary>
+            資料加解密金鑰檔案
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.WSKeyFile">
+            <summary>
+            服務授權加密密碼檔案
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.WSDecryptKey">
+            <summary>
+            服務授權解密密碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.DBKeyFile">
+            <summary>
+            資料庫連線密碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.DBPos">
+            <summary>
+            目前資料庫位置
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.Language">
+            <summary>
+            預設語系
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.ShowAPIHelp">
+            <summary>
+            是否顯示 API 網頁輔助說明文件
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.ShowStackTrace">
+            <summary>
+            是否顯示堆疊追踪資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.DateFlag">
+            <summary>
+            系統預設的日期格式 (0：西曆 1：國曆)(未設定預設為：西曆)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.DBSettings">
+            <summary>
+            資料庫連線設定
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.ApiHelp">
+            <summary>
+            API 輔助文件資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.CompanyInfo">
+            <summary>
+            公司資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdAppSettings.ReportSettings">
+            <summary>
+            報表設定
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdCompanyInfo">
+            <summary>
+            公司資訊類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdCompanyInfo.ServiceName">
+            <summary>
+            服務名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdCompanyInfo.ServiceMail">
+            <summary>
+            服務郵箱
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdCompanyInfo.HomePage">
+            <summary>
+            公司官網
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdCompanyInfo.Address">
+            <summary>
+            公司地址
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdCompanyInfo.Phone">
+            <summary>
+            公司電話
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdDBProfile">
+            <summary>
+            應用程式資料庫連線資訊類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDBProfile.ShowName">
+            <summary>
+            資料庫顯示名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDBProfile.SecLevel">
+            <summary>
+            安控層級
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDBProfile.AdvanceSecurity">
+            <summary>
+            是否啟用進階安控 (0:停用 1:啟用)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDBProfile.IsAnsiDB">
+            <summary>
+            DB 是否使用 ANSI 文字型別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDBProfile.DBPath">
+            <summary>
+            資料庫連線字串
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDBProfile.DBKeyFile">
+            <summary>
+            資料庫連線密碼
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdLogging">
+            <summary>
+            記錄類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdLogging.Type">
+            <summary>
+            記錄型態
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdLogging.PathFormat">
+            <summary>
+            文字檔記錄型態的檔名格式
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdLogging.Json">
+            <summary>
+            文字記錄檔使用 JSON 格式
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdLogging.RetainedFileCountLimit">
+            <summary>
+            文字記錄檔檔案保留天數
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdLogging.CategoryName">
+            <summary>
+            JSON 格式文字記錄檔顯示的類別名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdLogging.LogLevel">
+            <summary>
+            記錄層級
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.LogLevel">
+            <summary>
+            記錄層級類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.LogLevel.Default">
+            <summary>
+            預設記錄的最低層級
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.LogLevel.System">
+            <summary>
+            System 命名空間記錄來源的最低層級
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.LogLevel.Microsoft">
+            <summary>
+            Microsoft 命名空間記錄來源的最低層級
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdRelatedDB">
+            <summary>
+            系統關聯資料庫連線資訊類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRelatedDB.DBName">
+            <summary>
+            系統名稱 (如:AllNewGUI、AllNewPY、AllNewHTL)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRelatedDB.IsAnsiDB">
+            <summary>
+            DB 是否使用 ANSI 文字型別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRelatedDB.DBPath">
+            <summary>
+            資料庫連線字串
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRelatedDB.DBKeyFile">
+            <summary>
+            資料庫連線密碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRelatedDB.DateFlag">
+            <summary>
+            系統使用的日期格式 (0：西曆 1：國曆)
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdReportSettings">
+            <summary>
+            報表設定類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdReportSettings.TemplatePath">
+            <summary>
+            報表範本的存放路徑
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdReportSettings.ReportPath">
+            <summary>
+            報表生成的存放路徑
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdApiMessage">
+            <summary>
+            系統共用訊息密封類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdApiMessage.Result">
+            <summary>
+            作業處理狀態 (true:成功 false:失敗)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdApiMessage.Code">
+            <summary>
+            訊息代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdApiMessage.Message">
+            <summary>
+            訊息內容
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdApiMessage.ResponseData">
+            <summary>
+            回應給前端的資料。可以是數值、文字、模型物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdApiMessage.StackTrace">
+            <summary>
+            錯誤堆疊追蹤內容
+            </summary>
+        </member>
+        <member name="M:GUIStd.Models.MdApiMessage.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.Models.MdApiMessage.#ctor(System.Exception)">
+            <summary>
+            建構子
+            </summary>
+            <param name="ex">例外物件</param>
+        </member>
+        <member name="M:GUIStd.Models.MdApiMessage.#ctor(System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="message">訊息內容</param>
+        </member>
+        <member name="M:GUIStd.Models.MdApiMessage.#ctor(System.String,System.Exception,GUIStd.Enums.ExceptionMessageType)">
+            <summary>
+            建構子
+            </summary>
+            <param name="message">訊息內容</param>
+            <param name="ex">例外物件</param>
+            <param name="msgType">取得 Exception 錯誤資訊的型態列舉值</param>
+        </member>
+        <member name="M:GUIStd.Models.MdApiMessage.#ctor(System.Nullable{System.Int32},System.String,System.Exception,GUIStd.Enums.ExceptionMessageType)">
+            <summary>
+            建構子
+            </summary>
+            <param name="code">訊息代碼</param>
+            <param name="message">訊息內容</param>
+            <param name="ex">例外物件</param>
+            <param name="msgType">取得 Exception 錯誤資訊的型態列舉值</param>
+        </member>
+        <member name="M:GUIStd.Models.MdApiMessage.#ctor(System.String,System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="message">訊息內容</param>
+            <param name="stackTrace">錯誤堆疊追蹤內容</param>
+        </member>
+        <member name="M:GUIStd.Models.MdApiMessage.#ctor(System.Nullable{System.Int32},System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="code">訊息代碼</param>
+            <param name="message">訊息內容</param>
+        </member>
+        <member name="M:GUIStd.Models.MdApiMessage.#ctor(System.Boolean,System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="result">作業處理狀態</param>
+            <param name="message">訊息內容</param>
+        </member>
+        <member name="M:GUIStd.Models.MdApiMessage.#ctor(System.Nullable{System.Int32},System.Boolean,System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="code">訊息代碼</param>
+            <param name="result">作業處理狀態</param>
+            <param name="message">訊息內容</param>
+        </member>
+        <member name="T:GUIStd.Models.MdBase64Image">
+            <summary>
+            圖檔模型
+            </summary>
+        </member>
+        <member name="F:GUIStd.Models.MdBase64Image.SerialNo">
+            <summary>
+            流水號
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdBase64Image.Name">
+            <summary>
+            檔案名稱(含副檔名)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdBase64Image.Size">
+            <summary>
+            檔案大小
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdBase64Image.Type">
+            <summary>
+            檔案類型，如：image/png、image/jpg ...
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdBase64Image.DataURL">
+            <summary>
+            Base64字串
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdBase64Image.Data">
+            <summary>
+            檔案的Binary資料，供檔案寫入用
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdClientBase">
+            <summary>
+            目前請求的前端資訊的基底類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientBase.AllowAnonymous">
+            <summary>
+            是否允許匿名存取 API
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientBase.DBPos">
+            <summary>
+            目前資料庫位置
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientBase.Language">
+            <summary>
+            前端網頁目前使用的語系
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientBase.DBLang">
+            <summary>
+            後端資料庫使用的語系
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientBase.UserId">
+            <summary>
+            登入帳號
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientBase.SystemUserId">
+            <summary>
+            系統使用者帳號
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientBase.DeviceUid">
+            <summary>
+            裝置唯一識別碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientBase.SystemId">
+            <summary>
+            請求的系統代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientBase.ControllerName">
+            <summary>
+            請求的控制器名稱
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdClientInfo">
+            <summary>
+            目前請求的前端資訊類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientInfo.AllowAnonymous">
+            <summary>
+            不允許匿名存取 API
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdClientInfoAnon">
+            <summary>
+            允許匿名的目前請求的前端資訊類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientInfoAnon.AllowAnonymous">
+            <summary>
+            允許匿名存取 API
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdClientInfoAnon.SystemUserId">
+            <summary>
+            系統使用者帳號
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdCodeInfo">
+            <summary>
+            系統共用代碼訊息類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdCodeInfo.Code">
+            <summary>
+            訊息代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdCodeInfo.Message">
+            <summary>
+            訊息內容
+            </summary>
+        </member>
+        <member name="M:GUIStd.Models.MdCodeInfo.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.Models.MdCodeInfo.#ctor(System.Int32,System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="code">訊息代碼</param>
+            <param name="message">訊息內容</param>
+        </member>
+        <member name="T:GUIStd.Models.MdDirInfo">
+            <summary>
+            描述目錄內容資訊的類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfo.FullName">
+            <summary>
+            目錄的完整路徑
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfo.Name">
+            <summary>
+            目錄名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfo.CreateTime">
+            <summary>
+            建檔時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfo.LastAccessTime">
+            <summary>
+            最後存取時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfo.LastWriteTime">
+            <summary>
+            最後寫入時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfo.Parent">
+            <summary>
+            上層資料夾資訊
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfo.Files">
+            <summary>
+            本層資料夾包含的檔案
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfo.SubDirs">
+            <summary>
+            下層資料夾資訊
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdDirInfoForPhoto">
+            <summary>
+            圖檔資訊的專用資料夾類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfoForPhoto.FullName">
+            <summary>
+            資料夾的完整路徑(隱藏)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfoForPhoto.CreateTime">
+            <summary>
+            建檔時間(隱藏)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfoForPhoto.LastAccessTime">
+            <summary>
+            最後存取時間(隱藏)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdDirInfoForPhoto.LastWriteTime">
+            <summary>
+            最後寫入時間(隱藏)
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdFileInfo">
+            <summary>
+            描述檔案資訊的類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdFileInfo.FullName">
+            <summary>
+            檔案的完整路徑
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdFileInfo.Name">
+            <summary>
+            檔案名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdFileInfo.Extension">
+            <summary>
+            副檔名
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdFileInfo.CreateTime">
+            <summary>
+            建檔時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdFileInfo.LastAccessTime">
+            <summary>
+            最後存取時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdFileInfo.LastWriteTime">
+            <summary>
+            最後寫入時間
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdFileInfoForPhoto">
+            <summary>
+            圖檔資訊的專用類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdFileInfoForPhoto.FullName">
+            <summary>
+            資料夾的完整路徑(隱藏)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdFileInfoForPhoto.Extension">
+            <summary>
+            副檔名(隱藏)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdFileInfoForPhoto.CreateTime">
+            <summary>
+            建檔時間(隱藏)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdFileInfoForPhoto.LastAccessTime">
+            <summary>
+            最後存取時間(隱藏)
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdLoginInfo">
+            <summary>
+            登入資訊類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdLoginInfo.UserId">
+            <summary>
+            登入使用者帳號
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdLoginInfo.Password">
+            <summary>
+            登入密碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdLoginInfo.DeviceUid">
+            <summary>
+            裝置唯一識別碼
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdRange`1">
+            <summary>
+            共用範圍條件泛型模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRange`1.Start">
+            <summary>
+            範圍(起)
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRange`1.End">
+            <summary>
+            範圍(迄)
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdRequestInfo">
+            <summary>
+            每個前端請求資訊類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRequestInfo.DBPos">
+            <summary>
+            目前資料庫位置
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRequestInfo.AccessToken">
+            <summary>
+            具名驗證的存取令牌，用以驗證合法性，以決定 API 是否可以使用
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRequestInfo.AnonToken">
+            <summary>
+            匿名驗證的存取令牌，用以驗證合法性，以決定 API 是否可以使用
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRequestInfo.Language">
+            <summary>
+            網頁使用語系
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdRequestInfo.RequestId">
+            <summary>
+            前端發送特定操作請求的帳號
+            </summary>
+        </member>
+        <member name="T:GUIStd.Models.MdUILang">
+            <summary>
+            前端介面語系類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdUILang.Code">
+            <summary>
+            語系代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.Models.MdUILang.Name">
+            <summary>
+            語系名稱
+            </summary>
+        </member>
+        <member name="T:GUIStd.WatchTime">
+            <summary>
+            測量執行效能的類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.WatchTime.TimeWatcher">
+            <summary>
+            用於測量執行時間的效能物件
+            </summary>
+        </member>
+        <member name="M:GUIStd.WatchTime.LogStart(System.String)">
+            <summary>
+            紀錄開始測量資訊
+            </summary>
+            <param name="logMessage">要紀錄的資訊</param>
+        </member>
+        <member name="M:GUIStd.WatchTime.LogEnd(System.String)">
+            <summary>
+            紀錄停止測量資訊
+            </summary>
+            <param name="logMessage">要紀錄的資訊</param>
+        </member>
+        <member name="M:GUIStd.WatchTime.Start">
+            <summary>
+            開始或繼續測量某個時間間隔的執行時間
+            </summary>
+        </member>
+        <member name="M:GUIStd.WatchTime.Stop">
+            <summary>
+            停止測量某個時間間隔的執行時間
+            </summary>
+        </member>
+        <member name="M:GUIStd.WatchTime.Reset">
+            <summary>
+            停止時間間隔測量，並將執行時間重置為零
+            </summary>
+        </member>
+        <member name="M:GUIStd.WatchTime.ReStart">
+            <summary>
+            停止時間間隔測量，並將執行時間重置為零，然後開始測量執行時間
+            </summary>
+        </member>
+        <member name="M:GUIStd.WatchTime.Start(System.String)">
+            <summary>
+            開始或繼續測量某個時間間隔的執行時間，並加入資訊紀錄
+            </summary>
+            <param name="logMessage">要紀錄的資訊</param>
+        </member>
+        <member name="M:GUIStd.WatchTime.Stop(System.String)">
+            <summary>
+            停止測量某個時間間隔的執行時間，輸出毫秒為單位的執行成本，並加入資訊紀錄
+            </summary>
+        </member>
+        <member name="M:GUIStd.WatchTime.ReStart(System.String)">
+            <summary>
+            停止時間間隔測量，並將執行時間重置為零，然後開始測量執行時間，並加入資訊紀錄
+            </summary>
+        </member>
+    </members>
+</doc>

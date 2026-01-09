@@ -1,0 +1,771 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd.BLL.PY</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.BLL.PY.Private.BlAppAttendances">
+            <summary>
+            線上請假轉考勤商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.DaoCINI">
+            <summary>
+            NetGUI CINI資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.DaoSINI">
+            <summary>
+            NetGUI SINI資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.DaoAA">
+            <summary>
+            AllNewPY AA資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.DaoPYSINI">
+            <summary>
+            AllNewPY SINI資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.DaoXDB">
+            <summary>
+            XDB資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.EnableAutoUpdateShift">
+            <summary>
+            考勤同步班別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.DefaultCancelShift">
+            <summary>
+            銷假出貨預設班別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.OtherDefaultCancelShift">
+            <summary>
+            銷假出貨預設班別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.FirstCancelShift">
+            <summary>
+            銷假預設班別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.OtherCancelShift">
+            <summary>
+            銷假預設替代班別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.AllowancePrefix">
+            <summary>
+            加班津貼轉考勤班別前綴字軌
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.CancelShiftPrefix">
+            <summary>
+            加班單撤銷班別前綴字軌
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.DayUnit">
+            <summary>
+            線上請假日單位
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlAppAttendances.CompensatoryBreakAttCode">
+            <summary>
+            例假日加班額外核定8小時補休考勤代碼
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.IsAttendNeedsToUpdateShift(System.String)">
+            <summary>
+            是否需要回寫班表
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.GetNextAA16(System.String,System.String,System.Int32)">
+            <summary>
+            AA16(班別)依照字軌取下一號
+            </summary>
+            <param name="prefix">字軌</param>
+            <param name="AA16Max">目前號碼</param>
+            <param name="decimalPlace">流水號位數</param>
+            <returns>AA16班別</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.GetAA20(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="DWA03">加班日期</param>
+            <param name="DWA11">加班起始時間</param>
+            <param name="DWA12">加班截止時間</param>
+            <returns>截止日期</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.GetAttendanceForOvertime(GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplication_w,GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplicationDetail_w,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            產生加班單考勤資料模型物件
+            </summary>
+            <param name="dw">加班單資料模型物件</param>
+            <param name="dwa">加班單明細資料模型物件</param>
+            <param name="overtimeCode">轉休考勤代碼</param>
+            <param name="overtimeCodeL">轉薪考勤代碼</param>
+            <param name="isCxnlApp">是否為撤銷單</param>
+            <param name="originalReason">撤銷原單加班原因</param>
+            <returns>考勤紀錄資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.WriteOvertimeAttendanceToDB(GUIStd.DAL.AllNewPY.Models.MdAttendance_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Boolean,System.String)">
+            <summary>
+            寫入加班考勤紀錄
+            </summary>
+            <param name="attendance">考勤記錄資料模型物件</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="isCxnlApp">是否為撤銷單具</param>
+            <param name="DW02">請假單號</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.WritePaidOvertimeAttendanceToDB(GUIStd.DAL.AllNewPY.Models.MdAttendance_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Boolean,System.String,System.String,System.String,System.Decimal,System.Decimal)">
+            <summary>
+            依照累計加班時數轉入對應費率的考勤紀錄
+            </summary>
+            <param name="attendance">考勤記錄資料模型物件</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+            <param name="isCxnlApp">是否為撤銷單具</param>
+            <param name="DW02">請假單號</param>
+            <param name="DWA05">日別代碼(B:國、C:休、D:例、Z:特休)</param>
+            <param name="DWA06">補修記號</param>
+            <param name="AA10Sum">累計加班時數(恆正數)</param>
+            <param name="AA10In">已轉入加班時數(恆正數)</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.WriteOvertimeSumUpAttendanceToDB(GUIStd.DAL.AllNewPY.Models.MdAttendance_w,GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplication_w,GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplicationDetail_w,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,GUIStd.DAL.Base.Models.MdTimeInfo,System.Decimal@,System.Decimal@,System.String@,System.String@)">
+            <summary>
+            依照日期、轉薪/轉修彙總考勤時數後寫入資料庫
+            </summary>
+            <param name="attendence">考勤資料模型物件</param>
+            <param name="dw">加班單資料模型物件</param>
+            <param name="dwaNext">下一筆加班明細資料模型物件</param>
+            <param name="overtimeCode">加班轉休請假代號</param>
+            <param name="overtimeCodeL">加班轉薪請假代號</param>
+            <param name="isDayChanged">因換日結束累計</param>
+            <param name="isRegularOff">是否為例假日</param>
+            <param name="isCompesatory">加班日別是否需要補償時數為8小時</param>
+            <param name="isCxnlApp">是否為加班撤銷單</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="AA10Sum">目前累計加班時數</param>
+            <param name="AA10In">已經轉入加班時數</param>
+            <param name="DWA05Brk">日別Breaker</param>
+            <param name="DWA06Brk">轉薪/轉修Breaker</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.CheckRoutine(GUIStd.Enums.State,GUIStd.DAL.AllNewPY.Models.MdAttendance_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Collections.Generic.List{System.String}@,System.Boolean,System.Boolean@)">
+            <summary>
+            假單轉考勤檢核邏輯
+            </summary>
+            <param name="state">Add或Update</param>
+            <param name="obj">考勤紀錄資料模型物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="errLines">檢核後回傳的錯誤訊息</param>
+            <param name="isCxnlApp">是否為撤銷單</param>
+            <param name="useOtherAA16">是否需要使用替代排班別代號填入AA16</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.DoCheck(GUIStd.Enums.State,GUIStd.DAL.AllNewPY.Models.MdAttendance_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Boolean,System.Boolean@)">
+            <summary>
+            假單考勤紀錄寫入檢核邏輯
+            </summary>
+            <param name="state">Add或Update</param>
+            <param name="obj">考勤紀錄資料模型物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="isCxnlApp">是否為撤銷單</param>
+            <param name="useOtherAA16">是否需要使用替代排班別代號填入AA16</param>
+            <exception cref="T:GUIStd.CustomException"></exception>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.DoCheck(GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplication_w)">
+            <summary>
+            加班單考勤紀錄寫入檢核邏輯
+            </summary>
+            <param name="obj"></param>
+            <exception cref="T:GUIStd.CustomException"></exception>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.WriteAppAttendance(GUIStd.DAL.AllNewPY.Models.MdAttendance_w,System.String,System.String,System.Boolean@)">
+            <summary>
+            寫入假單考勤紀錄
+            </summary>
+            <param name="obj">考勤紀錄資料模型物件</param>
+            <param name="DW02">假單編號</param>
+            <param name="DW64">原始單號</param>
+            <param name="updateAO">是否回填班表(輸出)</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlAppAttendances.WriteOvertimeAttendance(GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplication_w,System.String,System.String,System.String,System.String)">
+            <summary>
+            寫入加班單考勤紀錄
+            </summary>
+            <param name="obj"></param>
+            <param name="overtimeCode">加班轉休請假代號</param>
+            <param name="overtimeCodeL">加班轉薪請假代號</param>
+            <param name="overtimeReasonCode">加班原因代碼</param>
+            <param name="overtimeReason">加班原因</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.PY.Private.BlApprovalFlows">
+            <summary>
+            簽核流程商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlApprovalFlows.DaoApprovalFlow">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlApprovalFlows.DaoPA">
+            <summary>
+            AllNewPY PA資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlApprovalFlows.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlApprovalFlows.CheckGetFlowId(System.String,System.String,System.String,System.String,System.String@)">
+            <summary>
+            檢查是否存在簽核流程，並取得簽核流程編號
+            </summary>
+            <param name="PA06">員工編號</param>
+            <param name="DT01">公司別</param>
+            <param name="DT03">部門別</param>
+            <param name="DT04">請假代號</param>
+            <param name="DT02">(Out)簽核流程編號</param>
+            <returns>是否存在簽核流程</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlApprovalFlows.GetApprovalFlow(System.String,System.String,System.String,System.String,System.Decimal,System.String,System.String)">
+            <summary>
+            依該流程編號取得簽核流程
+            </summary>
+            <param name="leaveCode">線上請假代號</param>
+            <param name="DT01">公司別</param>
+            <param name="userId">申請人員編</param>
+            <param name="departmentId">申請人部門</param>
+            <param name="applyQty">申請時數</param>
+            <param name="agentId">代理人員編</param>
+            <param name="agentComp">代理人公司別</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.PY.Private.BlLeaveApplications">
+            <summary>
+            假單資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoLeaveApplication">
+            <summary>
+            請假流程資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoSINI">
+            <summary>
+            NetGUI SINI資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoAQ">
+            <summary>
+            AllNewPY AQ資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoPA">
+            <summary>
+            AllNewPY PA資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoPYSINI">
+            <summary>
+            AllNewPY SINI資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoDWA">
+            <summary>
+            DWA資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoDW">
+            <summary>
+            DW資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoDX">
+            <summary>
+            DX資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoDS">
+            <summary>
+            DS資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoXDB">
+            <summary>
+            XDB資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.DaoApprovalFlow">
+            <summary>
+            請假流程資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.BllDT">
+            <summary>
+            DT請假流程資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.BlApprovalFlows">
+            <summary>
+            線上請假簽核流程商用元件
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlLeaveApplications.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.AllowSamePeriodLeave">
+            <summary>
+            是否允許同時段不同假別請假設定
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlLeaveApplications.AllNewLeaveDayUnit">
+            <summary>
+            日的單位名稱
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlLeaveApplications.CheckRoutine(GUIStd.Enums.State,GUIStd.DAL.PY.Models.MdApplication_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Collections.Generic.List{System.String}@)">
+            <summary>
+            DW層級檢核
+            </summary>
+            <param name="state">Add或Update</param>
+            <param name="obj">加班單的DW物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="errLines">檢核後回傳的錯誤訊息</param>
+            <returns>檢核成功或檢核失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlLeaveApplications.CheckRoutine(GUIStd.Enums.State,GUIStd.DAL.PY.Models.MdApplication_w,GUIStd.DAL.PY.Models.MdApplicationDetail_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Collections.Generic.List{System.String}@)">
+            <summary>
+            DWA層級檢核
+            </summary>
+            <param name="state">Add或Update</param>
+            <param name="DW">加班單資料模型物件</param>
+            <param name="obj">加班單明細資料模型物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="errLines">檢核後回傳的錯誤訊息</param>
+            <returns>檢核成功或檢核失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlLeaveApplications.DoCheck(GUIStd.Enums.State,GUIStd.DAL.PY.Models.MdApplication_w,GUIStd.DAL.Base.Models.MdTimeInfo)">
+            <summary>
+            假單新增檢核羅期
+            </summary>
+            <param name="state">Add或Update</param>
+            <param name="obj">加班單資料模型物件</param>
+            <param name="timeInfo"></param>
+            <exception cref="T:GUIStd.CustomException"></exception>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlLeaveApplications.GetCloseDateForAB(System.String)">
+            <summary>
+            取得假單申請關帳日
+            </summary>
+            <param name="compId">公司別</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlLeaveApplications.IsPunchExists(System.String,System.String,System.String,System.Boolean,System.String@)">
+            <summary>
+            先行檢查打卡紀錄是否存在
+            </summary>
+            <param name="AQ01">打卡時間</param>
+            <param name="AQ02">打卡類別</param>
+            <param name="AQ03">卡號</param>
+            <param name="isParttimePunch">是否為兼職打卡</param>
+            <param name="errMsg">打卡記錄存在回傳錯誤訊息</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlLeaveApplications.GetOLA26UiData(System.String,System.String@,System.Boolean@,GUIStd.DAL.AllNewPY.Models.MdEmployee@,System.Collections.Generic.IEnumerable{GUIStd.DAL.PY.Models.MdReasonCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.PY.Models.MdAttendanceCode}@)">
+            <summary>
+            取得OLA26畫面資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlLeaveApplications.GetMissingPunchData(System.String,System.Int32,System.String)">
+            <summary>
+            取得員工在關帳日後的忘打卡紀錄(分頁)
+            </summary>
+            <param name="employeeId">員工編號</param>
+            <param name="pageNo">查詢頁次</param>
+            <param name="funcName">功能名稱</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.PY.Private.BlOvertimeApplications">
+            <summary>
+            加班單資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.DaoDW">
+            <summary>
+            DW資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.DaoDWA">
+            <summary>
+            DWA資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.DaoDX">
+            <summary>
+            DX資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.DaoDS">
+            <summary>
+            DS資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.DaoXDB">
+            <summary>
+            XDB資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.DaoPA">
+            <summary>
+            AllNewPY PA資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.DaoAA">
+            <summary>
+            AllNewPY 考勤資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.DaoApprovalFlow">
+            <summary>
+            請假流程資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.DaoSINI">
+            <summary>
+            NetGUI SINI資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.DaoPYSINI">
+            <summary>
+            AllNewPY SINI資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.HolidyCodeConfig">
+            <summary>
+            一例一休假別考勤代碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.BllDT">
+            <summary>
+            DT請假流程資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.BllDS">
+            <summary>
+            DS請假原因資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.BlApprovalFlows">
+            <summary>
+            線上請假簽核流程商用元件
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.OvertimeCode">
+            <summary>
+            加班轉休請假代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.OvertimeCodeL">
+            <summary>
+            加班轉薪請假代號
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.Private.BlOvertimeApplications.AnnualLeaveCode">
+            <summary>
+            特休假請假代號
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.CheckRoutineForRevoke(GUIStd.Enums.State,GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplication_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Collections.Generic.List{System.String}@)">
+            <summary>
+            DW層級檢核for加班撤銷
+            </summary>
+            <param name="state">Add或Update</param>
+            <param name="obj">加班單的DW物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="errLines">檢核後回傳的錯誤訊息</param>
+            <returns>檢核成功或檢核失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.CheckRoutine(GUIStd.Enums.State,GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplication_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Collections.Generic.List{System.String}@)">
+            <summary>
+            DW層級檢核for加班申請
+            </summary>
+            <param name="state">Add或Update</param>
+            <param name="obj">加班單的DW物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="errLines">檢核後回傳的錯誤訊息</param>
+            <returns>檢核成功或檢核失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.CheckRoutine(GUIStd.Enums.State,GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplicationDetail_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Collections.Generic.List{System.String}@)">
+            <summary>
+            DWA層級檢核
+            </summary>
+            <param name="state">Add或Update</param>
+            <param name="obj">加班單明細DWA物件</param>
+            <param name="timeInfo">異動資料基本欄位資訊</param>
+            <param name="errLines">檢核後回傳的錯誤訊息</param>
+            <returns>檢核成功或檢核失敗</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.DoCheck(GUIStd.Enums.State,GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplication_w,GUIStd.DAL.Base.Models.MdTimeInfo)">
+            <summary>
+            加班單異動前檢核
+            </summary>
+            <param name="state">異動狀態</param>
+            <param name="obj">加班單物件</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.DoCheck(GUIStd.Enums.State,GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplication_w,System.Collections.Generic.IEnumerable{GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplicationDetail_w},GUIStd.DAL.Base.Models.MdTimeInfo)">
+            <summary>
+            加班單明細異動前檢核
+            </summary>
+            <param name="state">異動狀態</param>
+            <param name="obj">加班單物件</param>
+            <param name="_details">加班單明細物件</param>
+            <param name="timeInfo">目前請求的前端資訊物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.DoCheckDel(System.String,System.String)">
+            <summary>
+            檢查請假單/加班單是否可以刪除
+            </summary>
+            <param name="DW01">公司別</param>
+            <param name="DW02">請假單/加班單號</param>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.GetCloseDateForAB(System.String)">
+            <summary>
+            取得關帳日
+            </summary>
+            <param name="compId">公司別</param>
+            <returns>關帳日期yyyyMMdd</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.GetOLA24UiData(System.String,System.String@,GUIStd.DAL.AllNewPY.Models.MdEmployee@,System.Collections.Generic.IEnumerable{GUIStd.DAL.PY.Models.MdReasonCode}@)">
+            <summary>
+            取得OLA24畫面資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.GetOLA25UiData(System.String,System.String@,GUIStd.DAL.AllNewPY.Models.MdEmployee@,System.Collections.Generic.IEnumerable{GUIStd.DAL.PY.Models.MdReasonCode}@,GUIStd.DAL.PY.Models.MdAttendanceCode@,GUIStd.DAL.PY.Models.MdAttendanceCode@)">
+            <summary>
+            取得OLA25畫面資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.GetRow(System.String,System.String)">
+            <summary>
+            取得指定加班單
+            </summary>
+            <param name="compId">公司別</param>
+            <param name="appNo">加班單單號</param>
+            <returns>加班單資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.GetData(System.String,System.String,System.String)">
+            <summary>
+            取得加班申請紀錄
+            </summary>
+            <param name="employeeId">員工編號</param>
+            <param name="dateS">起日</param>
+            <param name="dateE">迄日</param>
+            <returns>加班單資料模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.GetDataForRevoke(System.String,System.String)">
+            <summary>
+            取得加班單撤銷
+            </summary>
+            <param name="compId">公司別</param>
+            <param name="appNo">加班單號</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.GetDataByPage(System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            取得加班單申請紀錄(分頁)
+            </summary>
+            <param name="employeeId">員工編號</param>
+            <param name="dates">起日</param>
+            <param name="datee">迄日</param>
+            <param name="pageNo">頁次</param>
+            <param name="funcName">功能名稱</param>
+            <returns>加班單資料模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.GetOvertimeFlow(System.String,System.String,System.String,System.Decimal,System.Boolean)">
+            <summary>
+            取得加班簽核流程
+            </summary>
+            <param name="DT01">公司別</param>
+            <param name="userId">申請人員編</param>
+            <param name="departmentId">申請人部門</param>
+            <param name="applyQty">申請時數</param>
+            <param name="overtimeToLeave">加班轉補休</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.IsAllowOvertime(System.String,System.String,System.String,System.String)">
+            <summary>
+            取得日別資訊並判斷能否加班
+            </summary>
+            <param name="companyId">公司別</param>
+            <param name="employeeId">員工編號</param>
+            <param name="leaveDate">請假日</param>
+            <param name="leaveCode">請假代碼</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.ProcessCeateOvertimeApplication(GUIStd.DAL.PY.Models.Private.OvertimeApplication.MdOvertimeApplication_w,System.String@)">
+            <summary>
+            建立加班單
+            </summary>
+            <param name="obj">加班單物件</param>
+            <param name="DW02">加班單號</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.PY.Private.BlOvertimeApplications.ProcessDelete(System.String,System.String)">
+            <summary>
+            刪除假單/加班單
+            </summary>
+            <param name="compId">公司別</param>
+            <param name="appNo">請假單/加班單號</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.PY.BlDS">
+            <summary>
+            請假原因類別商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.BlDS.DaoDS">
+            <summary>
+            DS資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.BlDS.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.PY.BlDS.GetHelp(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            取得請假原因代碼的所有資料
+            </summary>
+            <param name="DS01">類別代號(01:請假原因, 02:加班原因, 03:銷假原因)</param>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.PY.BlDT">
+            <summary>
+            簽核流程資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.BlDT.DaoPA">
+            <summary>
+            AllNewPY PA資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.BlDT.DaoApprovalFlow">
+            <summary>
+            私用請假流程資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.BlDT.DaoA02A">
+            <summary>
+            AllNewGUI A02A資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.BlDT.DaoCINI">
+            <summary>
+            NetGUI CINI資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.BlDT.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.PY.BlDT.IsMustSign(System.Boolean,GUIStd.DAL.PY.Models.Private.ApprovalFlow.MdApprovalFlowStep)">
+            <summary>
+            判斷此階段是否為必審者
+            </summary>
+            <param name="isNewFlow">新/舊版簽核流程</param>
+            <param name="step">簽核流程階段資料模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.PY.BlDT.GetApprovalFlowByFlowId``2(System.String,System.String,System.String,System.String,System.Decimal,System.Collections.Generic.IEnumerable{``1}@,System.Boolean@,System.String,System.String,System.Boolean)">
+            <summary>
+            依該流程編號取得簽核流程
+            </summary>
+            <param name="flowId">簽核流程ID</param>
+            <param name="DT01">公司別</param>
+            <param name="userId">申請人員編</param>
+            <param name="departmentId">申請人部門</param>
+            <param name="applyQty">申請時數</param>
+            <param name="steps">簽核流程泛型集合物件</param>
+            <param name="agentId">代理人員編</param>
+            <param name="agentComp">代理人公司別</param>
+            <param name="includeEmptyFields">將模型欄位填入空白</param>
+            <param name="isLastAuditor">申請人是否為最後一關簽核人</param>
+        </member>
+        <member name="T:GUIStd.BLL.PY.BlDW">
+            <summary>
+            加班單商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.BlDW.DaoDW">
+            <summary>
+            DS資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.BlDW.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.PY.BlDW.IsExistOvertimeApp(System.String,System.String,System.String)">
+            <summary>
+            檢查是否存在該日期的有效加班單
+            </summary>
+            <param name="companyId">公司別</param>
+            <param name="employeeId">員工編號</param>
+            <param name="overtimeApplicationDate">加班日期</param>
+            <returns>加班單號</returns>
+        </member>
+        <member name="T:GUIStd.BLL.PY.BlDX">
+            <summary>
+            加班單商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.PY.BlDX.DaoDX">
+            <summary>
+            DS資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.PY.BlDX.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+    </members>
+</doc>

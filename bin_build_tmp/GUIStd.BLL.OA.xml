@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd.BLL.OA</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.BLL.OA.Private.BlCallReport">
+            <summary>
+            存取Call Report資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.OA.Private.BlCallReport.DaoCallReport">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.OA.Private.BlCallReport.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.OA.Private.BlCallReport.GetData(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            取得符合條件的所有Call Report的分頁頁次資料
+            </summary>
+            <param name="OA0301">公司別</param>
+            <param name="OA0310">拜訪客戶</param>
+            <param name="OA0305s">拜訪日期(起)</param>
+            <param name="OA0305e">拜訪日期(迄)</param>
+            <param name="OA0332s">下次拜訪日期(起)</param>
+            <param name="OA0332e">下次拜訪日期(迄)</param>
+            <param name="funcName">功能名稱</param>
+            <param name="pageNo">查詢頁次</param>
+            <param name="lang">語系</param>
+            <returns>Call Report泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.OA.Private.BlCallReport.GetRow(System.String,System.String,System.String)">
+            <summary>
+            取得唯一的Call Report資料
+            </summary>
+            <param name="OA0301">公司別</param>
+            <param name="OA0302">Call No.</param>
+            <param name="lang">語系</param>
+            <returns>Call Report模型物件</returns>
+        </member>
+        <member name="T:GUIStd.BLL.OA.BlOA03">
+            <summary>
+            存取Call Report資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.BLL.OA.BlOA03.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.OA.BlOA03.DaoOA03">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="F:GUIStd.BLL.OA.BlOA03.mDaoOA03Trans">
+            <summary>
+            具交易式的資料存取物件變數
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA03.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA03.IsExist(System.String,System.String)">
+            <summary>
+            判斷資料是否已存在
+            </summary>
+            <param name="OA0301">公司別</param>
+            <param name="OA0302">Call No.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA03.DoCheck(GUIStd.Enums.State,GUIStd.DAL.OA.Models.Private.CallReport.MdCallReport)">
+            <summary>
+            異動資料前的欄位檢核
+            </summary>
+            <param name="state">作業狀態</param>
+            <param name="obj">客戶資料模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA03.GetDaoOA03Trans(System.Data.SqlClient.SqlConnection@,System.Data.SqlClient.SqlTransaction@)">
+            <summary>
+            取得具交易式的資料存取物件
+            </summary>
+            <param name="cn">輸出交易式資料庫連線物件</param>
+            <param name="trans">輸出交易處理物件</param>
+            <returns>資料存取交易式物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA03.ProcessInsertTrans(GUIStd.DAL.OA.Models.Private.CallReport.MdCallReport,GUIStd.Models.MdClientInfo,System.String@)">
+            <summary>
+            處理交易式新增資料
+            </summary>
+            <param name="obj">Call Report資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <param name="callNo">輸出call No(OA0302)</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA03.ProcessUpdateTrans(GUIStd.DAL.OA.Models.Private.CallReport.MdCallReport,GUIStd.Models.MdClientInfo)">
+            <summary>
+            處理交易式修改作業
+            </summary>
+            <param name="obj">Call Report資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA03.ProcessDeleteTrans(System.String,System.String)">
+            <summary>
+            處理交易式刪除作業
+            </summary>
+            <param name="companyId">公司別</param>
+            <param name="callNo">Call No.</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.OA.BlOA12">
+            <summary>
+            存取業務機會資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.OA.BlOA12.DaoOA12">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA12.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA12.GetRow(System.Decimal,System.String)">
+            <summary>
+            取得唯一的業務機會資料
+            </summary>
+            <param name="OA1201">Key</param>
+            <param name="lang">語系</param>
+            <returns>業務機會模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA12.GetHelp(System.String)">
+            <summary>
+            取得業務機會輔助資料
+            </summary>
+            <param name="OA1202">客戶代碼</param>
+            <returns>業務機會資料模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA12.ProcessInsert(GUIStd.DAL.OA.Models.MdBusinessOppty,GUIStd.Models.MdClientInfo,System.Decimal@)">
+            <summary>
+            處理新增作業
+            </summary>
+            <param name="obj">業務機會資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <param name="OA1201">輸出Key(OA1201)</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA12.ProcessUpdate(System.Decimal,GUIStd.DAL.OA.Models.MdBusinessOppty,GUIStd.Models.MdClientInfo)">
+            <summary>
+            處理修改作業
+            </summary>
+            <param name="OA1201">Key</param>
+            <param name="obj">客戶資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.OA.BlOA12.ProcessDelete(System.Decimal)">
+            <summary>
+            處理刪除作業
+            </summary>
+            <param name="OA1201">Key</param>
+            <returns>受影響的資料列</returns>
+        </member>
+    </members>
+</doc>

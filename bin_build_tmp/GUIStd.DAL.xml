@@ -1,0 +1,1314 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd.DAL</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.DAL.MapHelper">
+            <summary>
+            Dapper 資料存取物件
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.MapHelper.CommandTimeout">
+            <summary>
+            指令執行逾時時間 (單位:秒)
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.OpenConnection(System.String)">
+            <summary>
+            建立資料庫連線物件
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ToArrayOrNull``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            當泛型集合物件長度為 0 時回傳 null，否則回傳泛型集合陣列
+            </summary>
+            <typeparam name="T">泛型型別</typeparam>
+            <param name="source">泛型集合物件</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.PrepareParameters(System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean)">
+            <summary>
+            準備 Dapper 動態參數物件
+            </summary>
+            <param name="param">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <returns>Dapper 動態參數物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.SetOutputParametersValue(Dapper.DynamicParameters,System.Collections.Generic.List{GUIStd.DAL.Parameter})">
+            <summary>
+            設定輸出參數值
+            </summary>
+            <param name="dParams">動態參數物件</param>
+            <param name="listParams">參數泛型集合物件</param>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.PrettyCommandText(System.String)">
+            <summary>
+            美化 T-SQL 指令
+            </summary>
+            <param name="commandText">T-SQL 指令</param>
+            <returns>字串</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.GetSPParams(System.Collections.Generic.IEnumerable{GUIStd.DAL.Models.MdSPParameter},System.Collections.Generic.List{GUIStd.DAL.Parameter})">
+            <summary>
+            建立預存程序所需的參數泛型集合物件
+            </summary>
+            <param name="paramList">參數泛型集合物件</param>
+            <param name="timeInfo"> 資料庫異動欄位資訊參數泛型集合物件</param>
+            <returns>參數泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.GetSPParams(System.Data.SqlClient.SqlConnection,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            建立預存程序所需的參數泛型集合物件
+            </summary>
+            <param name="cn">使用的資料庫連線物件</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="timeInfo"> 資料庫異動欄位資訊參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>參數泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.GetSPParams(System.Data.SqlClient.SqlTransaction,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            建立預存程序所需的參數泛型集合物件
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="timeInfo"> 資料庫異動欄位資訊參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>參數泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.GetSPParams(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            建立預存程序所需的參數泛型集合物件
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="timeInfo"> 資料庫異動欄位資訊參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>參數泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.SetParamsValue(System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Collections.Generic.List{System.Reflection.PropertyInfo},System.Object,System.String[])">
+            <summary>
+            將模型物件中的屬性值放入參數物件中
+            </summary>
+            <param name="paramsList">參數泛型集合物件</param>
+            <param name="modelParams">資料模型屬性成員泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="ignoreParams">不設定參數值的參數名稱字串陣列</param>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.SetParamsValue(System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Object,System.String[])">
+            <summary>
+            將模型物件中的屬性值放入參數物件中
+            </summary>
+            <param name="paramsList">參數泛型集合物件</param>
+            <param name="timeInfoParams">異動資料基本欄位參數泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="ignoreParams">不設定參數值的參數名稱字串陣列</param>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.SetParamsValue(System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Object,System.String[])">
+            <summary>
+            將模型物件中的屬性值放入參數物件中
+            </summary>
+            <param name="paramsList">參數泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="ignoreParams">不設定參數值的參數名稱字串陣列</param>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.IsJson(System.String)">
+            <summary>
+            判斷文字是否為 JSON 字串
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ToDataTable(System.Data.Common.DbDataReader,System.String)">
+            <summary>
+            將 DataReader 轉至 DataTable
+            </summary>
+            <param name="dr">DbDataReader</param>
+            <param name="dataTableName">回傳的 DataTable 名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.GetSPParameters(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            建立預存程序所需的參數泛型集合物件
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="timeInfo"> 資料庫異動欄位資訊參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>參數泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.GetModelProperities(System.Object)">
+            <summary>
+            取得模型物件的屬性欄位集合
+            </summary>
+            <param name="model">資料模型物件</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.GetModelPropertyValue(System.Object,System.String,System.Collections.Generic.List{System.Reflection.PropertyInfo})">
+            <summary>
+            取得模型物件屬性欄位的資料
+            </summary>
+            <param name="model">資料模型物件</param>
+            <param name="propertyName">模型中的屬性名稱</param>
+            <param name="modelProperties">模型物件中的所有屬性欄位集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.SetModelPropertyValue(System.Object,System.String,System.Object)">
+            <summary>
+            設定模型物件屬性欄位的資料
+            </summary>
+            <param name="model">資料模型物件</param>
+            <param name="propertyName">模型中的屬性名稱</param>
+            <param name="propertyValue">屬性值</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ModelPropertyExist(System.Object,System.String)">
+            <summary>
+            模型物件屬性是否存在
+            </summary>
+            <param name="model">資料模型物件</param>
+            <param name="propertyName">模型中的屬性名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.SetParameterForOutput(System.Collections.Generic.List{GUIStd.DAL.Parameter},System.String)">
+            <summary>
+            自參數集合物件，找出特定參數，設為輸出型態
+            </summary>
+            <param name="paramsList">參數泛型集合物件</param>
+            <param name="paramName">參數名稱</param>
+            <returns>參數物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.SetParameterValue(System.Collections.Generic.List{GUIStd.DAL.Parameter},System.String,System.Object)">
+            <summary>
+            設定參數值
+            </summary>
+            <param name="paramsList">參數泛型集合物件</param>
+            <param name="paramName">參數名稱</param>
+            <param name="value">參數值</param>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.SetParametersValue(System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            設定參數值
+            </summary>
+            <param name="paramsList">參數泛型集合物件</param>
+            <param name="paramsKeyValue">以字典型態傳入參數的Key/Value</param>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Execute(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32},System.Data.SqlClient.SqlTransaction)">
+            <summary>
+            執行指令，回傳受影響總列數
+            </summary>
+            <param name="connection">資料庫連線物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <param name="trans">使用的交易物件</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Execute(System.String,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳受影響總列數
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Execute(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳受影響總列數
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Execute(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳受影響總列數
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteSP(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳受影響總列數
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Execute(System.Data.SqlClient.SqlTransaction,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳受影響總列數
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteSP(System.Data.SqlClient.SqlTransaction,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳受影響總列數
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Execute(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Object,System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳受影響總列數
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="textParams">預存程序所有參數泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteSP(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Object,System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳受影響總列數
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">預存程序所有參數泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteSP(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Object,System.String[],System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳受影響總列數
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">預存程序所有參數泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="ignoreParams">不設定參數值的參數名稱字串陣列</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Execute(System.Data.SqlClient.SqlTransaction,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Object,System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳受影響總列數
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="textParams">預存程序所有參數泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteSP(System.Data.SqlClient.SqlTransaction,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Object,System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳受影響總列數
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">預存程序所有參數泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteSP(System.Data.SqlClient.SqlTransaction,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Object,System.String[],System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳受影響總列數
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">預存程序所有參數泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="ignoreParams">不設定參數值的參數名稱字串陣列</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteSPForAutoParams(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Object,System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳受影響總列數
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="timeInfoParams">異動資料基本欄位參數泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteSPForAutoParams(System.Data.SqlClient.SqlTransaction,System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Object,System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳受影響總列數
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="timeInfoParams">異動資料基本欄位參數泛型集合物件</param>
+            <param name="modelType">存放資料模型物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteScalar``1(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳第一行第一列的單一值
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connection">資料庫連線物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteScalar``1(System.String,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳第一行第一列的單一值
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteScalar``1(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳第一行第一列的單一值
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">預存程序名稱</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteScalarSP``1(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳第一行第一列的單一值
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">參數泛型集合物件</param>
+            <param name="isAnsi"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteReader(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.String,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳 DataTable
+            </summary>
+            <param name="connection">資料庫連線物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="dataTableName">回傳的 DataTable 名稱</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteReader(System.String,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.String,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳 DataTable
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="dataTableName">回傳的 DataTable 名稱</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteReader(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.String,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳 DataTable
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="dataTableName">回傳的 DataTable 名稱</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.ExecuteReaderSP(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.String,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳 DataTable
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">參數泛型集合物件</param>
+            <param name="dataTableName">回傳的 DataTable 名稱</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件後的資料集
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件後的資料集
+            </summary>
+            <param name="connection">資料庫連線物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query``1(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connection">資料庫連線物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query``1(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="trans">使用的交易物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query(System.String,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件後的資料集
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query``1(System.String,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳符合查詢條件後的資料集
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySP(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳符合查詢條件後的資料集
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">參數泛型集合物件</param>
+            <param name="isAnsi"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query``1(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySP``1(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">參數泛型集合物件</param>
+            <param name="isAnsi"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySingle(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件的單筆資料
+            </summary>
+            <param name="connection">資料庫連線物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySingle``1(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件的單筆資料
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connection">資料庫連線物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySingle(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件的單筆資料
+            </summary>
+            <param name="trans">使用的交易物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySingle``1(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件的單筆資料
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="trans">使用的交易物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySingle(System.String,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件的單筆資料
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySingle``1(System.String,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，回傳符合查詢條件的單筆資料
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySingle(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳符合查詢條件的單筆資料
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySingleSP(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳符合查詢條件的單筆資料
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">參數泛型集合物件</param>
+            <param name="isAnsi"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySingle``1(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳符合查詢條件的單筆資料
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySingleSP``1(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳符合查詢條件的單筆資料
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="spParams">參數泛型集合物件</param>
+            <param name="isAnsi"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query``1(System.String,System.String,System.Type[],System.Func{System.Object[],``0},System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TReturn">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="types">資料集參照的模型物件型別陣列</param>
+            <param name="map">將資料列映射到返回類型的函數</param>
+            <param name="splitOn">拆分下一個物件的起始欄位名稱，物件欄位之間以逗號間隔</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query``1(System.String,System.String,System.Type[],System.Func{System.Object[],``0},System.String,System.Collections.Generic.List{``0}@,``0@,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TReturn">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="types">資料集參照的模型物件型別陣列</param>
+            <param name="map">將資料列映射到返回類型的函數</param>
+            <param name="splitOn">拆分下一個物件的起始欄位名稱，物件欄位之間以逗號間隔</param>
+            <param name="finalResult">儲存最終結果的集合物件</param>
+            <param name="breakObj">彙整多筆資料列至目前使用中的模型物件</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query``1(System.String,System.String,System.Type[],System.Func{System.Object[],``0},System.String,``0@,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TReturn">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="types">資料集參照的模型物件型別陣列</param>
+            <param name="map">將資料列映射到返回類型的函數</param>
+            <param name="splitOn">拆分下一個物件的起始欄位名稱，物件欄位之間以逗號間隔</param>
+            <param name="breakObj">彙整多筆資料列至目前使用中的模型物件</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySP``1(System.String,System.String,System.Type[],System.Func{System.Object[],``0},System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TReturn">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="types">資料集參照的模型物件型別陣列</param>
+            <param name="map">將資料列映射到返回類型的函數</param>
+            <param name="splitOn">拆分下一個物件的起始欄位名稱，物件欄位之間以逗號間隔</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySP``1(System.String,System.String,System.Type[],System.Func{System.Object[],``0},System.String,System.Collections.Generic.List{``0}@,``0@,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TReturn">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="types">資料集參照的模型物件型別陣列</param>
+            <param name="map">將資料列映射到返回類型的函數</param>
+            <param name="splitOn">拆分下一個物件的起始欄位名稱，物件欄位之間以逗號間隔</param>
+            <param name="finalResult">儲存最終結果的集合物件</param>
+            <param name="breakObj">彙整多筆資料列至目前使用中的模型物件</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySP``1(System.String,System.String,System.Type[],System.Func{System.Object[],``0},System.String,``0@,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TReturn">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="types">資料集參照的模型物件型別陣列</param>
+            <param name="map">將資料列映射到返回類型的函數</param>
+            <param name="splitOn">拆分下一個物件的起始欄位名稱，物件欄位之間以逗號間隔</param>
+            <param name="breakObj">彙整多筆資料列至目前使用中的模型物件</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query``2(System.String,System.String,System.Type[],System.Func{System.Object[],``0},System.String,System.Collections.Generic.List{``1}@,``1@,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TRowReturn">資料列映射函式返回的型別參數</typeparam>
+            <typeparam name="TReturn">實際回傳的型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="types">資料集參照的模型物件型別陣列</param>
+            <param name="map">將資料列映射到返回類型的函數</param>
+            <param name="splitOn">拆分下一個物件的起始欄位名稱，物件欄位之間以逗號間隔</param>
+            <param name="finalResult">儲存最終結果的集合物件</param>
+            <param name="breakObj">彙整多筆資料列至目前使用中的模型物件</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.Query``2(System.String,System.String,System.Type[],System.Func{System.Object[],``0},System.String,``1@,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 T-SQL，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TRowReturn">資料列映射函式返回的型別參數</typeparam>
+            <typeparam name="TReturn">實際回傳的型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="types">資料集參照的模型物件型別陣列</param>
+            <param name="map">將資料列映射到返回類型的函數</param>
+            <param name="splitOn">拆分下一個物件的起始欄位名稱，物件欄位之間以逗號間隔</param>
+            <param name="breakObj">彙整多筆資料列至目前使用中的模型物件</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySP``2(System.String,System.String,System.Type[],System.Func{System.Object[],``0},System.String,System.Collections.Generic.List{``1}@,``1@,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TRowReturn">資料列映射函式返回的型別參數</typeparam>
+            <typeparam name="TReturn">實際回傳的型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="types">資料集參照的模型物件型別陣列</param>
+            <param name="map">將資料列映射到返回類型的函數</param>
+            <param name="splitOn">拆分下一個物件的起始欄位名稱，物件欄位之間以逗號間隔</param>
+            <param name="finalResult">儲存最終結果的集合物件</param>
+            <param name="breakObj">彙整多筆資料列至目前使用中的模型物件</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySP``2(System.String,System.String,System.Type[],System.Func{System.Object[],``0},System.String,``1@,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TRowReturn">資料列映射函式返回的型別參數</typeparam>
+            <typeparam name="TReturn">實際回傳的型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="types">資料集參照的模型物件型別陣列</param>
+            <param name="map">將資料列映射到返回類型的函數</param>
+            <param name="splitOn">拆分下一個物件的起始欄位名稱，物件欄位之間以逗號間隔</param>
+            <param name="breakObj">彙整多筆資料列至目前使用中的模型物件</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QueryMultiple(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行多個 T-SQL 指令，回傳多個結果資料集
+            </summary>
+            <param name="connection">資料庫連線物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="cmdParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QueryMultiple(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行多個 T-SQL 指令，回傳多個結果資料集
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QueryMultiple(System.String,System.String,System.Data.SqlClient.SqlConnection@,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行多個 T-SQL 指令，回傳多個結果資料集
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandText">T-SQL 指令</param>
+            <param name="cn">回傳 SqlConnection 物件，用以關閉連線</param>
+            <param name="textParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QueryMultipleSP(System.String,System.String,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行內含多個 T-SQL 指令的 SP，回傳多個結果資料集
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">Stored Procedure Name</param>
+            <param name="spParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QueryMultipleSP(System.String,System.String,System.Data.SqlClient.SqlConnection@,System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            執行內含多個 T-SQL 指令的 SP，回傳多個結果資料集
+            </summary>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">Stored Procedure Name</param>
+            <param name="cn">回傳 SqlConnection 物件，用以關閉連線</param>
+            <param name="spParams">參數泛型集合物件</param>
+            <param name="isAnsi">文字欄位是否使用 Ansi 型別</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.BulkMerge``1(System.String,System.String,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.List{GUIStd.DAL.Parameter},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},GUIStd.DAL.Models.MdBulkError{``0}@,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String,System.String[],System.Nullable{System.Int32})">
+            <summary>
+            使用 Dapper.Plus 進行大批資料合併 (Bulk Merge)。
+            </summary>
+            <typeparam name="T">大批寫入資料模型類別</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="tableName">資料表名稱</param>
+            <param name="data">資料模型泛型集合物件</param>
+            <param name="timeInfo">新增/修改、日期、時間、機台、使用者資訊</param>
+            <param name="mapKeys">資料模型執行Merge指令使用的欄位映射lambda函式(回傳匿名物件)</param>
+            <param name="errors">批次處理錯誤訊息</param>
+            <param name="identity">資料模型子動取號欄位映射lambda函式(回傳匿名物件)</param>
+            <param name="notMatchCondition">要遇到Not Matched By Target時做的額外判斷</param>
+            <param name="allowFields">允許串接的模型欄位</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>影響資料總列數</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QueryWithJson``2(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,``1,System.String,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，僅傳遞一個 JsonText 資料的參數，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TResult">型別參數</typeparam>
+            <typeparam name="TMdQParams">型別參數</typeparam>
+            <param name="connection">資料庫連線物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="jParamName">傳入 T-SQL 的參數名稱</param>
+            <param name="jObject">傳入 T-SQL 的參數模型物件</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QueryWithJson``2(System.String,System.Data.CommandType,System.String,``1,System.String,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，僅傳遞一個 JsonText 資料的參數，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TResult">型別參數</typeparam>
+            <typeparam name="TMdQParams">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="jParamName">傳入 T-SQL 的參數名稱</param>
+            <param name="jObject">傳入 T-SQL 的參數模型物件</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QueryWithJson``1(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,``0,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，僅傳遞一個 JsonText 資料的參數，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TMdQParams">型別參數</typeparam>
+            <param name="connection">資料庫連線物件</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="jParamName">傳入 T-SQL 的參數名稱</param>
+            <param name="jObject">傳入 T-SQL 的參數模型物件</param>
+            <param name="dataTableName">回傳的 DataTable 名稱</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QueryWithJson``1(System.String,System.Data.CommandType,System.String,``0,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            執行指令，僅傳遞一個 JsonText 資料的參數，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TMdQParams">型別參數</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="commandType">指令型態</param>
+            <param name="commandText">SQL 指令</param>
+            <param name="jParamName">傳入 T-SQL 的參數名稱</param>
+            <param name="jObject">傳入 T-SQL 的參數模型物件</param>
+            <param name="dataTableName">回傳的 DataTable 名稱</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySPWithJson``2(System.String,System.String,``1,System.Collections.Generic.Dictionary{System.Int32,System.String},System.String,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，僅傳遞一個 JsonText 資料的參數，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TResult">回傳的泛型型別參數</typeparam>
+            <typeparam name="TMdQParams">傳入 SP 的參數模型物件的泛型型別</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="jObject">傳入 SP 的查詢參數模型物件</param>
+            <param name="clientMessages">SP 中，錯誤代碼與錯誤訊息的對應</param>
+            <param name="jParamName">傳入 SP 的查詢參數名稱</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>SQL執行結果泛型物件</returns>
+        </member>
+        <member name="M:GUIStd.DAL.MapHelper.QuerySPWithJson``1(System.String,System.String,``0,System.Collections.Generic.Dictionary{System.Int32,System.String},System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            執行 SP，僅傳遞一個 JsonText 資料的參數，回傳符合查詢條件後的資料集
+            </summary>
+            <typeparam name="TMdQParams">傳入 SP 的參數模型物件的泛型型別</typeparam>
+            <param name="connectionString">資料庫連線字串</param>
+            <param name="spName">預存程序名稱</param>
+            <param name="jObject">傳入 SP 的查詢參數模型物件</param>
+            <param name="clientMessages">SP 中，錯誤代碼與錯誤訊息的對應</param>
+            <param name="jParamName">傳入 SP 的查詢參數名稱</param>
+            <param name="dataTableName">回傳的 DataTable 名稱</param>
+            <param name="commandTimeout">指令執行逾時時間</param>
+            <returns>SQL執行結果泛型物件</returns>
+        </member>
+        <member name="T:GUIStd.DAL.Models.MdBulkError`1">
+            <summary>
+            資料庫批次異動錯誤資訊模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdBulkError`1.Message">
+            <summary>
+            錯誤訊息
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdBulkError`1.Data">
+            <summary>
+            錯誤清單
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.Models.MdSPParameter">
+            <summary>
+            預存程序參數資訊模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSPParameter.ParamName">
+            <summary>
+            參數名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSPParameter.ParamTypeName">
+            <summary>
+            參數型別名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSPParameter.TypePrecision">
+            <summary>
+            數值型別參數的有效位數或文字型別參數的文字長度
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSPParameter.TypeScale">
+            <summary>
+            數值型別參數的小數位數
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.Models.MdSQLError">
+            <summary>
+            資料存取失敗的錯誤資訊模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLError.ErrorTime">
+            <summary>
+            發生時間
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLError.ClientMessage">
+            <summary>
+            回送前端的錯訊訊息
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.Models.MdSQLErrorBase">
+            <summary>
+            資料存取失敗的錯誤資訊基底模型類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLErrorBase.ErrorNumber">
+            <summary>
+            錯誤碼
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLErrorBase.ErrorMessage">
+            <summary>
+            SQL 的錯誤訊息
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLErrorBase.CustomMessage">
+            <summary>
+            自訂的錯誤訊息
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLErrorBase.ErrorLine">
+            <summary>
+            錯誤行
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLErrorBase.ErrorProcedure">
+            <summary>
+            錯誤程序
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLErrorBase.ErrorSeverity">
+            <summary>
+            錯誤嚴重等級
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLErrorBase.ErrorState">
+            <summary>
+            錯誤狀態
+            </summary>
+        </member>
+        <member name="T:GUIStd.DAL.Models.MdSQLResult`1">
+            <summary>
+            系統資料存取結果資訊模型類別
+            </summary>
+            <typeparam name="T">資料存放的模型型別或 DataTable</typeparam>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLResult`1.Data">
+            <summary>
+            資料存放在模型型別的資料
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Models.MdSQLResult`1.DTData">
+            <summary>
+            資料存放在 DataTable 型別的資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.Models.MdSQLResult`1.Success(System.Object)">
+            <summary>
+            資料存取成功的結果模型物件
+            </summary>
+            <param name="data">查詢結果資料模型物件</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.DAL.Models.MdSQLResult`1.Failed(System.Collections.Generic.IEnumerable{GUIStd.DAL.Models.MdSQLError})">
+            <summary>
+            資料存取失敗的結果模型物件
+            </summary>
+            <param name="errors">存取失敗的錯誤資訊模型物件列舉</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.DAL.Parameter">
+            <summary>
+            SQL 參數類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Parameter.Name">
+            <summary>
+            參數名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Parameter.Value">
+            <summary>
+            參數值
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Parameter.OutputValue">
+            <summary>
+            輸出參數值
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Parameter.Type">
+            <summary>
+            參數型別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.Parameter.Direction">
+            <summary>
+            參數方向
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.Parameter.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.Parameter.#ctor(System.String,System.String)">
+            <summary>
+            SQL 字串參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數字串值</param>
+        </member>
+        <member name="M:GUIStd.DAL.Parameter.#ctor(System.String,System.String[])">
+            <summary>
+            SQL 字串參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數字串陣列</param>
+        </member>
+        <member name="M:GUIStd.DAL.Parameter.#ctor(System.String,System.Int32)">
+            <summary>
+            SQL 數值參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數數值</param>
+        </member>
+        <member name="M:GUIStd.DAL.Parameter.#ctor(System.String,System.Decimal)">
+            <summary>
+            SQL 數值參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數數值</param>
+        </member>
+        <member name="M:GUIStd.DAL.Parameter.#ctor(System.String,System.Guid)">
+            <summary>
+            SQL 唯一識別碼參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數數值</param>
+        </member>
+        <member name="M:GUIStd.DAL.Parameter.#ctor(System.String,System.Decimal[])">
+            <summary>
+            SQL 數值參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數數值陣列</param>
+        </member>
+        <member name="M:GUIStd.DAL.Parameter.#ctor(System.String,System.Byte[])">
+            <summary>
+            SQL 位元陣列參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數位元陣列</param>
+        </member>
+        <member name="M:GUIStd.DAL.Parameter.InitialValues``1(System.String,``0)">
+            <summary>
+            初始化共用屬性值
+            </summary>
+            <typeparam name="T">型別參數</typeparam>
+            <param name="name">參數名稱</param>
+            <param name="value">參數數值</param>
+        </member>
+        <member name="T:GUIStd.DAL.ParameterOutput">
+            <summary>
+            SQL 參數類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.DAL.ParameterOutput.Direction">
+            <summary>
+            參數方向
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.ParameterOutput.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUIStd.DAL.ParameterOutput.#ctor(System.String,System.String)">
+            <summary>
+            SQL 字串參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數字串值</param>
+        </member>
+        <member name="M:GUIStd.DAL.ParameterOutput.#ctor(System.String,System.String[])">
+            <summary>
+            SQL 字串參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數字串陣列</param>
+        </member>
+        <member name="M:GUIStd.DAL.ParameterOutput.#ctor(System.String,System.Int32)">
+            <summary>
+            SQL 數值參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數數值</param>
+        </member>
+        <member name="M:GUIStd.DAL.ParameterOutput.#ctor(System.String,System.Decimal)">
+            <summary>
+            SQL 數值參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數數值</param>
+        </member>
+        <member name="M:GUIStd.DAL.ParameterOutput.#ctor(System.String,System.Decimal[])">
+            <summary>
+            SQL 數值參數建構子
+            </summary>
+            <param name="name">參數名稱</param>
+            <param name="value">參數數值陣列</param>
+        </member>
+    </members>
+</doc>

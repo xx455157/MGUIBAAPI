@@ -1,0 +1,707 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUICore.Web</name>
+    </assembly>
+    <members>
+        <member name="T:GUICore.Web.App`1">
+            <summary>
+            系統應用程式物件
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.App`1.SetDecryptWSKey">
+            <summary>
+            設定服務授權解密密碼
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.App`1.InitConfig(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            初始化系統應用程式組態設定物件
+            </summary>
+            <param name="configuration">系統組態設定物件</param>
+        </member>
+        <member name="M:GUICore.Web.App`1.InitLogging(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            初始化系統記錄組態設定物件
+            </summary>
+            <param name="loggerFactory">記錄器工廠物件</param>
+        </member>
+        <member name="T:GUICore.Web.Attributes.RequiredFromQueryActionConstraint">
+            <summary>
+            查詢參數的必要條件約束類別
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.Attributes.RequiredFromQueryAttribute">
+            <summary>
+            必要查詢參數宣告式屬性類別
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.Controllers.GUIAppAnonAuthController">
+            <summary>
+            【匿名授權】繼承自基底控制器的衍生基底控制器
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppAnonAuthController.ClientContentAnon">
+            <summary>
+            目前匿名請求的前端資訊
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppAnonAuthController.ClientContent">
+            <summary>
+            轉換後的具名請求的前端資訊
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.Controllers.GUIAppAuthController">
+            <summary>
+            【具名授權】繼承自基底控制器的衍生基底控制器
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.Controllers.GUIAppBaseController">
+            <summary>
+            基底控制器
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppBaseController.CurrentRequestInfo">
+            <summary>
+            取得目前請求的前端資訊物件
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppBaseController.CurrentLang">
+            <summary>
+            後端資料庫使用的語系
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppBaseController.CurrentUILang">
+            <summary>
+            前端網頁目前使用的語系
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppBaseController.ClientContent">
+            <summary>
+            目前請求的前端資訊
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppBaseController.ImageReadPath">
+            <summary>
+            存放網站圖片的網址
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppBaseController.WatchTime">
+            <summary>
+            測量執行效能的物件
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppBaseController.ControlName">
+            <summary>
+            取得控制器名稱
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppBaseController.SystemId">
+            <summary>
+            系統代號
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.Controllers.GUIAppController">
+            <summary>
+            基底控制器
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppController.ClientContent">
+            <summary>
+            目前請求的前端資訊
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.Controllers.GUIAppSIGRHub">
+            <summary>
+            【匿名】繼承自基底 SignalR 中樞的衍生 SignalR 中樞
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppSIGRHub.HttpContext">
+            <summary>
+            取得 Hub 的 HttpContext 物件
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppSIGRHub.ClientContentAnon">
+            <summary>
+            目前匿名請求的前端資訊
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppSIGRHub.CurrentLang">
+            <summary>
+            後端資料使用的語系
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppSIGRHub.CurrentUILang">
+            <summary>
+            前端目前使用的語系
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppSIGRHub.HubUser">
+            <summary>
+            設定呼叫服務的使用者
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppSIGRHub.ClientContent">
+            <summary>
+            轉換後的具名請求的前端資訊
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Controllers.GUIAppSIGRHub.OnConnectedAsync">
+            <summary>
+            連線事件
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Controllers.GUIAppSIGRHub.OnDisconnectedAsync(System.Exception)">
+            <summary>
+            斷線事件
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.Controllers.GUIAppWSController">
+            <summary>
+            【服務授權】繼承自基底控制器的衍生基底控制器
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppWSController.ClientContentWS">
+            <summary>
+            目前服務請求的前端資訊
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppWSController.WSUser">
+            <summary>
+            設定呼叫服務的使用者
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Controllers.GUIAppWSController.ClientContent">
+            <summary>
+            轉換後的服務請求的前端資訊
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.Extensions.WebApplication">
+            <summary>
+            IApplicationBuilder 擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebApplication.UseCustomDirectoryBrowsing(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String,System.String[])">
+            <summary>
+            允許瀏覽資料夾的的擴充函式
+            </summary>
+            <param name="builder">應用程式構建物件</param>
+            <param name="mapRequestPath">資料夾對應的請求路徑</param>
+            <param name="physicalFolder">資料夾名稱</param>
+            <returns>應用程式構建物件</returns>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebApplication.UseCustomUnknownFileType(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String,System.String,System.String[])">
+            <summary>
+            指定某資料夾中未知檔案型態的 MIME Type 擴充函式
+            舉例：沒有副檔名的圖檔，MIME Type 可設為 【image/png】
+            </summary>
+            <param name="builder">應用程式構建物件</param>
+            <param name="contentType">MIME Type</param>
+            <param name="physicalFolder">存放未知檔案型態的資料夾名稱</param>
+            <param name="mapRequestPath">資料夾對應的請求路徑</param>
+            <returns>應用程式構建物件</returns>
+        </member>
+        <member name="T:GUICore.Web.Extensions.WebRequest">
+            <summary>
+            HttpRequest 擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebRequest.GetRawBodyStringAsync(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding,System.Boolean)">
+            <summary>
+            取得本文原生資料的擴充函式
+            </summary>
+            <param name="request">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpRequest 作業型別</param>
+            <param name="encoding">本文原生資料的編碼，預設值：UTF8</param>
+            <param name="leaveOpen">完成讀取並被釋放後，資料流是否仍保持在開啟狀態</param>
+            <returns>字串</returns>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebRequest.ReadMultipleRawBodyStringAsync(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            取得本文原生資料的擴充函式
+            </summary>
+            <param name="request">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpRequest 作業型別</param>
+            <param name="encoding">本文原生資料的編碼，預設值：UTF8</param>
+            <returns>字串</returns>
+        </member>
+        <member name="T:GUICore.Web.Extensions.WebResponse">
+            <summary>
+            HttpResponse 擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.TaskSuccess(Microsoft.AspNetCore.Http.HttpResponse,System.Nullable{System.Int32},System.String,GUIStd.Enums.ResourceLang,System.Object)">
+            <summary>
+            回傳作業成功資訊回前端的函式
+            </summary>
+            <param name="response">HttpResponse 物件</param>
+            <param name="affectedRows">作業成功後受影響的資料列</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+            <param name="responseData">回應給前端的資料。可以是數值、文字、模型物件</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.TaskFailed(Microsoft.AspNetCore.Http.HttpResponse,System.Exception,System.String,GUIStd.Enums.ResourceLang)">
+            <summary>
+            傳送作業失敗資訊回前端的函式
+            </summary>
+            <param name="response">HttpResponse 物件</param>
+            <param name="ex">作業失敗丟出的例外物件</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.IsValidJSON(System.Object)">
+            <summary>
+            判定資料是否為合法的 JSON String
+            </summary>
+            <param name="data">資料物件，可以是數值、文字、模型物件</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendFailed(Microsoft.AspNetCore.Http.HttpResponse,System.String)">
+            <summary>
+            傳送作業失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="errorMessage">作業失敗的錯誤訊息</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendFailed(Microsoft.AspNetCore.Http.HttpResponse,System.String,GUIStd.Enums.ResourceLang)">
+            <summary>
+            傳送作業失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendFailed(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Exception)">
+            <summary>
+            傳送作業失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="errorMessage">作業失敗的錯誤訊息</param>
+            <param name="ex">作業失敗丟出的例外物件</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendSuccess(Microsoft.AspNetCore.Http.HttpResponse,System.String)">
+            <summary>
+            傳送作業成功資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="message">作業成功的訊息</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendSuccess(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Object)">
+            <summary>
+            傳送作業成功資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="message">作業成功的訊息</param>
+            <param name="responseData">回應給前端的資料。可以是數值、文字、模型物件</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendSuccess(Microsoft.AspNetCore.Http.HttpResponse,System.Nullable{System.Int32},System.String)">
+            <summary>
+            傳送作業成功資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="code">作業成功的代碼</param>
+            <param name="message">作業成功的訊息</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendSuccess(Microsoft.AspNetCore.Http.HttpResponse,System.Nullable{System.Int32},System.String,System.Object)">
+            <summary>
+            傳送作業成功資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="code">作業成功的代碼</param>
+            <param name="message">作業成功的訊息</param>
+            <param name="responseData">回應給前端的資料。可以是數值、文字、模型物件</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.InsertSuccess(Microsoft.AspNetCore.Http.HttpResponse,System.Int32,System.String,GUIStd.Enums.ResourceLang,System.Object)">
+            <summary>
+            傳送新增成功資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="affectedRows">新增成功後受影響的資料列</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+            <param name="responseData">回應給前端的資料。可以是數值、文字、模型物件</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.InsertFailed(Microsoft.AspNetCore.Http.HttpResponse,System.Exception,System.String,GUIStd.Enums.ResourceLang)">
+            <summary>
+            傳送新增失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="ex">作業失敗丟出的例外物件</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.UpdateSuccess(Microsoft.AspNetCore.Http.HttpResponse,System.Int32,System.String,GUIStd.Enums.ResourceLang,System.Object)">
+            <summary>
+            傳送修改成功資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="affectedRows">修改成功後受影響的資料列</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+            <param name="responseData">回應給前端的資料。可以是數值、文字、模型物件</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.UpdateFailedWhenKeyNotSame(Microsoft.AspNetCore.Http.HttpResponse)">
+            <summary>
+            傳送修改失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.UpdateFailed(Microsoft.AspNetCore.Http.HttpResponse,System.Exception,System.String,GUIStd.Enums.ResourceLang)">
+            <summary>
+            傳送修改失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="ex">作業失敗丟出的例外物件</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.DeleteSuccess(Microsoft.AspNetCore.Http.HttpResponse,System.Int32,System.String,GUIStd.Enums.ResourceLang,System.Object)">
+            <summary>
+            傳送刪除成功資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="affectedRows">刪除成功後受影響的資料列</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+            <param name="responseData">回應給前端的資料。可以是數值、文字、模型物件</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.DeleteFailed(Microsoft.AspNetCore.Http.HttpResponse,System.Exception,System.String,GUIStd.Enums.ResourceLang)">
+            <summary>
+            傳送刪除失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="ex">作業失敗丟出的例外物件</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.Completed(Microsoft.AspNetCore.Http.HttpResponse,System.String,GUIStd.Enums.ResourceLang)">
+            <summary>
+            傳送作業成功資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.Failed(Microsoft.AspNetCore.Http.HttpResponse,System.Exception,System.String,GUIStd.Enums.ResourceLang)">
+            <summary>
+            傳送作業失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="ex">作業失敗丟出的例外物件</param>
+            <param name="messageResourceKey">取得資源檔中訊息的資源鍵</param>
+            <param name="resourceLang">系統詞庫資源檔列舉</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendJSONText(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int32)">
+            <summary>
+            傳送 JSON 格式字串回前端
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="jsonText">JSON 格式字串</param>
+            <param name="statusCode">狀態碼</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendFile(Microsoft.AspNetCore.Http.HttpResponse,System.IO.MemoryStream,System.String)">
+            <summary>
+            傳送檔案回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="stream">檔案內容的 Memory Stream</param>
+            <param name="fileName">前端下載時的預設檔名，需包含副檔名</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendFile(Microsoft.AspNetCore.Http.HttpResponse,System.Byte[],System.String)">
+            <summary>
+            傳送檔案回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="fileContent">檔案內容的位元陣列</param>
+            <param name="fileName">前端下載時的預設檔名，需包含副檔名</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendFileFailed(Microsoft.AspNetCore.Http.HttpResponse,System.Exception)">
+            <summary>
+            傳送檔案下載作業失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="ex">作業失敗丟出的例外物件</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendFileNotExistFailed(Microsoft.AspNetCore.Http.HttpResponse)">
+            <summary>
+            傳送檔案下載作業失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendReportNoQueryData(Microsoft.AspNetCore.Http.HttpResponse)">
+            <summary>
+            傳送報表無符合條件資料的失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+        </member>
+        <member name="M:GUICore.Web.Extensions.WebResponse.SendReportFailed(Microsoft.AspNetCore.Http.HttpResponse,System.String)">
+            <summary>
+            報表作業失敗資訊回前端的擴充函式
+            </summary>
+            <param name="response">第一個參數採用 this 修飾子，並指定此擴充函式的 HttpResponse 作業型別</param>
+            <param name="errorMessage">作業失敗的錯誤訊息</param>
+        </member>
+        <member name="T:GUICore.Web.Filters.AppAnonAuthActionFilter">
+            <summary>
+            自訂匿名授權動作篩選條件類別
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Filters.AppAnonAuthActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            覆寫呼叫動作方法之前觸發的函式
+            </summary>
+            <param name="actionContext">動作上下文物件</param>
+        </member>
+        <member name="T:GUICore.Web.Filters.AppAuthActionFilter">
+            <summary>
+            自訂具名授權動作篩選條件類別
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Filters.AppAuthActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            覆寫呼叫動作方法之前觸發的函式
+            </summary>
+            <param name="actionContext">動作上下文物件</param>
+        </member>
+        <member name="T:GUICore.Web.Filters.ValidateModelFilter">
+            <summary>
+            自訂模型驗證失敗回應訊息的篩選條件類別
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Filters.ValidateModelFilter.LoggingRequest(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            Log 請求本文
+            </summary>
+            <param name="context">動作上下文物件</param>
+        </member>
+        <member name="M:GUICore.Web.Filters.ValidateModelFilter.CreateFileInfo(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            建立上傳檔案資訊物件
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GUICore.Web.Filters.ValidateModelFilter.ParametersIsValid(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            判斷 API 參數值是否合法
+            </summary>
+            <param name="context">動作上下文物件</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUICore.Web.Filters.ValidateModelFilter.GetModelJsonPropertyName(System.Reflection.PropertyInfo[],System.String,System.String@)">
+            <summary>
+            取得 Model 屬性成員的 JSON 屬性名稱
+            </summary>
+            <param name="props">Model 的所有屬性成員資訊</param>
+            <param name="propKey">傳入的屬性成員名稱</param>
+            <param name="propName">回傳的 JSON 屬性名稱</param>
+            <returns>是否取得屬性成員的 JSON 屬性名稱</returns>
+        </member>
+        <member name="M:GUICore.Web.Filters.ValidateModelFilter.ReplaceKeyWithJsonPropertyName(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,System.String)">
+            <summary>
+            將 Data Model 的屬性名稱，替換為 JsonProperty Attribute 的 propertyName 屬性值
+            </summary>
+            <param name="context">動作上下文物件</param>
+            <param name="key">Data Model 屬性成員名稱</param>
+            <returns>JSON 物件的屬性名稱</returns>
+        </member>
+        <member name="M:GUICore.Web.Filters.ValidateModelFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            呼叫動作方法之前觸發的函式
+            </summary>
+            <param name="context">動作上下文物件</param>
+        </member>
+        <member name="T:GUICore.Web.Filters.WSAuthActionFilter">
+            <summary>
+            自訂服務授權動作篩選條件類別
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Filters.WSAuthActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            覆寫呼叫動作方法之前觸發的函式
+            </summary>
+            <param name="actionContext">動作上下文物件</param>
+        </member>
+        <member name="T:GUICore.Web.FromFormModelBinder">
+            <summary>
+            自訂模型繫結的類別
+            應用於 FromForm 型態的 API
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.FromFormModelBinder.GetValueProviderResultValue(System.Reflection.PropertyInfo,Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)">
+            <summary>
+            取得屬性值或陣列值
+            </summary>
+            <param name="prop">屬性的資訊物件</param>
+            <param name="result">存放屬性值的物件</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUICore.Web.FromFormModelBinder.BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext)">
+            <summary>
+            進行模型繫結
+            </summary>
+            <param name="bindingContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GUICore.Web.Middlewares.CustomRequest">
+            <summary>
+            自訂請求中介軟體物件
+            </summary>
+        </member>
+        <member name="F:GUICore.Web.Middlewares.CustomRequest.Next">
+            <summary>
+            下一個請求委派物件
+            </summary>
+        </member>
+        <member name="F:GUICore.Web.Middlewares.CustomRequest.AppSet">
+            <summary>
+            系統應用程式組態設定        
+            </summary>
+        </member>
+        <member name="F:GUICore.Web.Middlewares.CustomRequest.ReqInfoSet">
+             <summary>
+             每個前端請求的資訊
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Middlewares.CustomRequest.GetRequestLanguage(Microsoft.AspNetCore.Http.IHeaderDictionary)">
+            <summary>
+            取得 Request 的預設語系
+            </summary>
+            <param name="headers">Request Headers</param>
+            <returns>語系文字</returns>
+        </member>
+        <member name="M:GUICore.Web.Middlewares.CustomRequest.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            執行中介軟體作業的函式
+            </summary>
+            <param name="context">HTTP上下文物件</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUICore.Web.Middlewares.CustomRequest.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            建構子
+            </summary>
+            <param name="next">下一個請求委派物件</param>
+        </member>
+        <member name="T:GUICore.Web.Middlewares.CustomRequestExtensions">
+            <summary>
+            自訂請求中介軟體擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Middlewares.CustomRequestExtensions.UseCustomRequest(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            公開 CustomMiddleware 中介軟體的擴充函式
+            </summary>
+            <param name="builder">應用程式構建物件</param>
+            <returns>應用程式構建物件</returns>
+        </member>
+        <member name="T:GUICore.Web.Middlewares.JsonException">
+            <summary>
+            JSON 格式例外類別
+            </summary>
+        </member>
+        <member name="F:GUICore.Web.Middlewares.JsonException.mEnv">
+            <summary>
+            提供應用程式管理功能和服務的環境
+            </summary>
+        </member>
+        <member name="F:GUICore.Web.Middlewares.JsonException.mSerializer">
+            <summary>
+            JSON 序列化物件
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Middlewares.JsonException.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Middlewares.JsonException.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            執行中介軟體作業的函式
+            </summary>
+            <param name="context">HTTP上下文物件</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUICore.Web.Middlewares.JsonExceptionExtensions">
+            <summary>
+            JSON 格式例外中介軟體擴充函式的類別
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.Middlewares.JsonExceptionExtensions.UseJsonException(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            公開 JsonException 中介軟體的擴充函式
+            </summary>
+            <param name="builder"></param>
+            <returns>應用程式構建物件</returns>
+        </member>
+        <member name="T:GUICore.Web.Models.MdApiAppSettings">
+            <summary>
+            應用程式設定模型類別
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Models.MdApiAppSettings.TokenKeyFile">
+            <summary>
+            AccessToken 加解密金鑰檔案
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Models.MdApiAppSettings.ImageReadPath">
+            <summary>
+            存放網站圖片的網址
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Models.MdApiAppSettings.ImageUploadPath">
+            <summary>
+            存放網站圖片寫入的路徑
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.Models.MdFile">
+            <summary>
+            檔案上傳模型
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Models.MdFile.FormFiles">
+            <summary>
+            使用FormData傳遞多個檔案
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.Models.MdFormData">
+            <summary>
+            Form-Data檔案上傳模型
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Models.MdFormData.FormFile">
+            <summary>
+            使用FormData傳遞單一圖檔
+            </summary>
+        </member>
+        <member name="P:GUICore.Web.Models.MdFormData.HidFormFiles">
+            <summary>
+            使用畫面HiddenField傳遞前端物件透過JSON.stringfy轉換後的字串
+            </summary>
+        </member>
+        <member name="T:GUICore.Web.WebFunc">
+            <summary>
+            系統共用函式物件
+            </summary>
+        </member>
+        <member name="M:GUICore.Web.WebFunc.ResponseJSON(Microsoft.AspNetCore.Http.HttpResponse,System.Net.HttpStatusCode,GUIStd.Models.MdApiMessage,System.String)">
+            <summary>
+            傳送前端 JSON 訊息回應
+            </summary>
+            <param name="response">回應物件</param>
+            <param name="statusCode">回應狀態代碼</param>
+            <param name="msg">系統訊息物件</param>
+            <param name="contentType">訊息型態</param>
+        </member>
+        <member name="M:GUICore.Web.WebFunc.IFormFile2Base64Image(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            [非同步]將FormData夾帶的File轉換為MdBase64Iamge模型物件
+            </summary>
+            <param name="file">上傳的檔案</param>
+            <returns>MdBase64Iamge模型物件</returns>
+        </member>
+        <member name="M:GUICore.Web.WebFunc.ConvertFormFileToBase64Image(GUICore.Web.Models.MdFormData)">
+            <summary>
+            將透過Form-Data傳輸的檔案轉換成MdBase64物件回傳
+            </summary>
+        </member>
+    </members>
+</doc>

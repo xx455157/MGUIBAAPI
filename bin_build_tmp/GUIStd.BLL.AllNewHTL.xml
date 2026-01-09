@@ -1,0 +1,1825 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GUIStd.BLL.AllNewHTL</name>
+    </assembly>
+    <members>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlKiosk">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.GetBooking(System.String,System.String,System.String,System.String)">
+            <summary>
+            查詢訂單
+            </summary>
+            <param name="domain">飯店代號</param>
+            <param name="booking_type">
+            訂單查詢類型代碼  
+            1：網路訂單號 2：電話號碼 3：E-mail 4：住宿碼 5：房號
+            </param>
+            <param name="start_date">入住日期，格式 yyyyMMdd 或 yyyy-MM-dd</param>
+            <param name="booking_number">訂單號碼 / 住宿碼</param>
+            <returns>訂單資料集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.GetAvailableRooms(System.String,System.String,System.String,System.String)">
+            <summary>
+            取得住宿價格
+            </summary>
+            <param name="domain">飯店代號</param>
+            <param name="start_date">入住日期</param>
+            <param name="check_out">退房日期</param>
+            <param name="isDUS">是否為DUS</param>
+            <returns>可用房間資料集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.GetInvoice(System.String,System.String,System.Int32)">
+            <summary>
+            查詢發票
+            </summary>
+            <param name="domain">飯店代號</param>
+            <param name="booking_number">住宿碼</param>
+            <param name="type_number">發票類型</param>
+            <returns>發票資料集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.GetHotel">
+            <summary>
+            取得飯店資訊
+            </summary>
+            <returns>飯店資料</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.GetService(System.String,System.String)">
+            <summary>
+            取得服務資訊
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.BookingRoomDetail(GUIStd.DAL.AllNewHTL.Models.MdBookingRoomDetail)">
+            <summary>
+            更新入住資訊
+            </summary>
+            <param name="obj">更新入住資訊</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.UpdateRoomStatus(System.String,System.String,System.String)">
+            <summary>
+            變更訂房狀態
+            </summary>
+            <param name="domain">飯店代號</param>
+            <param name="order_number">訂單編號</param>
+            <param name="status">狀態</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.InsertPayment(System.String,System.String,GUIStd.DAL.AllNewHTL.Models.MdKioskPayment)">
+            <summary>
+            建立付款資料
+            </summary>
+            <param name="domain">飯店代號</param>
+            <param name="booking_number">訂單號碼</param>
+            <param name="obj">付款資料</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.PostBooing(System.String,GUIStd.DAL.AllNewHTL.Models.MdKioskPostBooking)">
+            <summary>
+            建立訂單
+            </summary>
+            <param name="domain">飯店代號</param>
+            <param name="odj">訂單資料</param>
+            <returns>訂單資料集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.InsertInvoice(System.String,System.String,GUIStd.DAL.AllNewHTL.Models.MdKioskHTVC_Insert)">
+            <summary>
+            建立發票
+            </summary>
+            <param name="domain">飯店代號</param>
+            <param name="booking_number">訂單號碼</param>
+            <param name="odj">發票資料</param>
+            <returns>發票資料集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.BookingCxnl(System.String,System.String)">
+            <summary>
+            訂單取消
+            </summary>
+            <param name="domain">飯店代號</param>
+            <param name="order_number">訂單編號</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.InsertHPCar(System.String,System.String,System.String)">
+            <summary>
+            插入車輛資訊
+            </summary>
+            <param name="domain">飯店代號</param>
+            <param name="ordernumber">訂單編號</param>
+            <param name="carnumber">車牌號碼</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.InsertHPCard(System.String,System.String,System.String)">
+            <summary>
+            取得製卡UID
+            </summary>
+            <param name="domain">飯店代號</param>
+            <param name="ordernumber">訂單編號</param>
+            <param name="carnumber">車牌號碼</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlKiosk.SaveOCRFiles(System.String,System.String,GUIStd.Models.MdBase64Image)">
+            <summary>
+            旅客資料證件上傳
+            </summary>
+            <param name="booking_number">訂單號碼</param>
+            <param name="OCR">OCR資料</param>
+            <param name="image">圖片資料</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Client.DunQian.BlBooking">
+            <summary>
+            存取住客資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Client.DunQian.BlBooking.DaoRMBK">
+            <summary>
+            資料存取物件屬性
+            </summary>        
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlBooking.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlBooking.GetBooking(System.String)">
+            <summary>
+            取得待上傳RMS訂單資料
+            </summary>
+            <param name="RVNO">訂單號碼</param>
+            <returns>RMS訂單資料物件模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlBooking.GetBookings(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            取得待上傳RMS訂房資料清單
+            </summary>
+            <param name="RVList">訂單號碼清單</param>
+            <returns>RMS訂單資料物件模型泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlBooking.UpdateMessageUniqueId(GUIStd.DAL.AllNewHTL.Models.Client.DunQian.MdRmsMessageUid)">
+            <summary>
+            上傳完畢後回填MsgUid
+            </summary>
+            <param name="obj">RMS訊息唯一碼模型物件</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Client.DunQian.BlHotel">
+            <summary>
+            存取住客資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Client.DunQian.BlHotel.DaoRms">
+            <summary>
+            資料存取物件屬性
+            </summary>        
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlHotel.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlHotel.GetData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Client.DunQian.BlPrice">
+            <summary>
+            存取住客資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Client.DunQian.BlPrice.DaoRMIV">
+            <summary>
+            資料存取物件屬性
+            </summary>        
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlPrice.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlPrice.GetData(System.String,System.String)">
+            <summary>
+            取得待上傳RMS房型資料
+            </summary>
+            <param name="date">日期</param>
+            <param name="roomType">房型</param>
+            <returns>RMS房價資料物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlPrice.GetData(System.String,System.String,System.String)">
+            <summary>
+            取得待上傳RMS房型資料
+            </summary>
+            <param name="dates">日期起</param>
+            <param name="datee">日期迄</param>
+            <param name="roomType">房型</param>
+            <returns>RMS房價資料泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlPrice.GetData(System.String[],System.String)">
+            <summary>
+            取得待上傳RMS房型資料
+            </summary>
+            <param name="dates">日期陣列</param> 
+            <param name="roomType">房型</param>
+            <returns>RMS房價資料泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlPrice.GetData(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{GUIStd.DAL.AllNewGUI.Models.MdDateRange}})">
+            <summary>
+            取得待上傳RMS房型資料
+            </summary>
+            <param name="_dict">Key:房型，Value:連續的日期區段</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlPrice.UpdateMessageUniqueId(GUIStd.DAL.AllNewHTL.Models.Client.DunQian.MdRmsMessageUid)">
+            <summary>
+            上傳完畢後回填MsgUid
+            </summary>
+            <param name="obj">RMS訊息唯一碼模型物件</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlPrice.UpdateMessageUniqueId(System.String,GUIStd.DAL.AllNewHTL.Models.Client.DunQian.MdRmsMessageUid)">
+            <summary>
+            上傳完畢後回填MsgUid
+            </summary>
+            <param name="roomType">房型代碼</param>
+            <param name="obj">RMS訊息唯一碼模型物件</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlPrice.UpdateMessageUniqueId(System.String,System.String,System.String,System.Guid)">
+            <summary>
+            上傳完畢後回填MsgUid
+            </summary>
+            <param name="dates">日期起</param>
+            <param name="datee">日期迄</param>
+            <param name="roomType">房型代碼</param>
+            <param name="msgUid">訊息唯一碼</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Client.DunQian.BlQueueJob">
+            <summary>
+            存取住客資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlQueueJob.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlQueueJob.GetRoomPrices(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Client.DunQian.MdRmsJob})">
+            <summary>
+            將RMDX的資料依房型整理後查詢有差異的RMIV資料
+            </summary>
+            <param name="_jobs">RMDX指示檔泛型集合物件</param>
+            <returns>比對原始值有差異的RMIV泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlQueueJob.GetJobs">
+            <summary>
+            取得待上傳RMS清單
+            </summary>
+            <returns>RMS待上傳資料泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlQueueJob.GetJobs(System.String)">
+            <summary>
+            取得待上傳RMS清單
+            </summary>
+            <param name="jobType">RMRT、RMIV、RMBK三種類型</param>
+            <returns>RMS待上傳資料泛型集合物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlQueueJob.UpdateJobStatus(System.String,System.String,System.String)">
+            <summary>
+            更新指示檔狀態
+            </summary>
+            <param name="RMDX01o">RMRT、RMIV、RMBK三種類別</param>
+            <param name="RMDX17o">處理時間</param>
+            <param name="RMDX08">狀態</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlQueueJob.UpdateJobStatus(System.Decimal,System.String)">
+            <summary>
+            更新指示檔狀態
+            </summary>
+            <param name="RMDX00o">指示檔Pkey</param>
+            <param name="RMDX08">狀態</param>
+            <returns>受影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Client.DunQian.BlRoom">
+            <summary>
+            存取住客資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Client.DunQian.BlRoom.DaoRMRT">
+            <summary>
+            資料存取物件屬性
+            </summary>        
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlRoom.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlRoom.GetData">
+            <summary>
+            取得待上傳RMS房型資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Client.DunQian.BlRoom.UpdateMessageUniqueId(GUIStd.DAL.AllNewHTL.Models.Client.DunQian.MdRmsMessageUid)">
+            <summary>
+            上傳完畢後回填MsgUid
+            </summary>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlAccountDetailReport">
+            <summary>
+            帳單明細表商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlAccountDetailReport.DaoAccountDetailReport">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlAccountDetailReport.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlAccountDetailReport.Query(GUIStd.DAL.AllNewHTL.Models.Private.HTL.vHTRGM09.MdAccountDetailReportQuery)">
+            <summary>
+            查詢帳單明細表資料
+            </summary>
+            <param name="queryParams">查詢條件</param>
+            <returns>帳單明細表資料集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlAccountSummaryReport">
+            <summary>
+            科目彙總表商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlAccountSummaryReport.DaoAccountSummaryReport">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlAccountSummaryReport.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlAccountSummaryReport.Query(GUIStd.DAL.AllNewHTL.Models.Private.HTL.vHTRGM09.MdAccountDetailReportQuery)">
+            <summary>
+            查詢科目彙總表資料
+            </summary>
+            <param name="queryParams">查詢條件</param>
+            <returns>科目彙總表資料集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlArrivalList">
+            <summary>
+            存取住客資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlArrivalList.DaoArrivalList">
+            <summary>
+            資料存取物件屬性
+            </summary>        
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlArrivalList.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlArrivalList.GetArrivalListData(System.String)">
+            <summary>
+            取得當日入住清單
+            </summary>        
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlBanquet">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlBanquet.DaoBQ">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlBanquet.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlBanquet.GetDataByDate(System.String)">
+            <summary>
+            宴會檢曆資料
+            </summary>
+            <param name="HP08">宴會日期</param>
+            <returns>宴會檢曆資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlBanquet.GetDataByDate(System.String,System.String)">
+            <summary>
+            宴會檢曆資料
+            </summary>
+            <param name="HP08">宴會日期</param>
+            <param name="HP17s">宴會廳字串(以,分隔)</param>
+            <returns>宴會檢曆資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlBanquet.GetDataEventType">
+            <summary>
+            訂宴活動類別
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlBanquet.GetDataRooms(System.String)">
+            <summary>
+            取得廳別底下的宴會場地
+            </summary>
+            <param name="BC01">廳別代碼</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlBanquet.GetDataSales">
+            <summary>
+            取得訂宴業務員
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlBanquet.GetRow(System.String,System.String)">
+            <summary>
+            取出訂宴詳細資料
+            </summary>
+            <param name="HP05">訂宴RV號碼</param>
+            <param name="HP28">訂宴流水號</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlBookings">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlBookings.DaoBooking">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlBookings.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlBookings.GetReservation(System.String)">
+            <summary>
+            使用訂單號碼查詢訂單
+            </summary>
+            <param name="rvno"></param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlBookings.GetReservations(System.String)">
+            <summary>
+            使用訂單號碼查詢訂單
+            </summary>
+            <param name="checkInDate"></param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlCheckIn">
+            <summary>
+            登記入住商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.DaoHTKY">
+            <summary>
+            HTKY資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.DaoHTTB">
+            <summary>
+            HTTB資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.DaoSINI">
+            <summary>
+            SINI資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.DaoCheckIn">
+            <summary>
+            CheckIn資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.DaoCheckOut">
+            <summary>
+            CheckOut資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.DoCheck(GUIStd.Enums.State,GUIStd.DAL.AllNewHTL.Models.Private.Register.MdCheckIn)">
+            <summary>
+            取消入住的資料檢核
+            </summary>        
+            <param name="obj">住客資料模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.GetHTRGM01UIData(System.String,System.String@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@)">
+            <summary>
+            取得HTRGM01畫面條件資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.GetDataByPage(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            取得符合條件的所有住客資料，一次取回一頁資料
+            </summary>
+            <param name="VS03">入住日期</param>
+            <param name="GR03">旅客姓名</param>
+            <param name="CN09">手機號碼</param>
+            <param name="CN10">電子郵件</param>
+            <param name="RV01">訂房號碼</param>
+            <param name="RV10">合約公司</param>
+            <param name="VS06">房號</param>
+            <param name="VS17">入住狀態</param>
+            <param name="currentLang">語系</param>        
+            <param name="funcName">功能名稱</param>
+            <param name="pageNo">查詢頁次</param>
+            <returns>分頁住客資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.GetRVInfo(System.String,System.String,GUIStd.DAL.AllNewHTL.Models.Private.Register.MdRVData@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.Register.MdVisitData}@)">
+            <summary>
+            取得訂房資料，內含訂房明細及住客清單
+            </summary>
+            <param name="RV01">訂房號碼</param>
+            <param name="currentLang">語系</param>
+            <returns>訂房資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.ProcessCheckIn(GUIStd.DAL.AllNewHTL.Models.MdVisitor,GUIStd.Models.MdClientInfo,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.Register.MdCheckIn}@)">
+            <summary>
+            處理入住作業
+            </summary>                
+            <param name="obj">住客資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.ProcessCancelCheckInCheckCheck(GUIStd.DAL.AllNewHTL.Models.Private.Register.MdCheckIn)">
+            <summary>
+            處理取消入住檢核作業
+            </summary>        
+            <param name="obj">住客資料模型物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckIn.ProcessCancelCheckIn(System.String,GUIStd.DAL.AllNewHTL.Models.Private.Register.MdCheckIn)">
+            <summary>
+            處理取消入住作業
+            </summary>
+            <param name="cleanRoom">是否變更乾淨房路徑參數</param>
+            <param name="obj">住客資料模型物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlCheckOut">
+            <summary>
+            退房商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.DaoHTCA">
+            <summary>
+            HTCA資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.DaoHTFX">
+            <summary>
+            HTFX資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.DaoHTHF">
+            <summary>
+            HTHF資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.DaoHTKY">
+            <summary>
+            HTKY資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.DaoHTSH">
+            <summary>
+            HTSH資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.DaoHTTB">
+            <summary>
+            HTTB資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.DaoCheckOut">
+            <summary>
+            CheckOut資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.DoCheck(GUIStd.Enums.State,System.String)">
+            <summary>
+            退房前的資料檢核
+            </summary>
+            <param name="state">作業狀態</param>
+            <param name="roomNo">房號</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.GetHTFCM06_dUIData(System.String,GUIStd.Models.MdClientInfo,System.String,System.String,System.String@,System.String@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@)">
+            <summary>
+            取得HTFCM06帳務明細畫面條件資料
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            </summary>		
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.GetFolioData(System.String,System.String,GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdFolioVisitData@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdHouseFolio}@)">
+            <summary>
+            取得退房資料，內含住客資料及帳務清單
+            </summary>        
+            <param name="VS06">房號</param>
+            <param name="currentLang">語系</param>
+            <returns>訂房資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.GetRow(System.String,System.String,GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdHouseFolio@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdFocTransaction}@)">
+            <summary>
+            取得帳單(帳夾)資料及帳務資料
+            </summary>
+            <param name="FX01">帳單號碼</param>
+            <param name="currentLang">語系</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.GetEmptyFolio(System.String,System.String)">
+            <summary>
+            依房號、住客號碼取得空帳夾
+            </summary>        
+            <param name="VS06">房號</param>
+            <param name="VS24">住客號碼</param>
+            <returns>空帳單(帳夾)資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.ProcessInsert(System.String,GUIStd.DAL.AllNewHTL.Models.MdFolioTransaction,GUIStd.Models.MdClientInfo,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdHouseFolio}@,GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdFolioData_d@)">
+            <summary>
+            處理新增作業
+            </summary>
+            <param name="obj">帳務資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.ProcessUpdate(System.String,GUIStd.DAL.AllNewHTL.Models.MdFolioTransaction,GUIStd.Models.MdClientInfo,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdHouseFolio}@,GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdFolioData_d@)">
+            <summary>
+            處理修改作業
+            </summary>		
+            <param name="obj">帳務資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.ProcessDelete(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdHouseFolio}@,GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdFolioData_d@)">
+            <summary>
+            處理刪除作業
+            </summary>
+            <param name="FX01">帳單號碼</param>
+            <param name="FX001">建檔日期</param>
+            <param name="FX002">建檔時間</param>
+            <param name="FX10">房號</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.ProcessInsertFolio(System.String,System.String,GUIStd.DAL.AllNewHTL.Models.MdHouseFolio_w,GUIStd.Models.MdClientInfo,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdHouseFolio}@)">
+            <summary>
+            處理新增帳單(帳夾)作業
+            </summary>
+            <param name="VS06">房號</param>
+            <param name="obj">帳單(帳夾)資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.ProcessDeleteFolio(System.String,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdEmptyHouseFolio},System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.Accounting.MdHouseFolio}@)">
+            <summary>
+            處理刪除帳單(帳夾)作業
+            </summary>
+            <param name="VS06">房號</param>
+            <param name="obj">帳單(帳夾)資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.ProcessFolioClosed(System.String,System.String)">
+            <summary>
+            處理開關帳單(帳夾)
+            </summary>
+            <param name="folioNo">帳單號碼</param>
+            <param name="closed">登錄管制</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCheckOut.ProcessCheckOut(System.String)">
+            <summary>
+            處理退房作業
+            </summary>
+            <param name="roomNo">房號</param>        
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlCompany">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlCompany.DaoSINI">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCompany.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCompany.GetRow(System.String)">
+            <summary>
+            使用合約公司代碼查詢基本資料
+            </summary>
+            <param name="companyId">合約公司代碼</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCompany.GetDataForCompanySource(System.String,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source">業務碼</param>
+            <param name="pageNo">頁碼</param>
+            <param name="pgName">程式名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCompany.GetData(GUIStd.DAL.AllNewHTL.Models.MdCompany_r,System.Int32,System.String)">
+            <summary>
+            使用多個條件模糊比對合約公司取得合約公司清單
+            </summary>
+            <param name="company">合約公司資料模型</param>
+            <param name="pageNo">頁碼</param>
+            <param name="pgName">程式名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlCompany.GetData2">
+            <summary>
+            取得全部合約公司
+            </summary> 
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlConfigs">
+            <summary>
+             資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlConfigs.DaoHTKY">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlConfigs.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlConfigs.GetPOSSetupUiData(System.String@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,GUIStd.DAL.AllNewHTL.Models.Private.Configs.MdDefaultConfig@)">
+            <summary>
+            取得POSSetup畫面資料
+            </summary>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlGuest">
+            <summary>
+            旅客商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlGuest.DaoHTTB">
+            <summary>
+            HTTB資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlGuest.DaoHTUS">
+            <summary>
+            HTUS資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlGuest.DaoSINI">
+            <summary>
+            SINI資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlGuest.DaoGuest">
+            <summary>
+            Guest資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlGuest.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlGuest.GetHTGRM01UIData(System.String,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@)">
+            <summary>
+            取得HTGRM01畫面查詢條件資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlGuest.GetDataByPage(GUIStd.DAL.AllNewHTL.Models.Private.History.MdGuestData_q,System.String,System.String,System.Int32)">
+            <summary>
+            取得符合條件的所有旅客資料，一次取回一頁資料
+            </summary>        
+            <param name="GR03">旅客姓名</param>
+            <param name="CN07">電話號碼</param>
+            <param name="CN10">電子郵件</param>
+            <param name="GR10">證件號碼</param>
+            <param name="currentLang">語系</param>        
+            <param name="funcName">功能名稱</param>
+            <param name="pageNo">查詢頁次</param>
+            <returns>分頁旅客資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlGuest.GetHTGRM01_dUIData(System.String,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@)">
+            <summary>
+            取得HTGRM01_d明細畫面查詢條件資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlGuest.GetGuestData(System.String)">
+            <summary>
+            取得旅客號碼的內容與聯絡事項
+            </summary>
+            <param name="GR01">旅客號碼</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlGuest.ProcessUpdate(GUIStd.DAL.AllNewHTL.Models.Private.History.MdGuestData_d,GUIStd.Models.MdClientInfo)">
+            <summary>
+            處理修改作業
+            </summary>                
+            <param name="obj">旅客資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.DaoHouseKeeping">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.GetResGuests(System.String)">
+            <summary>
+            取得目前房間內入住的旅客訊息與服務事項
+            </summary>
+            <param name="VS06">房號</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.GetRooms(System.String,System.String)">
+            <summary>
+            抓取目前房間使用狀態/房控狀態/入住資訊，For房控平面圖顯示
+            </summary>
+            <param name="floor">樓層代碼，null查詢全部</param>
+            <param name="maidId">房務員ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.GetFloors(System.String)">
+            <summary>
+            抓取飯店樓層資訊
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.GetFloors(System.String,System.String)">
+            <summary>
+            抓取飯店樓層資訊，並依照房務人員ID顯示負責樓層
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.GetFloorsForMobileHTL(System.String)">
+            <summary>
+            抓取飯店樓層資訊（MobileHTL 專用）
+            </summary>
+            <param name="language">語言代碼</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.GetFloorsForMobileHTL(System.String,System.String)">
+            <summary>
+            抓取飯店樓層資訊，並依照房務人員ID顯示負責樓層（MobileHTL 專用）
+            </summary>
+            <param name="language">語言代碼</param>
+            <param name="maidId">房務員ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.GetColors(System.String)">
+            <summary>
+            取得房間狀態的顏色對照表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.GetInstructions(System.String,System.String)">
+            <summary>
+            取得房況指令
+            </summary>
+            <param name="InstructionType">指令類別</param>
+            <param name="prefiex">指令碼前綴</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlHouseKeeping.ProcessUpdateRoomInstruction(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.HouseKeeping.MdRoomHK_w})">
+            <summary>
+            更新房間的房控字眼
+            </summary>
+            <param name="obj">房控物件的泛型集合物件</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlInvoiceDetailReport">
+            <summary>
+            發票明細表商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlInvoiceDetailReport.DaoInvoiceDetailReport">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlInvoiceDetailReport.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlInvoiceDetailReport.Query(GUIStd.DAL.AllNewHTL.Models.Private.HTL.vHTRGM09.MdInvoiceDetailReportQuery)">
+            <summary>
+            查詢發票明細表資料
+            </summary>
+            <param name="queryParams">查詢條件</param>
+            <returns>發票明細表資料集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlInvoices">
+            <summary>
+            發票商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlInvoices.DaoInvoice">
+            <summary>
+            Invoice資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlInvoices.DaoHTVC">
+            <summary>
+            HTVC資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlInvoices.DaoHTVD">
+            <summary>
+            HTVD資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlInvoices.DaoHTKY">
+            <summary>
+            HTKY資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlInvoices.DaoHTFX">
+            <summary>
+            HTFX資料存取物件屬性
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlInvoices.DaoHTHF">
+            <summary>
+            HTHF資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlInvoices.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlInvoices.GetInvoiceData(System.String,System.Decimal@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.MdInvoice}@)">
+            <summary>
+            取得發票資料，內含應開發票金額與及已開發票清單
+            </summary>        
+            <param name="folioNo">帳單號碼</param>		
+            <returns>發票資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlInvoices.ProcessInsert(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.MdInvoice_w},System.String[]@)">
+            <summary>
+            處理發票新增作業
+            </summary>
+            <param name="obj">發票資料模型物件</param>        
+            <param name="pqList">InsertPQEInvoice 回傳的 PQ01 集合</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlInvoices.ProcessUpdate(System.String,System.String,System.String)">
+            <summary>
+            處理發票修改作業
+            </summary>
+            <param name="HF01">帳單號碼</param>
+            <param name="VC04">發票號碼</param>
+            <param name="VC07">發票狀態</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlMinibarAmenities">
+            <summary>
+            存取冰箱飲料/備品資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlMinibarAmenities.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlMinibarAmenities.CheckRoutine(GUIStd.Enums.State,GUIStd.DAL.AllNewHTL.Models.Private.HouseKeeping.MdMinibar_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Collections.Generic.List{System.String}@)">
+            <summary>
+            冰箱飲料物件檢核邏輯
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlMinibarAmenities.CheckRoutine(GUIStd.Enums.State,GUIStd.DAL.AllNewHTL.Models.Private.HouseKeeping.MdMenuHK_w,GUIStd.DAL.Base.Models.MdTimeInfo,System.Collections.Generic.List{System.String}@)">
+            <summary>
+            房間備品檢核邏輯
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlMinibarAmenities.DoCheck(GUIStd.Enums.State,GUIStd.DAL.AllNewHTL.Models.Private.HouseKeeping.MdMinibar_w,GUIStd.DAL.Base.Models.MdTimeInfo)">
+            <summary>
+            檢核冰箱飲料物件
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlMinibarAmenities.DoCheck(GUIStd.Enums.State,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.HouseKeeping.MdMinibar_w},GUIStd.DAL.Base.Models.MdTimeInfo)">
+            <summary>
+            檢核冰箱飲料泛型集合物件
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlMinibarAmenities.DoCheck(GUIStd.Enums.State,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.HouseKeeping.MdMenuHK_w},System.String,System.String,System.String,GUIStd.DAL.Base.Models.MdTimeInfo)">
+            <summary>
+            檢核房間備品泛型集合物件
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlMinibarAmenities.ProcessInsertRoomMinibar(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.Private.HouseKeeping.MdMinibar_w})">
+            <summary>
+            登陸冰箱飲料消耗數量金額
+            </summary>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlOccupancyStatsReport">
+            <summary>
+            住房率統計表商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlOccupancyStatsReport.DaoOccupancyStatsReport">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlOccupancyStatsReport.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlOccupancyStatsReport.Query(GUIStd.DAL.AllNewHTL.Models.Private.HTL.vHTRGM09.MdOccupancyStatsReportQuery)">
+            <summary>
+            查詢住房率統計表資料
+            </summary>
+            <param name="queryParams">查詢條件</param>
+            <returns>住房率統計表資料集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlOrders">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlOrders.DaoOrders">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlOrders.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlOrders.GetMealStatusData(System.String,System.String)">
+            <summary>
+            透過廳別、日期取得取餐資料
+            </summary>
+            <param name="PX01">廳別</param>
+            <param name="PX02">營業日期</param>
+            <returns>取餐狀態資料模型</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlPreCheckIn">
+            <summary>
+            存取住客資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlPreCheckIn.DaoPreCheckIn">
+            <summary>
+            資料存取物件屬性
+            </summary>        
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlPreCheckIn.DaoPreCheckInTrans">
+            <summary>
+            具交易式的資料存取物件變數
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlPreCheckIn.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlPreCheckIn.GetPreCheckInData(System.String)">
+            <summary>
+            取得住宿號碼的旅客訊息與聯絡事項
+            </summary>
+            <param name="VS24">住宿號碼</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlPreCheckIn.ProcessUpdate(GUIStd.DAL.AllNewHTL.Models.Private.Register.MdPreCheckIn,GUIStd.Models.MdClientInfo)">
+            <summary>
+            處理修改作業
+            </summary>                
+            <param name="obj">住客資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlPreCheckIn.ProcessUpdateTrans(GUIStd.DAL.AllNewHTL.Models.Private.Register.MdPreCheckIn,GUIStd.Models.MdClientInfo)">
+            <summary>
+            處理交易式修改作業
+            </summary>		
+            <param name="obj">住客資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlQRCodeLangs">
+            <summary>
+            QRCode資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlQRCodeLangs.DaoQRCodeLangs">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlQRCodeLangs.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlQRCodeLangs.GetQRCodeLangsUIData(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@)">
+            <summary>
+            取得QRCodeLangs畫面資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlQRCodeLangs.GetData(GUIStd.DAL.AllNewHTL.Models.Private.QRCodeLangs.MdExport)">
+            <summary>
+            取得QRCode相關語系資料
+            </summary>
+            <param name="obj">查詢條件物件</param>
+            <returns>語系相關集合物件</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlRecipe">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlRecipe.DaoRecipe">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRecipe.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRecipe.GetData(System.String,System.String,System.String)">
+            <summary>
+            透過開始日期、結束日期、餐廳別取得食譜資料
+            </summary>
+            <param name="startDate">開始日期</param>
+            <param name="endDate">結束日期</param>
+            <param name="posId">餐廳別</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRecipe.GetData(System.String,System.String)">
+            <summary>
+            透過開始日期、結束日期、取得餐飲分析資料
+            </summary>
+            <param name="startDate">開始日期</param>
+            <param name="endDate">結束日期</param>
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlRoomBlocks">
+            <summary>
+            房間商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlRoomBlocks.DaoRoomBlocks">
+            <summary>
+            RoomBlocks資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomBlocks.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomBlocks.GetHTRGM11UIData(System.String,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdCode}@)">
+            <summary>
+            取得HTRGM11畫面查詢條件資料
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomBlocks.GetData(System.String,System.String,System.String[])">
+            <summary>
+            取得符合條件的房間資料
+            </summary>        
+            <param name="dates">日期(起)</param>
+            <param name="datee">日期(迄)</param>		
+            <param name="roomTypes">房型字串陣列</param>
+            <returns>房間資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomBlocks.GetRoomPriceData(System.String,System.String,System.String)">
+            <summary>
+            取得符合條件的房價資料
+            </summary>
+            <param name="rvNo">訂房號碼</param>
+            <param name="oldRoomType">舊房型</param>
+            <param name="newRoomType">新房型</param>				
+            <returns>房價資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomBlocks.ProcessUpdate(GUIStd.DAL.AllNewHTL.Models.Private.Reserve.MdRoomPrice)">
+            <summary>
+            處理修改作業
+            </summary>                
+            <param name="obj">房價資料模型物件</param>        
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlRooms">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlRooms.DaoRooms">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRooms.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRooms.GetRowForPayment(System.String)">
+            <summary>
+            透過房號找房帳資料
+            </summary>
+            <param name="VS06">roomNo</param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlRoomsAnalysis">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlRoomsAnalysis.DaoRoomsAnalysis">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomsAnalysis.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomsAnalysis.GetDataForRoomSalesQuantity(System.String,System.String,System.String[])">
+            <summary>
+            取得日期區的房型銷售數量
+            </summary>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <param name="buildingsId"></param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomsAnalysis.GetDataForRoomSalesInventory(System.String,System.String,System.String[])">
+            <summary>
+            取得日期區的房型空房數量
+            </summary>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <param name="buildingsId"></param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomsAnalysis.GetDataForRoomOcp(System.String,System.String,System.String[])">
+            <summary>
+            透過日期、館別取得取餐資料
+            </summary>
+            <param name="startDate">日期(起)</param>
+            <param name="endDate">日期(迄)</param>
+            <param name="buildingsId">館別</param> 
+            <returns>取餐狀態資料模型</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomsAnalysis.GetFloorPlanData">
+            <summary>
+            取得平面圖畫面資料
+            </summary>
+                <returns>平面圖資料模型集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlRoomStays">
+            <summary>
+            存取住客資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlRoomStays.DaoRoomStays">
+            <summary>
+            資料存取物件屬性
+            </summary>        
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomStays.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRoomStays.DailyGuestList">
+            <summary>
+            取得當日入住清單
+            </summary>        
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlRVInfo">
+            <summary>
+            存取訂房須知的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlRVInfo.DaoRVInfo">
+            <summary>
+            資料存取物件屬性
+            </summary>        
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRVInfo.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlRVInfo.GetCol">
+            <summary>
+            取得訂房須知
+            </summary>        
+            <returns></returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.Private.BlVacantForecastReport">
+            <summary>
+            空房庫存預測表商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.Private.BlVacantForecastReport.DaoVacantForecastReport">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlVacantForecastReport.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.Private.BlVacantForecastReport.Query(GUIStd.DAL.AllNewHTL.Models.Private.HTL.vHTRGM09.MdVacantForecastReportQuery)">
+            <summary>
+            查詢空房庫存預測表資料
+            </summary>
+            <param name="queryParams">查詢條件</param>
+            <returns>空房庫存預測表資料集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlCurrency">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlCurrency.DaoHTCY">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlCurrency.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlCurrency.GetData">
+            <summary>
+            取得多個代碼的所有資料
+            </summary>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlBkDate">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlBkDate.DaoHTKY">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlBkDate.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlBkDate.GetHelp(System.String)">
+            <summary>
+            取得會計日期
+            </summary>
+            <param name="KY01">KY01代號</param>
+            <returns>會計日期模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlCodes">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlCodes.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlCodes.DaHTTB">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlCodes.GetHelp(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            取得代碼的所有資料
+            </summary>
+            <param name="TB01">TB01代號</param>
+            <param name="TB02">語言C/E</param>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlCodes.GetData(System.String[],System.String,System.Boolean)">
+            <summary>
+            取得多個代碼的所有資料
+            </summary>
+            <param name="TB01s">TB01代號</param>
+            <param name="TB02">語言C/E</param>
+            <param name="includeId">是否包含代碼</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlCodes.GetDataForCountry(System.String,System.Boolean)">
+            <summary>
+            取得國家代碼的所有資料
+            </summary>		
+            <param name="TB02">語言C/E</param>
+            <param name="includeId">是否包含代碼</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlCodes.GetDataForCity(System.String,System.Boolean)">
+            <summary>
+            取得城市代碼的所有資料
+            </summary>		
+            <param name="TB02">語言C/E</param>
+            <param name="includeId">是否包含代碼</param>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlHTCA">
+            <summary>
+            存取出納科目資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlHTCA.DaHTCA">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTCA.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTCA.GetHelp(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            取得出納科目的所有資料
+            </summary>
+            <param name="CA15">部門代碼</param>
+            <param name="CA02">語言C/E</param>
+            <param name="includeEmptyRow">是否包含空白列</param>
+            <param name="includeId">是否包含代碼</param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlHTFX">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlHTFX.DaoHTFX">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTFX.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTFX.DoCheck(GUIStd.Enums.State,GUIStd.DAL.AllNewHTL.Models.MdFolioTransaction,GUIStd.DAL.Base.Models.MdTimeInfo)">
+            <summary>
+            異動資料前的欄位檢核
+            </summary>
+            <param name="state">作業狀態</param>
+            <param name="obj">員工資料模型物件</param>
+            <param name="timeInfo">目前日期、時間、工作站、使用者</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTFX.Insert(GUIStd.DAL.AllNewHTL.Models.MdFolioTransaction,GUIStd.Models.MdClientInfo)">
+            <summary>
+            新增帳務資料作業
+            </summary>
+            <param name="obj">帳務資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlHTHC">
+            <summary>
+            存取代碼資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlHTHC.DaoHTHC">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTHC.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTHC.GetHelp(System.String,System.String)">
+            <summary>
+            取得代碼的所有資料
+            </summary>
+            <param name="type">類別</param>
+            <param name="HC03">語言C/E</param>
+            <returns>代碼資料模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlHTLA">
+            <summary>
+            存取候位資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlHTLA.DaoHTLA">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTLA.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTLA.BulkMerge(System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewHTL.Models.MdLang_w})">
+            <summary>
+            新增/修改對應語系的資料表
+            </summary>
+            <param name="objs">語系之泛型模型物件</param>
+            <returns>影響筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlHTPF">
+            <summary>
+            存取開桌帳單資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlHTPF.DaoHTPF">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTPF.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTPF.UpdateMealStatus(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            異動取餐狀態
+            </summary>
+            <param name="PF01">廳別</param>
+            <param name="PF02">日期</param>
+            <param name="PF03">桌號</param>
+            <param name="PF05">帳單號碼</param>
+            <param name="PF52">更新狀態</param>
+            <returns>異動資料筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlHTPP">
+            <summary>
+            存取候位資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlHTPP.DaoHTPP">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTPP.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTPP.GetPosDateTableData(System.String,System.String)">
+            <summary>
+            透過廳別、營業日期查詢桌況
+            </summary>
+            <param name="PP01">餐廳代碼</param>
+            <param name="PF02">用餐日期</param>
+            <returns>候位資料模型泛型集合</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlHTPR">
+            <summary>
+            存取候位資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlHTPR.DaoHTPR">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTPR.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTPR.GetWaitingData(System.String,System.String,System.String)">
+            <summary>
+            透過廳別、用餐日期找已叫號資料
+            </summary>
+            <param name="PR03">餐廳代碼</param>
+            <param name="PR04">用餐日期</param>
+            <param name="PR33">候位狀態</param>
+            <returns>候位資料模型泛型集合</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTPR.UpdateNumberStatus(System.String,System.String)">
+            <summary>
+            透過廳別、用餐日期找候位資料
+            </summary>
+            <param name="PR01">排隊ID</param>
+            <param name="PR33">排隊狀態</param>
+            <returns>異動資料筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlHTRV">
+            <summary>
+            存取候位資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="F:GUIStd.BLL.AllNewHTL.BlHTRV.TableName">
+            <summary>
+            維護的資料表名稱
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlHTRV.DaoHTAC">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTRV.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTRV.IsChange(System.String,System.String)">
+            <summary>
+            判斷資料是否異動
+            </summary>
+            <param name="RV01o">原客戶編號</param>
+            <param name="RV01n">新客戶編號</param>
+            <returns>是或否</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTRV.DoCheck(GUIStd.Enums.State,GUIStd.DAL.AllNewHTL.Models.Private.Bookings.MdBookings,System.String)">
+            <summary>
+            異動資料前的欄位檢核
+            </summary>
+            <param name="state">作業狀態</param>
+            <param name="obj">客戶資料模型物件</param>
+            <param name="RV01o">修改作業下的原客戶編號</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTRV.IsExist(System.String)">
+            <summary>
+            判斷資料是否已存在
+            </summary>
+            <param name="RV01">客戶編號</param>
+            <returns></returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTRV.ProcessInsert(GUIStd.DAL.AllNewHTL.Models.Private.Bookings.MdBookings,GUIStd.Models.MdClientInfo,System.String@)">
+            <summary>
+            處理新增作業
+            </summary>
+            <param name="obj">客戶資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <param name="rvNo">輸出call No(RV01)</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTRV.ProcessUpdate(System.String,GUIStd.DAL.AllNewHTL.Models.Private.Bookings.MdBookings,GUIStd.Models.MdClientInfo)">
+            <summary>
+            處理修改作業
+            </summary>
+            <param name="RV01">訂房號碼</param>
+            <param name="obj">訂房資料模型物件</param>
+            <param name="clientInfo">目前請求的前端資訊物件</param>
+            <returns>受影響的資料列</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlHTSH">
+            <summary>
+            班別商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlHTSH.DaoHTSH">
+            <summary>
+            HTSH資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTSH.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTSH.GetHotelShift(System.String,System.String,System.String)">
+            <summary>
+            取得飯店班別
+            </summary>
+            <param name="bkDate">會計日期（格式: YYYYMMDD）</param>
+            <param name="typeCode">類型代碼</param>
+            <param name="workstation">工作站/機台</param>
+            <returns>班別代碼</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlHTSH.ProcessInsert(GUIStd.DAL.AllNewHTL.Models.MdHTSH)">
+            <summary>
+            新增飯店班別
+            </summary>
+            <param name="obj">班別資料模型物件</param>
+            <returns>影響的資料筆數</returns>
+        </member>
+        <member name="T:GUIStd.BLL.AllNewHTL.BlSINI">
+            <summary>
+            存取系統參數資料的商業邏輯類別
+            </summary>
+        </member>
+        <member name="P:GUIStd.BLL.AllNewHTL.BlSINI.DaoSINI">
+            <summary>
+            資料存取物件屬性
+            </summary>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlSINI.#ctor(GUIStd.Models.MdClientInfo)">
+            <summary>
+            建構子
+            </summary>
+            <param name="clientContent">目前請求的前端資訊模型物件</param>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlSINI.GetPosConfigs(System.String)">
+            <summary>
+            取得各餐廳組態設定資料模型
+            </summary>
+            <param name="posId">廳別代號</param>
+            <returns>mPOS餐廳組態設定資料模型物件</returns>
+        </member>
+        <member name="M:GUIStd.BLL.AllNewHTL.BlSINI.WritePosConfigs(System.String,System.Collections.Generic.IEnumerable{GUIStd.DAL.AllNewGUI.Models.MdValue},System.String)">
+            <summary>
+            更新mPOS組態設定
+            </summary>
+            <param name="moduleId">模組ID</param>
+            <param name="configs">組態設定模型泛型集合物件</param>
+            <param name="posId">廳別代碼</param>
+            <returns>受影響筆數</returns>
+        </member>
+    </members>
+</doc>

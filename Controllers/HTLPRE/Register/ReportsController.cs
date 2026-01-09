@@ -1,7 +1,6 @@
 #region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 #endregion
 
@@ -9,16 +8,10 @@ using System;
 
 
 using GUICore.Web.Controllers;
-using GUICore.Web.Extensions;
-using GUIStd;
-using GUIStd.Attributes;
 using GUIStd.BLL.AllNewHTL.Private;
-using GUIStd.DAL.AllNewHTL.Models.Private.Register;
-using GUIStd.DAL.AllNewHTL.Models;
-using GUIStd.Models;
 using System.Collections.Generic;
 using GUIStd.DAL.AllNewHTL.Models.Private.RoomsAnalysis;
-using GUIStd.DAL.AllNewGUI.Models.Private.HTL.vHTRGM09;
+using GUIStd.DAL.AllNewHTL.Models.Private.HTL.vHTRGM09;
 
 #endregion
 
@@ -56,6 +49,12 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// 空房庫存預測表商業邏輯物件屬性
         /// </summary>
         private BlVacantForecastReport BlVacantForecastReport => new BlVacantForecastReport(ClientContent);
+
+        /// <summary>
+        /// 住房率統計表商業邏輯物件屬性
+        /// </summary>
+        private BlOccupancyStatsReport BlOccupancyStatsReport => new BlOccupancyStatsReport(ClientContent);
+
         #endregion
 
         #region " 共用函式 - 查詢資料 "
@@ -113,6 +112,17 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         public IEnumerable<MdVacantForecastReport> VacantForecast([FromBody] MdVacantForecastReportQuery queryParams)
         {
             return BlVacantForecastReport.Query(queryParams);
+        }
+
+        /// <summary>
+        /// 查詢住房率統計表資料
+        /// </summary>
+        /// <param name="queryParams">查詢條件</param>
+        /// <returns>住房率統計表資料集合</returns>
+        [HttpPost("OccupancyStats")]
+        public IEnumerable<MdOccupancyStatsReport> OccupancyStats([FromBody] MdOccupancyStatsReportQuery queryParams)
+        {
+            return BlOccupancyStatsReport.Query(queryParams);
         }
 
         #endregion
