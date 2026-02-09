@@ -15,7 +15,6 @@ using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.Models;
 using GUICore.Web.Extensions;
 
-
 #endregion
 
 namespace MGUIBAAPI.Controllers.AS
@@ -50,6 +49,36 @@ namespace MGUIBAAPI.Controllers.AS
         }
 
         /// <summary>
+        /// 判斷資產存放位置是否存在
+        /// </summary>
+        /// <param name="AQ01">資產存放位置</param>
+        /// <returns></returns>
+        [HttpGet("isexits/{AQ01}")]
+        public bool isExists(string AQ01)
+        {
+            bool _result = BlStoredLocation.IsExists(AQ01);
+
+            return _result;
+        }
+
+        /// <summary>
+        /// 判斷資產存放位置是否存在AB
+        /// </summary>
+        /// <param name="AQ01">資產存放位置</param>
+        /// <returns></returns>
+        [HttpGet("isexitsByAB/{AQ01}")]
+        public bool isExistsByAB(string AQ01)
+        {
+            bool _result = BlStoredLocation.IsExistsByAB(AQ01);
+
+            return _result;
+        }
+
+        #endregion
+
+        #region " 異動資料 "
+
+        /// <summary>
         /// 刪除資產存放位置
         /// </summary>
         /// <param name="AQ01">資產存放位置</param>
@@ -74,11 +103,12 @@ namespace MGUIBAAPI.Controllers.AS
         /// </summary>
         /// <returns></returns>
         [HttpPost("insert")]
-        public MdApiMessage Insert([FromBody] MdASM26_q queryParams)
+        public MdApiMessage Insert([FromBody] MdASM26_q obj)
         {
             try
             {
-                int _result = BlStoredLocation.Insert(queryParams);
+                int _result = BlStoredLocation.Insert(obj);
+
                 return HttpContext.Response.InsertSuccess(_result);
             }
             catch (Exception ex)
@@ -92,11 +122,11 @@ namespace MGUIBAAPI.Controllers.AS
         /// </summary>
         /// <returns></returns>
         [HttpPost("update")]
-        public MdApiMessage Update([FromBody] MdASM26_q queryParams)
+        public MdApiMessage Update([FromBody] MdASM26_q obj)
         {
             try
-			{
-                int _result = BlStoredLocation.Update(queryParams);
+            {
+                int _result = BlStoredLocation.Update(obj);
                 return HttpContext.Response.UpdateSuccess(_result);
             }
             catch (Exception ex)
@@ -104,18 +134,7 @@ namespace MGUIBAAPI.Controllers.AS
                 return HttpContext.Response.UpdateFailed(ex);
             }
         }
-        /// <summary>
-        /// 判斷資產存放位置是否存在
-        /// </summary>
-        /// <param name="AQ01">資產存放位置</param>
-        /// <returns></returns>
-        [HttpGet("isexits/{AQ01}")]
-        public bool isExists(string AQ01)
-        {
-            bool _result = BlStoredLocation.IsExists(AQ01);
 
-            return _result;
-        }
         #endregion
     }
 }

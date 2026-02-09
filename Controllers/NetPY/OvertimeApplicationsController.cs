@@ -114,6 +114,19 @@ namespace MGUIBAAPI.Controllers.NetPY
         }
 
         /// <summary>
+        /// 取得範圍內有效的加班單時數統計
+        /// </summary>
+        /// <param name="companyId">公司別</param>
+        /// <param name="employeeId">員工編號</param>
+        /// <param name="overtimeRange">加班日期範圍</param>
+        /// <returns>總加班時數</returns>
+        [HttpPost("totalovertime/{companyId}/{employeeId}")]
+        public decimal GetTotalOvertimeHours(string companyId, string employeeId, [FromBody] MdRange<string> overtimeRange)
+        {
+            return BlOvertimeApplications.GetTotalOvertimeHours(companyId, employeeId, overtimeRange);
+        }
+
+        /// <summary>
         /// 取得日別資訊並判斷能否加班
         /// </summary>
         /// <param name="companyId">公司別</param>

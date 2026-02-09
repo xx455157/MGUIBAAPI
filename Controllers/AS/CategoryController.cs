@@ -86,11 +86,11 @@ namespace MGUIBAAPI.Controllers.AS
         /// </summary>
         /// <param name="queryParams"></param>
         [HttpPost("insert")]
-        public MdApiMessage Insert([FromBody] MdASM11d_q queryParams)
+        public MdApiMessage Insert([FromBody] MdASM11d_q obj)
         {
             try
             {
-                int _result = BlCategory.Insert(queryParams);
+                int _result = BlCategory.Insert(obj);
                 return HttpContext.Response.InsertSuccess(_result);
             }
             catch (Exception ex)
@@ -104,11 +104,11 @@ namespace MGUIBAAPI.Controllers.AS
         /// </summary>
         /// <param name="queryParams"></param>
         [HttpPost("update")]
-        public MdApiMessage Update([FromBody] MdASM11d_q queryParams)
+        public MdApiMessage Update([FromBody] MdASM11d_q obj)
         {
             try
             {
-                int _result = BlCategory.Update(queryParams);
+                int _result = BlCategory.Update(obj);
                 return HttpContext.Response.UpdateSuccess(_result);
             }
             catch (Exception ex)

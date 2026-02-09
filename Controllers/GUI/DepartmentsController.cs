@@ -12,7 +12,7 @@ using GUIStd.Attributes;
 using GUIStd.BLL.AllNewGUI;
 using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.DAL.AllNewGUI.Models.Private.IV.Departments;
-using GUIStd.DAL.AllNewHTL.Models.Private.HTL.Departments;
+using GUIStd.DAL.AllNewGUI.Models.Private.HTL.Departments;
 
 #endregion
 

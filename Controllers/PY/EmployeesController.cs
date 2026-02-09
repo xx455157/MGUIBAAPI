@@ -100,6 +100,22 @@ namespace MGUIBAAPI.Controllers.PY
             return BlPA.GetEmployeeData(companyId, payrollDate, queryText, ControlName, pageNo);
         }
 
+        /// <summary>
+        /// 取得分頁頁次的輔助資料
+        /// </summary>
+        /// <param name="queryText">編號或名稱必需包含傳入的參數值（可選，模糊比對 PA06/PA03/PA04）</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("help/pages/{pageNo}")]
+        public MdEmployee_p GetHelpPaging(
+            [DARange(1, int.MaxValue)] int pageNo,
+            [FromQuery] string queryText = null,
+            [FromQuery] bool sortByName = false)
+        {
+            return BlPA.GetHelpPaging(queryText ?? string.Empty, ControlName, pageNo, sortByName);
+        }
+
         #endregion
     }
 }

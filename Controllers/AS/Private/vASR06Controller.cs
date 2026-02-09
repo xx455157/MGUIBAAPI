@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUICore.Web.Controllers;
+using GUIStd.BLL.AllNewAS.Private;
 using GUIStd.Attributes;
+using GUIStd.DAL.AllNewAS.Models.Private.vASR06;
 using GUIStd;
-using GUIStd.DAL.AllNewAS.Models.Private.Assets;
 using GUIStd.DAL.Base.Models.Reports;
 using GUICore.Web.Extensions;
-using GUIStd.BLL.AllNewAS.Private;
-using GUIStd.DAL.AllNewAS.Models.Private.vASR06;
+using GUIStd.DAL.AllNewAS.Models.Private.Assets;
 using GUIStd.DAL.AllNewAS.Models.Private.Sold;
 
 #endregion
@@ -68,13 +68,16 @@ namespace MGUIBAAPI.Controllers.AS
         }
 
         /// <summary>
-        /// 報表畫面(web)
+        /// 報表畫面資料(web)
         /// </summary>
+        /// <param name="queryParams">查詢參數</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="rowsPerPage">一頁筆數</param>
         /// <returns>系統參數代碼模型集合物件</returns>
         [HttpPost("Q_GetList/pages/{pageNo}")]
-        public MdASR06_p Q_GetList([FromBody] MdSold_q queryParams, [DARange(1, int.MaxValue)] int pageNo)
+        public MdASR06_p Q_GetList([FromBody] MdSold_q queryParams, [DARange(1, int.MaxValue)] int pageNo, int rowsPerPage = 0)
         {
-            return BlASR06.Q_GetList(queryParams, ControlName, pageNo);
+            return BlASR06.Q_GetList(queryParams, ControlName, pageNo, ref rowsPerPage);
         }
 
         /// <summary>

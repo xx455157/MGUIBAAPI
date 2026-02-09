@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewGUI;
-using GUIStd.DAL.AllNewHTL.Models.Private.HTL.Events;
+using GUIStd.DAL.AllNewGUI.Models.Private.HTL.Events;
 
 #endregion
 

@@ -119,6 +119,22 @@ namespace MGUIBAAPI.Controllers.AS
             return BlApportionment.ApportionTrans(companyId, apportionYearMonth);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryBody">UI查詢參數</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="rowsPerPage">一頁筆數</param>
+        /// <returns>分頁分攤紀錄資料</returns>
+        [HttpPost("pages/{pageNo}")]
+        public MdApportTrans_p GetApportionments([FromBody] MdApportTrans_q queryBody, 
+            [DARange(1, int.MaxValue)] int pageNo,[FromQuery] int rowsPerPage = 0)
+        {
+            return BlApportionment.GetApportionments(queryBody, pageNo, ControlName, rowsPerPage);
+        }
+
+
         /// <summary>
         /// 檢查存在未來已分攤，或過去未分攤之交易紀錄
         /// </summary>

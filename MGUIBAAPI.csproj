@@ -137,6 +137,7 @@
     <Compile Include="Controllers\General\Pattern\CodesController.cs" />
     <Compile Include="Controllers\GUI\AnnounceController.cs" />
     <Compile Include="Controllers\GUI\CompaniesController.cs" />
+    <Compile Include="Controllers\GUI\CompanyProductAuthController.cs" />
     <Compile Include="Controllers\GUI\ConfigsController.cs" />
     <Compile Include="Controllers\GUI\CustomersController.cs" />
     <Compile Include="Controllers\GUI\DepartmentsController.cs" />
@@ -148,8 +149,13 @@
     <Compile Include="Controllers\GUI\FormDataController.cs" />
     <Compile Include="Controllers\GUI\MessagesController.cs" />
     <Compile Include="Controllers\GUI\NumberRulesController.cs" />
+    <Compile Include="Controllers\GUI\PackagesController.cs" />
     <Compile Include="Controllers\GUI\Private\vEFP01Controller.cs" />
+    <Compile Include="Controllers\GUI\Private\vGLM01Controller.cs" />
+    <Compile Include="Controllers\GUI\Private\vIVM92Controller.cs" />
+    <Compile Include="Controllers\GUI\Private\vMCF01Controller.cs" />
     <Compile Include="Controllers\GUI\Private\vMCF10Controller.cs" />
+    <Compile Include="Controllers\GUI\Private\vMCF12Controller.cs" />
     <Compile Include="Controllers\GUI\UserGroupsController.cs" />
     <Compile Include="Controllers\HTLPRE\Accounting\CheckOutController.cs" />
     <Compile Include="Controllers\HTLPRE\Accounting\FoliosController.cs" />
@@ -166,6 +172,8 @@
     <Compile Include="Controllers\HTLPRE\InvoicesController.cs" />
     <Compile Include="Controllers\HTLPRE\Private\vHTFCM06Controller.cs" />
     <Compile Include="Controllers\HTLPRE\Private\vHTGRM01Controller.cs" />
+    <Compile Include="Controllers\HTLPRE\Private\vHTPSP13Controller.cs" />
+    <Compile Include="Controllers\HTLPRE\Private\vHTPSR04Controller.cs" />
     <Compile Include="Controllers\HTLPRE\Private\vHTRGM01Controller.cs" />
     <Compile Include="Controllers\HTLPRE\Private\vHTRGM11Controller.cs" />
     <Compile Include="Controllers\HTLPRE\Private\vPOSSetupController.cs" />
@@ -180,6 +188,7 @@
     <Compile Include="Controllers\HTLPRE\Reservations\BookingsController.cs" />
     <Compile Include="Controllers\HTLPRE\Reservations\PackagesController.cs" />
     <Compile Include="Controllers\HTLPRE\Reservations\RoomBlocksController.cs" />
+    <Compile Include="Controllers\HTLPRE\Restaurant\MenusController.cs" />
     <Compile Include="Controllers\HTLPRE\Restaurant\OrdersController.cs" />
     <Compile Include="Controllers\HTLPRE\Restaurant\RecipeController.cs" />
     <Compile Include="Controllers\HTLPRE\Restaurant\ReservationsController.cs" />
@@ -193,6 +202,7 @@
     <Compile Include="Controllers\HTL\PerformancesController.cs" />
     <Compile Include="Controllers\HTL\VouchersController.cs" />
     <Compile Include="Controllers\IV\ConfigsController.cs" />
+    <Compile Include="Controllers\IV\Private\vIVM16Controller.cs" />
     <Compile Include="Controllers\IV\RequisitionsController.cs" />
     <Compile Include="Controllers\IV\WarehousesController.cs" />
     <Compile Include="Controllers\NetGUI\AttachmentsController.cs" />
@@ -205,6 +215,7 @@
     <Compile Include="Controllers\NetGUI\CustomersController.cs" />
     <Compile Include="Controllers\NetGUI\EmployeesController.cs" />
     <Compile Include="Controllers\NetGUI\FlowsController.cs" />
+    <Compile Include="Controllers\NetGUI\Private\vSCR01Controller.cs" />
     <Compile Include="Controllers\NetGUI\SystemsController.cs" />
     <Compile Include="Controllers\Pattern\ChartsController.cs" />
     <Compile Include="Controllers\Pattern\CustomersController.cs" />
@@ -324,6 +335,9 @@
     <None Update="Content\Files\WS.Key">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Logs\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\HTLPRE\Reports\" />
@@ -421,6 +435,9 @@
     <Reference Include="GUIStd.DBAllNewHTL">
       <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewHTL.dll</HintPath>
     </Reference>
+    <Reference Include="GUIStd.DBAllNewIV">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewIV.dll</HintPath>
+    </Reference>
     <Reference Include="GUIStd.DBAllNewPY">
       <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewPY.dll</HintPath>
     </Reference>
@@ -447,6 +464,9 @@
     </Reference>
     <Reference Include="GUIStd.LangHTL">
       <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangHTL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangIV">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangIV.dll</HintPath>
     </Reference>
     <Reference Include="GUIStd.LangOA">
       <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangOA.dll</HintPath>

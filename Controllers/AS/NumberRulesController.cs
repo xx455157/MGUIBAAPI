@@ -41,12 +41,12 @@ namespace MGUIBAAPI.Controllers.AS.NumberRules
         /// <summary>
         /// 取得單據編號設定
         /// </summary>
-        /// <param name="AF01">公司別</param>
+        /// <param name="companyId">公司別</param>
         /// <returns>單據編號原則設定模型泛型集合物件</returns>
         [HttpGet("getData")]
-        public IEnumerable<MdTXNumberRule> GetData([FromQuery] string AF01 = "")
+        public IEnumerable<MdTXNumberRule> GetData([FromQuery] string companyId = "")
         {
-            return BlAF.GetData(AF01: AF01);
+            return BlAF.GetData(AF01: companyId);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace MGUIBAAPI.Controllers.AS.NumberRules
         /// </summary>
         /// <param name="obj">單據編號原則模型物件</param>
         /// <returns>系統規範訊息物件</returns>
-        [HttpPost("Insert")]
+        [HttpPost("insert")]
         public MdApiMessage Insert([FromBody] MdTXNumberRule_i obj)
         {
             try
@@ -120,7 +120,7 @@ namespace MGUIBAAPI.Controllers.AS.NumberRules
         /// <summary>
         /// 修改資料
         /// </summary>		        
-        /// <param name="obj">傳票編號原則模型物件</param>
+        /// <param name="obj">單據編號原則模型物件</param>
         /// <returns>系統規範訊息物件</returns>
         [HttpPut("update")]
         public MdApiMessage Update([FromBody] MdTXNumberRule obj)

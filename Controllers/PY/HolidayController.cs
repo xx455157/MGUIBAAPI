@@ -1,12 +1,21 @@
+#region " 匯入的名稱空間：Framework "
+
 using Microsoft.AspNetCore.Mvc;
+using System;
+
+#endregion
+
+#region " 匯入的名稱空間：GoldenUp "
+
 using GUICore.Web.Controllers;
 using GUICore.Web.Extensions;
 using GUIStd.Attributes;
 using GUIStd.Models;
-using System;
 using GUIStd.DAL.AllNewPY.Models;
 using GUIStd.BLL.AllNewPY.Share;
 using GUIStd.DAL.AllNewPY.Models.Share.SM;
+
+#endregion
 
 namespace MGUIBAAPI.Controllers.PY
 {
@@ -37,6 +46,17 @@ namespace MGUIBAAPI.Controllers.PY
         public MdHolidayConfigSettings GetHolidayConfig()
         {
             return BlSM.GetHolidayConfig();
+        }
+
+        /// <summary>
+        /// 取得指定年度的假日設定（用於設定畫面）
+        /// </summary>
+        /// <param name="year">年度 (YYYY)</param>
+        /// <returns>年度假日設定模型物件</returns>
+        [HttpGet("year/{year}")]
+        public MdHolidayYearSettings GetYearSettings(string year)
+        {
+            return BlSM.GetYearSettings(year);
         }
 
         /// <summary>
@@ -74,12 +94,12 @@ namespace MGUIBAAPI.Controllers.PY
                 int _result = BlSM.ProcessSave(obj);
 
                 // 回應前端存檔成功訊息
-                return HttpContext.Response.InsertSuccess(_result);
+                return HttpContext.Response.UpdateSuccess(_result);
             }
             catch (Exception ex)
             {
                 // 回應前端存檔失敗訊息
-                return HttpContext.Response.InsertFailed(ex);
+                return HttpContext.Response.UpdateFailed(ex);
             }
         }
 

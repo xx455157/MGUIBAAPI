@@ -1,6 +1,7 @@
 ﻿#region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 #endregion
@@ -8,10 +9,12 @@ using System.Collections.Generic;
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUICore.Web.Controllers;
+using GUICore.Web.Extensions;
 using GUIStd.BLL.AllNewPY;
 using GUIStd.BLL.AllNewPY.Private; 
 using GUIStd.DAL.AllNewPY.Models;
 using GUIStd.DAL.AllNewPY.Models.Private;
+using GUIStd.Models;
 
 #endregion
 
@@ -70,6 +73,43 @@ namespace MGUIBAAPI.Controllers.PY
         public IEnumerable<MdPunch> GetPunch(string employeeId, string date)
         {
             return BlAQ.GetEmployeePunchTime(employeeId, date);
+        }
+
+        /// <summary>
+        /// 取得班別基本資料（未停用，包含考勤資料）
+        /// </summary>
+        /// <returns>班別基本資料（包含 AL、AN 資料和考勤資料）</returns>
+        [HttpGet("basic")]
+        public IEnumerable<MdShiftBasic> GetBasicShifts()
+        {
+            return BlShifts.GetBasicShifts();
+        }
+
+        #endregion
+
+        #region " 共用函式 - 異動資料 "
+
+        /// <summary>
+        /// 更新班別歸屬資料
+        /// </summary>
+        /// <param name="assignment">班別更換歸屬資料模型</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPost("updateAssignment")]
+        public MdApiMessage UpdateShiftAssignment([FromBody] MdShiftAssignment assignment)
+        {
+            try
+            {
+                // 呼叫商業元件執行更新作業
+                int _result = BlAQ.ProcessShiftChange(assignment);
+
+                // 回應前端更新成功訊息
+                return HttpContext.Response.UpdateSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                // 回應前端更新失敗訊息
+                return HttpContext.Response.UpdateFailed(ex);
+            }
         }
 
         #endregion

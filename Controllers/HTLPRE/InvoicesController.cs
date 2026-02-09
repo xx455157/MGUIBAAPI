@@ -13,8 +13,10 @@ using GUICore.Web.Extensions;
 using GUIStd;
 using GUIStd.BLL.AllNewHTL.Private;
 using GUIStd.DAL.AllNewHTL.Models;
+using GUIStd.DAL.AllNewHTL.Models.Private.Invoice;
 using GUIStd.Models;
 using MGUIBAAPI.Models.HTLPRE;
+using GUIStd.DAL.AllNewHTL.Models.Private.Restaurant;
 
 #endregion
 
@@ -55,6 +57,39 @@ namespace MGUIBAAPI.Controllers.HTLPRE
 				ChargeAmount = _chargeAmount,
 				Invoices = _invoices				
 			};
+		}
+
+		/// <summary>
+		/// 依條件查詢發票相關資料及統計
+		/// </summary>
+		/// <param name="obj">發票查詢條件物件</param>
+		/// <returns>發票相關資料及統計模型物件</returns>
+		[HttpPost("analysis")]
+		public MdInvData GetDataByInvList([FromBody] MdInvData_q obj) 
+		{
+			return BlInvoices.GetData(obj);
+		}
+
+		/// <summary>
+		/// 取得單筆發票明細資料
+		/// </summary>
+		/// <param name="invoiceNo">發票號碼</param>
+		/// <returns>系統規範訊息物件</returns>
+		[HttpGet("detail/{invoiceNo}")]
+		public MdInvoice GetRow(string invoiceNo)
+		{
+			return BlInvoices.GetRow(invoiceNo);
+		}
+
+		/// <summary>
+		///	依發票號碼取得帳單相關明細	
+		/// </summary>
+		/// <param name="invoiceNo">發票號碼</param>
+		/// <returns>餐廳帳單及發票資料模型物件</returns>
+		[HttpGet("query/folio/{invoiceNo}")]
+		public MdPosSummary GetDataByPOS(string invoiceNo)
+		{
+			return BlInvoices.GetDataByPOS(invoiceNo);
 		}
 
 		#endregion

@@ -72,9 +72,9 @@ namespace MGUIBAAPI.Controllers.AS
         /// </summary>
         /// <returns>系統參數代碼模型集合物件</returns>
         [HttpPost("Q_GetList/pages/{pageNo}")]
-        public MdASR10_p Q_GetList([FromBody] MdAllocation_q queryParams, [DARange(1, int.MaxValue)] int pageNo)
+        public MdASR10_p Q_GetList([FromBody] MdAllocation_q queryParams, [DARange(1, int.MaxValue)] int pageNo, int rowsPerPage = 0)
         {
-            return BlASR10.Q_GetList(queryParams, ControlName, pageNo);
+            return BlASR10.Q_GetList(queryParams, ControlName, pageNo, ref rowsPerPage);
         }
 
         /// <summary>

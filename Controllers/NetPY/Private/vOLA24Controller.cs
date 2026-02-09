@@ -14,6 +14,7 @@ using GUIStd.BLL.AllNewPY;
 using GUIStd.DAL.PY.Models;
 using GUIStd.DAL.AllNewPY.Models;
 using GUIStd.BLL.PY.Private;
+using GUIStd.DAL.PY.Models.Private.vOLA24;
 
 #endregion
 
@@ -33,23 +34,8 @@ namespace MGUIBAAPI.Controllers.NetPY
 
         #region " 共用函式 - 查詢資料 "
 
-
         [HttpGet("page/{employeeId}")]
-        public CmOLA24 GetUIData(string employeeId)
-        {
-            string _closeDate;
-            IEnumerable<MdReasonCode> _reasons;
-            MdEmployee _employee;
-
-            BlOvertimeApplications.GetOLA24UiData(employeeId, out _closeDate, out _employee, out _reasons);
-
-            return new CmOLA24()
-            {
-                closeDate = _closeDate,
-                reasons = _reasons,
-                employee = _employee
-            };
-        }
+        public MdOLA24_h GetUIData(string employeeId) => BlOvertimeApplications.GetOLA24UiData(employeeId);
 
         #endregion
 

@@ -41,8 +41,8 @@ namespace MGUIBAAPI.Controllers.HTLPRE
             IEnumerable<MdCode> _foliotypes;
             IEnumerable<MdCode> _accounts;
 
-            BlCheckOut.GetHTFCM06_dUIData(CurrentLang, ClientContent, "03", CurrentLang, 
-                out _bkDate,out _shift, out _foliotypes, out _accounts);
+            BlCheckOut.GetHTFCM06_dUIData(CurrentLang, ClientContent, "03", CurrentLang,
+                out _bkDate, out _shift, out _foliotypes, out _accounts);
 
             return new CmHTFCM06_d()
             {

@@ -90,7 +90,8 @@ namespace MGUIBAAPI.Controllers.OA
         [HttpGet("query/respflow/{empId}")]
         public IEnumerable<MdRespFlow> GetRespFlow(string empId)
         {
-            return BlJobAgents.GetRespFlow(empId);
+            //return BlJobAgents.GetRespFlow(empId);
+            return null;
         }
 
         /// <summary>

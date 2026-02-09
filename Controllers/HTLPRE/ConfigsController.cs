@@ -53,6 +53,29 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         #region " 共用屬性 - 異動資料"
 
         /// <summary>
+        /// 使用Merge Into指令處理SINI新增/修改
+        /// </summary>
+        /// <param name="obj">Server組態設定資料模型泛型集合物件</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPost()]
+        public MdApiMessage Upsert([FromBody] IEnumerable<MdConfig> obj)
+        {
+            try
+            {
+                // 呼叫商業元件執行修改作業
+                int _result = BlSINI.Upsert(obj);
+
+                // 回應前端修改成功訊息 
+                return HttpContext.Response.InsertSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                // 回應前端修改失敗訊息
+                return HttpContext.Response.InsertFailed(ex);
+            }
+        }
+
+        /// <summary>
         /// 通用規則組態設定
         /// </summary>
         /// <param name="moduleId">模組代碼</param>
@@ -100,7 +123,6 @@ namespace MGUIBAAPI.Controllers.HTLPRE
                 return HttpContext.Response.InsertFailed(ex);
             }
         }
-
 
 
         #endregion

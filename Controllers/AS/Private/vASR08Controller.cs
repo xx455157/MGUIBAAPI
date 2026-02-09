@@ -68,13 +68,16 @@ namespace MGUIBAAPI.Controllers.AS
         }
 
         /// <summary>
-        /// 固定畫面(web)
+        /// 報表畫面資料(web)
         /// </summary>
+        /// <param name="queryParams">查詢參數</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="rowsPerPage">一頁筆數</param>
         /// <returns>系統參數代碼模型集合物件</returns>
         [HttpPost("Q_GetList/pages/{pageNo}")]
-        public MdASR08_p Q_GetList([FromBody] MdCapitalize_q queryParams, [DARange(1, int.MaxValue)] int pageNo)
+        public MdASR08_p Q_GetList([FromBody] MdCapitalize_q queryParams, [DARange(1, int.MaxValue)] int pageNo, int rowsPerPage = 0)
         {
-            return BlASR08.Q_GetList(queryParams, ControlName, pageNo);
+            return BlASR08.Q_GetList(queryParams, ControlName, pageNo, ref rowsPerPage);
         }
 
         /// <summary>

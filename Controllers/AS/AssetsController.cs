@@ -56,12 +56,6 @@ namespace MGUIBAAPI.Controllers.AS
             return BlAsset.GetSHelp(compId, queryText, ControlName, pageNo, sortByName, singleLocation);
         }
 
-        [HttpPost("help/{queryText}/pages/{pageNo}")]
-        public MdCode_p GetSHelp(string[] compIds, string queryText, [DARange(1, int.MaxValue)] int pageNo)
-        {
-            return null;
-        }
-
         /// <summary>
         /// 使用公司別清單/大部門清單尋找資產科目
         /// </summary>
@@ -96,6 +90,11 @@ namespace MGUIBAAPI.Controllers.AS
         }
 
         /// <summary>
+        [HttpPost("accounts/help/{queryText}/pages/{pageNo}/fldName/{fldName}")]
+        public MdCode_p GetAssetAccts(string queryText, [DARange(1, int.MaxValue)] int pageNo,string fldName, [FromBody] string[] companies)
+        {
+            return BlAsset.GetAccts(SearchKey: queryText,fldName: fldName, companies: companies, funcName: ControlName, pageNo: pageNo);
+        }
         /// 資產單號
         /// </summary>
         /// <returns>系統參數代碼模型集合物件</returns>

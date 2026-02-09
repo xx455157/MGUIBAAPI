@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewGUI;
 using GUIStd.DAL.AllNewGUI.Models;
+using GUIStd.Attributes;
 
 #endregion
 
@@ -44,6 +45,52 @@ namespace MGUIBAAPI.Controllers.GUI
             [FromQuery] bool includeEmptyRow, [FromQuery] bool includeId)
         {
             return BlA16.GetHelp(dataType, CurrentLang, includeEmptyRow, includeId);
+        }
+
+        /// <summary>
+        /// 取得分頁頁次的輔助資料
+        /// </summary>
+        /// <param name="queryText">編號或名稱必需包含傳入的參數值</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="fullName">是否全名</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("help/{queryText}/pages/{pageNo}")]
+        public MdCode_p GetSHelp(string queryText, [DARange(1, int.MaxValue)] int pageNo,
+            [FromQuery] bool fullName, [FromQuery] bool sortByName)
+        {
+            return BlA16.GetSHelp(queryText, ControlName, pageNo, fullName, sortByName);
+        }
+
+        /// <summary>
+        /// 取得分頁頁次的輔助資料(搜尋字眼非必要)
+        /// </summary>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="queryText">編號或名稱的參數值</param>
+        /// <param name="fullName">是否全名</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("help/pages/{pageNo}")]
+        public MdCode_p GetSHelp2(string queryText, [DARange(1, int.MaxValue)] int pageNo,
+            [FromQuery] bool fullName, [FromQuery] bool sortByName)
+        {
+            return BlA16.GetSHelp(queryText, ControlName, pageNo, fullName, sortByName, true);
+        }
+
+        /// <summary>
+        /// 取得分頁頁次的輔助資料(搜尋字眼非必要)
+        /// </summary>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="queryText">編號或名稱的參數值</param>
+        /// <param name="dataType">(1:客戶 2:廠商3:銀行):1,2 or 2,3 or 3</param>
+        /// <param name="fullName">是否全名</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("help/datatype/pages/{pageNo}")]
+        public MdCode_p GetSHelpDataType([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText, [FromQuery] string dataType,
+            [FromQuery] bool fullName = false, [FromQuery] bool sortByName = false)
+        {
+            return BlA16.GetSHelp(queryText, ControlName, pageNo, fullName, sortByName, true, dataType);
         }
 
         /// <summary>

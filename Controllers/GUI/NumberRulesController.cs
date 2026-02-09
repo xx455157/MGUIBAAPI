@@ -19,11 +19,11 @@ using GUIStd;
 
 namespace MGUIBAAPI.Controllers.GUI.NumberRules
 {
-	/// <summary>
-	/// 【需經驗證】系統設定資料控制器
-	/// </summary>
-	[Route("gui/[controller]")]
-	public class NumberRulesController : GUIAppController
+    /// <summary>
+    /// 【需經驗證】系統設定資料控制器
+    /// </summary>
+    [Route("gui/[controller]")]
+    public class NumberRulesController : GUIAppController
     {
         #region " 私用屬性 "
 
@@ -41,13 +41,13 @@ namespace MGUIBAAPI.Controllers.GUI.NumberRules
         /// <summary>
         /// 取得傳票編號設定
         /// </summary>
-        /// <param name="A0301"></param>
-        /// <param name="A0303">公司別(沒有輸入就視為沒有條件)</param>
+        /// <param name="noteType">單據類別 預設為傳票</param>
+        /// <param name="companyId">公司別(沒有輸入就視為沒有條件)</param>
         /// <returns>傳票編號原則設定模型泛型集合物件</returns>
         [HttpGet("getData")]
-        public IEnumerable<MdNumberRule> GetData([FromQuery] string A0301 = "1", [FromQuery] string A0303 = "")
+        public IEnumerable<MdNumberRule> GetData([FromQuery] string noteType = "1", [FromQuery] string companyId = "")
         {
-            return BlA03.GetData(A0301: A0301, A0303: A0303);
+            return BlA03.GetData(A0301: noteType, A0303: companyId);
         }
 
         /// <summary>
@@ -69,12 +69,12 @@ namespace MGUIBAAPI.Controllers.GUI.NumberRules
         /// <summary>
         /// 取得單據編號設定
         /// </summary>
-        /// <param name="B0101">公司別</param>
+        /// <param name="companyId">公司別</param>
         /// <returns>單據編號原則設定模型泛型集合物件</returns>
         [HttpGet("getTXData")]
-        public IEnumerable<MdTXNumberRule> GetTXData([FromQuery] string B0101 = "")
+        public IEnumerable<MdTXNumberRule> GetTXData([FromQuery] string companyId = "")
         {
-            return BlB01.GetData(B0101: B0101);
+            return BlB01.GetData(B0101: companyId);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace MGUIBAAPI.Controllers.GUI.NumberRules
         /// <param name="TXType">異動別</param>
         /// <returns></returns>
         [HttpGet("isExistsTX")]
-        public bool IsExistTX([FromQuery] string companyId="", [FromQuery] string prefix="", [FromQuery] string TXType="")
+        public bool IsExistTX([FromQuery] string companyId = "", [FromQuery] string prefix = "", [FromQuery] string TXType = "")
         {
             return BlB01.IsExist(companyId, prefix, TXType);
         }
@@ -187,7 +187,7 @@ namespace MGUIBAAPI.Controllers.GUI.NumberRules
         /// </summary>
         /// <param name="obj">單據編號原則模型物件</param>
         /// <returns>系統規範訊息物件</returns>
-        [HttpPost("InsertTX")]
+        [HttpPost("insertTX")]
         public MdApiMessage Insert([FromBody] MdTXNumberRule obj)
         {
             try
