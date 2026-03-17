@@ -59,6 +59,11 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// </summary>
         private BlPriceAuditReport BlPriceAuditReport => new BlPriceAuditReport(ClientContent);
 
+        /// <summary>
+        /// 住客應收帳款商業邏輯物件屬性
+        /// </summary>
+        private BlGuestReceivable BlGuestReceivable => new BlGuestReceivable(ClientContent);
+
         #endregion
 
         #region " 共用函式 - 查詢資料 "
@@ -138,6 +143,17 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         public IEnumerable<MdPriceAuditReport> PriceAudit([FromBody] MdPriceAuditReportQuery queryParams)
         {
             return BlPriceAuditReport.Query(queryParams);
+        }
+
+        /// <summary>
+        /// 查詢住客應收帳款資料
+        /// </summary>
+        /// <param name="queryParams">查詢條件</param>
+        /// <returns>住客應收帳款資料集合</returns>
+        [HttpPost("GuestReceivable")]
+        public IEnumerable<MdGuestReceivable> GuestReceivable([FromBody] MdGuestReceivableQuery queryParams)
+        {
+            return BlGuestReceivable.Query(queryParams);
         }
 
         #endregion
