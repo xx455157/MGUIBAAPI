@@ -20,7 +20,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Config
     /// <summary>
     /// 班別資料控制器
     /// </summary>
-    [Route("htlpre/Config/[controller]")]
+    [Route("htlpre/Register/[controller]")]
     public class ShiftsController : GUIAppAuthController
     {
         #region " 私用屬性 "

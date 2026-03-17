@@ -15,6 +15,7 @@ using GUIStd.DAL.AllNewAS.Models.Private.Assets;
 using GUIStd.DAL.Base.Models.Reports;
 using GUICore.Web.Extensions;
 using GUIStd.DAL.AllNewAS.Models.Private.WriteUp;
+using MGUIBAAPI.Features;
 
 #endregion
 
@@ -91,7 +92,7 @@ namespace MGUIBAAPI.Controllers.AS
             // 回傳報表檔案
             if (_info.Contents != null)
             {
-                return HttpContext.Response.SendFile(_info.Contents, _info.FileName);
+                    return this.SendFileOrUtf8Text(_info.Contents, _info.FileName);
             }
             // 回傳報表作業失敗及錯誤訊息
             if (!string.IsNullOrWhiteSpace(_info.ErrorMessage))

@@ -120,7 +120,7 @@ namespace MGUIBAAPI.Controllers.Test
                 var _stream = await Common.ReadFileToStreamAsync(_srcFileName);
 
                 // 回傳檔案
-                return HttpContext.Response.SendFile(_stream, _clientFileName);
+                return this.SendFileOrUtf8Text(_stream, _clientFileName);
             }
             catch (Exception ex)
             {
@@ -153,7 +153,7 @@ namespace MGUIBAAPI.Controllers.Test
                 var _stream = await Common.ReadFileToStreamAsync(_srcFileName);
 
                 // 回傳檔案
-                return HttpContext.Response.SendFile(_stream, clientFileName);
+                return this.SendFileOrUtf8Text(_stream, clientFileName);
             }
             catch (Exception ex)
             {

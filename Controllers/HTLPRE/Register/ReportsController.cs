@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 #region " 匯入的名稱空間：GoldenUp "
 
-
 using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewHTL.Private;
 using System.Collections.Generic;
@@ -54,6 +53,11 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// 住房率統計表商業邏輯物件屬性
         /// </summary>
         private BlOccupancyStatsReport BlOccupancyStatsReport => new BlOccupancyStatsReport(ClientContent);
+
+        /// <summary>
+        /// 房價稽核表商業邏輯物件屬性
+        /// </summary>
+        private BlPriceAuditReport BlPriceAuditReport => new BlPriceAuditReport(ClientContent);
 
         #endregion
 
@@ -123,6 +127,17 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         public IEnumerable<MdOccupancyStatsReport> OccupancyStats([FromBody] MdOccupancyStatsReportQuery queryParams)
         {
             return BlOccupancyStatsReport.Query(queryParams);
+        }
+
+        /// <summary>
+        /// 查詢房價稽核表資料
+        /// </summary>
+        /// <param name="queryParams">查詢條件</param>
+        /// <returns>房價稽核表資料集合</returns>
+        [HttpPost("PriceAudit")]
+        public IEnumerable<MdPriceAuditReport> PriceAudit([FromBody] MdPriceAuditReportQuery queryParams)
+        {
+            return BlPriceAuditReport.Query(queryParams);
         }
 
         #endregion
