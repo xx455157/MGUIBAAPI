@@ -1,7 +1,6 @@
-﻿#region " 匯入的名稱空間：Framework "
+#region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 #endregion
 
@@ -9,20 +8,16 @@ using System.Collections.Generic;
 
 using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewHTL;
-using GUIStd.DAL.AllNewGUI.Models;
-using GUIStd.DAL.AllNewHTL.Models;
-using GUICore.Web.Extensions;
-using System;
 using GUIStd.DAL.AllNewHTL.Models.Private;
-using GUICore.Web.Filters;
+using GUIStd.Models;
 using GUICore.Web.Attributes;
+
 #endregion
 
 namespace MGUIBAAPI.Controllers.General.DonQianKiosk
 {
 	/// <summary>
-	/// 敦謙自助報到機 - 服務項目控制器
-	/// 提供飯店服務項目查詢功能
+	/// 【需經驗證】敦謙自助報到機 - 服務項目控制器
 	/// </summary>
 	[Route("general/DonQianKiosk/[controller]")]
 	public class ServiceItemsController : GUIAppWSController
@@ -30,7 +25,7 @@ namespace MGUIBAAPI.Controllers.General.DonQianKiosk
 		#region " 建構子 "
 
 		/// <summary>
-		/// 建構子：初始化服務項目控制器
+		/// 建構子
 		/// </summary>
 		public ServiceItemsController()
 		{
@@ -53,15 +48,15 @@ namespace MGUIBAAPI.Controllers.General.DonQianKiosk
 
 		/// <summary>
 		/// 取得服務項目清單
-		/// 查詢指定訂單可使用的飯店服務項目（如早餐、接駁、洗衣等）
 		/// </summary>
 		/// <param name="domain">飯店代號（選填）</param>
 		/// <param name="order_number">訂單號碼或住宿碼（必填）</param>
 		/// <returns>服務項目資料集合</returns>
-		[HttpGet()]
-		public IEnumerable<MdKioskService> GetRow(string domain, [RequiredFromQuery] string order_number)
+		[HttpGet]
+		public System.Collections.Generic.IEnumerable<MdKioskService> GetRow(
+			string domain,
+			[RequiredFromQuery] string order_number)
 		{
-			// 呼叫商業邏輯層查詢服務項目清單
 			return BlKiosk.GetService(domain, order_number);
 		}
 
