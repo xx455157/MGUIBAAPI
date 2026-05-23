@@ -21,7 +21,6 @@ using GUIStd.BLL.AllNewGUI.Private;
 using GUIStd.DAL.AllNewGUI.Models.Private.GUI.EForm;
 using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.Models;
-using MGUIBAAPI.Features;
 
 #endregion
 
@@ -118,7 +117,7 @@ namespace MGUIBAAPI.Controllers.GUI
 				if (_fileContent == null) return BadRequest(HttpContext.Response.SendFileNotExistFailed());
 
 				// 回傳檔案
-                return this.SendFileOrUtf8Text(_fileContent, _fileName);
+				return HttpContext.Response.SendFile(_fileContent, _fileName);
 			}
 			catch (Exception ex)
 			{

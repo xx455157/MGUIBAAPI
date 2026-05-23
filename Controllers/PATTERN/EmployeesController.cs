@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -11,6 +12,8 @@ using GUICore.Web.Controllers;
 using GUICore.Web.Extensions;
 using GUIStd.Attributes;
 using GUIStd.BLL.GUI;
+using GUIStd.DAL.AllNewGUI.Models;
+using GUIStd.DAL.Base.Models;
 using GUIStd.DAL.GUI.Models;
 using GUIStd.Models;
 
@@ -34,6 +37,16 @@ namespace MGUIBAAPI.Controllers.Pattern
         #endregion
 
         #region " 共用函式 - 查詢資料 "
+
+        /// <summary>
+        /// 取得員工輔助資料
+        /// </summary>
+        /// <returns>員工資料代碼模型集合物件</returns>
+        [HttpGet("help")]
+        public IEnumerable<MdCode> GetHelp()
+        {
+            return BlT02.GetHelp();
+        }
 
         /// <summary>
         /// 取得分頁頁次的員工基本資料
@@ -74,6 +87,26 @@ namespace MGUIBAAPI.Controllers.Pattern
         public bool IsExist(string employeeId)
         {
             return BlT02.IsExist(employeeId);
+        }
+
+        /// <summary>
+        /// 取得分頁頁次的輔助資料
+        /// </summary>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/pages/{pageNo}")]
+        public MdCode_p GetSHelpv2([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText, 
+            [FromQuery] bool sortByName)
+        {
+            return BlT02.GetSHelpv2(new MdHelpPaging
+            {
+                QueryText = queryText,
+                FuncName = this.ControlName,
+                SortByName = sortByName,
+                PageNo = pageNo
+            });
         }
 
         #endregion

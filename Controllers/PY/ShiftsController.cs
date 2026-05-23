@@ -1,4 +1,4 @@
-﻿#region " 匯入的名稱空間：Framework "
+#region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -70,9 +70,9 @@ namespace MGUIBAAPI.Controllers.PY
         /// <param name="date">排班日</param>
         /// <returns>打卡資料泛型集合物件</returns>
         [HttpGet("punch/{employeeId}/{date}")]
-        public IEnumerable<MdPunch> GetPunch(string employeeId, string date)
+        public IEnumerable<MdPunch> GetPunch(string employeeId, string date, [FromQuery] bool showEmptyShifts = false)
         {
-            return BlAQ.GetEmployeePunchTime(employeeId, date);
+            return BlAQ.GetEmployeePunchTime(employeeId, date, showEmptyShifts);
         }
 
         /// <summary>
@@ -88,6 +88,31 @@ namespace MGUIBAAPI.Controllers.PY
         #endregion
 
         #region " 共用函式 - 異動資料 "
+
+        /// <summary>
+        /// 僅異動 AQ05（刷卡狀態），供前端點選狀態時呼叫
+        /// </summary>
+        /// <param name="request">AQ 更新資料模型（AQ01, AQ02, AQ03, Status/AQ05）</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPost("updatePunchStatus")]
+        public MdApiMessage UpdatePunchStatus([FromBody] MdAQUpdate request)
+        {
+            if (request == null)
+                return HttpContext.Response.UpdateFailed(new ArgumentNullException(nameof(request)));
+            try
+            {
+                // 呼叫商業元件執行刷卡狀態異動
+                int _result = BlAQ.UpdateAQ05(request.AQ01, request.AQ02, request.AQ03, request.AQ05) ? 1 : 0;
+
+                // 回應前端存檔成功訊息
+                return HttpContext.Response.UpdateSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                // 回應前端存檔失敗訊息
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
 
         /// <summary>
         /// 更新班別歸屬資料

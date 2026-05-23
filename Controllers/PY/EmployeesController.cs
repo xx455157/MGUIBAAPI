@@ -1,4 +1,4 @@
-﻿#region " 匯入的名稱空間：Framework "
+#region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -8,10 +8,12 @@ using System.Collections.Generic;
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUICore.Web.Controllers;
+using GUIStd.Attributes;
 using GUIStd.BLL.AllNewPY;
+using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.DAL.AllNewPY.Models;
 using GUIStd.DAL.AllNewPY.Models.Private.CompanyOrgStruct;
-using GUIStd.Attributes;
+using GUIStd.DAL.Base.Models;
 
 #endregion
 
@@ -33,6 +35,17 @@ namespace MGUIBAAPI.Controllers.PY
         #endregion
 
         #region " 共用函式 - 查詢資料 "
+
+        /// <summary>
+        /// 檢核員工是否已存在於薪資系統 PA 表（PA06=員工編號）；供 vMCF08 刪除前判斷（有 PA 時僅刪授權群組不刪 A08）。
+        /// </summary>
+        /// <param name="employeeId">員工編號路徑參數</param>
+        /// <returns>true 表示 PA 表已有此員工</returns>
+        [HttpGet("exists/employeeid/{employeeId}")]
+        public bool IsExistByPA06(string employeeId)
+        {
+            return BlPA.IsExistByPA06(employeeId ?? "");
+        }
 
         /// <summary>
         /// 取得員工基本資料
@@ -114,6 +127,39 @@ namespace MGUIBAAPI.Controllers.PY
             [FromQuery] bool sortByName = false)
         {
             return BlPA.GetHelpPaging(queryText ?? string.Empty, ControlName, pageNo, sortByName);
+        }
+
+        /// <summary>
+        /// 判斷身分證字號是否已存在（供 vMCP10 身分證字號變更檢核，比照 GUI EmployeesController IsExist）
+        /// </summary>
+        /// <param name="socialId">身分證字號路徑參數</param>
+        /// <returns>已存在為 true，否則為 false</returns>
+        [HttpGet("exists/{socialId}")]
+        public bool IsExist(string socialId)
+        {
+            return BlPA.IsExist(socialId ?? "");
+        }
+
+        /// <summary>
+        /// 取得身分證字號分頁輔助資料（vMCP10 身分證字號變更用，比照 GUI EmployeesController GetSHelpv2）
+        /// </summary>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件（Codes: Id=身分證字號, Name=姓名）</returns>
+        [HttpGet("helpv2/pages/{pageNo}")]
+        public MdCode_p GetSHelpv2(
+            [DARange(1, int.MaxValue)] int pageNo,
+            [FromQuery] string queryText,
+            [FromQuery] bool sortByName)
+        {
+            return BlPA.GetSHelpv2(new MdHelpPaging
+            {
+                QueryText = queryText,
+                FuncName = this.ControlName,
+                SortByName = sortByName,
+                PageNo = pageNo
+            });
         }
 
         #endregion

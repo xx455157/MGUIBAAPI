@@ -118,19 +118,19 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Accounting
         /// <param name="roomNo">房號</param>        
         /// <returns>已入住房號清單、帳單(帳夾)資料模型物件</returns>
         [HttpGet("querytransferfolio/{roomNo}")]
-        //public CmHTFCM09_d GetTransferFolio(string roomNo)
-        //{
-        //    IEnumerable<MdCode> _checkinRoomNos;
-        //    IEnumerable<MdHouseFolio> _folios;
+        public CmHTFCM09_d GetTransferFolio(string roomNo)
+        {
+            IEnumerable<MdCode> _checkinRoomNos;
+            IEnumerable<MdHouseFolio> _folios;
 
-        //    BlCheckOut.GetTransferFolio(VS06: roomNo, checkinRoomNos: out _checkinRoomNos, folios: out _folios);
+            BlCheckOut.GetTransferFolio(VS06: roomNo, checkinRoomNos: out _checkinRoomNos, folios: out _folios);
             
-        //    return new CmHTFCM09_d()
-        //    {
-        //        CheckInRoomNos = _checkinRoomNos,
-        //        Folios = _folios
-        //    };
-        //}
+            return new CmHTFCM09_d()
+            {
+                CheckInRoomNos = _checkinRoomNos,
+                Folios = _folios
+            };
+        }
 
         #endregion
 
@@ -151,9 +151,10 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Accounting
 
                 // 呼叫商業元件執行新增作業                
                 int _result = BlCheckOut.ProcessInsert(CurrentLang, obj, ClientContent, out _folios, out _folioData_d);
-
-                // 回應前端新增成功訊息                
-                return HttpContext.Response.InsertSuccess(_result, 
+                
+                // 回應前端入帳成功訊息                
+                return HttpContext.Response.SendSuccess(
+                    Localization.GetValue(Enums.ResourceLang.LangHTL, "PgmMsg_PostingSuccessMsg"), 
                     responseData: new
                     {
                         Folios = _folios,
@@ -353,8 +354,9 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Accounting
                 // 呼叫商業元件執行修改作業
                 int _result = BlCheckOut.ProcessTransfer(transferInRoomNo, transferInFolioNo, obj, ClientContent);
 
-                // 回應前端修改成功訊息
-                return HttpContext.Response.UpdateSuccess(_result);
+                // 回應前端轉帳成功訊息                
+                return HttpContext.Response.SendSuccess(
+                    Localization.GetValue(Enums.ResourceLang.LangHTL, "PgmMsg_TransferSuccessMsg"));
             }
             catch (Exception ex)
             {

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUIStd.DAL.AllNewGUI.Models;
+using GUIStd.DAL.AllNewHTL.Models;
 
 #endregion
 
@@ -28,6 +29,11 @@ namespace MGUIBAAPI.Models.HTLPRE
         /// 查詢條件
         /// </summary>
         public IEnumerable<MdCode> SelectConditions { get; set; }
+
+        /// <summary>
+        /// 合約公司集合
+        /// </summary>
+        public IEnumerable<MdCompany_r> Companies { get; set; }
 
         /// <summary>
         /// 入住狀態

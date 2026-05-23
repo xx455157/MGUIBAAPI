@@ -6,7 +6,7 @@ using GUIStd.Models;
 using System;
 using GUIStd.DAL.AllNewPY.Models;
 using GUIStd.BLL.AllNewPY.Private;
-using GUIStd.DAL.AllNewPY.Models.Share.PG;
+using GUIStd.DAL.AllNewPY.Models;
 
 namespace MGUIBAAPI.Controllers.PY
 {

@@ -32,7 +32,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE
 
         /// <summary>
         /// 取得會計及會計科目代碼資料
-        /// </summary>        
+        /// </summary>
         [HttpGet("paged")]
         public CmHTFCM06_d GetUIData_d()
         {
@@ -40,16 +40,18 @@ namespace MGUIBAAPI.Controllers.HTLPRE
             string _shift;
             IEnumerable<MdCode> _foliotypes;
             IEnumerable<MdCode> _accounts;
+            IEnumerable<MdCode> _transaccounts;
 
             BlCheckOut.GetHTFCM06_dUIData(CurrentLang, ClientContent, "03", CurrentLang,
-                out _bkDate, out _shift, out _foliotypes, out _accounts);
+                out _bkDate, out _shift, out _foliotypes, out _accounts, out _transaccounts);
 
             return new CmHTFCM06_d()
             {
                 BKDate = _bkDate,
                 SHIFT = _shift,
-                FolioTypes= _foliotypes,
-                Accounts = _accounts,                
+                FolioTypes = _foliotypes,
+                Accounts = _accounts,
+                TransAccounts = _transaccounts,
             };
         }
 

@@ -74,6 +74,18 @@ namespace MGUIBAAPI.Controllers.AS
             return _result;
         }
 
+        /// <summary>
+        /// 取得存放位置輔助分頁資料（用於遠端搜尋）
+        /// </summary>
+        /// <param name="queryText">查詢文字</param>
+        /// <param name="pageNo">頁次</param>
+        /// <returns>存放位置分頁資料</returns>
+        [HttpGet("help/{queryText}/pages/{pageNo}")]
+        public MdCode_p GetHelpPaging(string queryText, [DARange(1, int.MaxValue)] int pageNo)
+        {
+            return BlStoredLocation.GetHelpPaging(queryText, ControlName, pageNo);
+        }
+
         #endregion
 
         #region " 異動資料 "

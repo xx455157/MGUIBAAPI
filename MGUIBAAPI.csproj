@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <Product>GoldenUp Mobile Business Analysis WebAPI</Product>
@@ -15,9 +15,9 @@
     <UserSecretsId>3D029402-1EE8-4C38-BD56-E15558D6C559</UserSecretsId>
     <LangVersion>7.1</LangVersion>
     <Configurations>Debug;Release;Azure</Configurations>
-    <AssemblyVersion>25.11.1201.0</AssemblyVersion>
-    <FileVersion>25.11.1201.0</FileVersion>
-    <Version>25.11.1201.0</Version>
+    <AssemblyVersion>26.4.102.0</AssemblyVersion>
+    <FileVersion>26.4.102.0</FileVersion>
+    <Version>26.4.102.0</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\netcoreapp2.2\MGUIBAAPI.xml</DocumentationFile>
@@ -36,49 +36,25 @@
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Controllers\General\**" />
-    <Compile Remove="Controllers\GUI\**" />
-    <Compile Remove="Controllers\HTLPRE\**" />
-    <Compile Remove="Controllers\HTL\**" />
-    <Compile Remove="Controllers\IV\**" />
-    <Compile Remove="Controllers\NetGUI\**" />
-    <Compile Remove="Controllers\Pattern\**" />
+    <Compile Remove="Controllers\PATTERN\**" />
     <Compile Remove="Controllers\TRAINING\**" />
     <Compile Remove="Models\Training\**" />
     <Compile Remove="ViewModels\**" />
     <Compile Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
     <Compile Remove="wwwroot\lib\jquery-validation\**" />
-    <Content Remove="Controllers\General\**" />
-    <Content Remove="Controllers\GUI\**" />
-    <Content Remove="Controllers\HTLPRE\**" />
-    <Content Remove="Controllers\HTL\**" />
-    <Content Remove="Controllers\IV\**" />
-    <Content Remove="Controllers\NetGUI\**" />
-    <Content Remove="Controllers\Pattern\**" />
+    <Content Remove="Controllers\PATTERN\**" />
     <Content Remove="Controllers\TRAINING\**" />
     <Content Remove="Models\Training\**" />
     <Content Remove="ViewModels\**" />
     <Content Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
     <Content Remove="wwwroot\lib\jquery-validation\**" />
-    <EmbeddedResource Remove="Controllers\General\**" />
-    <EmbeddedResource Remove="Controllers\GUI\**" />
-    <EmbeddedResource Remove="Controllers\HTLPRE\**" />
-    <EmbeddedResource Remove="Controllers\HTL\**" />
-    <EmbeddedResource Remove="Controllers\IV\**" />
-    <EmbeddedResource Remove="Controllers\NetGUI\**" />
-    <EmbeddedResource Remove="Controllers\Pattern\**" />
+    <EmbeddedResource Remove="Controllers\PATTERN\**" />
     <EmbeddedResource Remove="Controllers\TRAINING\**" />
     <EmbeddedResource Remove="Models\Training\**" />
     <EmbeddedResource Remove="ViewModels\**" />
     <EmbeddedResource Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
     <EmbeddedResource Remove="wwwroot\lib\jquery-validation\**" />
-    <None Remove="Controllers\General\**" />
-    <None Remove="Controllers\GUI\**" />
-    <None Remove="Controllers\HTLPRE\**" />
-    <None Remove="Controllers\HTL\**" />
-    <None Remove="Controllers\IV\**" />
-    <None Remove="Controllers\NetGUI\**" />
-    <None Remove="Controllers\Pattern\**" />
+    <None Remove="Controllers\PATTERN\**" />
     <None Remove="Controllers\TRAINING\**" />
     <None Remove="Models\Training\**" />
     <None Remove="ViewModels\**" />
@@ -86,17 +62,11 @@
     <None Remove="wwwroot\lib\jquery-validation\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Controllers\AS\Private\vASR01Controller.cs" />
-    <Compile Remove="Controllers\AS\Private\vASR02Controller.cs" />
-    <Compile Remove="Controllers\AS\Private\vASR03Controller.cs" />
-    <Compile Remove="Controllers\AS\Private\vASR04Controller.cs" />
-    <Compile Remove="Controllers\AS\Private\vASR05Controller.cs" />
-    <Compile Remove="Controllers\AS\Private\vASR06Controller.cs" />
-    <Compile Remove="Controllers\AS\Private\vASR07Controller.cs" />
-    <Compile Remove="Controllers\AS\Private\vASR08Controller.cs" />
-    <Compile Remove="Controllers\AS\Private\vASR09Controller.cs" />
-    <Compile Remove="Controllers\AS\Private\vASR10Controller.cs" />
     <Compile Remove="Controllers\GUIControllerBase.cs" />
+    <Compile Remove="Controllers\NetHTL\Private\vRRM02Controller.cs" />
+    <Compile Remove="Controllers\OA\InvoicesController.cs" />
+    <Compile Remove="Controllers\OA\PaymentsController.cs" />
+    <Compile Remove="Controllers\OA\RevenueBudgetsController.cs" />
     <Compile Remove="Features\Configuration.cs" />
     <Compile Remove="Features\LineBot.cs" />
     <Compile Remove="Features\PushMessage.cs" />
@@ -111,119 +81,12 @@
     <None Remove="favicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\General\DonQianKiosk\AvailableRoomsController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\BookingController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\BookingCxnlController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\BookingRoomDetailController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\CarController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\CardController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\FilesController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\HotelController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\InvoiceController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\PaymentController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\RoomStatusController.cs" />
-    <Compile Include="Controllers\General\DonQianKiosk\ServiceItemsController.cs" />
-    <Compile Include="Controllers\General\DunQianRMS\BookingsController.cs" />
-    <Compile Include="Controllers\General\DunQianRMS\HotelsController.cs" />
-    <Compile Include="Controllers\General\DunQianRMS\PricesController.cs" />
-    <Compile Include="Controllers\General\DunQianRMS\QueueJobsController.cs" />
-    <Compile Include="Controllers\General\DunQianRMS\RoomsController.cs" />
-    <Compile Include="Controllers\General\HTLPRE\CodesController.cs" />
-    <Compile Include="Controllers\General\HTLPRE\CurrencyController.cs" />
-    <Compile Include="Controllers\General\HTLPRE\Register\CheckInController.cs" />
-    <Compile Include="Controllers\General\HTLPRE\Register\ReservationInfoController.cs" />
-    <Compile Include="Controllers\General\Pattern\BkDateController.cs" />
-    <Compile Include="Controllers\General\Pattern\BookingsController.cs" />
-    <Compile Include="Controllers\General\Pattern\CodesController.cs" />
-    <Compile Include="Controllers\GUI\AnnounceController.cs" />
-    <Compile Include="Controllers\GUI\CompaniesController.cs" />
-    <Compile Include="Controllers\GUI\CompanyProductAuthController.cs" />
-    <Compile Include="Controllers\GUI\ConfigsController.cs" />
-    <Compile Include="Controllers\GUI\CustomersController.cs" />
-    <Compile Include="Controllers\GUI\DepartmentsController.cs" />
-    <Compile Include="Controllers\GUI\EformController.cs" />
-    <Compile Include="Controllers\GUI\EmployeesController.cs" />
-    <Compile Include="Controllers\GUI\EventsController.cs" />
-    <Compile Include="Controllers\GUI\FilesController.cs" />
-    <Compile Include="Controllers\GUI\FlowStagesController.cs" />
-    <Compile Include="Controllers\GUI\FormDataController.cs" />
-    <Compile Include="Controllers\GUI\MessagesController.cs" />
-    <Compile Include="Controllers\GUI\NumberRulesController.cs" />
-    <Compile Include="Controllers\GUI\PackagesController.cs" />
-    <Compile Include="Controllers\GUI\Private\vEFP01Controller.cs" />
-    <Compile Include="Controllers\GUI\Private\vGLM01Controller.cs" />
-    <Compile Include="Controllers\GUI\Private\vIVM92Controller.cs" />
-    <Compile Include="Controllers\GUI\Private\vMCF01Controller.cs" />
-    <Compile Include="Controllers\GUI\Private\vMCF10Controller.cs" />
-    <Compile Include="Controllers\GUI\Private\vMCF12Controller.cs" />
-    <Compile Include="Controllers\GUI\UserGroupsController.cs" />
-    <Compile Include="Controllers\HTLPRE\Accounting\CheckOutController.cs" />
-    <Compile Include="Controllers\HTLPRE\Accounting\FoliosController.cs" />
-    <Compile Include="Controllers\HTLPRE\AccountsController.cs" />
-    <Compile Include="Controllers\HTLPRE\Analysis\RoomsController.cs" />
-    <Compile Include="Controllers\HTLPRE\Banquets\EventsController.cs" />
-    <Compile Include="Controllers\HTLPRE\BkDateController.cs" />
-    <Compile Include="Controllers\HTLPRE\CodesController.cs" />
-    <Compile Include="Controllers\HTLPRE\CompaniesController.cs" />
-    <Compile Include="Controllers\HTLPRE\ConfigsController.cs" />
-    <Compile Include="Controllers\HTLPRE\History\GuestController.cs" />
-    <Compile Include="Controllers\HTLPRE\HouseKeeping\MaidController.cs" />
-    <Compile Include="Controllers\HTLPRE\HouseKeeping\MinibarAmenitiesController.cs" />
-    <Compile Include="Controllers\HTLPRE\InvoicesController.cs" />
-    <Compile Include="Controllers\HTLPRE\Private\vHTFCM06Controller.cs" />
-    <Compile Include="Controllers\HTLPRE\Private\vHTGRM01Controller.cs" />
-    <Compile Include="Controllers\HTLPRE\Private\vHTPSP13Controller.cs" />
-    <Compile Include="Controllers\HTLPRE\Private\vHTPSR04Controller.cs" />
-    <Compile Include="Controllers\HTLPRE\Private\vHTRGM01Controller.cs" />
-    <Compile Include="Controllers\HTLPRE\Private\vHTRGM11Controller.cs" />
-    <Compile Include="Controllers\HTLPRE\Private\vPOSSetupController.cs" />
-    <Compile Include="Controllers\HTLPRE\Private\vQRCodeLangsController.cs" />
-    <Compile Include="Controllers\HTLPRE\QRCode\LangsController.cs" />
-    <Compile Include="Controllers\HTLPRE\Register\CheckInController.cs" />
-    <Compile Include="Controllers\HTLPRE\Register\ReportsController.cs" />
-    <Compile Include="Controllers\HTLPRE\Register\ReservationInfoController.cs" />
-    <Compile Include="Controllers\HTLPRE\Register\RoomsController.cs" />
-    <Compile Include="Controllers\HTLPRE\Register\RoomStaysController.cs" />
-    <Compile Include="Controllers\HTLPRE\Register\ShiftsController.cs" />
-    <Compile Include="Controllers\HTLPRE\Reservations\BookingsController.cs" />
-    <Compile Include="Controllers\HTLPRE\Reservations\PackagesController.cs" />
-    <Compile Include="Controllers\HTLPRE\Reservations\RoomBlocksController.cs" />
-    <Compile Include="Controllers\HTLPRE\Restaurant\MenusController.cs" />
-    <Compile Include="Controllers\HTLPRE\Restaurant\OrdersController.cs" />
-    <Compile Include="Controllers\HTLPRE\Restaurant\RecipeController.cs" />
-    <Compile Include="Controllers\HTLPRE\Restaurant\ReservationsController.cs" />
-    <Compile Include="Controllers\HTLPRE\ServicesController.cs" />
-    <Compile Include="Controllers\HTL\AccountsController.cs" />
-    <Compile Include="Controllers\HTL\CodesController.cs" />
-    <Compile Include="Controllers\HTL\ConfigsController.cs" />
-    <Compile Include="Controllers\HTL\DataAsyncs\DataAsyncsController.cs" />
-    <Compile Include="Controllers\HTL\Members\MembersController.cs" />
-    <Compile Include="Controllers\HTL\Members\SysMemberController.cs" />
-    <Compile Include="Controllers\HTL\PerformancesController.cs" />
-    <Compile Include="Controllers\HTL\VouchersController.cs" />
-    <Compile Include="Controllers\IV\ConfigsController.cs" />
-    <Compile Include="Controllers\IV\Private\vIVM16Controller.cs" />
-    <Compile Include="Controllers\IV\RequisitionsController.cs" />
-    <Compile Include="Controllers\IV\WarehousesController.cs" />
-    <Compile Include="Controllers\NetGUI\AttachmentsController.cs" />
-    <Compile Include="Controllers\NetGUI\AuthProgramsController.cs" />
-    <Compile Include="Controllers\NetGUI\BasicCodesController.cs" />
-    <Compile Include="Controllers\NetGUI\BusinessesController.cs" />
-    <Compile Include="Controllers\NetGUI\ClientConfigsController.cs" />
-    <Compile Include="Controllers\NetGUI\CompaniesController.cs" />
-    <Compile Include="Controllers\NetGUI\ConfigsController.cs" />
-    <Compile Include="Controllers\NetGUI\CustomersController.cs" />
-    <Compile Include="Controllers\NetGUI\EmployeesController.cs" />
-    <Compile Include="Controllers\NetGUI\FlowsController.cs" />
-    <Compile Include="Controllers\NetGUI\Private\vSCR01Controller.cs" />
-    <Compile Include="Controllers\NetGUI\SystemsController.cs" />
+    <Compile Include="Controllers\Pattern\AuthProgramsController.cs" />
     <Compile Include="Controllers\Pattern\ChartsController.cs" />
     <Compile Include="Controllers\Pattern\CustomersController.cs" />
     <Compile Include="Controllers\Pattern\EmployeesController.cs" />
+    <Compile Include="Controllers\Pattern\Private\vQPatternController.cs" />
     <Compile Include="Controllers\Pattern\Private\vSCR01Controller.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Controllers\HTLPRE\Register\登記.txt" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
@@ -340,12 +203,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\HTLPRE\Reports\" />
+    <Folder Include="Controllers\NetHTL\Private\" />
     <Folder Include="Controllers\NetPY\" />
     <Folder Include="Properties\PublishProfiles\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Controllers\HTLPRE\RoomsController.csbak" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GUICore.Web">
@@ -380,6 +240,9 @@
     </Reference>
     <Reference Include="GUIStd.BLL.HT2020">
       <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.HT2020.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.HTL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.HTL.dll</HintPath>
     </Reference>
     <Reference Include="GUIStd.BLL.OA">
       <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.OA.dll</HintPath>
@@ -416,6 +279,12 @@
     </Reference>
     <Reference Include="GUIStd.DAL.HT2020">
       <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.HT2020.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.HTL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.HTL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.HTL.Constant">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.HTL.Constant.dll</HintPath>
     </Reference>
     <Reference Include="GUIStd.DAL.OA">
       <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.OA.dll</HintPath>

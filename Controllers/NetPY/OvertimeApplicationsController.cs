@@ -273,7 +273,7 @@ namespace MGUIBAAPI.Controllers.NetPY
             catch (Exception ex)
             {
                 // 回應前端修改失敗訊息
-                return HttpContext.Response.InsertFailed(ex);
+                return HttpContext.Response.DeleteFailed(ex);
             }
 
         }

@@ -16,6 +16,8 @@ using GUIStd.DAL.AllNewAS.Models.Private.vASM11;
 using GUIStd.Models;
 using GUICore.Web.Extensions;
 using GUIStd.DAL.AllNewAS.Models.Private.Assets;
+using GUIStd.DAL.AllNewAS.Models;
+using DAL_BASE_MODEL = GUIStd.DAL.Base.Models;
 
 #endregion
 
@@ -42,10 +44,12 @@ namespace MGUIBAAPI.Controllers.AS
         /// <summary>
         /// 取得固定資產類別下拉選單
         /// </summary>
+        /// <param name="compId"></param>
         /// <param name="queryText">財產編號或名稱必需包含傳入的參數值</param>
         /// <param name="pageNo">查詢頁次</param>
+        /// <param name="FuzzySearch"></param>
         [HttpGet("help/{compId}/{queryText}/pages/{pageNo}")]
-        public MdCode_p GetSHelp(string compId, string queryText, [DARange(1, int.MaxValue)] int pageNo, [FromQuery] bool FuzzySearch)
+        public MdCategory_p GetSHelp(string compId, string queryText, [DARange(1, int.MaxValue)] int pageNo, [FromQuery] bool FuzzySearch)
         {
             return BlCategory.GetHelp(compId, queryText, FuzzySearch, ControlName, pageNo);
         }
@@ -60,6 +64,30 @@ namespace MGUIBAAPI.Controllers.AS
         {
             return BlCategory.GetData(queryParams, funcName: ControlName, pageNo: pageNo);
         }
+
+
+        /// <summary>
+        /// 取得分頁頁次的輔助資料
+        /// </summary>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/pages/{pageNo}")]
+        public MdCode_p GetSHelpv2([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText,
+            [FromQuery] bool sortByName, [FromQuery] string companyId = "")
+        {
+            var _para = new DAL_BASE_MODEL.MdHelpPaging
+            {
+                Language = ClientContent.Language,
+                QueryText = queryText,
+                FuncName = this.ControlName,
+                SortByName = sortByName,
+                PageNo = pageNo,
+            };
+            return BlCategory.GetSHelpv2(_para, companyId);
+        }
+
 
         /// <summary>
         /// 刪除固定資產類別

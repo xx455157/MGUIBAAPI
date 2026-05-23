@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewHTL;
 using GUIStd.DAL.AllNewHTL.Models.Private;
+using GUIStd.DAL.AllNewHTL.Models;
 
 #endregion
 

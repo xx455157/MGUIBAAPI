@@ -15,6 +15,8 @@ using GUIStd.Models;
 using GUIStd.BLL.AllNewHTL;
 using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.DAL.AllNewHTL.Models.Private.Configs;
+using GUIStd.BLL.AllNewHTL.Private;
+using GUIStd.DAL.AllNewHTL.Models.Private.vHTSetup;
 
 #endregion
 
@@ -32,6 +34,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// 商業邏輯物件屬性
         /// </summary>
         private BlSINI BlSINI => new BlSINI(ClientContent);
+        private BlConfigs BlConfigs => new BlConfigs(ClientContent);
 
         #endregion
 
@@ -66,7 +69,30 @@ namespace MGUIBAAPI.Controllers.HTLPRE
                 int _result = BlSINI.Upsert(obj);
 
                 // 回應前端修改成功訊息 
-                return HttpContext.Response.InsertSuccess(_result);
+                return HttpContext.Response.InsertSuccess(_result, "PgmMsg_SaveSuccess");
+            }
+            catch (Exception ex)
+            {
+                // 回應前端修改失敗訊息
+                return HttpContext.Response.InsertFailed(ex);
+            }
+        }
+
+        /// <summary>
+        /// 寫入旅館營業資訊組態
+        /// </summary>
+        /// <param name="obj">旅館營業資訊組態設定資料模型泛型集合物件</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPost("hotelInfo")]
+        public MdApiMessage WriteConfig([FromBody] MdHTSetupHotelInfo_w obj)
+        {
+            try
+            {
+                // 呼叫商業元件執行修改作業
+                int _result = BlConfigs.WriteHotelInfo(obj);
+                var _resultObj = HttpContext.Response.InsertSuccess(_result);
+                // 回應前端修改成功訊息 
+                return _resultObj;
             }
             catch (Exception ex)
             {
@@ -88,7 +114,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE
             {
                 // 呼叫商業元件執行修改作業
                 int _result = BlSINI.WritePosConfigs(moduleId, values);
-                var _resultObj = HttpContext.Response.InsertSuccess(_result);
+                var _resultObj = HttpContext.Response.InsertSuccess(_result, "PgmMsg_SaveSuccess");
                 // 回應前端修改成功訊息 
                 return _resultObj;
             }
@@ -113,7 +139,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE
             {
                 // 呼叫商業元件執行修改作業
                 int _result = BlSINI.WritePosConfigs(moduleId, values, posId);
-                var _resultObj = HttpContext.Response.InsertSuccess(_result);
+                var _resultObj = HttpContext.Response.InsertSuccess(_result, "PgmMsg_SaveSuccess");
                 // 回應前端修改成功訊息 
                 return _resultObj;
             }

@@ -1,0 +1,571 @@
+# Highest Priority Rule
+
+任何 API 修改前，必須先巡查所有 Controller，歸納專案既有 API 標準。
+
+如果尚未完成 Controller 巡查，不得新增、修改、刪除任何 API 程式碼。
+
+本專案優先遵守既有風格，而不是 AI 自己認為的標準 RESTful 寫法，也不是標準 ASP.NET Core 慣例。
+
+---
+
+# Project API Skill（MGUIBAAPI 專用版）
+
+## 目的
+
+這個 Skill 用於協助本專案（MGUIBAAPI）新增、修改、檢查 API。
+
+本專案並非標準 ASP.NET Core Web API 專案，而是基於 GUIStd Framework 的高度客製化飯店管理系統 API。
+
+**重要前提**：
+- 專案使用 GUIStd Framework（GUIAppAuthController、GUIStd BLL 等）
+- 專案有多種 Response 格式並存（三種都算標準）
+- 專案不使用 `[ApiController]` 屬性
+- 專案 Route 格式依模組分層，不使用 `api/[controller]`
+- 專案大量自訂 HTTP Method（PUT/POST/DELETE 混用）
+
+---
+
+## 適用範圍
+
+當使用者要求以下任務時，必須套用此 Skill：
+
+- 新增 API
+- 修改 API
+- 調整 Controller
+- 檢查 API 格式是否標準
+- 修正 Request / Response 格式
+- 修正 Route / HTTP Method
+- 修正 Status Code
+- 修正 DTO / ViewModel / Entity 回傳問題
+- 修正 API 錯誤處理
+- 調整前端呼叫 API 對應問題
+- 檢查 API 是否符合專案既有規範
+
+---
+
+## 核心原則
+
+1. 先巡查所有 Controller，再修改 API。不得只根據單一 Controller 判斷專案標準。
+2. **不得自行創造新的 API Response 格式**。本專案已有三種格式，都算標準。
+3. **不得大改架構**。GUIStd Framework 的基底類別不可修改。
+4. **不得修改無關檔案**。
+5. **不得任意更改既有 API Route**。前端已綁定，修改 Route 會破壞串接。
+6. **本專案不使用 `[ApiController]`**。嚴禁在 Controller 上添加此屬性。
+7. **本專案 Route 不使用 `api/[controller]`**。依模組分層（見 Route 標準章節）。
+8. **本專案 HTTP Status Code 統一回 200**。錯誤放 body 的 `success`/`message` 欄位。不得改用標準 HTTP Status Code 模式。
+9. 如果專案已有 Response Model（MdApiMessage），必須沿用。
+10. 如果專案已有 Error Handling / Exception Filter / Middleware，必須沿用。
+11. 如果專案已有 DTO / ViewModel，Controller 不應直接回傳 Entity（HTLPRE 私有 API 例外）。
+12. 修改前要先說明判斷依據。修改後要回報實際修改了哪些檔案與方法。
+
+---
+
+## 第一階段：Controller 巡查
+
+在新增或修改任何 API 之前，必須先搜尋所有 Controller。
+
+優先使用 Grep 工具搜尋：
+
+```
+class .*Controller
+Route\(
+HttpGet|HttpPost|HttpPut|HttpDelete|HttpPatch
+```
+
+---
+
+## 第二階段：整理 API 清單
+
+巡查所有 Controller 後，必須整理出 API 清單。
+
+每個 API 至少要確認：
+
+* Controller 名稱與基底類別（GUIAppAuthController 或 GUIAppWSController）
+* Action / Method 名稱
+* HTTP Method
+* Route（確認屬於哪個模組）
+* Request 來源（FromBody / FromQuery / URL 路徑參數）
+* Response 格式（MdApiMessage / anonymous object / 直接回 Model）
+* 是否呼叫 GUIStd BLL
+* 是否有 try-catch 包裝
+* 是否有前端已綁定的 Route
+
+---
+
+## 第三階段：歸納專案 API 標準
+
+### 1. Route 標準
+
+確認專案 Route 依模組分層：
+
+| 模組 | Route 格式 | 範例 |
+| ---- | --------- | ---- |
+| OA | `oa/[controller]` | `oa/payments`、`oa/invoices` |
+| HTLPRE 公開 | `htlpre/[controller]` | `htlpre/accounts` |
+| HTLPRE 私有 | `htlpre/private/[controller]` | `htlpre/private/vHTFCM06` |
+| HTLPRE 預訂 | `htlpre/reservations/[controller]` | `htlpre/reservations/reservation` |
+| HTLPRE 分析 | `htlpre/analysis/[controller]` | `htlpre/analysis/rooms` |
+| PY 公開 | `py/[controller]` | `py/shifts`、`py/attendance` |
+| PY 私有 | `py/private/[controller]` | `py/private/vABM08` |
+| AS 公開 | `as/[controller]` | `as/assets` |
+| AS 私有 | `as/private/[controller]` | `as/private/vASM19` |
+| PATTERN 私有 | `pattern/private/[controller]` | `pattern/private/vQPattern` |
+| NetPY | `netpy/[controller]` | `netpy/leaveApplications` |
+| General (Kiosk) | `general/DonQianKiosk/[controller]` | `general/DonQianKiosk/booking` |
+
+不得自行改成 `api/[controller]` 或其他 RESTful 格式。
+
+---
+
+### 2. HTTP Method 標準
+
+| 操作 | 慣用 Method | 說明 |
+| ---- | ---------- | ---- |
+| 查詢列表 | GET 或 POST | 分頁查詢用 POST，普通查詢用 GET |
+| 查詢單筆 | GET | |
+| 新增 | POST | |
+| 修改 | PUT 或 POST | 標準欄位修改用 PUT，特殊作業用 POST |
+| 刪除 | DELETE 或 POST | 視業務情境選擇 |
+| 批次作業 | POST | |
+| 報表產生 | POST | |
+| 特殊作業（如複製、展期）| POST | |
+
+如果專案既有 API 因前端限制大量使用 POST 查詢，不得擅自改成 GET。
+
+---
+
+### 3. Response 格式標準（本專案有三種並存）
+
+**格式 A：MdApiMessage（用於 CRUD 異動 API）**
+
+來自 `GUICore.Web.Extensions`（GUIStd Framework），由 `HttpContext.Response` extension methods 產生。
+
+```csharp
+// Controller 程式碼
+public MdApiMessage Insert([FromBody] MdPayment_i paymentData)
+{
+    try
+    {
+        // ...
+        return HttpContext.Response.InsertSuccess(_result.Seq, responseData: _result.Seq.ToString());
+    }
+    catch (Exception ex)
+    {
+        return HttpContext.Response.InsertFailed(ex);
+    }
+}
+```
+
+適用場景：新增（Insert/InsertSuccess/InsertFailed）、修改（UpdateSuccess/UpdateFailed）、刪除（DeleteSuccess/DeleteFailed）、複製（SendSuccess/SendFailed）、取得編號（SendSuccess/SendFailed）、檢查是否存在（SendSuccess/SendFailed）。
+
+**格式 B：Ok/BadRequest + anonymous object（用於查詢類 API）**
+
+```csharp
+return Ok(new { success = true, data = new { codes = new List<object>(), paging = new { totalRows = 0, rowsPerPage = 0, currentPage = pageNo } } });
+return Ok(new { success = true, data = _result });
+return StatusCode(500, new { success = false, message = ex.Message });
+return BadRequest(new { success = false, message = "請提供收支明細資料" });
+return NotFound(new { success = false, message = "收支明細不存在" });
+```
+
+適用場景：列表查詢、分頁查詢、單筆查詢、統計資料。
+
+**格式 C：直接回傳 Model（用於 HTLPRE 私有 API）**
+
+```csharp
+public IEnumerable<MdCode> GetHelp(string posId, ...)
+{
+    return BlHTCA.GetHelp(posId, CurrentLang, includeEmptyRow, includeId);
+}
+```
+
+適用場景：HTLPRE 私有 Controller 的輔助資料取得、Helper 查詢。
+
+---
+
+### 4. 錯誤處理標準
+
+| 情境 | 錯誤格式 |
+| ---- | -------- |
+| MdApiMessage 類 API | `HttpContext.Response.InsertFailed(ex)` / `UpdateFailed(ex)` / `DeleteFailed(ex)` |
+| anonymous object 類 API 成功 | `Ok(new { success = true, data = ... })` |
+| anonymous object 類 API 參數錯誤 | `BadRequest(new { success = false, message = "..." })` |
+| anonymous object 類 API 查無資料 | `NotFound(new { success = false, message = "..." })` |
+| anonymous object 類 API 系統錯誤 | `StatusCode(500, new { success = false, message = ex.Message })` |
+
+MdApiMessage 類 API 必須包 try-catch。anonymous object 類查詢 API 也建議包 try-catch。
+
+---
+
+### 5. Status Code 標準
+
+**本專案不使用標準 HTTP Status Code 表達業務錯誤。**
+
+永遠回 `200 OK`，錯誤放在 response body 的 `success`/`message` 欄位。
+
+| 情境 | 專案實際做法 |
+| ---- | ----------- |
+| 查詢成功 | `Ok(new { success = true, data = ... })` |
+| 修改成功 | `Ok(new { success = true, message = "..." })` |
+| 參數錯誤 | `BadRequest(new { success = false, message = "..." })` |
+| 查無資料 | `Ok(new { success = true, data = ... })` + 空陣列 或 `NotFound(...)` |
+| 系統錯誤 | `StatusCode(500, new { success = false, message = ... })` |
+
+---
+
+### 6. DTO / ViewModel 標準
+
+**本專案 DTO 命名慣例**：
+
+| 後綴 | 用途 | 範例 |
+| ---- | ---- | ---- |
+| `_i` | 新增 Request DTO | `MdPayment_i`、`MdContract_i` |
+| `_u` | 修改 Request DTO | `MdPayment_u`、`MdContract_u` |
+| `_q` | 查詢 Request DTO | `MdContract_q`、`MdABM08_q` |
+| `_p` | 分頁 Response Model | `MdAccount_p`、`MdASR02_p` |
+| `_h` | Helper/輔助資料 Response Model | `MdASM19_Qh`、`MdABM08_h` |
+| `Cm` 前綴 | 複合 ViewModel（HTLPRE） | `CmHTFCM06_d`、`CmHTGRM01_d` |
+
+Request DTO 通常放在 `MGUIBAAPI/Models/` 或 `GUIStd.DAL.*/Models/` 下。
+
+Entity（資料庫 Model）放在 `GUIStd.DAL.*/Models/` 下，Controller 應使用 DAL 的 Entity 搭配 BLL 操作，不直接回傳 Entity。
+
+---
+
+### 7. Service Layer 標準
+
+**本專案 Service Layer = GUIStd BLL 層。**
+
+所有 Controller 都呼叫 GUIStd BLL，不得在 Controller 直接寫 SQL 或商業邏輯。
+
+Controller 應只負責：
+- 接收 Request（FromBody / FromQuery / URL 參數）
+- 呼叫對應的 GUIStd BLL
+- 回傳統一 Response（MdApiMessage 或 anonymous object）
+
+BLL 實例化方式：
+```csharp
+// 延遲初始化（推薦）
+private BlOA20 BlOA20 => mBlOA20 = mBlOA20 ?? new BlOA20(ClientContent);
+private BlOA20 mBlOA20;
+
+// 或直接實例化
+private BlHTCA BlHTCA => new BlHTCA(ClientContent);
+```
+
+幾乎所有 BLL 建構子都需要傳入 `ClientContent`（繼承自基底 Controller）。
+
+---
+
+### 8. 分頁格式標準
+
+```json
+{
+  "success": true,
+  "data": {
+    "codes": [...],
+    "paging": {
+      "totalRows": 100,
+      "rowsPerPage": 20,
+      "currentPage": 1
+    }
+  }
+}
+```
+
+或（簡化版）：
+```json
+{
+  "success": true,
+  "data": {
+    "codes": [...],
+    "paging": {
+      "totalRows": 100
+    }
+  }
+}
+```
+
+分頁參數通常在 URL：`/query/pages/{pageNo}`，額外參數用 `FromQuery`。
+
+---
+
+## 第四階段：修改 API 前的檢查
+
+在修改 API 前，必須先回答：
+
+1. 目前要修改的是哪個 Controller？
+2. 目前要修改的是哪個 API？Route 是什麼？
+3. 這個 API 屬於哪種 Response 格式（MdApiMessage / anonymous object / direct Model）？
+4. 前端是否已綁定這個 API（從 Route 或前端程式碼確認）？
+5. 專案是否有同類 API 可參考？
+6. 本次修改是否會影響前端既有串接？
+7. 本次修改是否可以用最小改動完成？
+
+---
+
+## 第五階段：新增 API 規則
+
+### Controller
+
+```csharp
+[Route("oa/[controller]")]  // 依模組選擇正確前綴
+public class XxxController : GUIAppAuthController
+{
+    private BlXXX BlXXX => mBlXXX = mBlXXX ?? new BlXXX(ClientContent);
+    private BlXXX mBlXXX;
+
+    // CRUD 異動 API → 使用 MdApiMessage
+    [HttpPost("insert")]
+    public MdApiMessage Insert([FromBody] MdXxx_i request)
+    {
+        try
+        {
+            if (request == null)
+                return HttpContext.Response.InsertFailed(new Exception("請提供資料"));
+
+            var _data = new GUIStd.DAL.XXX.Models.MdXXX_i { ... };
+            var _result = BlXXX.Insert(_data, ControlName);
+
+            if (!_result.Success)
+                return HttpContext.Response.InsertFailed(new Exception(_result.Message));
+
+            return HttpContext.Response.InsertSuccess(_result.Seq, responseData: _result.Seq.ToString());
+        }
+        catch (Exception ex)
+        {
+            return HttpContext.Response.InsertFailed(ex);
+        }
+    }
+
+    // 查詢類 API → 使用 anonymous object + Ok/BadRequest
+    [HttpGet("list/{compId}")]
+    public IActionResult GetList(string compId, [FromQuery] string searchKey)
+    {
+        try
+        {
+            var _result = BlXXX.GetList(compId, searchKey);
+            return Ok(new { success = true, data = _result });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = ex.Message });
+        }
+    }
+
+    // HTLPRE 私有 API → 可直接回傳 Model
+    [HttpGet("paged")]
+    public CmXxx_d GetUIData_d()
+    {
+        return BlXxx.GetUIData_d();
+    }
+}
+```
+
+### 嚴禁事項
+
+- ❌ 不得添加 `[ApiController]` 屬性
+- ❌ 不得使用 `api/[controller]` 作為 Route 前綴
+- ❌ 不得在 anonymous object 類 API 使用標準 HTTP Status Code（不用 BadRequest 就表示失敗）
+- ❌ 不得修改前端已綁定的 Route
+
+---
+
+## 第六階段：修改 API 規則
+
+修改既有 API 時：
+
+1. 不得任意修改 route（前端的綁定依據）。
+2. 不得任意修改 response 欄位名稱（前端的取值依據）。
+3. 不得任意修改 HTTP method（前端可能已綁定特定 method）。
+4. 不得破壞前端既有參數。
+5. 不得刪除既有欄位，除非使用者明確要求。
+6. 新增欄位時要避免影響舊前端（使用可選欄位）。
+7. 若必須 breaking change，必須先明確告知。
+
+---
+
+## 第七階段：API 標準檢查清單
+
+每次 API 修改完成後，必須檢查：
+
+* [ ] 是否巡查過相關 Controller
+* [ ] Route 是否符合模組分層標準
+* [ ] HTTP Method 是否合理
+* [ ] Response 格式是否符合專案既有類型（MdApiMessage / anonymous object / direct Model）
+* [ ] MdApiMessage 類 API 是否有 try-catch
+* [ ] anonymous object 類 API 錯誤是否用 BadRequest/StatusCode
+* [ ] 是否呼叫 GUIStd BLL（而非直接寫 SQL）
+* [ ] 是否避免修改無關檔案
+* [ ] 是否避免破壞前端串接
+* [ ] 是否列出實際修改檔案
+* [ ] 是否說明修改原因
+
+---
+
+## 第八階段：回報格式
+
+完成巡查後，必須先輸出：
+
+```
+Controller API 巡查結果：
+
+1. 已巡查的 Controller：
+   - XxxController（oa/xxx）
+   - YyyController（htlpre/private/xxx）
+
+2. 專案目前 API 標準：
+   - Route 格式：依模組分層（見 Route 標準章節）
+   - Response 格式：三種並存（MdApiMessage / anonymous object / direct Model）
+   - Error 格式：MdApiMessage 類用 extension methods；anonymous 類用 BadRequest/StatusCode
+   - HTTP Method 慣例：POST 查詢常見，GET/POST/POST(insert)/PUT/PATCH/DELETE 混用
+   - DTO 後綴：_i/_u/_q/_p/_h/Cm
+   - Service Layer：GUIStd BLL，傳入 ClientContent
+   - 分頁格式：data: { codes: [], paging: {} }
+   - Status Code：統一回 200，錯誤放 body
+
+3. 本次要修改的 API：
+   - Controller：XxxController
+   - Method：GetList
+   - Route：oa/xxx/list/{compId}
+   - 現有格式：anonymous object
+   - 修改原因：前端需要新增分頁資訊
+
+4. 修改策略：
+   - 採用最小修改
+   - 不改動 Route
+   - 不改變既有欄位結構
+```
+
+完成修改後，必須輸出：
+
+```
+修改完成：
+
+1. 修改檔案：
+   - Controllers/OA/XxxController.cs
+   - Models/OA/MdXxx_i.cs
+
+2. 修改內容：
+   - 新增 GetPagedList API（anonymous object + paging）
+   - 新增 MdXxx_q DTO
+
+3. 為什麼這樣改：
+   - 前端需要分頁功能
+   - 參考既有 ContractsController 的分頁寫法
+
+4. 是否符合專案 API 標準：
+   - Route：oa/[controller] ✓
+   - Response：anonymous object + Ok ✓
+   - Error：StatusCode(500) + BadRequest ✓
+   - Service：呼叫 GUIStd BLL ✓
+   - Status Code：統一 200 ✓
+
+5. 是否可能影響前端：
+   - 否。這是新增 API，不影響既有串接。
+```
+
+---
+
+## 禁止行為
+
+AI 不可以做以下事情：
+
+1. 未巡查相關 Controller 就直接新增 API。
+2. 自行創造第四種 Response 格式。
+3. 因為覺得 RESTful 比較標準，就強行改掉專案既有路由（`api/[controller]` 在本專案從未使用）。
+4. 任意修改前端已經使用中的 API Route。
+5. 任意改 HTTP Method。
+6. 任意把 POST 查詢改成 GET。
+7. 任意把專案統一回傳 200 的模式改成標準 HTTP Status Code 模式。
+8. 在 Controller 添加 `[ApiController]` 屬性（本專案零個 Controller 使用此屬性）。
+9. 在 Controller 寫 SQL 或直接操作 DbContext（本專案統一透過 GUIStd BLL）。
+10. 大量重構 GUIStd BLL / GUIAppAuthController 等 framework 類別。
+11. 修改 common / global 類別來硬套 API 格式。
+12. 修改無關 Controller。
+13. 修改無關前端檔案。
+14. 只檢查單一 Controller 就宣稱符合專案標準。
+15. 只叫使用者清快取或重啟服務，不處理根本問題。
+16. **對一個從未使用過 `[ApiController]` 的專案，強制要求添加 `[ApiController]`**。
+17. **對一個統一回 200 的專案，強制要求使用標準 HTTP Status Code**。
+
+---
+
+## 參考範例（本專案實際程式碼）
+
+### 範例 1：MdApiMessage 類 CRUD API
+
+```csharp
+[HttpPost("insert")]
+public MdApiMessage Insert([FromBody] MdPayment_i paymentData)
+{
+    try
+    {
+        if (paymentData == null)
+            return HttpContext.Response.InsertFailed(new Exception("請提供收款資料"));
+
+        var _data = new GUIStd.DAL.OA.Models.Private.OA24.MdOA24_i { ... };
+        var _result = BlOA20.InsertPayment(_data, ControlName);
+
+        if (!_result.Success)
+            return HttpContext.Response.InsertFailed(new Exception(_result.Message));
+
+        return HttpContext.Response.InsertSuccess(_result.Seq, responseData: _result.Seq.ToString());
+    }
+    catch (Exception ex)
+    {
+        return HttpContext.Response.InsertFailed(ex);
+    }
+}
+```
+
+### 範例 2：anonymous object 類查詢 API
+
+```csharp
+[HttpPost("query/pages/{pageNo}")]
+public IActionResult GetContracts([FromBody] MdContract_q queryParams, [DARange(1, int.MaxValue)] int pageNo)
+{
+    try
+    {
+        var _result = BlOA20.GetData(...);
+        if (_result == null)
+            return Ok(new { success = true, data = new { codes = new List<object>(), paging = new { totalRows = 0, rowsPerPage = 0, currentPage = pageNo } } });
+
+        return Ok(new { success = true, data = _result });
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, new { success = false, message = ex.Message });
+    }
+}
+```
+
+### 範例 3：HTLPRE 私有 API 直接回 Model
+
+```csharp
+[HttpGet("paged")]
+public CmHTFCM06_d GetUIData_d()
+{
+    return new CmHTFCM06_d()
+    {
+        BKDate = _bkDate,
+        SHIFT = _shift,
+        FolioTypes = _foliotypes,
+        Accounts = _accounts,
+        TransAccounts = _transaccounts,
+    };
+}
+```
+
+---
+
+## 最終目標
+
+本 Skill 的最終目標是：
+
+* 保持 API 格式與專案既有程式碼一致
+* 保持前後端串接穩定
+* 避免 AI 自行套用「標準 ASP.NET Core」慣例
+* 避免破壞 GUIStd Framework 的既有設計
+* 讓新增 API 看起來像原本專案的人寫的
+* 區分「本專案從未使用」vs「本專案標準做法」的差異

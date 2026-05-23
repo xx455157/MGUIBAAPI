@@ -40,6 +40,11 @@ namespace MGUIBAAPI.Models.HTLPRE
         /// </summary>
         public IEnumerable<MdCode> Accounts { get; set; }
 
+        /// <summary>
+        /// 轉帳科目集合(客房自己的轉帳科目SINI與餐廳轉客房的SINI集合)
+        /// </summary>
+        public IEnumerable<MdCode> TransAccounts { get; set; }
+
         #endregion
     }
 }

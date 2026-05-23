@@ -1,6 +1,7 @@
 ﻿#region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 #endregion
@@ -8,13 +9,12 @@ using System.Collections.Generic;
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUICore.Web.Controllers;
-using GUIStd.DAL.AllNewAS.Models.Private.Assets;
 using GUICore.Web.Extensions;
-using System;
-using GUIStd.Models;
-using GUIStd.DAL.AllNewAS.Models.Private.vASM12;
 using GUIStd;
+using GUIStd.Models;
 using GUIStd.BLL.AllNewAS.Private;
+using GUIStd.BLL.AllNewAS;
+using GUIStd.DAL.AllNewAS.Models.Private.Assets;
 
 #endregion
 
@@ -34,9 +34,16 @@ namespace MGUIBAAPI.Controllers.AS
         ///// </summary>
         private BlTransaction BlTransaction => new BlTransaction(ClientContent);
 
+        private BlAG BlAG => new BlAG(ClientContent);
+
+        private BlAC BlAC => new BlAC(ClientContent);
+
+        private BlAD BlAD => new BlAD(ClientContent);
+
         #endregion
 
         #region " 共用函式 - 查詢資料 "
+		
         /// <summary>
         /// 取得單號原則
         /// </summary>
@@ -46,76 +53,8 @@ namespace MGUIBAAPI.Controllers.AS
         {
             return BlTransaction.GetData(company);
         }
-        /*
-        [HttpGet("delete/{AE01}/{AE02}")]
-        public MdApiMessage Delete(string AF01, string AF02)
-        {
-            try
-            {
-                int _result = BlTransaction.Delete(AF01, AF02);
-                // 回應前端刪除成功訊息
-                return HttpContext.Response.DeleteSuccess(_result);
-            }
-            catch (Exception ex)
-            {
-                return HttpContext.Response.DeleteFailed(ex);
-            }
-        }
 
-        [HttpPost("insert")]
-        public MdApiMessage Insert([FromBody] MdASM12_q queryParams)
-        {
-            try
-            {
-                int _result = BlTransaction.Insert(queryParams);
-                return HttpContext.Response.InsertSuccess(_result);
-            }
-            catch (Exception ex)
-            {
-                return HttpContext.Response.InsertFailed(ex);
-            }
-        }
-        */
-        /// <summary>
-        /// 更新單號原則
-        /// </summary>
-        /// <param name="queryParams"></param>
-        [HttpPost("update")]
-        public MdApiMessage Update([FromBody] MdASM12_q queryParams)
-        {
-            try
-            {
-                int _result = BlTransaction.Update(queryParams);
-                return HttpContext.Response.UpdateSuccess(_result);
-            }
-            catch (Exception ex)
-            {
-                return HttpContext.Response.UpdateFailed(ex);
-            }
-        }
 
-        /// <summary>
-        /// 複製單號原則
-        /// </summary>
-        /// <param name="queryParams"></param>
-        [HttpPost("copy")]
-        public IActionResult Copy([FromBody] MdASM12c_q queryParams)
-        {
-            var _res = new MdApiMessage();
-            try 
-            {
-                int _result = BlTransaction.Copy(queryParams.AE01 , queryParams.targetCompanies);
-                _res.Result = true;
-                _res.Message = Localization.GetValue(Enums.ResourceLang.Lang, "PgmMsg_CopySuccess", true);
-                return Ok( _res );
-            }
-            catch (Exception ex)
-            {
-                _res.Result = false;
-                _res.Message = Localization.GetValue(Enums.ResourceLang.Lang, "PgmMsg_CopyFail", true);
-                return BadRequest(_res);
-            }
-}
 
         /// <summary>
         /// 單號原則是否存在
@@ -127,6 +66,7 @@ namespace MGUIBAAPI.Controllers.AS
         {
             return BlTransaction.isExists(AF01, AF02);
         }
+
         /// <summary>
         /// 單號原則的前綴是否存在
         /// </summary>
@@ -138,7 +78,7 @@ namespace MGUIBAAPI.Controllers.AS
         {
             if (string.IsNullOrEmpty(AF02))
                 AF02 = "";
-            return BlTransaction.IsPrefixExist(AF01, AF02, AF03);
+            return BlTransaction.isExists(AF01, AF02, AF03);
         }
 
         /// <summary>
@@ -166,7 +106,119 @@ namespace MGUIBAAPI.Controllers.AS
             return BlTransaction.isHasRecord(AF01, AF02);
         }
 
-        
+
+        /// <summary>
+        /// 取得單據號碼
+        /// </summary>
+        /// <param name="companyId">公司別</param>
+        /// <param name="purchaseDate">購入日期 (YYYYMMDD)</param>
+        /// <param name="txType">異動類別</param>
+        /// <returns>自動產生的購入單號</returns>
+        [HttpGet("autoNumber/{companyId}/{purchaseDate}/{txType}")]
+        public MdApiMessage GetAutoNumber(string companyId, string purchaseDate, string txType )
+        {
+            try
+            {
+                // 驗證日期格式
+                if (string.IsNullOrEmpty(purchaseDate) || purchaseDate.Length != 8)
+                    throw new Exception(Localization.GetValue(Enums.ResourceLang.LangAS, "PgmMsg_InvalidDateFormat"));
+
+                // 呼叫自動取號
+                string _autoNumber = BlAG.GetAutoNumber(companyId, txType, purchaseDate);
+
+                if (string.IsNullOrEmpty(_autoNumber))
+                    throw new Exception(Localization.GetValue(Enums.ResourceLang.LangAS, "PgmMsg_NonSetNoteNoRule"));
+
+                // 返回成功訊息
+                return Response.SendSuccess(
+                    Localization.GetValue(Enums.ResourceLang.LangAS, "PgmMsg_GetAutoNumberSuccess"),
+                    new
+                    {
+                        purchaseNo = _autoNumber
+                    }
+                );
+            }
+            catch (Exception ex)
+            {
+                return Response.SendFailed(
+                    Localization.GetValue(Enums.ResourceLang.LangAS, "PgmMsg_GetAutoNumberFailed"),
+                    ex
+                );
+            }
+        }
+
+        /// <summary>
+        /// 檢查購入單號是否重複
+        /// </summary>
+        /// <param name="companyId">公司別</param>
+        /// <param name="docNo">購入單號</param>
+        /// <param name="txType">異動別</param>
+        /// <returns>是否重複（true=重複, false=不重複）</returns>
+        [HttpGet("checkTransNoExists/{companyId}/{docNo}/{txType}")]
+        public MdApiMessage CheckTransNoExists(string companyId, string docNo, string txType)
+        {
+            try
+            {
+                bool _isExists = BlAC.IsTransNoExists(companyId, "2", txType, docNo);
+
+                string _message = !_isExists
+                    ? Localization.GetValue(Enums.ResourceLang.Lang, "PgmMsg_NotExistForAPI")
+                    : Localization.GetValue(Enums.ResourceLang.Lang, "PgmMsg_RecordExist");
+
+                return Response.SendSuccess(
+                    _message = Localization.GetValue(Enums.ResourceLang.LangAS, "PanelDescpt_PurchaseNo") + _message,
+                    new
+                    {
+                        isDuplicate = _isExists,
+                        purchaseNo = docNo
+                    }
+                );
+            }
+            catch (Exception ex)
+            {
+                return Response.SendFailed(
+                    Localization.GetValue(Enums.ResourceLang.LangAS, "PgmMsg_CheckPurchaseNoFailed"),
+                    ex
+                );
+            }
+        }
+
+        /// <summary>
+        /// 檢查購入單號是否重複
+        /// </summary>
+        /// <param name="companyId">公司別</param>
+        /// <param name="docNo">調撥單號</param>
+        /// <param name="txType">異動別</param>
+        /// <returns>是否重複（true=重複, false=不重複）</returns>
+        [HttpGet("checkTransNoExistsByAD/{companyId}/{docNo}/{txType}")]
+        public MdApiMessage CheckTransNoExistsByAD(string companyId, string docNo, string txType)
+        {
+            try
+            {
+                bool _isExists = BlAD.IsTransNoExists(companyId, "2", txType, docNo);
+
+                string _message = !_isExists
+                    ? Localization.GetValue(Enums.ResourceLang.Lang, "PgmMsg_NotExistForAPI")
+                    : Localization.GetValue(Enums.ResourceLang.Lang, "PgmMsg_RecordExist");
+
+                return Response.SendSuccess(
+                    _message = Localization.GetValue(Enums.ResourceLang.LangAS, "PanelDescpt_AllocationNo") + _message,
+                    new
+                    {
+                        isDuplicate = _isExists,
+                        transNo = docNo
+                    }
+                );
+            }
+            catch (Exception ex)
+            {
+                return Response.SendFailed(
+                    Localization.GetValue(Enums.ResourceLang.LangAS, "PgmMsg_CheckPurchaseNoFailed"),
+                    ex
+                );
+            }
+        }
+
         #endregion
     }
 }

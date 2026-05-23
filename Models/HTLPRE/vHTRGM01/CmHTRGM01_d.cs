@@ -24,7 +24,6 @@ namespace MGUIBAAPI.Models.HTLPRE
         /// </summary>
         public MdRVData RVDetail { get; set; }
 
-
         /// <summary>
         /// 住客資料
         /// </summary>

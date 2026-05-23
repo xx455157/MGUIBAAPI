@@ -37,15 +37,6 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Accounting
 
         #region " 共用函式 -  查詢資料 "
 
-        /// <summary>
-        /// 取得尚未退房的房間資料(未實作)
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public object GetDataForCheckOut()
-        {
-            return null;
-        }
 
         /// <summary>
         /// 取得房間帳單資料
@@ -83,30 +74,6 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Accounting
                 // 回應前端新增失敗訊息
                 return HttpContext.Response.InsertFailed(ex);
             }
-        }
-
-        /// <summary>
-        /// 新增帳匣(未實作)
-        /// </summary>
-        /// <param name="obj">帳匣資料模型物件</param>
-        /// <returns></returns>
-        [HttpPost("folio")]
-        public MdApiMessage InsertFolio([FromBody] object obj)
-        {
-            try
-            {
-                // 呼叫商業元件執行新增作業
-                int _result = -1; //new BlHTHF().Insert(obj, ClientContent);
-
-                // 回應前端新增成功訊息
-                return HttpContext.Response.InsertSuccess(_result);
-            }
-            catch (Exception ex)
-            {
-                // 回應前端新增失敗訊息
-                return HttpContext.Response.InsertFailed(ex);
-            }
-
         }
 
 

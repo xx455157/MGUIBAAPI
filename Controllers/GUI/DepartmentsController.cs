@@ -13,6 +13,7 @@ using GUIStd.BLL.AllNewGUI;
 using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.DAL.AllNewGUI.Models.Private.IV.Departments;
 using GUIStd.DAL.AllNewGUI.Models.Private.HTL.Departments;
+using GUIStd.DAL.Base.Models;
 
 #endregion
 
@@ -94,6 +95,26 @@ namespace MGUIBAAPI.Controllers.GUI
             [FromQuery] string companyId = "")
         {
             return BlA02.GetSHelp(queryText, ControlName, pageNo, fullName, sortByName, companyId);
+        }
+
+        /// <summary>
+        /// 取得分頁頁次的輔助資料
+        /// </summary>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/pages/{pageNo}")]
+        public MdCode_p GetSHelpv2([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText,
+            [FromQuery] bool sortByName)
+        {
+            return BlA02.GetSHelpv2(new MdHelpPaging
+            {
+                QueryText = queryText,
+                FuncName = this.ControlName,
+                SortByName = sortByName,
+                PageNo = pageNo
+            });
         }
 
 

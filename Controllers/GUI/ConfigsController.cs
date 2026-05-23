@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewGUI;
 using GUIStd.DAL.AllNewGUI.Models;
+using GUICore.Web.Extensions;
+using GUIStd.Models;
+using GUIStd.DAL.AllNewGUI.TSQL;
 
 #endregion
 
@@ -67,7 +70,35 @@ namespace MGUIBAAPI.Controllers.GUI.Configs
 		public MdUploadImageInfo GetUploadImageInfo(string funcName)
 		{
 			return BlSINI.GetUploadImageInfo(funcName);
-		}
-		#endregion
-	}
+        }
+
+        #endregion
+
+        #region " 共用屬性 - 異動資料"
+
+        /// <summary>
+        /// 使用Merge Into指令處理SINI新增/修改
+        /// </summary>
+        /// <param name="obj">Server組態設定資料模型泛型集合物件</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPost()]
+        public MdApiMessage Upsert([FromBody] IEnumerable<MdConfig> obj)
+        {
+            try
+            {
+                // 呼叫商業元件執行修改作業
+                int _result = BlSINI.Upsert(obj);
+
+                // 回應前端修改成功訊息 
+                return HttpContext.Response.InsertSuccess(_result, "PgmMsg_SaveSuccess");
+            }
+            catch (Exception ex)
+            {
+                // 回應前端修改失敗訊息
+                return HttpContext.Response.InsertFailed(ex);
+            }
+        }
+
+        #endregion
+    }
 }

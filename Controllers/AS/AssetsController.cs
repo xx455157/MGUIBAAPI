@@ -1,5 +1,6 @@
 ﻿#region " 匯入的名稱空間：Framework "
 
+using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -8,18 +9,25 @@ using System.Collections.Generic;
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUICore.Web.Controllers;
+using GUICore.Web.Extensions;
+using GUIStd;
+using GUIStd.Models;
+using GUIStd.BLL.AllNewAS;
 using GUIStd.Attributes;
 using GUIStd.BLL.AllNewAS.Private;
 using GUIStd.DAL.AllNewAS.Models;
 using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.DAL.AllNewAS.Models.Private.vASR02;
+using BLL_GUI = GUIStd.BLL.GUI;
+using DAL_BASE_MODEL = GUIStd.DAL.Base.Models;
+using GUIStd.DAL.AllNewAS.Models.Private.Assets;
 
 #endregion
 
 namespace MGUIBAAPI.Controllers.AS
 {
     /// <summary>
-    /// 排班資料控制器
+    /// 財產資料控制器
     /// </summary>
     [Route("as/[controller]")]
     public class AssetsController : GUIAppAuthController
@@ -31,6 +39,10 @@ namespace MGUIBAAPI.Controllers.AS
         ///// 商業邏輯物件屬性
         ///// </summary>
         private BlAsset BlAsset => new BlAsset(ClientContent);
+
+        private BlSINI BlSINI => new BlSINI(ClientContent);
+
+        private BlAA BlAA => new BlAA(ClientContent);
 
         #endregion
 
@@ -67,6 +79,7 @@ namespace MGUIBAAPI.Controllers.AS
             return BlAsset.GetAssetAccts(queryParams);
         }
 
+
         /// <summary>
         /// 查詢固定資產目錄
         /// </summary>
@@ -95,6 +108,8 @@ namespace MGUIBAAPI.Controllers.AS
         {
             return BlAsset.GetAccts(SearchKey: queryText,fldName: fldName, companies: companies, funcName: ControlName, pageNo: pageNo);
         }
+
+        /// <summary>
         /// 資產單號
         /// </summary>
         /// <returns>系統參數代碼模型集合物件</returns>
@@ -103,6 +118,260 @@ namespace MGUIBAAPI.Controllers.AS
         {
             return BlAsset.GetAssetNoHelp(SearchKey: queryText, companies: companies, funcName: ControlName, pageNo: pageNo);
         }
+
+        /// <summary>
+        /// 資產單號基本資料 輔助查詢 多資料
+        /// </summary>
+        /// <returns>系統參數代碼模型集合物件</returns>
+        [HttpPost("number/help2/{queryText}/pages/{pageNo}")]
+        public MdAssetHelp_p GetAssetNoHelp2(string queryText, [DARange(1, int.MaxValue)] int pageNo, [FromBody] string[] companies, [FromQuery] bool FuzzySearch = true)
+        {
+            return BlAsset.GetAssetNoHelp2(SearchKey: queryText, companies: companies, funcName: ControlName, pageNo: pageNo);
+        }
+
+        /// <summary>
+        /// 取得資產編號（自動取號）
+        /// </summary>
+        /// <param name="companyId">公司別</param>
+        /// <param name="assetCategory">資產類別</param>
+        /// <param name="purchaseDate">購入日期 (YYYYMMDD)</param>
+        /// <returns>自動產生的資產編號</returns>
+        [HttpGet("assetNo/{companyId}/{assetCategory}/{purchaseDate}")]
+        public MdApiMessage GetAssetNo(string companyId, string assetCategory, string purchaseDate)
+        {
+            try
+            {
+                // 呼叫自動取號
+                bool _success = BlSINI.GetAssetNo(
+                    AA01: companyId,
+                    AA26: assetCategory,
+                    AA03: purchaseDate,
+                    assetNo: out string _assetNo,
+                    errMsg: out string _errMsg
+                );
+
+                if (!_success)
+                {
+                    // 不自動取號或發生錯誤
+                    if (string.IsNullOrEmpty(_errMsg))
+                    {
+                        // 人工輸入模式
+                        return HttpContext.Response.SendSuccess(
+                            "人工輸入模式",
+                            responseData: new
+                            {
+                                assetNo = "",
+                                isAutoGenerate = false
+                            }
+                        );
+                    }
+                    else
+                    {
+                        // 發生錯誤
+                        throw new Exception(_errMsg);
+                    }
+                }
+
+                // 返回成功訊息
+                return Response.SendSuccess(
+                    "資產編號自動取號成功",
+                    new
+                    {
+                        assetNo = _assetNo,
+                        isAutoGenerate = true
+                    }
+                );
+            }
+            catch (Exception ex)
+            {
+                return HttpContext.Response.SendFailed(
+                    $"取得資產編號失敗：{ex.Message}",
+                    ex
+                );
+            }
+        }
+
+        /// <summary>
+        /// 檢查財產編號是否重複（檢查 AA 表）
+        /// </summary>
+        /// <param name="companyId">公司別</param>
+        /// <param name="assetNo">財產編號</param>
+        /// <returns>是否重複（true=重複, false=不重複）</returns>
+        [HttpGet("checkAssetNoExists/{companyId}/{assetNo}")]
+        public MdApiMessage CheckAssetNoDuplicate(string companyId, string assetNo)
+        {
+            try
+            {
+                // 檢查 AA 表中是否存在該財產編號
+                bool _isDuplicate = BlAA.IsExist2(companyId, assetNo);
+
+                string _message = !_isDuplicate
+                    ? Localization.GetValue(Enums.ResourceLang.Lang, "PgmMsg_NotExistForAPI")
+                    : Localization.GetValue(Enums.ResourceLang.Lang, "PgmMsg_RecordExist");
+
+                return Response.SendSuccess(
+                     _message = Localization.GetValue(Enums.ResourceLang.LangAS, "PanelDescpt_AssetNo") + _message,
+                    new
+                    {
+                        isDuplicate = _isDuplicate,
+                        assetNo = assetNo
+                    }
+                );
+            }
+            catch (Exception ex)
+            {
+                return Response.SendFailed(
+                    Localization.GetValue(Enums.ResourceLang.LangAS, "PgmMsg_CheckAssetNoFailed"),
+                    ex
+                );
+            }
+        }
+
+        /// <summary>
+        /// 取得分頁頁次的輔助資料
+        /// </summary>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/pages/{pageNo}")]
+        public MdBasic_p GetSHelpv2([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText,
+            [FromQuery] bool sortByName, [FromQuery] string companyId = "")
+        {
+            var _para = new DAL_BASE_MODEL.MdHelpPaging
+            {
+                Language = ClientContent.Language,
+                QueryText = queryText,
+                FuncName = this.ControlName,
+                SortByName = sortByName,
+                PageNo = pageNo,
+            };
+            return BlAA.GetSHelpv2(_para, companyId);
+        }
+
+        /// <summary>
+        /// 取得分頁頁次的輔助資料
+        /// </summary>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/forhasqty/pages/{pageNo}")]
+        public MdAssetKeyCols_p GetSHelpv2ForHasQty([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText,
+            [FromQuery] bool sortByName, [FromQuery] string companyId = "")
+        {
+            var _para = new DAL_BASE_MODEL.MdHelpPaging
+            {
+                Language = ClientContent.Language,
+                QueryText = queryText,
+                FuncName = this.ControlName,
+                SortByName = sortByName,
+                PageNo = pageNo,
+            };
+            return BlAA.GetSHelpv2ForHasQty(_para, companyId);
+        }
+
+        /// <summary>
+        /// 取得分頁頁次的輔助資料 AC03='05' 檢核
+        /// </summary>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/forDepreciation/pages/{pageNo}")]
+        public MdAssetCapitalizeCols_p GetSHelpv2ForDepreciation([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText,
+            [FromQuery] bool sortByName, [FromQuery] string companyId = "", [FromQuery] string transDate = "")
+        {
+            var _para = new DAL_BASE_MODEL.MdHelpPaging
+            {
+                Language = ClientContent.Language,
+                QueryText = queryText,
+                FuncName = this.ControlName,
+                SortByName = sortByName,
+                PageNo = pageNo,
+            };
+            return BlAA.GetSHelpv2ForDepreciation(_para, companyId, transDate);
+        }
+
+        /// <summary>
+        /// 取得分頁頁次的輔助資料 AC03='05' 檢核
+        /// </summary>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/forResidualValueChange/pages/{pageNo}")]
+        public MdAssetResidualValueChangeCols_p GetSHelpv2ForResidualValueChange([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText,
+            [FromQuery] bool sortByName, [FromQuery] string companyId = "", [FromQuery] string transDate = "")
+        {
+            var _para = new DAL_BASE_MODEL.MdHelpPaging
+            {
+                Language = ClientContent.Language,
+                QueryText = queryText,
+                FuncName = this.ControlName,
+                SortByName = sortByName,
+                PageNo = pageNo,
+            };
+            return BlAA.GetSHelpv2ForResidualValueChange(_para, companyId, transDate);
+        }
+
+        /// <summary>
+        /// 取得固定資產明細（分佈清單）
+        /// </summary>
+        /// <param name="query">查詢參數（公司別、財產編號、購入日期）</param>
+        /// <returns>固定資產明細合併模型</returns>
+        [HttpPost("query/basic")]
+        public MdBasic GetBasicData([FromBody] MdBasic_q query)
+        {
+            return BlAsset.GetBasicData(query.AA01, query.AA02, query.AA03);
+        }
+
+
+        /// <summary>
+        /// 取得固定資產明細（分佈清單）
+        /// </summary>
+        /// <param name="query">查詢參數（公司別、財產編號、購入日期）</param>
+        /// <returns>固定資產明細合併模型</returns>
+        [HttpPost("query/distribution")]
+        public IEnumerable<MdDistribution> GetDistribution([FromBody] MdBasic_q query)
+        {
+            return BlAsset.GetDistribution(query.AA01, query.AA02, query.AA03);
+        }
+
+        /// <summary>
+        /// 取得固定資產明細（基本資料 + 分佈清單）
+        /// </summary>
+        /// <param name="query">查詢參數（公司別、財產編號、購入日期）</param>
+        /// <returns>固定資產明細合併模型</returns>
+        [HttpPost("query/basicDistribution")]
+        public MdBasicInfo GetBasicDistrInfo([FromBody] MdBasic_q query)
+        {
+            return BlAsset.GetBasicDistrInfo(query.AA01, query.AA02, query.AA03);
+        }
+
+        /// <summary>
+        /// 取得帳卡分頁查詢資料
+        /// </summary>
+        /// <param name="pageNo">頁碼（最小值 1）</param>
+        /// <param name="query">查詢參數</param>
+        /// <param name="rowsPerPage">一頁筆數（0 表示使用系統預設值）</param>
+        /// <returns>帳卡分頁查詢結果</returns>
+        [HttpPost("query/acctcard/pages/{pageNo}")]
+        public MdAcctCard_p GetAcctCardData([DARange(1, int.MaxValue)] int pageNo, [FromBody] MdAcctCard_q query, int rowsPerPage = 0)
+        {
+            return BlAsset.GetAcctCardData(query, ControlName, pageNo, ref rowsPerPage);
+        }
+
+        /// <summary>
+        /// 取得 資產科目清單
+        /// </summary>
+        /// <returns>系統參數代碼模型集合物件</returns>
+        [HttpGet("accounts/help/{companyId}")]
+        public IEnumerable<MdCode> GetAccountsHelp(string companyId)
+        {
+            return BlAsset.GetAccountsHelp(companyId);
+        }
+
         #endregion
     }
 }

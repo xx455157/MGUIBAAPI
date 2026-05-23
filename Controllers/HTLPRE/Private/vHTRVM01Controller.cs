@@ -11,6 +11,7 @@ using GUICore.Web.Controllers;
 using MGUIBAAPI.Models.HTLPRE;
 using GUIStd.BLL.AllNewHTL.Private;
 using GUIStd.DAL.AllNewGUI.Models;
+using GUIStd.DAL.AllNewHTL.Models;
 
 #endregion
 
@@ -34,15 +35,45 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         public CmHTRVM01 GetUIData()
         {
             string _bkDate;
-            IEnumerable<MdCode> _selectConditions;            
+            IEnumerable<MdCode> _selectConditions;
+            IEnumerable<MdCompany_r> _companies;
 
-            BlReservation.GetHTRVM01UIData(out _bkDate, out _selectConditions);
+            BlReservation.GetHTRVM01UIData(out _bkDate, out _selectConditions, out _companies);
             
             return new CmHTRVM01()
             {
                 BKDate = _bkDate,
-                SelectConditions = _selectConditions
+                SelectConditions = _selectConditions,
+                Companies = _companies,
             };
+        }
+
+        [HttpGet("paged")]
+        public CmHTRVM01_d GetUIData_d()
+        {
+			string _bkDate;			
+            IEnumerable<MdCompany_r> _companies;
+            IEnumerable<MdCode> _roomTypes;
+            IEnumerable<MdService> _services;
+            IEnumerable<MdCode> _rvTypes;
+            IEnumerable<MdCode> _salesInfo;
+            IEnumerable<MdCode> _originInfo;
+            IEnumerable<MdCode> _sourceInfo;
+
+            BlReservation.GetHTRVM01_dUIData(out _bkDate, out _companies, out _roomTypes, 
+                out _services, out _rvTypes, out _salesInfo, out _originInfo, out _sourceInfo);
+
+            return new CmHTRVM01_d()
+            {
+                BKDate = _bkDate,
+                Companies = _companies,
+                RoomTypes = _roomTypes,
+                Services = _services,
+                RVTypes = _rvTypes,
+                SalesInfo = _salesInfo,
+                OriginInfo = _originInfo,
+                SourceInfo = _sourceInfo
+			};			
         }
 
         #endregion

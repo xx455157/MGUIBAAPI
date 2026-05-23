@@ -1,0 +1,256 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Product>GoldenUp Mobile Business Analysis WebAPI</Product>
+    <Company>GoldenUp Information</Company>
+    <Authors>GoldenUp</Authors>
+    <PackageId>MGUIBAAPI</PackageId>
+    <Copyright>Copyright © 2021</Copyright>
+    <Description>GoldenUp Mobile Business Analysis WebAPI</Description>
+    <NeutralLanguage>English (United States)</NeutralLanguage>
+    <AssemblyName>MGUIBAAPI</AssemblyName>
+    <RootNamespace>MGUIBAAPI</RootNamespace>
+    <IsServiceFabricServiceProject>True</IsServiceFabricServiceProject>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <UserSecretsId>3D029402-1EE8-4C38-BD56-E15558D6C559</UserSecretsId>
+    <LangVersion>7.1</LangVersion>
+    <Configurations>Debug;Release;Azure</Configurations>
+    <AssemblyVersion>26.3.3101.0</AssemblyVersion>
+    <FileVersion>26.3.3101.0</FileVersion>
+    <Version>26.3.3101.0</Version>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\netcoreapp2.2\MGUIBAAPI.xml</DocumentationFile>
+    <OutputPath>bin\</OutputPath>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>bin\netcoreapp2.2\MGUIBAAPI.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Azure|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>bin\netcoreapp2.2\MGUIBAAPI.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\PATTERN\**" />
+    <Compile Remove="Controllers\TRAINING\**" />
+    <Compile Remove="Models\Training\**" />
+    <Compile Remove="ViewModels\**" />
+    <Compile Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <Compile Remove="wwwroot\lib\jquery-validation\**" />
+    <Content Remove="Controllers\PATTERN\**" />
+    <Content Remove="Controllers\TRAINING\**" />
+    <Content Remove="Models\Training\**" />
+    <Content Remove="ViewModels\**" />
+    <Content Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <Content Remove="wwwroot\lib\jquery-validation\**" />
+    <EmbeddedResource Remove="Controllers\PATTERN\**" />
+    <EmbeddedResource Remove="Controllers\TRAINING\**" />
+    <EmbeddedResource Remove="Models\Training\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-validation\**" />
+    <None Remove="Controllers\PATTERN\**" />
+    <None Remove="Controllers\TRAINING\**" />
+    <None Remove="Models\Training\**" />
+    <None Remove="ViewModels\**" />
+    <None Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
+    <None Remove="wwwroot\lib\jquery-validation\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\GUIControllerBase.cs" />
+    <Compile Remove="Controllers\HTLPRE\Register\CheckInController - Copy.cs" />
+    <Compile Remove="Controllers\HTLPRE\Register\ShiftsController.cs" />
+    <Compile Remove="Features\Configuration.cs" />
+    <Compile Remove="Features\LineBot.cs" />
+    <Compile Remove="Features\PushMessage.cs" />
+    <Compile Remove="Models\ApiAppSettings.cs" />
+    <Compile Remove="Models\AppSettings.cs" />
+    <Compile Remove="Models\DBProfile.cs" />
+    <Compile Remove="Models\DBSettings.cs" />
+    <Compile Remove="Models\TimeInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="jose-jwt" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="NSwag.Annotations" Version="12.0.14" />
+    <PackageReference Include="NSwag.AspNetCore" Version="12.0.14" />
+    <PackageReference Include="NSwag.Core" Version="12.0.14" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.1.0" />
+    <PackageReference Include="Z.Dapper.Plus" Version="7.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
+    <None Update="Aspose.Cells.NET.lic">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Aspose.Words.NET.lic">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Customer.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Shared - Copy.Azure.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Shared.Azure.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Shared.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\Token.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\WS.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Logs\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GUICore.Web">
+      <HintPath>..\..\..\Packages\BIN\netcoreapp2.2\GUICore.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewAS">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewAS.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewGL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewGL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewGUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewHTL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewHTL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewIV">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewIV.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.AllNewPY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.AllNewPY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.GUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.GUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.HT2020">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.HT2020.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.OA">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.OA.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.BLL.PY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.BLL.PY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewAS">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewAS.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewAS.Constant">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewAS.Constant.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewGL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewGL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewGUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewHTL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewHTL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewIV">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewIV.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.AllNewPY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.AllNewPY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.Base">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.GUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.GUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.HT2020">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.HT2020.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.OA">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.OA.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DAL.PY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DAL.PY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewAS">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewAS.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewGL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewGL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewGUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewHTL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewHTL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewIV">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewIV.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBAllNewPY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBAllNewPY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBGUI">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBOA">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBOA.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.DBPY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.DBPY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.Excel">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.Lang">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.Lang.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangAS">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangAS.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangGL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangGL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangHTL">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangHTL.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangIV">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangIV.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangOA">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangOA.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.LangPY">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.LangPY.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.Security">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.Security.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

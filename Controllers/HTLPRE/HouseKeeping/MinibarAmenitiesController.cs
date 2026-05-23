@@ -14,16 +14,17 @@ using GUIStd.Models;
 using GUIStd.BLL.AllNewHTL.Private;
 using GUIStd.DAL.AllNewHTL.Models;
 using GUIStd.DAL.AllNewHTL.Models.Private.HouseKeeping;
+using GUIStd.DAL.AllNewHTL.Models.Private.vHTRCR01;
 
 #endregion
 
 namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
 {
     /// <summary>
-    /// 程式資料控制器
+    /// 房間飲料備品資料控制器
     /// </summary>
     [Route("htlpre/housekeeping/[controller]")]
-    public class MinibarAmenities : GUIAppAuthController
+    public class MinibarAmenitiesController : GUIAppAuthController
     {
         #region " 私用屬性 "
 
@@ -64,6 +65,20 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
         public IEnumerable<MdEquipment> GetAmenities()
         {
             return BlMinibarAmenities.GetAmenitiesData();
+        }
+
+        /// <summary>
+        /// 查詢指定期間、房號範圍、備品類別的房間備品資料，並分頁回傳
+        /// </summary>
+        /// <param name="obj">查詢參數資料物件</param>
+        /// <param name="pageNo">頁次</param>
+        /// <param name="rowsPerPage">每頁筆數</param>
+        /// <param name="isSummary">是否彙總查詢</param>
+        /// <returns>房間備品耗用分業資料模型物件</returns>
+        [HttpPost("amenities/pages/{pageNo}")]
+        public MdAmenity_p GetConsumptions([FromBody]MdHTRCR01_q obj, int pageNo, [FromQuery] int rowsPerPage, [FromQuery] bool isSummary)
+        {
+            return BlMinibarAmenities.GetAmenityConsumptions(obj, pageNo, rowsPerPage, isSummary);
         }
 
         #endregion

@@ -11,6 +11,7 @@ using GUICore.Web.Controllers;
 using MGUIBAAPI.Models.HTLPRE;
 using GUIStd.BLL.AllNewHTL.Private;
 using GUIStd.DAL.AllNewGUI.Models;
+using GUIStd.DAL.AllNewHTL.Models;
 
 #endregion
 
@@ -35,14 +36,16 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         {
             string _bkDate;
             IEnumerable<MdCode> _selectConditions;
+            IEnumerable<MdCompany_r> _companies;
             IEnumerable<MdCode> _ciStatus;
 
-            BlCheckIn.GetHTRGM01UIData(CurrentLang, out _bkDate, out _selectConditions, out _ciStatus);
-            
+            BlCheckIn.GetHTRGM01UIData(CurrentLang, out _bkDate, out _selectConditions, out _companies, out _ciStatus);
+
             return new CmHTRGM01()
             {
                 BKDate = _bkDate,
                 SelectConditions = _selectConditions,
+                Companies = _companies,
                 CIStatus = _ciStatus
             };
         }

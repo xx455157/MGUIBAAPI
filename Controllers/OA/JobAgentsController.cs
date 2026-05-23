@@ -10,12 +10,27 @@ using System.Collections.Generic;
 using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewGUI;
 using GUIStd.DAL.AllNewGUI.Models;
+using GUIStd.DAL.AllNewGUI.Models.Private.HTL.Departments;
+using GUIStd.DAL.AllNewGUI.Models.Private.IV.Departments;
 using GUIStd.Attributes;
+using GUIStd.BLL.GUI;
 using GUIStd.BLL.AllNewGUI.Private;
+using GUIStd.DAL.AllNewPY.Models.Private.DeptAtts;
+using GUIStd.BLL.AllNewPY.Private;
 using GUIStd.DAL.AllNewGUI.Models.Private.GUI.JobAgents;
+using Newtonsoft.Json;
+using System.Linq;
+using Microsoft.AspNetCore.Builder;
+using GUIStd.BLL.AllNewIV.Private;
+using GUIStd.DAL.GUI.Models.Private.Customers;
 using GUIStd.Models;
+using GUIStd.Extensions;
 using GUICore.Web.Extensions;
+using GUIStd.BLL.GUI.Private;
 using System;
+using GUIStd.BLL.OA;
+using System.ComponentModel.Design;
+using System.Dynamic;
 
 #endregion
 
@@ -83,15 +98,15 @@ namespace MGUIBAAPI.Controllers.OA
             return BlJobAgents.GetDetail(dataKey);
         }
 
+
         /// <summary>
         /// 查詢 負責的簽核流程
         /// </summary>
         /// <returns></returns>
-        [HttpGet("query/respflow/{empId}")]
-        public IEnumerable<MdRespFlow> GetRespFlow(string empId)
+        [HttpPost("query/respflow/{empId}")]
+        public IEnumerable<MdRespFlow> GetRespFlow(string empId, [FromBody] IEnumerable<MdRespFlow> excludes)
         {
-            //return BlJobAgents.GetRespFlow(empId);
-            return null;
+            return BlJobAgents.GetRespFlow(empId, excludes);
         }
 
         /// <summary>

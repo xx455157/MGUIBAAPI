@@ -1,7 +1,6 @@
 ﻿#region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 
 #endregion
@@ -11,8 +10,8 @@ using System.Collections.Generic;
 using GUICore.Web.Controllers;
 using GUIStd.Attributes;
 using GUIStd.BLL.GUI;
-using GUIStd.BLL.GUI.Private;
 using GUIStd.DAL.AllNewGUI.Models;
+using GUIStd.DAL.Base.Models;
 
 #endregion
 
@@ -46,16 +45,6 @@ namespace MGUIBAAPI.Controllers.NetGUI
 		{
 			return BlA08.GetHelp<MdCode>(departmentId, includeEmptyRow);
 		}
-
-		/// <summary>
-		/// 取得員工輔助資料
-		/// </summary>
-		/// <returns>員工資料代碼模型集合物件</returns>
-		[HttpGet("help")]
-		public IEnumerable<MdCode> GetHelp()
-		{
-			return BlA08.GetHelp(CurrentUILang);
-		}
 		
 		/// <summary>
 		/// 取得分頁頁次的輔助資料
@@ -71,6 +60,26 @@ namespace MGUIBAAPI.Controllers.NetGUI
 			return BlA08.GetSHelp(queryText, ControlName, pageNo, sortByName, CurrentUILang);
 		}
 
-		#endregion
-	}
+        /// <summary>
+        /// 取得分頁頁次的輔助資料
+        /// </summary>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/pages/{pageNo}")]
+        public MdCode_p GetSHelpv2([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText,
+            [FromQuery] bool sortByName)
+        {
+            return BlA08.GetSHelpv2(new MdHelpPaging
+            {
+                QueryText = queryText,
+                FuncName = this.ControlName,
+                SortByName = sortByName,
+                PageNo = pageNo
+            });
+        }
+
+        #endregion
+    }
 }

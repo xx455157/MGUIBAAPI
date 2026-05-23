@@ -11,6 +11,8 @@ using GUIStd.BLL.AllNewHTL;
 using GUIStd.DAL.AllNewHTL.Models.Private;
 using GUIStd.Models;
 using GUICore.Web.Attributes;
+using GUICore.Web.Extensions;
+using System;
 
 #endregion
 
@@ -19,7 +21,7 @@ namespace MGUIBAAPI.Controllers.General.DonQianKiosk
 	/// <summary>
 	/// 【需經驗證】敦謙自助報到機 - 房間狀態控制器
 	/// </summary>
-	[Route("general/DonQianKiosk/[controller]")]
+	[Route("general/DonQianKiosk/")]
 	public class RoomStatusController : GUIAppWSController
 	{
 		#region " 建構子 "

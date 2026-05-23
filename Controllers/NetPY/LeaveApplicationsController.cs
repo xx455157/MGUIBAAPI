@@ -67,9 +67,10 @@ namespace MGUIBAAPI.Controllers.NetPY
         /// <param name="pageNo">查詢頁次</param>
         /// <returns></returns>
         [HttpGet("pages/missingpunch/{employeeId}/{pageNo}")]
-        public MdMissingPunch_p GetMissingPunchData(string employeeId, [DARange(1, int.MaxValue)] int pageNo)
+        public MdMissingPunch_p GetMissingPunchData(string employeeId, [DARange(1, int.MaxValue)] int pageNo,
+        [FromQuery] string shiftDate = "", [FromQuery] string shiftId = "")
         {
-            return BlLeaveApplications.GetMissingPunchData(employeeId, pageNo, ControlName);
+            return BlLeaveApplications.GetMissingPunchData(employeeId, pageNo, ControlName, shiftDate, shiftId);
         }
 
 

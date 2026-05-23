@@ -101,26 +101,17 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
         {
             return BlHouseKeeping.GetInstructions(type, prefix);
         }
-
+		
         /// <summary>
-        /// 取得 MobileHTL 飯店所有樓層
+        /// 取得房間故障/臨時維修記錄
         /// </summary>
-        /// <returns>樓層字串陣列</returns>
-        [HttpGet("mobilehtl/floors")]
-        public string[] GetMobileHTLFloors()
+        /// <param name="roomNo">房號</param>
+        /// <param name="oType">故障類別:OOO、OOS</param>
+        /// <returns>房間故障資料模型物件</returns>
+        [HttpGet("outoforder/{roomNo}/{oType}")]
+        public MdOutOfOrderRoom GetOutOfOrderRoom(string roomNo, string oType)
         {
-            return BlHouseKeeping.GetFloorsForMobileHTL(CurrentUILang);
-        }
-
-        /// <summary>
-        /// 抓取 MobileHTL 飯店樓層資訊，並依照房務人員ID顯示負責樓層
-        /// </summary>
-        /// <param name="maidId">房務員ID</param>
-        /// <returns></returns>
-        [HttpGet("mobilehtl/floors/{maidId}")]
-        public IEnumerable<MdFloor> GetMobileHTLFloors(string maidId)
-        {
-            return BlHouseKeeping.GetFloorsForMobileHTL(CurrentUILang, maidId);
+            return BlHouseKeeping.GetOutOfOrderRoom(roomNo, oType);
         }
 
         #endregion
@@ -130,8 +121,8 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
         /// <summary>
         /// 更新房間房況指令
         /// </summary>
-        /// <param name="obj">房況指令的泛型集合物件'</param>
-        /// <returns></returns>
+        /// <param name="obj">房況指令的泛型集合物件</param>
+        /// <returns>系統規範訊息物件</returns>
         [HttpPut("room/instruction")]
         public MdApiMessage UpdateRoomInstruction([FromBody] IEnumerable<MdRoomHK_w> obj)
         {
@@ -153,8 +144,8 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
         /// <summary>
         /// 房間清潔
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">飯店房間資料模型泛型集合物件</param>
+        /// <returns>系統規範訊息物件</returns>
         [HttpPut("room/clean")]
         public MdApiMessage UpdateRoomClean([FromBody] IEnumerable<MdRoom_w> obj)
         {
@@ -163,6 +154,30 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
                 // 呼叫商業元件執行新增作業
                 var _result = BlHouseKeeping.ProcessUpdateRoomClean(obj);
 
+                // 回應前端新增成功訊息
+                return HttpContext.Response.UpdateSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                // 回應前端新增失敗訊息
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
+
+        /// <summary>
+        /// 設定房間為故障/臨時維修
+        /// </summary>
+        /// <param name="roomNo">房號</param>
+        /// <param name="oType">故障類別:OOO、OOS</param>
+        /// <param name="obj">房間故障資料模型物件</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPost("outofservice/{roomNo}/{oType}")]
+        public MdApiMessage UpdateOutOfService(string roomNo, string oType, [FromBody] MdOutOfOrderRoom obj)
+        {
+            try
+            {
+                // 呼叫商業元件執行新增作業
+                var _result = BlHouseKeeping.ProcessUpdateOutOfService(roomNo, oType, obj);
                 // 回應前端新增成功訊息
                 return HttpContext.Response.UpdateSuccess(_result);
             }

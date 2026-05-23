@@ -13,7 +13,6 @@ using GUIStd;
 using GUIStd.BLL.GUI.Private;
 using GUIStd.DAL.Base.Models.Reports;
 using GUIStd.DAL.GUI.Models.Private.vSCR01;
-using MGUIBAAPI.Features;
 
 #endregion
 
@@ -64,7 +63,7 @@ namespace MGUIBAAPI.Controllers.Pattern.Private
             
             // 回傳報表檔案
             if (_info.Contents != null)
-                    return this.SendFileOrUtf8Text(_info.Contents, _info.FileName);
+                return HttpContext.Response.SendFile(_info.Contents, _info.FileName);
             
             // 回傳報表作業失敗及錯誤訊息
             if (!string.IsNullOrWhiteSpace(_info.ErrorMessage))

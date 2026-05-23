@@ -13,7 +13,6 @@ using GUIStd.Attributes;
 using GUIStd.Models;
 using GUIStd.DAL.AllNewPY.Models;
 using GUIStd.BLL.AllNewPY.Share;
-using GUIStd.DAL.AllNewPY.Models.Share.SM;
 
 #endregion
 

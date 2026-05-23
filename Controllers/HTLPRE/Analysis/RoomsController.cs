@@ -1,6 +1,6 @@
-﻿#region " 匯入的名稱空間：Framework "
+#region " 匯入的名稱空間：Framework "
 
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 #endregion
@@ -8,8 +8,8 @@ using System.Collections.Generic;
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUICore.Web.Controllers;
-using GUIStd.BLL.AllNewHTL.Private;
 using GUIStd.DAL.AllNewHTL.Models.Private.RoomsAnalysis;
+using GUIStd.BLL.AllNewHTL.Private;
 
 #endregion
 
@@ -44,6 +44,20 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Analysis
 		{
 			return BlRoomsAnalysis.GetDataForRoomOcp(startDate, endDate, buildingsId);
 		}
+
+        /// <summary>
+        /// 取得平面圖畫面資料
+        /// </summary>
+        /// <returns>平面圖資料模型集合</returns>
+        /// <remarks>
+        /// 此 API 用於提供房間平面圖所需的房間狀態、入住資訊等資料。
+        /// 包含樓層、房號、房型、入住/預訂客人、入離店日期等資訊。
+        /// </remarks>
+        [HttpGet("floorplan")]
+        public IEnumerable<MdFloorPlan> GetFloorPlan()
+        {
+            return BlRoomsAnalysis.GetFloorPlanData();
+        }
 
         #endregion
 

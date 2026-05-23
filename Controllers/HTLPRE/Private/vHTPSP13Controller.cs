@@ -27,7 +27,7 @@ using GUIStd.BLL.GUI;
 namespace MGUIBAAPI.Controllers.HTLPRE
 {
     /// <summary>
-    ///  vQRCodeLangs程式資料控制器
+    ///  vHTPSP13程式資料控制器
     /// </summary>
     [Route("htlpre/private/[controller]")]
 	public class vHTPSP13Controller : GUIAppAuthController

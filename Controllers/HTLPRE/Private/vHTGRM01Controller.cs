@@ -64,7 +64,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE
                 CountryInfo = _countryInfo,
                 CityInfo = _cityInfo
             };
-        }        
+        }
 
         #endregion
 

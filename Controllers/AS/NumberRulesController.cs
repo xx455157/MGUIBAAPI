@@ -62,6 +62,18 @@ namespace MGUIBAAPI.Controllers.AS.NumberRules
             return BlAF.IsExist(companyId, prefix, TXType);
         }
 
+        /// <summary>
+        /// 判斷單據是否為電腦給號
+        /// </summary>
+        /// <param name="companyId">公司別</param>
+        /// <param name="TXType">異動別</param>
+        /// <returns></returns>
+        [HttpGet("isAutoGenerateNo")]
+        public bool isAutoGenerateNo([FromQuery] string companyId = "", [FromQuery] string TXType = "")
+        {
+            return BlAF.IsAutoGenerateNo(AF01:companyId, AF02:"", AF03:TXType);
+        }
+
         #endregion
 
         #endregion
@@ -76,12 +88,12 @@ namespace MGUIBAAPI.Controllers.AS.NumberRules
         /// <param name="obj">單據編號原則模型物件</param>
         /// <returns>系統規範訊息物件</returns>
         [HttpPost("insert")]
-        public MdApiMessage Insert([FromBody] MdTXNumberRule_i obj)
+        public MdApiMessage Insert([FromBody] MdTXNumberRule_w obj)
         {
             try
             {
                 // 呼叫商業元件執行修改作業
-                int _result = BlAF.Insert(obj);
+                int _result = BlAF.Insert02(obj);
 
                 // 回應前端修改成功訊息
                 return HttpContext.Response.InsertSuccess(_result);

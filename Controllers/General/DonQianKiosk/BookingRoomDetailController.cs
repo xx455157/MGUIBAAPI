@@ -10,6 +10,9 @@ using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewHTL;
 using GUIStd.DAL.AllNewHTL.Models.Private;
 using GUIStd.Models;
+using GUIStd.DAL.AllNewHTL.Models;
+using GUICore.Web.Extensions;
+using System;
 
 #endregion
 

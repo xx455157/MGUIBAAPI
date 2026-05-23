@@ -1,6 +1,7 @@
 ﻿#region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 #endregion
@@ -11,6 +12,8 @@ using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewGUI;
 using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.Attributes;
+using GUICore.Web.Extensions;
+using GUIStd.Models;
 
 #endregion
 
@@ -102,6 +105,33 @@ namespace MGUIBAAPI.Controllers.GUI
         public IEnumerable<MdCustomer> GetData(string customerId)
         {
             return BlA16.GetData(customerId);
+        }
+
+        #endregion
+
+        #region " 共用屬性 - 異動資料"
+
+        /// <summary>
+        /// 使用Merge Into指令處理客戶/廠商基本資料新增/修改
+        /// </summary>
+        /// <param name="obj">客戶/廠商基本資料模型泛型集合物件</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPost("import")]
+        public MdApiMessage Upsert([FromBody] IEnumerable<MdCustomer_w> obj)
+        {
+            try
+            {
+                // 呼叫商業元件執行修改作業
+                int _result = BlA16.Upsert(obj);
+
+                // 回應前端修改成功訊息 
+                return HttpContext.Response.InsertSuccess(_result, "PgmMsg_SaveSuccess");
+            }
+            catch (Exception ex)
+            {
+                // 回應前端修改失敗訊息
+                return HttpContext.Response.InsertFailed(ex);
+            }
         }
 
         #endregion

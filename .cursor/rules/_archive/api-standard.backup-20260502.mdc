@@ -1,0 +1,672 @@
+# Highest Priority Rule
+
+任何 API 修改前，必須先巡查所有 Controller，歸納專案既有 API 標準。
+
+如果尚未完成 Controller 巡查，不得新增、修改、刪除任何 API 程式碼。
+
+本專案優先遵守既有風格，而不是 AI 自己認為的標準 RESTful 寫法。
+
+---
+
+# Project API Skill
+
+## 目的
+
+這個 Skill 用於協助本專案新增、修改、檢查 API。
+
+任何 API 相關修改前，AI 必須先巡查專案既有 Controller，歸納出本專案目前的 API 寫法與標準，再進行最小必要修改。
+
+禁止 AI 直接依照自己的習慣新增 API。
+
+---
+
+## 適用範圍
+
+當使用者要求以下任務時，必須套用此 Skill：
+
+- 新增 API
+- 修改 API
+- 調整 Controller
+- 檢查 API 格式是否標準
+- 修正 Request / Response 格式
+- 修正 Route / HTTP Method
+- 修正 Status Code
+- 修正 DTO / ViewModel / Entity 回傳問題
+- 修正 API 錯誤處理
+- 調整前端呼叫 API 對應問題
+- 檢查 API 是否符合專案既有規範
+
+---
+
+## 核心原則
+
+1. 先巡查所有 Controller，再修改 API。
+2. 不得只根據單一 Controller 判斷專案標準。
+3. 不得自行創造新的 API Response 格式。
+4. 不得大改架構。
+5. 不得修改無關檔案。
+6. 不得任意更改既有 API Route，避免破壞前端串接。
+7. 優先遵守專案既有寫法，而不是套用通用最佳實踐。
+8. 如果專案已有 Response Model，必須沿用。
+9. 如果專案已有 Error Handling / Exception Filter / Middleware，必須沿用。
+10. 如果專案已有 Service Layer，Controller 不應直接寫商業邏輯。
+11. 如果專案已有 DTO / ViewModel，Controller 不應直接回傳 Entity。
+12. 修改前要先說明判斷依據。
+13. 修改後要回報實際修改了哪些檔案與方法。
+
+---
+
+## 第一階段：Controller 巡查
+
+在新增或修改任何 API 之前，必須先搜尋所有 Controller。
+
+優先使用以下指令：
+
+```bash
+rg "class .*Controller|ControllerBase|ApiController|HttpGet|HttpPost|HttpPut|HttpPatch|HttpDelete|Route\(" .
+```
+
+如果專案沒有 `rg`，改用：
+
+```bash
+grep -R "class .*Controller\|ControllerBase\|ApiController\|HttpGet\|HttpPost\|HttpPut\|HttpPatch\|HttpDelete\|Route(" -n .
+```
+
+如果是 ASP.NET Core 專案，也要檢查：
+
+```bash
+rg "IActionResult|ActionResult|Ok\(|BadRequest\(|NotFound\(|Created\(|NoContent\(|Unauthorized\(|Forbid\(" .
+```
+
+同時搜尋既有 Response Model：
+
+```bash
+rg "ApiResponse|ResponseModel|BaseResponse|ResultModel|CommonResult|ServiceResult|PagedResult|Pagination|PageResult" .
+```
+
+同時搜尋 DTO / ViewModel：
+
+```bash
+rg "Dto|DTO|ViewModel|Request|Response|Input|Output" .
+```
+
+---
+
+## 第二階段：整理 API 清單
+
+巡查所有 Controller 後，必須整理出 API 清單。
+
+請使用以下格式輸出：
+
+| Controller | Method | HTTP Method | Route | Request 來源 | Response 格式 | Status Code | 是否符合專案標準 | 問題 |
+| ---------- | ------ | ----------- | ----- | ---------- | ----------- | ----------- | -------- | -- |
+
+每個 API 至少要確認：
+
+* Controller 名稱
+* Action / Method 名稱
+* HTTP Method
+* Route
+* Request 來源
+
+  * FromBody
+  * FromQuery
+  * FromRoute
+  * FromForm
+* Response 格式
+* Status Code
+* 是否使用 DTO / ViewModel
+* 是否直接回傳 Entity
+* 是否有參數驗證
+* 是否有權限檢查
+* 是否有錯誤處理
+* 是否呼叫 Service
+* 是否包含商業邏輯
+* 是否與其他 Controller 寫法一致
+
+---
+
+## 第三階段：歸納專案 API 標準
+
+在修改 API 前，必須先根據既有 Controller 歸納專案標準。
+
+請回答以下問題：
+
+### 1. Route 標準
+
+確認專案通常使用哪種 Route 寫法：
+
+```csharp
+[Route("api/[controller]")]
+```
+
+或：
+
+```csharp
+[Route("api/xxx/yyy")]
+```
+
+或其他專案自訂格式。
+
+不得自行改成不同風格。
+
+---
+
+### 2. HTTP Method 標準
+
+確認專案對 CRUD 的慣用 HTTP Method：
+
+| 操作   | 應確認的慣例             |
+| ---- | ------------------ |
+| 查詢列表 | GET 或 POST         |
+| 查詢單筆 | GET                |
+| 新增   | POST               |
+| 修改   | PUT / PATCH / POST |
+| 刪除   | DELETE / POST      |
+| 匯出   | GET / POST         |
+| 匯入   | POST               |
+
+如果專案既有 API 因前端限制大量使用 POST 查詢，不得擅自改成 GET。
+
+---
+
+### 3. Response 格式標準
+
+確認專案是否有統一回傳格式，例如：
+
+```json
+{
+  "code": 200,
+  "message": "success",
+  "data": {}
+}
+```
+
+或：
+
+```json
+{
+  "success": true,
+  "message": "",
+  "result": {}
+}
+```
+
+或：
+
+```json
+{
+  "status": 0,
+  "msg": "",
+  "rows": [],
+  "total": 0
+}
+```
+
+必須沿用專案既有格式。
+
+禁止新增新的 Response Model，除非專案完全沒有既有格式，且使用者同意。
+
+---
+
+### 4. 錯誤處理標準
+
+確認專案是否使用：
+
+* try-catch
+* Exception Filter
+* Middleware
+* ServiceResult
+* ApiResponse
+* ModelState validation
+* 自訂錯誤碼
+* 統一錯誤訊息格式
+
+如果專案已有統一錯誤處理，不得在 Controller 裡重複寫大量 try-catch。
+
+---
+
+### 5. Status Code 標準
+
+確認專案是否慣用：
+
+* 永遠回 200，錯誤放在 response code
+* 正常使用 HTTP Status Code
+* 混合模式
+
+不得自行把專案原本的統一格式改掉。
+
+如果專案使用標準 HTTP Status Code，則建議：
+
+| 情境   | Status Code                         |
+| ---- | ----------------------------------- |
+| 查詢成功 | 200 OK                              |
+| 新增成功 | 201 Created 或 200 OK，依專案慣例          |
+| 修改成功 | 200 OK 或 204 NoContent，依專案慣例        |
+| 刪除成功 | 200 OK 或 204 NoContent，依專案慣例        |
+| 參數錯誤 | 400 BadRequest                      |
+| 未登入  | 401 Unauthorized                    |
+| 無權限  | 403 Forbid                          |
+| 查無資料 | 404 NotFound                        |
+| 系統錯誤 | 500 Internal Server Error，由統一錯誤處理負責 |
+
+---
+
+### 6. DTO / Entity 標準
+
+確認專案是否：
+
+* 直接回傳 Entity
+* 使用 DTO
+* 使用 ViewModel
+* 使用 Request / Response Model
+* 使用 AutoMapper
+* 手動 mapping
+
+如果專案已有 DTO / ViewModel，不得直接回傳資料庫 Entity。
+
+---
+
+### 7. Service Layer 標準
+
+確認 Controller 是否通常呼叫：
+
+* Service
+* Repository
+* Manager
+* Application Service
+* UseCase
+
+如果專案已有 Service Layer，Controller 不應直接處理商業邏輯。
+
+Controller 應只負責：
+
+* 接收 Request
+* 驗證基本參數
+* 呼叫 Service
+* 回傳統一 Response
+
+---
+
+### 8. 分頁格式標準
+
+確認專案列表 API 是否有固定格式，例如：
+
+```json
+{
+  "data": [],
+  "total": 100,
+  "page": 1,
+  "pageSize": 20
+}
+```
+
+或：
+
+```json
+{
+  "rows": [],
+  "total": 100
+}
+```
+
+新增列表 API 時必須沿用既有分頁格式。
+
+---
+
+## 第四階段：修改 API 前的檢查
+
+在修改 API 前，必須先回答：
+
+1. 目前要修改的是哪個 Controller？
+2. 目前要修改的是哪個 API？
+3. 這個 API 應該參考哪些既有 Controller？
+4. 專案目前標準 Response 格式是什麼？
+5. 專案目前標準錯誤格式是什麼？
+6. 專案目前 Route 命名規則是什麼？
+7. 專案目前是否使用 DTO / ViewModel？
+8. 專案目前是否使用 Service Layer？
+9. 本次修改是否會影響前端既有串接？
+10. 本次修改是否可以用最小改動完成？
+
+如果以上資訊不明確，必須先回報不確定處，不得直接修改。
+
+---
+
+## 第五階段：新增 API 規則
+
+新增 API 時，必須遵守以下規則：
+
+### Controller
+
+Controller 只處理 API 進出口，不寫大量商業邏輯。
+
+建議結構：
+
+```csharp
+[HttpPost]
+public async Task<IActionResult> MethodName([FromBody] RequestDto request)
+{
+    // validate request if needed
+    // call service
+    // return project-standard response
+}
+```
+
+實際格式必須以專案既有 Controller 為準。
+
+---
+
+### Request
+
+Request 必須確認：
+
+* 是否使用 DTO
+* 是否需要 `[FromBody]`
+* 是否需要 `[FromQuery]`
+* 是否需要 `[FromRoute]`
+* 是否需要必填驗證
+* 是否需要日期格式處理
+* 是否需要分頁參數
+* 是否需要排序參數
+
+不得讓 Controller 接收過多散亂參數，除非專案既有風格就是如此。
+
+---
+
+### Response
+
+Response 必須確認：
+
+* 是否使用專案既有 Response Model
+* 是否包裝成統一格式
+* 是否需要 total / rows / data
+* 是否需要 message
+* 是否需要 code
+* 是否需要 success
+* 是否避免直接回傳 Entity
+
+---
+
+### Service
+
+如果專案已有 Service，新增 API 時應優先新增或呼叫 Service 方法。
+
+Controller 不應直接：
+
+* 寫 SQL
+* 操作 DbContext 過多
+* 處理複雜商業規則
+* 組合大量資料
+* 寫大量 if/else 商業邏輯
+
+---
+
+## 第六階段：修改 API 規則
+
+修改既有 API 時：
+
+1. 不得任意修改 route。
+2. 不得任意修改 response 欄位名稱。
+3. 不得任意修改 HTTP method。
+4. 不得破壞前端既有參數。
+5. 不得刪除既有欄位，除非使用者明確要求。
+6. 新增欄位時要避免影響舊前端。
+7. 若必須 breaking change，必須先明確告知。
+
+---
+
+## 第七階段：API 標準檢查清單
+
+每次 API 修改完成後，必須檢查：
+
+* [ ] 是否巡查過所有 Controller
+* [ ] 是否歸納出專案既有 API 標準
+* [ ] 是否沿用既有 Response Model
+* [ ] 是否沿用既有錯誤處理
+* [ ] 是否沿用既有 Route 風格
+* [ ] 是否使用正確 HTTP Method
+* [ ] 是否使用正確 Status Code 或專案自訂 code
+* [ ] 是否有必要的參數驗證
+* [ ] 是否避免直接回傳 Entity
+* [ ] 是否使用 DTO / ViewModel
+* [ ] 是否呼叫 Service Layer
+* [ ] 是否避免 Controller 過胖
+* [ ] 是否避免修改無關檔案
+* [ ] 是否避免破壞前端串接
+* [ ] 是否列出實際修改檔案
+* [ ] 是否說明修改原因
+
+---
+
+## 第八階段：回報格式
+
+完成巡查後，必須先輸出：
+
+```text
+Controller API 巡查結果：
+
+1. 已巡查的 Controller：
+   - XxxController
+   - YyyController
+   - ZzzController
+
+2. 專案目前 API 標準：
+   - Route 格式：
+   - Response 格式：
+   - Error 格式：
+   - HTTP Method 慣例：
+   - DTO / ViewModel 使用方式：
+   - Service Layer 使用方式：
+   - 分頁格式：
+
+3. 發現的不一致問題：
+   - 問題一：
+   - 問題二：
+
+4. 本次要修改的 API：
+   - Controller：
+   - Method：
+   - Route：
+   - 修改原因：
+
+5. 修改策略：
+   - 採用最小修改
+   - 不改動無關檔案
+   - 不改變前端既有串接
+```
+
+完成修改後，必須輸出：
+
+```text
+修改完成：
+
+1. 修改檔案：
+   - 檔案一：
+   - 檔案二：
+
+2. 修改內容：
+   - 修改一：
+   - 修改二：
+
+3. 為什麼這樣改：
+   - 原因一：
+   - 原因二：
+
+4. 是否符合專案 API 標準：
+   - Route：
+   - Response：
+   - Error：
+   - DTO：
+   - Service：
+   - Status Code：
+
+5. 是否可能影響前端：
+   - 是 / 否
+   - 說明：
+```
+
+---
+
+## 禁止行為
+
+AI 不可以做以下事情：
+
+1. 未巡查所有 Controller 就直接新增 API。
+2. 自行創造新的 Response 格式。
+3. 因為覺得 RESTful 比較標準，就強行改掉專案既有路由。
+4. 任意修改前端已經使用中的 API Route。
+5. 任意改 HTTP Method。
+6. 任意把 POST 查詢改成 GET。
+7. 任意把專案統一回傳 200 的模式改成 HTTP Status Code 模式。
+8. 直接回傳 Entity，除非專案既有標準就是如此。
+9. 在 Controller 寫大量商業邏輯。
+10. 大量重構 Service / Repository。
+11. 修改 common / global 類別來硬套 API 格式。
+12. 修改無關 Controller。
+13. 修改無關前端檔案。
+14. 只檢查單一 Controller 就宣稱符合專案標準。
+15. 只叫使用者清快取或重啟服務，不處理根本問題。
+
+---
+
+## 使用者要求 API 修改時的標準回應策略
+
+當使用者說：
+
+```text
+幫我新增一支 API
+```
+
+AI 必須先做：
+
+```text
+我會先巡查所有 Controller，確認本專案 API 標準，然後再以最小修改新增 API。
+```
+
+接著執行 Controller 巡查。
+
+---
+
+當使用者說：
+
+```text
+你寫的 API 是否標準？
+```
+
+AI 必須先做：
+
+```text
+我會先比對所有 Controller 的既有寫法，確認目前專案標準，再檢查我寫的 API 是否一致。
+```
+
+不得直接回答「是標準的」。
+
+---
+
+當使用者說：
+
+```text
+調整這支 API
+```
+
+AI 必須先確認：
+
+* 是否會影響前端
+* 是否已有類似 API 可參考
+* 是否要保留原 route
+* 是否要保留原 response schema
+* 是否只做最小修改
+
+---
+
+## ASP.NET Core 專案特別檢查
+
+如果此專案是 ASP.NET Core，請特別檢查：
+
+* Controller 是否有 `[ApiController]`
+* Controller 是否有 `[Route]`
+* Action 是否使用 `[HttpGet]` / `[HttpPost]` / `[HttpPut]` / `[HttpDelete]`
+* 是否使用 `IActionResult`
+* 是否使用 `ActionResult<T>`
+* 是否使用 `[FromBody]`
+* 是否使用 `[FromQuery]`
+* 是否使用 `[FromRoute]`
+* 是否有 ModelState 驗證
+* 是否有 Authorization
+* 是否有統一 Response Model
+* 是否有 Exception Filter / Middleware
+* 是否有 Service Layer
+* 是否有 DTO / ViewModel
+* 是否有 async / await
+* 是否正確處理 null / not found
+* 是否正確處理 validation error
+
+---
+
+## API 命名建議
+
+除非專案已有不同規範，否則建議：
+
+### Controller 命名
+
+```text
+XxxController
+```
+
+### Request DTO
+
+```text
+CreateXxxRequest
+UpdateXxxRequest
+QueryXxxRequest
+```
+
+### Response DTO
+
+```text
+XxxResponse
+XxxDetailResponse
+XxxListItemResponse
+```
+
+### Service Method
+
+```text
+GetAsync
+GetListAsync
+CreateAsync
+UpdateAsync
+DeleteAsync
+```
+
+但實際命名必須以專案既有風格為準。
+
+---
+
+## 最小修改原則
+
+每次修改都要遵守：
+
+1. 能改 Controller 就不要改全域設定。
+2. 能改當前 API 就不要改其他 API。
+3. 能沿用既有 DTO 就不要新增 DTO。
+4. 能沿用既有 Response Model 就不要新增 Response Model。
+5. 能沿用既有 Service 就不要新增重複 Service。
+6. 能不改 Route 就不要改 Route。
+7. 能不改前端就不要改前端。
+8. 能不重構就不要重構。
+
+---
+
+## 最終目標
+
+本 Skill 的最終目標是：
+
+* 保持 API 格式一致
+* 保持前後端串接穩定
+* 避免 AI 自行創造不符合專案的 API 寫法
+* 避免 Controller 寫法混亂
+* 避免 Response 格式不一致
+* 避免日後維護困難
+* 讓新增 API 看起來像原本專案的人寫的

@@ -22,7 +22,6 @@ using GUIStd.DAL.GUI.Models;
 using GUIStd.DAL.AllNewAS.Models.Private.Purchased;
 using GUIStd.DAL.AllNewAS.Models.Private.vASR03;
 using GUIStd.BLL.AllNewAS.Private;
-using MGUIBAAPI.Features;
 
 #endregion
 
@@ -108,7 +107,7 @@ namespace MGUIBAAPI.Controllers.NetGUI
 
             // 回傳報表檔案
             if (_report.Contents != null)
-                    return this.SendFileOrUtf8Text(_report.Contents, _report.FileName);
+                return HttpContext.Response.SendFile(_report.Contents, _report.FileName);
 
             // 回傳報表作業失敗及錯誤訊息
             if (!string.IsNullOrWhiteSpace(_report.ErrorMessage))
