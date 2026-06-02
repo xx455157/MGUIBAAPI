@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -14,6 +15,7 @@ using GUIStd.Models;
 using GUIStd.BLL.AllNewHTL.Private;
 using GUIStd.DAL.AllNewHTL.Models;
 using GUIStd.DAL.AllNewHTL.Models.Private.HouseKeeping;
+using GUIStd.BLL.AllNewHTL;
 
 #endregion
 
@@ -31,6 +33,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
         /// 商業邏輯物件屬性
         /// </summary>
         private BlHouseKeeping BlHouseKeeping => new BlHouseKeeping(ClientContent);
+        private BlHTRH BlHTRH => new BlHTRH(ClientContent);
 
         #endregion
 
@@ -58,6 +61,19 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
         {
             return BlHouseKeeping.GetRooms(floor, maidId);
         }
+
+        [HttpPost("facilities")]
+        public IEnumerable<MdEquipment> GetFacilities([FromBody] MdRoomEquipment_q obj)
+        {
+            return BlHTRH.GetData(obj);
+        }
+
+        [HttpPost("facilities/rooms/{pageNo}")]
+        public MdRoomEquipment_p GetFacilities([FromBody] MdRoomEquipment_q obj, int pageNo, [FromQuery] int rowsPerPage)
+        {
+            return BlHTRH.GetFacilities(obj, pageNo, rowsPerPage);
+        }
+
 
         /// <summary>
         /// 取得飯店所有樓層
@@ -142,17 +158,16 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
         }
 
         /// <summary>
-        /// 房間清潔
+        /// 房間清潔(bodyContent:多筆MdRoom_w)
         /// </summary>
-        /// <param name="obj">飯店房間資料模型泛型集合物件</param>
         /// <returns>系統規範訊息物件</returns>
         [HttpPut("room/clean")]
-        public MdApiMessage UpdateRoomClean([FromBody] IEnumerable<MdRoom_w> obj)
+        public async Task<MdApiMessage> UpdateRoomClean()
         {
             try
             {
                 // 呼叫商業元件執行新增作業
-                var _result = BlHouseKeeping.ProcessUpdateRoomClean(obj);
+                var _result = BlHouseKeeping.ProcessUpdateRoomClean(await Request.GetRawBodyStringAsync());
 
                 // 回應前端新增成功訊息
                 return HttpContext.Response.UpdateSuccess(_result);
@@ -184,6 +199,28 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
             catch (Exception ex)
             {
                 // 回應前端新增失敗訊息
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
+
+        /// <summary>
+        /// 批次設定房間為故障/臨時維修（一次性多筆）
+        /// </summary>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPut("outofservice")]
+        public async Task<MdApiMessage> UpdateOutOfServiceBatch()
+        {
+            try
+            {
+                // 呼叫商業元件執行批次作業
+                var _result = BlHouseKeeping.ProcessUpdateOutOfServiceBatch(await Request.GetRawBodyStringAsync());
+
+                // 回應前端成功訊息
+                return HttpContext.Response.UpdateSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                // 回應前端失敗訊息
                 return HttpContext.Response.UpdateFailed(ex);
             }
         }
