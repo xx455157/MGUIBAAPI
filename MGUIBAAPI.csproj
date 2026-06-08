@@ -62,11 +62,13 @@
     <None Remove="wwwroot\lib\jquery-validation\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Controllers\AS\Private\vASR02Controller.cs" />
     <Compile Remove="Controllers\GUIControllerBase.cs" />
     <Compile Remove="Controllers\NetHTL\Private\vRRM02Controller.cs" />
     <Compile Remove="Controllers\OA\InvoicesController.cs" />
     <Compile Remove="Controllers\OA\PaymentsController.cs" />
     <Compile Remove="Controllers\OA\RevenueBudgetsController.cs" />
+    <Compile Remove="Controllers\PY\Private\vPYConfigsController.cs" />
     <Compile Remove="Features\Configuration.cs" />
     <Compile Remove="Features\LineBot.cs" />
     <Compile Remove="Features\PushMessage.cs" />

@@ -14,7 +14,7 @@ using GUIStd;
 using GUIStd.Models;
 using GUIStd.BLL.AllNewHTL;
 using GUIStd.DAL.AllNewGUI.Models;
-using GUIStd.DAL.AllNewHTL.Models.Share;
+using GUIStd.DAL.AllNewHTL.Models;
 using GUIStd.DAL.AllNewHTL.Models;
 
 #endregion
@@ -197,6 +197,30 @@ namespace MGUIBAAPI.Controllers.HTLPRE
                 // 回應前端修改失敗訊息
                 return HttpContext.Response.SendFailed(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Excel大批匯入
+        /// </summary>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        [HttpPost("import")]
+        public MdApiMessage Import([FromBody] IEnumerable<MdAccount_w> objs)
+        {
+            try
+            {
+                // 呼叫商業元件執行修改作業
+                int _result = BlHTCA.Upsert(objs);
+
+                // 回應前端修改成功訊息 
+                return HttpContext.Response.InsertSuccess(_result, "PgmMsg_SaveSuccess");
+            }
+            catch (Exception ex)
+            {
+                // 回應前端修改失敗訊息
+                return HttpContext.Response.InsertFailed(ex);
+            }
+
         }
 
         #endregion

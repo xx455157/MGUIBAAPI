@@ -185,6 +185,24 @@ namespace MGUIBAAPI.Controllers.HTLPRE
             }
         }
 
+        [HttpPost("upsert")]
+        public MdApiMessage Upsert([FromBody] IEnumerable<MdCodeHT_w> objs)
+        {
+            try
+            {
+                // 呼叫商業元件執行修改作業
+                int _result = BlCodes.Upsert(objs);
+
+                // 回應前端修改成功訊息 
+                return HttpContext.Response.InsertSuccess(_result, "PgmMsg_SaveSuccess");
+            }
+            catch (Exception ex)
+            {
+                // 回應前端修改失敗訊息
+                return HttpContext.Response.InsertFailed(ex);
+            }
+        }
+
         /// <summary>
         /// 依序號更改代碼
         /// </summary>

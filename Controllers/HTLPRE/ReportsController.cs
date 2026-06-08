@@ -1,6 +1,8 @@
 #region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -10,10 +12,6 @@ using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewHTL.Private;
 using GUIStd.DAL.AllNewHTL.Models.Private.RoomsAnalysis;
 using GUIStd.DAL.AllNewHTL.Models.Private.HTL.vHTRGM09;
-using MGUIBAAPI.Models.HTLPRE.vHTRGM09;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
 #endregion
 
@@ -67,6 +65,11 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// </summary>
         private BlGuestReceivable BlGuestReceivable => new BlGuestReceivable(ClientContent);
 
+        /// <summary>
+        /// 訂單詳情商業邏輯物件屬性
+        /// </summary>
+        private BlOrderDetail BlOrderDetail => new BlOrderDetail(ClientContent);
+
         #endregion
 
         #region " 共用函式 - 查詢資料 "
@@ -78,7 +81,20 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         [HttpGet("FloorPlan")]
         public IEnumerable<MdFloorPlan> GetFloorPlan()
         {
-            return BlRoomsAnalysis.GetFloorPlanData();
+            Logging.Logger.LogDebug("[vHTRGM09] FloorPlan API 呼叫開始");
+
+            try
+            {
+                var result = BlRoomsAnalysis.GetFloorPlanData();
+                var count = result != null ? result.Count() : 0;
+                Logging.Logger.LogDebug($"[vHTRGM09] FloorPlan API 完成，共 {count} 筆資料");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.LogError($"[vHTRGM09] FloorPlan API 發生錯誤：{ex.Message}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -89,7 +105,20 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         [HttpPost("AccountDetail")]
         public IEnumerable<MdAccountDetailReport> AccountDetail([FromBody] MdAccountDetailReportQuery queryParams)
         {
-            return BlAccountDetailReport.Query(queryParams);
+            Logging.Logger.LogDebug($"[vHTRGM09] AccountDetail API 呼叫開始，參數：{@queryParams}");
+
+            try
+            {
+                var result = BlAccountDetailReport.Query(queryParams);
+                var count = result != null ? result.Count() : 0;
+                Logging.Logger.LogDebug($"[vHTRGM09] AccountDetail API 完成，共 {count} 筆資料");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.LogError($"[vHTRGM09] AccountDetail API 發生錯誤：{ex.Message}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -100,7 +129,20 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         [HttpPost("AccountSummary")]
         public IEnumerable<MdAccountSummaryReport> AccountSummary([FromBody] MdAccountDetailReportQuery queryParams)
         {
-            return BlAccountSummaryReport.Query(queryParams);
+            Logging.Logger.LogDebug($"[vHTRGM09] AccountSummary API 呼叫開始，參數：{@queryParams}");
+
+            try
+            {
+                var result = BlAccountSummaryReport.Query(queryParams);
+                var count = result != null ? result.Count() : 0;
+                Logging.Logger.LogDebug($"[vHTRGM09] AccountSummary API 完成，共 {count} 筆資料");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.LogError($"[vHTRGM09] AccountSummary API 發生錯誤：{ex.Message}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -111,7 +153,20 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         [HttpPost("InvoiceDetail")]
         public IEnumerable<MdInvoiceDetailReport> InvoiceDetail([FromBody] MdInvoiceDetailReportQuery queryParams)
         {
-            return BlInvoiceDetailReport.Query(queryParams);
+            Logging.Logger.LogDebug($"[vHTRGM09] InvoiceDetail API 呼叫開始，參數：{@queryParams}");
+
+            try
+            {
+                var result = BlInvoiceDetailReport.Query(queryParams);
+                var count = result != null ? result.Count() : 0;
+                Logging.Logger.LogDebug($"[vHTRGM09] InvoiceDetail API 完成，共 {count} 筆資料");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.LogError($"[vHTRGM09] InvoiceDetail API 發生錯誤：{ex.Message}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -122,7 +177,20 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         [HttpPost("VacantForecast")]
         public IEnumerable<MdVacantForecastReport> VacantForecast([FromBody] MdVacantForecastReportQuery queryParams)
         {
-            return BlVacantForecastReport.Query(queryParams);
+            Logging.Logger.LogDebug($"[vHTRGM09] VacantForecast API 呼叫開始，參數：{@queryParams}");
+
+            try
+            {
+                var result = BlVacantForecastReport.Query(queryParams);
+                var count = result != null ? result.Count() : 0;
+                Logging.Logger.LogDebug($"[vHTRGM09] VacantForecast API 完成，共 {count} 筆資料");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.LogError($"[vHTRGM09] VacantForecast API 發生錯誤：{ex.Message}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -133,7 +201,20 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         [HttpPost("OccupancyStats")]
         public IEnumerable<MdOccupancyStatsReport> OccupancyStats([FromBody] MdOccupancyStatsReportQuery queryParams)
         {
-            return BlOccupancyStatsReport.Query(queryParams);
+            Logging.Logger.LogDebug($"[vHTRGM09] OccupancyStats API 呼叫開始，參數：{@queryParams}");
+
+            try
+            {
+                var result = BlOccupancyStatsReport.Query(queryParams);
+                var count = result != null ? result.Count() : 0;
+                Logging.Logger.LogDebug($"[vHTRGM09] OccupancyStats API 完成，共 {count} 筆資料");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.LogError($"[vHTRGM09] OccupancyStats API 發生錯誤：{ex.Message}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -144,7 +225,20 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         [HttpPost("PriceAudit")]
         public IEnumerable<MdPriceAuditReport> PriceAudit([FromBody] MdPriceAuditReportQuery queryParams)
         {
-            return BlPriceAuditReport.Query(queryParams);
+            Logging.Logger.LogDebug($"[vHTRGM09] PriceAudit API 呼叫開始，參數：{@queryParams}");
+
+            try
+            {
+                var result = BlPriceAuditReport.Query(queryParams);
+                var count = result != null ? result.Count() : 0;
+                Logging.Logger.LogDebug($"[vHTRGM09] PriceAudit API 完成，共 {count} 筆資料");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.LogError($"[vHTRGM09] PriceAudit API 發生錯誤：{ex.Message}", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -152,71 +246,32 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// </summary>
         /// <param name="roomNo">房號</param>
         /// <returns>住客應收帳款資料集合</returns>
-        [HttpGet("GuestReceivable/{roomNo}")]
-        public IEnumerable<MdGuestReceivable> GetGuestReceivable(string roomNo)
-        {
-            return BlGuestReceivable.GetData(roomNo);
-        }
+        //[HttpGet("GuestReceivable/{roomNo}")]
+        //public IEnumerable<MdGuestReceivable> GetGuestReceivable(string roomNo)
+        //{
+        //    return BlGuestReceivable.GetData(roomNo);
+        //}
 
         /// <summary>
         /// 取得訂單詳情
         /// </summary>
-        /// <param name="rvId">旅客編號（GR01）</param>
+        /// <param name="visitNo">住宿號碼（VS24）</param>
         /// <returns>訂單詳情資料模型</returns>
-        [HttpGet("rooms/{grId}/orderDetail")]
-        public MdOrderDetail GetOrderDetail(string grId)
+        [HttpGet("rooms/orderDetail/{visitNo}")]
+        public MdOrderDetail GetOrderDetail(string visitNo)
         {
+            Logging.Logger.LogDebug($"[vHTRGM09] GetOrderDetail API 呼叫開始，visitNo：{visitNo}");
+
             try
             {
-                // 取得平面圖資料
-                var floorPlanData = BlRoomsAnalysis.GetFloorPlanData();
-                
-                // 從平面圖資料中找到對應的旅客
-                var guest = floorPlanData?.FirstOrDefault(x => x.GR01 == grId);
-
-                if (guest == null)
-                {
-                    return new MdOrderDetail();
-                }
-
-                // 格式化日期
-                string FormatDate(string date)
-                {
-                    if (string.IsNullOrEmpty(date) || date.Length < 8)
-                        return date ?? "";
-                    return $"{date.Substring(0, 4)}-{date.Substring(4, 2)}-{date.Substring(6, 2)}";
-                }
-
-                // 組裝回傳資料
-                return new MdOrderDetail
-                {
-                    // 客戶資訊
-                    GuestName = guest.GR03 ?? "",
-                    Phone = guest.CN09 ?? "",
-                    ReservationNo = guest.RV01 ?? grId,
-                    GroupName = guest.GroupName ?? "",
-                    Nationality = guest.GR08 ?? "",
-                    Email = guest.CN10 ?? "",
-
-                    // 住宿資訊
-                    CheckInDate = FormatDate(guest.GR05),
-                    CheckOutDate = FormatDate(guest.GR06),
-                    RoomType = guest.RoomType ?? guest.GR07 ?? "",
-                    RoomNo = guest.VS06 ?? "",
-
-                    // 訂單資訊
-                    Source = guest.RV14 ?? "",
-                    IsDepositPaid = guest.RV17 == "Y",
-                    Sales = guest.RV15 ?? "",
-
-                    // 費用資訊
-                    TotalAmount = guest.TotalAmount
-                };
+                var result = BlOrderDetail.GetOrderDetail(visitNo);
+                Logging.Logger.LogDebug($"[vHTRGM09] GetOrderDetail API 完成，visitNo：{visitNo}");
+                return result;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[ReportsController] GetOrderDetail Error: {ex.Message}");
-                return new MdOrderDetail();
+                Logging.Logger.LogError($"[vHTRGM09] GetOrderDetail API 發生錯誤：{ex.Message}", ex);
+                throw;
             }
         }
 

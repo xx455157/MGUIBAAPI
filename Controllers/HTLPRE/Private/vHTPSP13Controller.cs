@@ -52,7 +52,14 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// </summary>
         /// <param name="PosId">廳別代碼</param>
         [HttpGet("pagep")]
-        public MdHTPSP13_h2 GetUIDataByPos([RequiredFromQuery]string PosId) => BlPOSMenu.GetUIData<MdHTPSP13_h2>(PosId);
+        public MdHTPSP13Pos_h GetUIDataByPos([RequiredFromQuery]string PosId) => BlPOSMenu.GetUIData<MdHTPSP13Pos_h>(PosId);
+
+        /// <summary>
+        /// 取得vHTPSP13畫面輔助資料-出納科目
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("pagea")]
+        public MdHTPSP13Acct_h GetUIDataByPos() => BlPOSMenu.GetUIData<MdHTPSP13Acct_h>();
 
         #endregion
 

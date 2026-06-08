@@ -74,6 +74,19 @@ namespace MGUIBAAPI.Controllers.HTLPRE
             return BlConfigs.GetHTSetupUiDataCode();
         }
 
+        [HttpGet("page/room")]
+        public MdHTSetupRoom_h GetUIDataForRoom()
+        {
+            return BlConfigs.GetHTSetupUiDataRoom();
+        }
+
+
+        [HttpGet("page/roomtype")]
+        public MdHTSetupRoomType_h GetUIDataForRoomType()
+        {
+            return BlConfigs.GetHTSetupUiDataRoomType();
+        }
+
         #endregion
 
         #region " 共用函式 - 報表查詢 "

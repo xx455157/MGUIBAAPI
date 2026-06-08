@@ -206,14 +206,15 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
         /// <summary>
         /// 批次設定房間為故障/臨時維修（一次性多筆）
         /// </summary>
+        /// <param name="rooms">OOO/OOS 批次資料集合</param>
         /// <returns>系統規範訊息物件</returns>
         [HttpPut("outofservice")]
-        public async Task<MdApiMessage> UpdateOutOfServiceBatch()
+        public MdApiMessage UpdateOutOfServiceBatch([FromBody] IEnumerable<MdOutOfOrderRoomBatch> rooms)
         {
             try
             {
                 // 呼叫商業元件執行批次作業
-                var _result = BlHouseKeeping.ProcessUpdateOutOfServiceBatch(await Request.GetRawBodyStringAsync());
+                var _result = BlHouseKeeping.ProcessUpdateOutOfServiceBatch(rooms);
 
                 // 回應前端成功訊息
                 return HttpContext.Response.UpdateSuccess(_result);

@@ -3,7 +3,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -49,6 +52,18 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         public MdPosConfig GetPosConfig(string posId)
         { 
             return BlSINI.GetPosConfigs(posId);
+        }
+
+        /// <summary>
+        /// 取得模組(Section)組態設定
+        /// </summary>
+        /// <param name="section">SINI Section</param>
+        /// <returns>SINI 組態列表</returns>
+        [HttpGet("module/{section}")]
+        public IEnumerable<MdCode> GetModuleConfigs(string section)
+        {
+            // 回傳格式：[{ id: Topic, name: TopicValue }]
+            return BlSINI.GetRows(section, new string[0], string.Empty);
         }
 
         #endregion
@@ -101,29 +116,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE
             }
         }
 
-        /// <summary>
-        /// 通用規則組態設定
-        /// </summary>
-        /// <param name="moduleId">模組代碼</param>
-        /// <param name="values">組態設定值</param>
-        /// <returns>系統規範訊息物件</returns>
-        [HttpPost("{moduleId}")]
-        public MdApiMessage WriteConfig(string moduleId, [FromBody] IEnumerable<MdValue> values)
-        {
-            try
-            {
-                // 呼叫商業元件執行修改作業
-                int _result = BlSINI.WritePosConfigs(moduleId, values);
-                var _resultObj = HttpContext.Response.InsertSuccess(_result, "PgmMsg_SaveSuccess");
-                // 回應前端修改成功訊息 
-                return _resultObj;
-            }
-            catch (Exception ex)
-            {
-                // 回應前端修改失敗訊息
-                return HttpContext.Response.InsertFailed(ex);
-            }
-        }
+
 
         /// <summary>
         /// 廳別詳細組態設定
@@ -154,3 +147,4 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         #endregion
     }
 }
+

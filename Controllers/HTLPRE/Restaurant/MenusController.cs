@@ -14,7 +14,7 @@ using GUICore.Web.Attributes;
 using GUIStd.Models;
 using GUIStd.BLL.AllNewHTL;
 using GUIStd.BLL.AllNewHTL.Private;
-using GUIStd.DAL.AllNewHTL.Models.Share;
+using GUIStd.DAL.AllNewHTL.Models;
 
 #endregion
 

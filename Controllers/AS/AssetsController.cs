@@ -21,6 +21,9 @@ using GUIStd.DAL.AllNewAS.Models.Private.vASR02;
 using BLL_GUI = GUIStd.BLL.GUI;
 using DAL_BASE_MODEL = GUIStd.DAL.Base.Models;
 using GUIStd.DAL.AllNewAS.Models.Private.Assets;
+using GUICore.Web.Attributes;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -43,6 +46,8 @@ namespace MGUIBAAPI.Controllers.AS
         private BlSINI BlSINI => new BlSINI(ClientContent);
 
         private BlAA BlAA => new BlAA(ClientContent);
+
+        private BlAB BlAB => new BlAB(ClientContent);
 
         #endregion
 
@@ -372,6 +377,127 @@ namespace MGUIBAAPI.Controllers.AS
             return BlAsset.GetAccountsHelp(companyId);
         }
 
+        /// <summary>
+        /// 取得 會計科目 分頁的輔助資料
+        /// A15InAA 檢核 1:固定資產科目/AA19、2:備抵折舊科目/AA20、3:折舊費用科目/AA21
+        /// </summary>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <param name="companyId">公司別</param>
+        /// <param name="accountType">科目類型</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/assetAccount/pages/{pageNo}")]
+        public MdCode_p GetSHelpv2AssetAccount([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText,
+            [FromQuery] bool sortByName, [FromQuery] string companyId = "", [FromQuery] string accountType = "")
+        {
+            var _para = new DAL_BASE_MODEL.MdHelpPaging
+            {
+                Language = ClientContent.Language,
+                FuncName = this.ControlName,
+                QueryText = queryText,
+                SortByName = sortByName,
+                PageNo = pageNo,
+            };
+            return BlAA.GetSHelpv2AssetAccount(_para, companyId, accountType);
+        }
+
+
+        /// <summary>
+        /// 取得 保管人 分頁的輔助資料
+        /// usp_SelectA0801InAB07ForHelpPaging
+        /// </summary>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <param name="companyId">公司別</param>
+        /// <param name="accountType">科目類型</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/assetKeeper/pages/{pageNo}")]
+        public MdCode_p GetSHelpv2AssetKeeper([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText,
+            [FromQuery] bool sortByName, [FromQuery] string companyId = "", [FromQuery] string accountType = "")
+        {
+            var _para = new DAL_BASE_MODEL.MdHelpPaging
+            {
+                Language = ClientContent.Language,
+                FuncName = this.ControlName,
+                QueryText = queryText,
+                SortByName = sortByName,
+                PageNo = pageNo,
+            };
+            return BlAB.GetSHelpv2AssetKeeper(_para, companyId);
+        }
+
+
+        /// <summary>
+        /// 取得 保管部門 分頁的輔助資料
+        /// usp_SelectA0201InAB06ForHelpPaging
+        /// </summary>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <param name="companyId">公司別</param>
+        /// <param name="accountType">科目類型</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("helpv2/assetKeepDept/pages/{pageNo}")]
+        public MdCode_p GetSHelpv2AssetKeepDept([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string queryText,
+            [FromQuery] bool sortByName, [FromQuery] string companyId = "", [FromQuery] string accountType = "")
+        {
+            var _para = new DAL_BASE_MODEL.MdHelpPaging
+            {
+                Language = ClientContent.Language,
+                FuncName = this.ControlName,
+                QueryText = queryText,
+                SortByName = sortByName,
+                PageNo = pageNo,
+            };
+            return BlAB.GetSHelpv2AssetKeepDept(_para, companyId);
+        }
+
         #endregion
+
+        #region " 共用函式 - 異動資料 "
+
+        /// <summary>
+        /// 批次更新勾選財產之會計科目（AA19／AA20／AA21 擇一）
+        /// </summary>
+        /// <param name="companyId">公司別</param>
+        /// <param name="accountType">科目類型</param>
+        /// <param name="newAccountSubject">新會計科目</param>
+        [HttpPost("updateForAccountChange")]
+        public async Task<MdApiMessage> UpdateForAccountChange([RequiredFromQuery] string companyId, [RequiredFromQuery] string accountType, [RequiredFromQuery] string newAccountSubject)
+        {
+            try
+            {
+                var _rows = BlAsset.UpdateForAccountChange(companyId, accountType, newAccountSubject, await Request.GetRawBodyStringAsync());
+                return HttpContext.Response.UpdateSuccess(_rows);
+            }
+            catch (Exception ex)
+            {
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
+
+        /// <summary>
+        /// 批次更新勾選財產之目前狀態（AB09）
+        /// </summary>
+        /// <param name="companyId">公司別</param>
+        /// <param name="newStatus">新狀態</param>
+        [HttpPost("updateForStatusChange")]
+        public async Task<MdApiMessage> UpdateForStatusChange([RequiredFromQuery] string companyId, [RequiredFromQuery] string newStatus)
+        {
+            try
+            {
+                var _rows = BlAsset.UpdateForStatusChange(companyId, newStatus, await Request.GetRawBodyStringAsync());
+                return HttpContext.Response.UpdateSuccess(_rows);
+            }
+            catch (Exception ex)
+            {
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
+
+        #endregion
+
     }
 }

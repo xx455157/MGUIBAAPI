@@ -1,7 +1,8 @@
 ﻿#region " 匯入的名稱空間：Framework "
 
-using Microsoft.AspNetCore.Mvc; 
+using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 
 #endregion
 
@@ -35,12 +36,23 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Register
         /// <summary>
         /// 取得本日變化預測表
         /// </summary>
-
         /// <returns>住房率模型泛型集合物件</returns>
         [HttpGet("dailyguestlist")]
 		public MdStatusRoomLists DailyGuestList()
 		{
-			return BlRoomStays.DailyGuestList();
+            Logging.Logger.LogDebug("[vHTRGM09] DailyGuestList API 呼叫開始");
+
+            try
+            {
+                var result = BlRoomStays.DailyGuestList();
+                Logging.Logger.LogDebug($"[vHTRGM09] DailyGuestList API 完成");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.LogError($"[vHTRGM09] DailyGuestList API 發生錯誤：{ex.Message}", ex);
+                throw;
+            }
         }
 
         #endregion

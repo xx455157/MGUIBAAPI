@@ -34,9 +34,9 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Reservation
         private BlReservation BlReservation => new BlReservation(ClientContent);
 
         #endregion
-
+        
         #region " 共用函式 - 取得訂房資料 "
-       
+
         /// <summary>
         /// 取得分頁頁次的訂房清單
         /// </summary>
@@ -113,7 +113,31 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Reservation
                 return HttpContext.Response.InsertFailed(ex);
             }
         }
-        
+
+        /// <summary>
+        /// 取消訂單作業
+        /// </summary>
+        /// <param name="reservationNo">訂房號碼</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPut("cancel/{reservationNo}")]
+        public MdApiMessage UpdateForCancel(string reservationNo)
+        {
+            try
+            {
+                // 呼叫商業元件執行新增作業
+                var _result = BlReservation.ProcessCancel(reservationNo);
+
+                // 回應前端修改成功訊息
+                return HttpContext.Response.SendSuccess(
+                    string.Format(Localization.GetValue(Enums.ResourceLang.LangHTL, "PgmMsg_CancelReservationSuccessMsg"), reservationNo));
+            }
+            catch (Exception ex)
+            {
+                // 回應前端新增失敗訊息
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
+
         #endregion        
 
     }
