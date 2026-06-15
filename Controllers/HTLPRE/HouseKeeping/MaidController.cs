@@ -180,6 +180,31 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
         }
 
         /// <summary>
+        /// 更新房間備註（HK14）
+        /// 對應 vHTRGM09 房卡快速操作 popover「備註」功能
+        /// </summary>
+        /// <param name="roomNo">房號</param>
+        /// <param name="obj">房間備註物件</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPut("room/remark/{roomNo}")]
+        public MdApiMessage UpdateRoomRemark(string roomNo, [FromBody] MdRoomRemark_w obj)
+        {
+            try
+            {
+                // 呼叫商業元件執行備註更新
+                var _result = BlHouseKeeping.ProcessUpdateRoomRemark(roomNo, obj?.remark);
+
+                // 回應前端更新成功訊息
+                return HttpContext.Response.UpdateSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                // 回應前端更新失敗訊息
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
+
+        /// <summary>
         /// 設定房間為故障/臨時維修
         /// </summary>
         /// <param name="roomNo">房號</param>
