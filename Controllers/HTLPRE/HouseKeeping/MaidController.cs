@@ -205,6 +205,45 @@ namespace MGUIBAAPI.Controllers.HTLPRE.HouseKeeping
         }
 
         /// <summary>
+        /// 取得住宿備註（HTMO，MO01='09VS'，MO02=VS24）
+        /// 對應 vHTRGM09 房卡快速操作 popover「住客備註」功能
+        /// </summary>
+        /// <param name="vs24">住宿編號</param>
+        /// <returns>備註字串（多列以 \n 串接；無資料回傳空字串）</returns>
+        [HttpGet("visit/remark/{vs24}")]
+        public string GetRoomVisitRemark(string vs24)
+        {
+            return BlHouseKeeping.ProcessGetRoomVisitRemark(vs24) ?? string.Empty;
+        }
+
+        /// <summary>
+        /// 更新住宿備註（HTMO，MO01='09VS'，MO02=VS24）
+        /// 對應 vHTRGM09 房卡快速操作 popover「住客備註」功能
+        /// 行為對齊 RGM02.frm / Ht2000.bas 的 Build_MemoData。
+        /// 空房（無 VS24）時前端不會呼叫此端點。
+        /// </summary>
+        /// <param name="vs24">住宿編號</param>
+        /// <param name="obj">住宿備註物件</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPut("visit/remark/{vs24}")]
+        public MdApiMessage UpdateRoomVisitRemark(string vs24, [FromBody] MdRoomVisitRemark_w obj)
+        {
+            try
+            {
+                // 呼叫商業元件執行住宿備註更新
+                var _result = BlHouseKeeping.ProcessUpdateRoomVisitRemark(vs24, obj?.remark);
+
+                // 回應前端更新成功訊息
+                return HttpContext.Response.UpdateSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                // 回應前端更新失敗訊息
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
+
+        /// <summary>
         /// 設定房間為故障/臨時維修
         /// </summary>
         /// <param name="roomNo">房號</param>
