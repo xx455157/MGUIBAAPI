@@ -32,12 +32,12 @@ namespace MGUIBAAPI.Controllers.GUI
     [Route("gui/[controller]")]
     public class FilesController : GUIAppAuthController
     {
-        #region " 私用函式 "
+        #region " 私用屬性 "
 
 
         #endregion
 
-        #region " 公用函式 "
+        #region " 共用函式 - 查詢資料 "
 
         /// <summary>
         /// 條列主機上傳目錄底下的圖檔
@@ -71,6 +71,10 @@ namespace MGUIBAAPI.Controllers.GUI
                 minEditDate: minDate, maxEditDate: maxDate);
         }
 
+        #endregion
+
+        #region " 共用屬性 - 異動資料 "
+        
         /// <summary>
         /// 使用表單資料模型傳遞參數，提供表單資料上傳、檔案上傳儲存的 API
         /// </summary>

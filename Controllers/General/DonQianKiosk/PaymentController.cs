@@ -63,10 +63,7 @@ namespace MGUIBAAPI.Controllers.General.DonQianKiosk
 		/// <param name="obj">付款資料物件</param>
 		/// <returns>系統規範訊息物件</returns>
 		[HttpPost]
-		public MdApiMessage Insert(
-			string domain,
-			[RequiredFromQuery] string booking_number,
-			[FromBody] MdKioskPayment obj)
+		public MdApiMessage Insert(string domain,[RequiredFromQuery] string booking_number,[FromBody] MdKioskPayment obj)
 		{
 			// 驗證必填欄位：payment_id 不可為 0
 			if (obj.payment_id == 0) return null;

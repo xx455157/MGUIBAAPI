@@ -34,7 +34,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Reservation
         private BlReservation BlReservation => new BlReservation(ClientContent);
 
         #endregion
-        
+
         #region " 共用函式 - 取得訂房資料 "
 
         /// <summary>
@@ -86,6 +86,17 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Reservation
             return BlReservation.GetDataForRoomPrice(dates, datee, companyId, roomTypes);
         }
 
+        /// <summary>
+        /// 取得唯一的訂房資料
+        /// </summary>        
+        /// <param name="reservationNo">訂房號碼路徑參數</param>
+        /// <returns>訂房資料模型物件</returns>
+        [HttpGet("{reservationNo}")]
+        public MdReservation_d GetRow(string reservationNo)
+        {
+            return BlReservation.GetRow(reservationNo);
+        }
+
         #endregion               
 
         #region " 共用函式 - 異動資料 "
@@ -100,7 +111,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Reservation
         {
             try
             {
-                // 呼叫商業元件執行入住作業
+                // 呼叫商業元件執行新增作業
                 int _result = BlReservation.ProcessInsert(obj, out string _rvNo);
 
                 // 回應前端新增成功訊息                
@@ -124,7 +135,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Reservation
         {
             try
             {
-                // 呼叫商業元件執行新增作業
+                // 呼叫商業元件執行取消訂單作業
                 var _result = BlReservation.ProcessCancel(reservationNo);
 
                 // 回應前端修改成功訊息
@@ -138,7 +149,31 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Reservation
             }
         }
 
-        #endregion        
+        /// <summary>
+        /// 修改訂單作業
+        /// </summary>        
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [HttpPut("{reservationNo}")]
+        public MdApiMessage Update(string reservationNo, [FromBody] MdReservation_w obj)
+        {
+            try
+            {
+                // 呼叫商業元件執行修改作業
+                var _result = BlReservation.ProcessUpdate(obj);
+
+                // 回應前端修改成功訊息
+                return HttpContext.Response.SendSuccess(
+                    string.Format(Localization.GetValue(Enums.ResourceLang.LangHTL, "PgmMsg_UpdateReservationSuccessMsg"), reservationNo));
+            }
+            catch (Exception ex)
+            {
+                // 回應前端新增失敗訊息
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
+
+        #endregion
 
     }
 }

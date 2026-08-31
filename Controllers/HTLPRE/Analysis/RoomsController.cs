@@ -1,6 +1,6 @@
-#region " 匯入的名稱空間：Framework "
+﻿#region " 匯入的名稱空間：Framework "
 
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc; 
 using System.Collections.Generic;
 
 #endregion

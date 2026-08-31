@@ -156,7 +156,7 @@ namespace MGUIBAAPI.Controllers.Pattern
         /// 刪除資料
         /// </summary>
         /// <param name="customerId">客戶編號</param>
-		/// <returns>系統規範訊息物件</returns>
+        /// <returns>系統規範訊息物件</returns>
         [HttpDelete("{customerId}")]
         public MdApiMessage Delete(string customerId)
         {

@@ -15,7 +15,7 @@ using GUIStd.Models;
 using GUIStd.BLL.AllNewHTL;
 using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.DAL.AllNewHTL.Models;
-using GUIStd.DAL.AllNewHTL.Models;
+using GUIStd.Attributes;
 
 #endregion
 
@@ -96,7 +96,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// <param name="rowsPerPage">每頁筆數</param>
         /// <returns>出納科目分業資料模型物件</returns>
         [HttpPost("query/pages/{pageNo}")]
-        public MdAccount_p GetDataForPaging(MdAccount_q obj, int pageNo, [FromQuery] int rowsPerPage)
+        public MdAccount_p GetDataForPaging(MdAccount_q obj, [DARange(1, int.MaxValue)] int pageNo, [FromQuery] int rowsPerPage)
 		{
 			return BlHTCA.GetDataForPaging(obj, pageNo, rowsPerPage);
         }

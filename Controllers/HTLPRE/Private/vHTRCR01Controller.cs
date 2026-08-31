@@ -16,6 +16,7 @@ using GUICore.Web.Extensions;
 using GUIStd.BLL.AllNewHTL.Private;
 using GUIStd.DAL.AllNewHTL.Models.Private.vHTRCR01;
 using GUIStd.DAL.Base.Models.Reports;
+using GUIStd;
 
 #endregion
 
@@ -31,6 +32,12 @@ namespace MGUIBAAPI.Controllers.HTLPRE
 
         private BlHouseKeeping BlHouseKeeping => new BlHouseKeeping(ClientContent);
         private BlHTRCR01 BlHTRCR01 => new BlHTRCR01(ClientContent);
+
+
+        /// <summary>
+        /// 報表的系統代號
+        /// </summary>
+        public override Enums.WebSystem SystemId { get; set; } = Enums.WebSystem.HTLPRE;
 
         #endregion
 

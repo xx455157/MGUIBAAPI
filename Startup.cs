@@ -35,6 +35,9 @@ namespace MGUIBAAPI
 
             // 註冊 Aspose.Cells 的 License
             GUIStd.Excel.Base.SetLicense();
+
+            // 註冊 Aspose.Word 的 License
+            GUIStd.Word.Base.SetLicense();
         }
 
         public IConfiguration Configuration { get; }

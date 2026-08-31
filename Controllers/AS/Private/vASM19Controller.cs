@@ -32,7 +32,6 @@ namespace MGUIBAAPI.Controllers.AS
     {
         #region " 私用屬性 "
 
-        private BlASM14 BlASM14 => new BlASM14(ClientContent);
         private BlASM19 BlASM19 => new BlASM19(ClientContent);
 
         #endregion
@@ -112,7 +111,7 @@ namespace MGUIBAAPI.Controllers.AS
         }
 
         /// <summary>
-        /// 財產選取查詢（D 畫面財產選取對話框，vASM19 盤點用，依 dlgAssetPhysical 邏輯）
+        /// 財產選取查詢
         /// </summary>
         /// <param name="companyId">公司別</param>
         /// <param name="queryParams">查詢參數模型（MdASM19_SelectAssetsParams）</param>
@@ -190,7 +189,7 @@ namespace MGUIBAAPI.Controllers.AS
         }
 
         /// <summary>
-        /// 修改盤點資料（先刪除原 AM01+AM02 明細，再依請求整批新增；單號以請求為準；公司別取自 Body Header.CompanyId）
+        /// 修改盤點資料
         /// </summary>
         [HttpPut("update")]
         public MdApiMessage UpdateInventory([FromBody] MdASM19_SaveRequest obj)

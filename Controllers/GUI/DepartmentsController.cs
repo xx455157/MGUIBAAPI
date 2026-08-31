@@ -1,6 +1,7 @@
 ﻿#region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 #endregion
@@ -8,12 +9,15 @@ using System.Collections.Generic;
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUICore.Web.Controllers;
+using GUICore.Web.Extensions;
 using GUIStd.Attributes;
 using GUIStd.BLL.AllNewGUI;
+using GUIStd.BLL.AllNewGUI.Private;
 using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.DAL.AllNewGUI.Models.Private.IV.Departments;
 using GUIStd.DAL.AllNewGUI.Models.Private.HTL.Departments;
 using GUIStd.DAL.Base.Models;
+using GUIStd.Models;
 
 #endregion
 
@@ -31,6 +35,10 @@ namespace MGUIBAAPI.Controllers.GUI
         /// 商業邏輯物件屬性
         /// </summary>
         private BlA02 BlA02 => new BlA02(ClientContent);
+
+        /// <summary>vMCF02 查詢列格式（Insert/Update responseData 用）</summary>
+        private BlMCF02 BlMCF02 => mBlMCF02 = mBlMCF02 ?? new BlMCF02(ClientContent);
+        private BlMCF02 mBlMCF02;
 
         #endregion
 
@@ -120,21 +128,85 @@ namespace MGUIBAAPI.Controllers.GUI
 
         /// <summary>
         /// 取得授權部門的輔助資料
-        /// S140313030
         /// </summary>
         /// <param name="includeEmptyRow">是否包含空白列</param>
         /// <param name="includeId">是否包含代碼</param>
         /// <param name="fullName">是否全名</param>
-        /// <param name="empId">員工編號</param>
         /// <returns>程式資料模型泛型集合物件</returns>
         [HttpGet("authdepts")]
-        public IEnumerable<MdCode> GetAuthDetps([FromQuery] bool includeEmptyRow, [FromQuery] bool includeId, [FromQuery] bool fullName, [FromQuery] string empId)
+        public IEnumerable<MdCode> GetAuthDetps([FromQuery] bool includeEmptyRow, [FromQuery] bool includeId, [FromQuery] bool fullName)
         {
-            if (string.IsNullOrWhiteSpace(empId))
+
+            return BlA02.GetHelpAuthorized(includeEmptyRow: includeEmptyRow, includeId:includeId, fullName: fullName);
+        }
+
+        /// <summary>上層部門 SelectLoadMore 選項</summary>
+        [HttpGet("query/parentdepts")]
+        public IEnumerable<MdCode> GetParentDepts([FromQuery] string keyword = "", [FromQuery] string excludeDeptCode = "", [DARange(1, int.MaxValue)] int pageNo = 1, [FromQuery] int rowsPerPage = 0)
+        {
+            return BlA02.GetParentDepts(keyword, excludeDeptCode, pageNo, rowsPerPage);
+        }
+
+        /// <summary>主鍵存在檢查</summary>
+        [HttpGet("exists/{deptCode}")]
+        public bool IsExist(string deptCode)
+        {
+            return BlA02.IsExist(deptCode);
+        }
+
+        #endregion
+
+        #region " 共用函式 - 異動資料 "
+
+        /// <summary>新增部門資料</summary>
+        [HttpPost]
+        public MdApiMessage Insert([FromBody] MdDepartment_w obj)
+        {
+            try
             {
-                empId = ClientContent.SystemUserId;
+                int _result = BlA02.ProcessInsert(obj);
+                return HttpContext.Response.InsertSuccess(
+                    affectedRows: _result,
+                    responseData: BlMCF02.GetQueryViewRow(obj.A0201)
+                );
             }
-            return BlA02.GetAuthDetps(empId, fullName, includeEmptyRow, includeId);
+            catch (Exception ex)
+            {
+                return HttpContext.Response.InsertFailed(ex);
+            }
+        }
+
+        /// <summary>修改部門資料</summary>
+        [HttpPut]
+        public MdApiMessage Update([FromBody] MdDepartment_w obj)
+        {
+            try
+            {
+                int _result = BlA02.ProcessUpdate(obj);
+                return HttpContext.Response.UpdateSuccess(
+                    affectedRows: _result,
+                    responseData: BlMCF02.GetQueryViewRow(obj.A0201)
+                );
+            }
+            catch (Exception ex)
+            {
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
+
+        /// <summary>刪除部門資料</summary>
+        [HttpDelete("{deptCode}")]
+        public MdApiMessage Delete(string deptCode)
+        {
+            try
+            {
+                int _result = BlA02.ProcessDelete(deptCode);
+                return HttpContext.Response.DeleteSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                return HttpContext.Response.DeleteFailed(ex);
+            }
         }
 
         #endregion

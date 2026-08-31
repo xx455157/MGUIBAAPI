@@ -10,6 +10,7 @@ using System.Collections.Generic;
 
 using GUICore.Web.Controllers;
 using GUICore.Web.Extensions;
+using GUIStd.Attributes;
 using GUIStd.Models;
 using GUIStd.BLL.AllNewHTL;
 using GUIStd.DAL.AllNewGUI.Models;
@@ -71,7 +72,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// <param name="rowsPerPage">每頁筆數</param>
         /// <returns>代碼彙總分業資料模型物件</returns>
         [HttpPost("query/pages/{pageNo}")]
-        public MdCodeHT_p GetDataForPaging(MdCodeHT_q obj, int pageNo, [FromQuery] int rowsPerPage)
+        public MdCodeHT_p GetDataForPaging(MdCodeHT_q obj, [DARange(1, int.MaxValue)] int pageNo, [FromQuery] int rowsPerPage)
         {
             return BlCodes.GetDataForPaging(obj, pageNo, rowsPerPage);
         }
@@ -98,12 +99,24 @@ namespace MGUIBAAPI.Controllers.HTLPRE
 			return BlCodes.GetDataForCity(CurrentLang, includeId);
         }
 
+        /// <summary>
+        /// 檢查代碼是否存在
+        /// </summary>
+        /// <param name="codeTable">代碼表名稱</param>
+        /// <param name="id">代碼ID</param>
+        /// <returns>是否存在</returns>
         [HttpGet("exists/{codeTable}/{id}")]
         public bool IsExists(string codeTable, string id)
         {
             return BlCodes.IsExists(codeTable, id);
         }
 
+        /// <summary>
+        /// 代碼是否已被使用
+        /// </summary>
+        /// <param name="codeTable">代碼表名稱</param>
+        /// <param name="id">代碼ID</param>
+        /// <returns>是否已被使用</returns>
         [HttpGet("istransexists/{codeTable}/{id}")]
         public bool IsTranExists(string codeTable, string id)
         {
@@ -137,7 +150,6 @@ namespace MGUIBAAPI.Controllers.HTLPRE
                 return HttpContext.Response.InsertFailed(ex);
             }
         }
-
 
         /// <summary>
         /// 修改代碼
@@ -185,6 +197,11 @@ namespace MGUIBAAPI.Controllers.HTLPRE
             }
         }
 
+        /// <summary>
+        /// 使用Merge Into 語法新增或修改代碼資料
+        /// </summary>
+        /// <param name="objs">代碼資料模型泛型集合物件</param>
+        /// <returns>系統規範訊息物件</returns>
         [HttpPost("upsert")]
         public MdApiMessage Upsert([FromBody] IEnumerable<MdCodeHT_w> objs)
         {

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <Product>GoldenUp Mobile Business Analysis WebAPI</Product>
@@ -15,9 +15,9 @@
     <UserSecretsId>3D029402-1EE8-4C38-BD56-E15558D6C559</UserSecretsId>
     <LangVersion>7.1</LangVersion>
     <Configurations>Debug;Release;Azure</Configurations>
-    <AssemblyVersion>26.4.102.0</AssemblyVersion>
-    <FileVersion>26.4.102.0</FileVersion>
-    <Version>26.4.102.0</Version>
+    <AssemblyVersion>26.8.703.0</AssemblyVersion>
+    <FileVersion>26.8.703.0</FileVersion>
+    <Version>26.8.703.0</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\netcoreapp2.2\MGUIBAAPI.xml</DocumentationFile>
@@ -36,25 +36,25 @@
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Controllers\PATTERN\**" />
+    <Compile Remove="Controllers\Pattern\**" />
     <Compile Remove="Controllers\TRAINING\**" />
     <Compile Remove="Models\Training\**" />
     <Compile Remove="ViewModels\**" />
     <Compile Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
     <Compile Remove="wwwroot\lib\jquery-validation\**" />
-    <Content Remove="Controllers\PATTERN\**" />
+    <Content Remove="Controllers\Pattern\**" />
     <Content Remove="Controllers\TRAINING\**" />
     <Content Remove="Models\Training\**" />
     <Content Remove="ViewModels\**" />
     <Content Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
     <Content Remove="wwwroot\lib\jquery-validation\**" />
-    <EmbeddedResource Remove="Controllers\PATTERN\**" />
+    <EmbeddedResource Remove="Controllers\Pattern\**" />
     <EmbeddedResource Remove="Controllers\TRAINING\**" />
     <EmbeddedResource Remove="Models\Training\**" />
     <EmbeddedResource Remove="ViewModels\**" />
     <EmbeddedResource Remove="wwwroot\lib\jquery-validation-unobtrusive\**" />
     <EmbeddedResource Remove="wwwroot\lib\jquery-validation\**" />
-    <None Remove="Controllers\PATTERN\**" />
+    <None Remove="Controllers\Pattern\**" />
     <None Remove="Controllers\TRAINING\**" />
     <None Remove="Models\Training\**" />
     <None Remove="ViewModels\**" />
@@ -62,13 +62,7 @@
     <None Remove="wwwroot\lib\jquery-validation\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Controllers\AS\Private\vASR02Controller.cs" />
     <Compile Remove="Controllers\GUIControllerBase.cs" />
-    <Compile Remove="Controllers\NetHTL\Private\vRRM02Controller.cs" />
-    <Compile Remove="Controllers\OA\InvoicesController.cs" />
-    <Compile Remove="Controllers\OA\PaymentsController.cs" />
-    <Compile Remove="Controllers\OA\RevenueBudgetsController.cs" />
-    <Compile Remove="Controllers\PY\Private\vPYConfigsController.cs" />
     <Compile Remove="Features\Configuration.cs" />
     <Compile Remove="Features\LineBot.cs" />
     <Compile Remove="Features\PushMessage.cs" />
@@ -185,6 +179,9 @@
     <None Update="Content\Files\Export\開發網站部署流程.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Files\Front.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Content\Files\Shared - Copy.Azure.Key">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -192,6 +189,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Content\Files\Shared.Key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Files\SSO.Key">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Content\Files\Token.Key">
@@ -205,11 +205,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\NetHTL\Private\" />
     <Folder Include="Controllers\NetPY\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Words">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\Aspose.Words.dll</HintPath>
+    </Reference>
     <Reference Include="GUICore.Web">
       <HintPath>..\..\..\Packages\BIN\netcoreapp2.2\GUICore.Web.dll</HintPath>
     </Reference>
@@ -347,6 +349,9 @@
     </Reference>
     <Reference Include="GUIStd.Security">
       <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIStd.Word">
+      <HintPath>..\..\..\Packages\BIN\netstandard2.0\GUIStd.Word.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

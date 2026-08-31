@@ -14,6 +14,7 @@ using GUICore.Web.Extensions;
 using GUIStd.BLL.AllNewPY;
 using GUIStd.DAL.AllNewPY.Models;
 using GUIStd.Models;
+using GUIStd.Attributes;
 
 #endregion
 
@@ -43,7 +44,37 @@ namespace MGUIBAAPI.Controllers.PY
         [HttpPost("query/{compId}/{employeeId}/{date}")]
         public IEnumerable<MdAttendance_r> GetAttendance(string compId, string employeeId, string date, [FromBody] string[] attCodes)
         {
-            return BlAA.GetData(compId, employeeId, date, attCodes);
+            return BlAA.GetAttendance(compId, employeeId, date, attCodes);
+        }
+
+        /// <summary>
+        /// vABM01：分頁查詢員工考勤清單（vQPattern getData）
+        /// </summary>
+        [HttpPost("query/pages/{pageNo}")]
+        public MdAttendance_p GetData(
+            [DARange(1, int.MaxValue)] int pageNo,
+            [FromBody] MdAttendance_q query)
+        {
+            var _rowsPerPage = query?.RowsPerPage ?? 0;
+            return BlAA.GetData(ControlName, pageNo, ref _rowsPerPage, query);
+        }
+
+        /// <summary>
+        /// vABM01：考勤複合主鍵是否已存在（vQPattern IsExist）；請求體 MdAttendance 鍵欄位
+        /// </summary>
+        [HttpPost("exists")]
+        public bool IsExist([FromBody] MdAttendance request)
+        {
+            return BlAA.IsExist(request);
+        }
+
+        /// <summary>
+        /// vABM01：依主鍵取得單筆考勤資料（vQPattern getRow）；請求體 MdAttendance 鍵欄位
+        /// </summary>
+        [HttpPost("row")]
+        public MdAttendance_row GetRow([FromBody] MdAttendance request)
+        {
+            return BlAA.GetRow(request);
         }
 
         #region " 共用函式 - 異動考勤 "
@@ -72,7 +103,45 @@ namespace MGUIBAAPI.Controllers.PY
         }
 
         /// <summary>
-        /// 新增或修改一筆考勤（AA）；請求體使用 Share/AA 的 MdAttendance
+        /// 新增一筆考勤（AA）；vABM01 vQPattern insert
+        /// </summary>
+        [HttpPost("insert")]
+        public MdApiMessage Insert([FromBody] MdAttendance request)
+        {
+            if (request == null)
+                return HttpContext.Response.InsertFailed(new ArgumentNullException(nameof(request)));
+            try
+            {
+                int _result = BlAA.ProcessInsert(request);
+                return HttpContext.Response.InsertSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                return HttpContext.Response.InsertFailed(ex);
+            }
+        }
+
+        /// <summary>
+        /// 修改一筆考勤（AA）；vABM01 vQPattern update；請求體 original 為編輯前主鍵、data 為新資料
+        /// </summary>
+        [HttpPost("update")]
+        public MdApiMessage Update([FromBody] MdAttendance_update request)
+        {
+            if (request == null)
+                return HttpContext.Response.UpdateFailed(new ArgumentNullException(nameof(request)));
+            try
+            {
+                int _result = BlAA.ProcessUpdate(request);
+                return HttpContext.Response.UpdateSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                return HttpContext.Response.UpdateFailed(ex);
+            }
+        }
+
+        /// <summary>
+        /// 新增或修改一筆考勤（AA）；請求體使用 Share/AA 的 MdAttendance（vABM08 等 upsert）
         /// </summary>
         /// <param name="request">考勤資料模型物件</param>
         /// <returns>系統規範訊息物件</returns>

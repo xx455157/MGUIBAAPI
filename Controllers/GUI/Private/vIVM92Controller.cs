@@ -22,7 +22,7 @@ using GUIStd.Models;
 namespace MGUIBAAPI.Controllers.GUI
 {
     /// <summary>
-    /// vMCF01 公司基本資料管理 程式資料控制器
+    /// vIVM92 發票字軌基本資料 程式資料控制器
     /// </summary>
     [Route("gui/private/[controller]")]
 	public class vIVM92Controller : GUIAppAuthController
@@ -44,11 +44,15 @@ namespace MGUIBAAPI.Controllers.GUI
         /// </summary>
         /// <param name="pageNo">查詢頁次</param>
         /// <param name="queryParams">查詢參數</param>
-        /// <returns>分頁公司資料模型物件</returns>
+        /// <param name="rowsPerPage">一頁筆數（0 時由 SINI 取得）</param>
+        /// <returns>分頁字軌資料模型物件</returns>
         [HttpPost("query/pages/{pageNo}")]
-        public MdIVM92QueryList_p GetData([DARange(1, int.MaxValue)] int pageNo, [FromBody] MdIVM92Query queryParams)
+        public MdIVM92QueryList_p GetData(
+            [DARange(1, int.MaxValue)] int pageNo,
+            [FromBody] MdIVM92Query queryParams,
+            int rowsPerPage = 0)
         {
-            return BlIVM92.GetData(queryParams,ControlName,pageNo);
+            return BlIVM92.GetData(queryParams, ControlName, pageNo, ref rowsPerPage);
         }
 
         /// <summary>

@@ -42,6 +42,16 @@ namespace MGUIBAAPI.Controllers.HTLPRE
 			return BlBkDate.GetHelp(typeId);
 		}
 
+		/// <summary>
+		/// 取得飯店營業日期與班別資料（for vHTRGM09 前端）
+		/// </summary>
+		/// <returns>飯店日期模型</returns>
+		[HttpGet("Hotel")]
+		public MdBKDate GetHotelDate()
+		{
+			return BlBkDate.GetHotelBusinessDate();
+		}
+
 		#endregion
 	}
 }

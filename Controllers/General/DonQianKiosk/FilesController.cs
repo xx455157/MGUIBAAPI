@@ -22,7 +22,7 @@ using GUICore.Web.Attributes;
 using GUICore.Web;
 using MGUIBAAPI.Features;
 using GUIStd;
-using IFormFile = Microsoft.AspNetCore.Http.IFormFile;
+//using IFormFile = Microsoft.AspNetCore.Http.IFormFile;
 
 #endregion
 

@@ -1,404 +1,328 @@
 #region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
 #endregion
 
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUICore.Web.Controllers;
-using GUIStd.Attributes;
-using System.Linq;
 using GUICore.Web.Extensions;
-using MGUIBAAPI.Models.OA;
+using GUIStd.Attributes;
 using GUIStd.BLL.OA.Private;
+using GUIStd.DAL.OA.Models.Private.OA20;
+using GUIStd.Extensions;
 using GUIStd.Models;
+using MGUIBAAPI.Models.OA;
 
 #endregion
 
 namespace MGUIBAAPI.Controllers.OA
 {
     /// <summary>
-    /// 營收合約控制器
+    /// 【需經驗證】OA營收合約控制器
     /// </summary>
     [Route("oa/[controller]")]
     public class ContractsController : GUIAppAuthController
     {
-        #region " 商業邏輯層屬性 "
+        #region " 私用屬性 "
 
-        private BlOA20 BlOA20 => mBlOA20 = mBlOA20 ?? new BlOA20(ClientContent);
-        private BlOA20 mBlOA20;
+        /// <summary>
+        /// 商業邏輯物件屬性
+        /// </summary>
+        private BlOA20 BlOA20 => new BlOA20(ClientContent);
+
+        /// <summary>
+        /// 收支款統計商業邏輯物件屬性
+        /// </summary>
+        private BlOA22 BlOA22 => new BlOA22(ClientContent);
 
         #endregion
 
-        #region " 合約主檔查詢 "
+        #region " 共用函式 - 查詢資料 "
 
         /// <summary>
-        /// 取得合約分頁資料
+        /// 取得分頁頁次的合約資料
         /// </summary>
-        [HttpPost("pages/{pageNo}")]
-        public IActionResult GetContracts([FromBody] MdContract_q queryParams, [DARange(1, int.MaxValue)] int pageNo)
+        /// <remarks>修正 BUG-003 / M-001 / M-002：完整傳遞所有查詢條件到 BLL</remarks>
+        [HttpPost("query/{compId}/{customerId}/pages/{pageNo}")]
+        public MdOA20_p GetData(string compId, string customerId,
+            [DARange(1, int.MaxValue)] int pageNo, [FromBody] MdContractQueryRequest body)
         {
-            try
-            {
-                var _result = BlOA20.GetData(
-                    queryParams.CompId ?? string.Empty,
-                    queryParams.CustomerId ?? string.Empty,
-                    string.Empty,
-                    queryParams.ContractStatus ?? string.Empty,
-                    queryParams.QueryText ?? string.Empty,
-                    ControlName,
-                    pageNo
-                );
+            // 從 Body 中取得查詢條件
+            var _contractType = body?.ContractType ?? string.Empty;
+            var _contractId = body?.ContractId ?? string.Empty;
+            var _contractDateStart = body?.ContractDateStart ?? string.Empty;
+            var _contractDateEnd = body?.ContractDateEnd ?? string.Empty;
+            var _queryText = body?.QueryText ?? string.Empty;
+            var _contractStatus = body?.ContractStatus ?? string.Empty;
 
-                if (_result == null)
-                    return Ok(new { success = true, data = new { codes = new List<object>(), paging = new { totalRows = 0, rowsPerPage = 0, currentPage = pageNo } } });
-
-                return Ok(new { success = true, data = _result });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
+            return BlOA20.GetData(
+                compId ?? string.Empty,
+                customerId ?? string.Empty,
+                _contractType,
+                _contractStatus,
+                _queryText,
+                _contractId,
+                _contractDateStart,
+                _contractDateEnd,
+                ControlName,
+                pageNo
+            );
         }
 
         /// <summary>
-        /// 取得合約單筆資料
+        /// 取得唯一的合約資料
         /// </summary>
+        /// <param name="compId">公司別</param>
+        /// <param name="contractId">合約編號</param>
+        /// <returns>合約資料</returns>
         [HttpGet("{compId}/{contractId}")]
-        public IActionResult GetContract(string compId, string contractId)
+        public MdOA20 GetRow(string compId, string contractId)
         {
-            try
-            {
-                var _contract = BlOA20.GetRow(compId, contractId);
-                if (_contract == null)
-                    return NotFound(new { success = false, message = "合約不存在" });
+            return BlOA20.GetRow(compId, contractId);
+        }
 
-                var _products = BlOA20.GetProducts(compId, contractId);
+        /// <summary>
+        /// 取得收支款統計資料（由 OA22 計算）
+        /// </summary>
+        /// <remarks>透過 BlOA22 商業邏輯層取得收支款統計</remarks>
+        /// <param name="compId">公司別</param>
+        /// <param name="contractId">合約編號</param>
+        /// <returns>收支款統計資料</returns>
+        [HttpGet("revenue/{compId}/{contractId}")]
+        public MdRevenueDetailStatusSummary GetRevenueSummary(string compId, string contractId)
+        {
+            var _summary = BlOA22.GetSummary(compId ?? string.Empty, contractId);
 
-                return Ok(new { success = true, data = new {
-                    contract = _contract,
-                    products = _products?.Select(p => new {
-                        productId = p.ProductId,
-                        productName = p.ProductName,
-                        productCategory = p.ProductCategory,
-                        salesAmount = p.SalesAmount,
-                        externalCost = p.ExternalCost,
-                        warrantyStartDate = p.WarrantyStartDate,
-                        warrantyEndDate = p.WarrantyEndDate,
-                        maintenanceStartDate = p.MaintenanceStartDate,
-                        maintenanceEndDate = p.MaintenanceEndDate,
-                        rentalStartDate = p.RentalStartDate,
-                        rentalEndDate = p.RentalEndDate,
-                        expectedMaintenanceAmount = p.ExpectedMaintenanceAmount,
-                        currentPM = p.CurrentPM
-                    })
-                }});
-            }
-            catch (Exception ex)
+            return new MdRevenueDetailStatusSummary
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                CompId = compId,
+                //ContractId = contractId,
+                //ReceivedAmount = _summary.ReceivedAmount,
+                //ArAmount = _summary.ArAmount,
+                //AccrualExpenseAmount = _summary.AccrualExpenseAmount,
+                //PayableAmount = _summary.PayableAmount
+            };
+        }
+
+        /// <summary>
+        /// 批次取得收支款統計資料（由 OA22 計算）
+        /// </summary>
+        /// <remarks>透過 BlOA22 商業邏輯層批次取得收支款統計</remarks>
+        /// <param name="compId">公司別</param>
+        /// <param name="contractIds">合約編號（多個用逗號分隔）</param>
+        /// <returns>收支款統計資料字典（key: 合約編號）</returns>
+        [HttpGet("revenue/batch/{compId}/{contractIds}")]
+        public Dictionary<string, MdRevenueDetailStatusSummary> GetRevenueSummaryBatch(
+            string compId, string contractIds)
+        {
+            var _result = new Dictionary<string, MdRevenueDetailStatusSummary>();
+
+            if (string.IsNullOrEmpty(contractIds))
+                return _result;
+
+            var _contractIdList = contractIds.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            if (_contractIdList.Length == 0)
+                return _result;
+
+            foreach (var _contractId in _contractIdList)
+            {
+                var _trimmedId = _contractId.Trim();
+                var _summary = BlOA22.GetSummary(compId ?? string.Empty, _trimmedId);
+
+                _result[_trimmedId] = new MdRevenueDetailStatusSummary
+                {
+                    //CompId = compId,
+                    //ContractId = _trimmedId,
+                    //ReceivedAmount = _summary.ReceivedAmount,
+                    //ArAmount = _summary.ArAmount,
+                    //AccrualExpenseAmount = _summary.AccrualExpenseAmount,
+                    //PayableAmount = _summary.PayableAmount
+                };
             }
+
+            return _result;
+        }
+
+        /// <summary>
+        /// 判斷合約是否已存在
+        /// </summary>
+        /// <param name="compId">公司別</param>
+        /// <param name="contractId">合約編號</param>
+        /// <returns></returns>
+        [HttpGet("exists/{compId}/{contractId}")]
+        public bool IsExist(string compId, string contractId)
+        {
+            return BlOA20.GetRow(compId, contractId) != null;
         }
 
         /// <summary>
         /// 合約輔助查詢（分頁）
         /// </summary>
+        /// <param name="compId">公司別</param>
+        /// <param name="queryText">查詢關鍵字</param>
+        /// <param name="pageNo">頁次</param>
+        /// <returns>合約分頁資料</returns>
         [HttpGet("help/{compId}/{queryText}/pages/{pageNo}")]
-        public IActionResult GetContractHelp(string compId, string queryText, [DARange(1, int.MaxValue)] int pageNo)
+        public MdOA20_p GetSHelp(string compId, string queryText, [DARange(1, int.MaxValue)] int pageNo)
         {
-            try
-            {
-                var _result = BlOA20.GetData(compId, string.Empty, string.Empty, string.Empty, queryText, ControlName, pageNo);
-                if (_result == null)
-                    return Ok(new { success = true, data = new { codes = new List<object>(), paging = new { totalRows = 0 } } });
-
-                return Ok(new { success = true, data = _result });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
-        }
-
-        /// <summary>
-        /// 取得客戶別合約統計
-        /// </summary>
-        [HttpGet("stats/{compId}/{customerId}")]
-        public IActionResult GetContractStats(string compId, string customerId)
-        {
-            try
-            {
-                var _result = BlOA20.GetData(compId, customerId, string.Empty, string.Empty, string.Empty, ControlName, 1);
-                if (_result == null)
-                    return Ok(new { success = true, data = new MdContractStats() });
-
-                var _contracts = _result.Codes?.ToList() ?? new List<GUIStd.DAL.OA.Models.Private.OA20.MdOA20>();
-                return Ok(new { success = true, data = new MdContractStats {
-                    TotalContracts = _result.Paging?.TotalRows ?? _contracts.Count,
-                    TotalAmount = _contracts.Sum(c => c.ContractAmountTax)
-                }});
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
+            return BlOA20.GetData(
+                compId ?? string.Empty,
+                string.Empty,                       // customerId
+                string.Empty,                       // contractType
+                string.Empty,                       // contractStatus
+                queryText ?? string.Empty,          // queryText
+                string.Empty,                       // contractId
+                string.Empty,                       // contractDateStart
+                string.Empty,                       // contractDateEnd
+                ControlName,                        // funcName
+                pageNo
+            );
         }
 
         #endregion
 
-        #region " 合約主檔維護 "
+        #region " 共用函式 - 異動資料 "
 
         /// <summary>
-        /// 新增合約
+        /// 新增資料
         /// </summary>
-        [HttpPost("insert")]
-        public IActionResult InsertContract([FromBody] MdContract_i contractData)
+        /// <param name="obj">合約資料模型物件</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPost]
+        public MdApiMessage Insert([FromBody] MdContract obj)
         {
             try
             {
-                if (contractData == null)
-                    return BadRequest(new { success = false, message = "請提供合約資料" });
-
-                var _data = new GUIStd.DAL.OA.Models.Private.OA20.MdOA20_i {
-                    OA2001 = contractData.CompId ?? string.Empty,
-                    OA2002 = contractData.ContractId ?? string.Empty,
-                    OA2003 = contractData.CustomerId ?? string.Empty,
-                    OA2004 = contractData.NewOldCustomer ?? "N",
-                    OA2005 = contractData.ContractEndDate ?? string.Empty,
-                    OA2006 = contractData.ContractType ?? "M",
-                    OA2007 = contractData.ContractAmount,
-                    OA2008 = contractData.ContractAmountTax,
-                    OA2009 = contractData.ExternalCostBudget,
-                    OA2010 = contractData.ContractStatus ?? "A",
-                    OA2011 = contractData.Remark ?? string.Empty,
-                    OA2012 = contractData.ExtendControlDate ?? string.Empty,
-                    OA2013 = DateTime.Now.ToString("yyyy/MM/dd"),
-                    OA2014 = contractData.CurrentSales ?? ClientContent.SystemUserId,
-                    OA2015 = contractData.ContractFileUrl ?? string.Empty
+                // 修正 BUG-011 / BUG-020：採用前端傳入的 CreateDate（若無則 fallback 為系統日）
+                var _createDate = !string.IsNullOrEmpty(obj.CreateDate)
+                    ? obj.CreateDate
+                    : DateTime.Now.ToString("yyyyMMdd");
+                // 組合新增資料模型
+                var _data = new MdOA20_i
+                {
+                    OA2001 = obj.CompId ?? string.Empty,
+                    OA2002 = obj.ContractId ?? string.Empty,
+                    OA2003 = obj.CustomerId ?? string.Empty,
+                    OA2004 = obj.NewOldCustomer ?? "N",
+                    OA2005 = obj.ContractEndDate ?? string.Empty,
+                    OA2006 = obj.ContractType ?? "M",
+                    OA2007 = obj.ContractAmount,
+                    OA2008 = obj.ContractAmountTax,
+                    OA2009 = obj.ExternalCostBudget,
+                    OA2010 = obj.ContractStatus ?? "A",
+                    OA2011 = obj.Remark ?? string.Empty,
+                    OA2012 = obj.ExtendControlDate ?? string.Empty,
+                    OA2013 = _createDate,
+                    OA2014 = obj.CurrentSales ?? ClientContent.SystemUserId,
+                    OA2015 = obj.ContractFileUrl ?? string.Empty
+                    // TODO: 修正 BUG-020 - 待 DB 新增 OA2016 欄位後移除註解
+                    // OA2016 = obj.ExtendMode ?? "待續簽約"
                 };
 
-                var _result = BlOA20.Insert(_data, null, ControlName);
+                // 呼叫商業元件執行新增作業
+                var _result = BlOA20.Insert(_data, Array.Empty<GUIStd.DAL.OA.Models.Private.OA21.MdOA21_i>(), ControlName);
 
+                // 檢查執行結果
                 if (!_result.Success)
-                    return BadRequest(new { success = false, message = _result.Message });
+                {
+                    return HttpContext.Response.InsertFailed(new Exception(_result.Message));
+                }
 
-                return Ok(new { success = true, data = _result.Result });
+                // 回應前端新增成功訊息（responseData 必須回傳 ContractId，前端 _savedContractId 才取得到值）
+                return HttpContext.Response.InsertSuccess(1, responseData: _result.Result?.ContractId);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                // 回應前端新增失敗訊息
+                return HttpContext.Response.InsertFailed(ex);
             }
         }
 
         /// <summary>
-        /// 更新合約
+        /// 修改資料
         /// </summary>
+        /// <param name="compId">公司別</param>
+        /// <param name="contractId">合約編號</param>
+        /// <param name="obj">合約資料模型物件</param>
+        /// <returns>系統規範訊息物件</returns>
         [HttpPut("{compId}/{contractId}")]
-        public IActionResult UpdateContract(string compId, string contractId, [FromBody] MdContract_u contractData)
+        public MdApiMessage Update(string compId, string contractId, [FromBody] MdContract obj)
         {
+            // 檢查鍵值路徑參數與本文中的鍵值是否相同
+            if (!compId.EqualsIgnoreCase(obj.CompId) || !contractId.EqualsIgnoreCase(obj.ContractId))
+            {
+                return HttpContext.Response.UpdateFailedWhenKeyNotSame();
+            }
+
             try
             {
-                if (contractData == null)
-                    return BadRequest(new { success = false, message = "請提供合約資料" });
-
-                var _data = new GUIStd.DAL.OA.Models.Private.OA20.MdOA20_u {
-                    OA2005 = contractData.ContractEndDate ?? string.Empty,
-                    OA2006 = contractData.ContractType ?? "M",
-                    OA2007 = contractData.ContractAmount,
-                    OA2008 = contractData.ContractAmountTax,
-                    OA2009 = contractData.ExternalCostBudget,
-                    OA2010 = contractData.ContractStatus ?? "A",
-                    OA2011 = contractData.Remark ?? string.Empty,
-                    OA2012 = contractData.ExtendControlDate ?? string.Empty,
-                    OA2014 = contractData.CurrentSales ?? ClientContent.SystemUserId,
-                    OA2015 = contractData.ContractFileUrl ?? string.Empty
+                // 組合更新資料模型
+                var _data = new MdOA20_u
+                {
+                    OA2005 = obj.ContractEndDate ?? string.Empty,
+                    OA2006 = obj.ContractType ?? "M",
+                    OA2007 = obj.ContractAmount,
+                    OA2008 = obj.ContractAmountTax,
+                    OA2009 = obj.ExternalCostBudget,
+                    OA2010 = obj.ContractStatus ?? "A",
+                    OA2011 = obj.Remark ?? string.Empty,
+                    OA2012 = obj.ExtendControlDate ?? string.Empty,
+                    OA2014 = obj.CurrentSales ?? ClientContent.SystemUserId,
+                    OA2015 = obj.ContractFileUrl ?? string.Empty
+                    // TODO: 修正 BUG-020 - 待 DB 新增 OA2016 欄位後移除註解
+                    // OA2016 = obj.ExtendMode ?? "待續簽約"
                 };
 
-                var _result = BlOA20.Update(compId, contractId, _data, ControlName);
+                // 呼叫商業元件執行修改作業
+                var _result = BlOA20.Update(compId ?? string.Empty, contractId, _data, ControlName);
 
+                // 檢查執行結果
                 if (!_result.Success)
-                    return BadRequest(new { success = false, message = _result.Message });
+                {
+                    return HttpContext.Response.UpdateFailed(new Exception(_result.Message));
+                }
 
-                return Ok(new { success = true, message = _result.Message });
+                // 回應前端修改成功訊息
+                return HttpContext.Response.UpdateSuccess(1);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                // 回應前端修改失敗訊息
+                return HttpContext.Response.UpdateFailed(ex);
             }
         }
 
         /// <summary>
-        /// 刪除合約
+        /// 刪除資料
         /// </summary>
+        /// <param name="compId">公司別</param>
+        /// <param name="contractId">合約編號</param>
+        /// <returns>系統規範訊息物件</returns>
         [HttpDelete("{compId}/{contractId}")]
-        public IActionResult DeleteContract(string compId, string contractId)
+        public MdApiMessage Delete(string compId, string contractId)
         {
             try
             {
-                var _result = BlOA20.Delete(compId, contractId, ControlName);
+                // 呼叫商業元件執行刪除作業
+                var _result = BlOA20.Delete(compId ?? string.Empty, contractId, ControlName);
 
+                // 檢查執行結果
                 if (!_result.Success)
-                    return BadRequest(new { success = false, message = _result.Message });
+                {
+                    return HttpContext.Response.DeleteFailed(new Exception(_result.Message));
+                }
 
-                return Ok(new { success = true, message = _result.Message });
+                // 回應前端刪除成功訊息
+                return HttpContext.Response.DeleteSuccess(1);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
-        }
-
-        #endregion
-
-        #region " 合約狀態管理 "
-
-        /// <summary>
-        /// 更新合約狀態
-        /// </summary>
-        [HttpPatch("{compId}/{contractId}/status")]
-        public IActionResult UpdateContractStatus(string compId, string contractId, [FromBody] MdContractStatusUpdate statusUpdate)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(statusUpdate?.NewStatus))
-                    return BadRequest(new { success = false, message = "請提供新狀態" });
-
-                var _data = new GUIStd.DAL.OA.Models.Private.OA20.MdOA20_u {
-                    OA2010 = statusUpdate.NewStatus
-                };
-
-                var _result = BlOA20.Update(compId, contractId, _data, ControlName);
-
-                if (!_result.Success)
-                    return BadRequest(new { success = false, message = _result.Message });
-
-                return Ok(new { success = true, message = "狀態更新成功" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
-        }
-
-        /// <summary>
-        /// 展期合約（自動續約）
-        /// </summary>
-        [HttpPost("{compId}/{contractId}/extend")]
-        public IActionResult ExtendContract(string compId, string contractId, [FromBody] MdContractExtend extendData)
-        {
-            try
-            {
-                if (extendData == null)
-                    return BadRequest(new { success = false, message = "請提供展期資料" });
-
-                var _data = new GUIStd.DAL.OA.Models.Private.OA20.MdOA20_u {
-                    OA2005 = extendData.NewEndDate ?? string.Empty,
-                    OA2012 = DateTime.Now.AddYears(extendData.ExtendYears).ToString("yyyy/MM/dd"),
-                    OA2011 = extendData.Remark ?? string.Empty
-                };
-
-                var _result = BlOA20.Update(compId, contractId, _data, ControlName);
-
-                if (!_result.Success)
-                    return BadRequest(new { success = false, message = _result.Message });
-
-                return Ok(new { success = true, message = "展期成功" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
-        }
-
-        #endregion
-
-        #region " Back Log / AR 報表 "
-
-        /// <summary>
-        /// 取得 Back Log 清單
-        /// </summary>
-        [HttpGet("backlog/{compId}")]
-        public IActionResult GetBackLog(string compId, [FromQuery] string salesId, [FromQuery] string startDate, [FromQuery] string endDate)
-        {
-            try
-            {
-                return Ok(new { success = true, data = new List<object>() });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
-        }
-
-        /// <summary>
-        /// 取得 AR(應收帳款) 清單
-        /// </summary>
-        [HttpGet("ar/{compId}")]
-        public IActionResult GetARList(string compId, [FromQuery] string salesId)
-        {
-            try
-            {
-                return Ok(new { success = true, data = new List<object>() });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
-        }
-
-        /// <summary>
-        /// 取得客戶維護中合約清單
-        /// </summary>
-        [HttpGet("expiring/{compId}")]
-        public IActionResult GetExpiringContracts(string compId, [FromQuery] int expireDays = 30)
-        {
-            try
-            {
-                return Ok(new { success = true, data = new List<object>() });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
-        }
-
-        #endregion
-
-        #region " 報表 "
-
-        /// <summary>
-        /// 合約營收統計報表
-        /// </summary>
-        [HttpGet("report/revenue/{compId}")]
-        public IActionResult GetRevenueReport(string compId, [FromQuery] string startDate, [FromQuery] string endDate,
-            [FromQuery] string salesId, [FromQuery] string customerId)
-        {
-            try
-            {
-                return Ok(new { success = true, data = new object() });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
-        }
-
-        /// <summary>
-        /// 資金預測報表
-        /// </summary>
-        [HttpGet("report/cashflow/{compId}")]
-        public IActionResult GetCashFlowForecast(string compId, [FromQuery] int months = 12)
-        {
-            try
-            {
-                return Ok(new { success = true, data = new object() });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                // 回應前端刪除失敗訊息
+                return HttpContext.Response.DeleteFailed(ex);
             }
         }
 

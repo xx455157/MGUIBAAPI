@@ -107,6 +107,17 @@ namespace MGUIBAAPI.Controllers.GUI
             return BlA16.GetData(customerId);
         }
 
+        /// <summary>
+        /// 取得客戶/廠商資料
+        /// </summary>
+        /// <param name="customerIds">客戶/廠商ID</param>
+        /// <returns>客戶資料模型泛型集合物件</returns>
+        [HttpPost("help/assignid")]
+        public IEnumerable<MdCustomer> GetData([FromBody] string[] customerIds)
+        {
+            return BlA16.GetData(customerIds);
+        }
+
         #endregion
 
         #region " 共用屬性 - 異動資料"

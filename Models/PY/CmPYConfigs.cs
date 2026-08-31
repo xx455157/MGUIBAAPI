@@ -22,14 +22,19 @@ namespace MGUIBAAPI.Models.PY
         #region " 共用屬性 "
 
         /// <summary>
-        /// 考勤資料下拉選項 (AB表)
+        /// 考勤資料下拉選項 (AB表，<see cref="MdAttendCode"/> 序列化含 attendCode／attendName／attendType／unitName 等)
         /// </summary>
-        public IEnumerable<MdCodeWithCategory> AttendanceOptions { get; set; }
+        public IEnumerable<MdAttendCode> AttendanceOptions { get; set; }
 
         /// <summary>
         /// 公司別下拉選項 (ARTHGUI A01表)
         /// </summary>
         public IEnumerable<MdCode> CompanyOptions { get; set; }
+
+        /// <summary>
+        /// 兼職特休假：核給不足1日處理方式選項 (SINI PYP60_LessThanOneDay2)
+        /// </summary>
+        public IEnumerable<MdCode> LessThanOneDay2Options { get; set; }
 
 
         #endregion

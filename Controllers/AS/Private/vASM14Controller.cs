@@ -61,7 +61,7 @@ namespace MGUIBAAPI.Controllers.AS
         /// 財產選取查詢（D 畫面財產選取對話框）
         /// </summary>
         /// <param name="companyId">公司別</param>
-        /// <param name="queryParams">查詢參數模型（MdASM14_SelectAssetsParams）</param>
+        /// <param name="queryParams">查詢參數模型</param>
         /// <returns>可選取的財產清單</returns>
         [HttpPost("selectAssets/{companyId}")]
         public MdApiMessage D_GetAssetsList(string companyId, [FromBody] MdASM14_SelectAssetsParams queryParams)

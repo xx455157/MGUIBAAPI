@@ -54,16 +54,6 @@ namespace MGUIBAAPI.Controllers.HTLPRE
 			return BlCodes.GetHelp("FL", CurrentLang, false, includeId);
 		}
 
-		/// <summary>
-		/// 取得班別配置資料
-		/// </summary>
-		/// <param name="includeId">是否包含代碼</param>
-		/// <returns>程式資料模型泛型集合物件</returns>
-		[HttpGet("Shifts")]
-		public IEnumerable<MdCode> GetShifts([FromQuery] bool includeId)
-		{
-			return BlCodes.GetHelp("SH", CurrentLang, false, includeId);
-		}
 
 		#endregion
 	}

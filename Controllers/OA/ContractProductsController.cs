@@ -3,16 +3,18 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 #endregion
 
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUICore.Web.Controllers;
+using GUICore.Web.Extensions;
 using GUIStd.Attributes;
-using System.Linq;
 using MGUIBAAPI.Models.OA;
 using GUIStd.BLL.OA.Private;
+using GUIStd.Extensions;
 using GUIStd.Models;
 
 #endregion
@@ -27,8 +29,7 @@ namespace MGUIBAAPI.Controllers.OA
     {
         #region " 商業邏輯層屬性 "
 
-        private BlOA20 BlOA20 => mBlOA20 = mBlOA20 ?? new BlOA20(ClientContent);
-        private BlOA20 mBlOA20;
+        private BlOA20 BlOA20 => new BlOA20(ClientContent);
 
         #endregion
 
@@ -38,115 +39,89 @@ namespace MGUIBAAPI.Controllers.OA
         /// 取得合約的產品/服務列表
         /// </summary>
         [HttpGet("list/{compId}/{contractId}")]
-        public IActionResult GetContractProducts(string compId, string contractId)
+        public IEnumerable<MdOA20ProductInfo> GetContractProducts(string compId, string contractId)
         {
-            try
-            {
-                var _products = BlOA20.GetProducts(compId, contractId);
-                if (_products == null)
-                    return Ok(new { success = true, data = new { codes = new List<object>() } });
+            var _products = BlOA20.GetProducts(compId, contractId);
+            if (_products == null)
+                return Enumerable.Empty<MdOA20ProductInfo>();
 
-                var _list = _products.Select(p => new {
-                    productId = p.ProductId,
-                    productName = p.ProductName,
-                    productCategory = p.ProductCategory,
-                    salesAmount = p.SalesAmount,
-                    externalCost = p.ExternalCost,
-                    warrantyStartDate = p.WarrantyStartDate,
-                    warrantyEndDate = p.WarrantyEndDate,
-                    maintenanceStartDate = p.MaintenanceStartDate,
-                    maintenanceEndDate = p.MaintenanceEndDate,
-                    rentalStartDate = p.RentalStartDate,
-                    rentalEndDate = p.RentalEndDate,
-                    expectedMaintenanceAmount = p.ExpectedMaintenanceAmount,
-                    currentPM = p.CurrentPM
-                }).ToList();
-
-                return Ok(new { success = true, data = new { codes = _list } });
-            }
-            catch (Exception ex)
+            return _products.Select(p => new MdOA20ProductInfo
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
+                productId = p.ProductId,
+                productName = p.ProductName,
+                productCategory = p.ProductCategory,
+                salesAmount = p.SalesAmount,
+                externalCost = p.ExternalCost,
+                warrantyStartDate = p.WarrantyStartDate,
+                warrantyEndDate = p.WarrantyEndDate,
+                maintenanceStartDate = p.MaintenanceStartDate,
+                maintenanceEndDate = p.MaintenanceEndDate,
+                rentalStartDate = p.RentalStartDate,
+                rentalEndDate = p.RentalEndDate,
+                expectedMaintenanceAmount = p.ExpectedMaintenanceAmount,
+                currentPM = p.CurrentPM
+            }).ToList();
         }
 
         /// <summary>
         /// 依據產品ID取得單筆產品資料
         /// </summary>
         [HttpGet("{compId}/{contractId}/{productId}")]
-        public IActionResult GetContractProduct(string compId, string contractId, string productId)
+        public MdOA20ProductInfo GetContractProduct(string compId, string contractId, string productId)
         {
-            try
-            {
-                var _products = BlOA20.GetProducts(compId, contractId);
-                var _product = _products?.FirstOrDefault(p => p.ProductId == productId);
+            var _products = BlOA20.GetProducts(compId, contractId);
+            var _product = _products?.FirstOrDefault(p => p.ProductId == productId);
+            if (_product == null)
+                return null;
 
-                if (_product == null)
-                    return NotFound(new { success = false, message = "產品不存在" });
-
-                return Ok(new { success = true, data = new {
-                    productId = _product.ProductId,
-                    productName = _product.ProductName,
-                    productCategory = _product.ProductCategory,
-                    salesAmount = _product.SalesAmount,
-                    externalCost = _product.ExternalCost,
-                    warrantyStartDate = _product.WarrantyStartDate,
-                    warrantyEndDate = _product.WarrantyEndDate,
-                    maintenanceStartDate = _product.MaintenanceStartDate,
-                    maintenanceEndDate = _product.MaintenanceEndDate,
-                    rentalStartDate = _product.RentalStartDate,
-                    rentalEndDate = _product.RentalEndDate,
-                    expectedMaintenanceAmount = _product.ExpectedMaintenanceAmount,
-                    currentPM = _product.CurrentPM
-                }});
-            }
-            catch (Exception ex)
+            return new MdOA20ProductInfo
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
+                productId = _product.ProductId,
+                productName = _product.ProductName,
+                productCategory = _product.ProductCategory,
+                salesAmount = _product.SalesAmount,
+                externalCost = _product.ExternalCost,
+                warrantyStartDate = _product.WarrantyStartDate,
+                warrantyEndDate = _product.WarrantyEndDate,
+                maintenanceStartDate = _product.MaintenanceStartDate,
+                maintenanceEndDate = _product.MaintenanceEndDate,
+                rentalStartDate = _product.RentalStartDate,
+                rentalEndDate = _product.RentalEndDate,
+                expectedMaintenanceAmount = _product.ExpectedMaintenanceAmount,
+                currentPM = _product.CurrentPM
+            };
         }
 
         /// <summary>
         /// 取得產品/服務下拉輔助
         /// </summary>
         [HttpGet("help/{compId}/{queryText}/pages/{pageNo}")]
-        public IActionResult GetProductHelp(string compId, string queryText, [DARange(1, int.MaxValue)] int pageNo)
+        public MdOA20ProductP GetProductHelp(string compId, string queryText, [DARange(1, int.MaxValue)] int pageNo)
         {
-            try
+            // 註：此端點預留介面，目前回傳空 paging；如需實際查詢請補上對應 BLL 方法。
+            return new MdOA20ProductP
             {
-                return Ok(new { success = true, data = new { codes = new List<object>(), paging = new { totalRows = 0 } } });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
+                codes = new List<MdOA20ProductInfo>(),
+                paging = new MdPagingInfo { totalRows = 0 }
+            };
         }
 
         /// <summary>
         /// 取得產品服務類別下拉
         /// </summary>
         [HttpGet("categories/{compId}")]
-        public IActionResult GetProductCategories(string compId)
+        public List<MdCodeOption> GetProductCategories(string compId)
         {
-            try
-            {
-                var _categories = new List<object> {
-                    new { value = "SW", label = "套裝軟體" },
-                    new { value = "HW", label = "硬體" },
-                    new { value = "RE", label = "租用" },
-                    new { value = "TS-H", label = "技術服務(時數型)" },
-                    new { value = "TS-N", label = "技術服務(非時數型)" },
-                    new { value = "MA", label = "維護" },
-                    new { value = "CU", label = "訂製" },
-                    new { value = "OT", label = "其他" }
-                };
-
-                return Ok(new { success = true, data = _categories });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { success = false, message = ex.Message });
-            }
+            return new List<MdCodeOption> {
+                new MdCodeOption { value = "SW", label = "套裝軟體" },
+                new MdCodeOption { value = "HW", label = "硬體" },
+                new MdCodeOption { value = "RE", label = "租用" },
+                new MdCodeOption { value = "TS-H", label = "技術服務(時數型)" },
+                new MdCodeOption { value = "TS-N", label = "技術服務(非時數型)" },
+                new MdCodeOption { value = "MA", label = "維護" },
+                new MdCodeOption { value = "CU", label = "訂製" },
+                new MdCodeOption { value = "OT", label = "其他" }
+            };
         }
 
         #endregion
@@ -154,105 +129,106 @@ namespace MGUIBAAPI.Controllers.OA
         #region " 產品/服務維護 "
 
         /// <summary>
-        /// 新增產品/服務
+        /// 新增資料
         /// </summary>
         [HttpPost("insert")]
-        public IActionResult InsertContractProduct([FromBody] MdContractProduct_i productData)
+        public MdApiMessage Insert([FromBody] MdContractProduct_i obj)
         {
+            if (obj == null)
+                return HttpContext.Response.InsertFailed(new Exception("請提供產品資料"));
+
+            var _data = new GUIStd.DAL.OA.Models.Private.OA21.MdOA21_i {
+                OA2101 = obj.CompId ?? string.Empty,
+                OA2102 = obj.ContractId ?? string.Empty,
+                OA2103 = obj.ProductId ?? string.Empty,
+                OA2104 = obj.SalesAmount,
+                OA2105 = obj.ExternalCostAmount,
+                OA2106 = obj.WarrantyStartDate ?? string.Empty,
+                OA2107 = obj.WarrantyEndDate ?? string.Empty,
+                OA2108 = obj.ExpectedMaintenanceAmount,
+                OA2109 = obj.CurrentPM ?? string.Empty,
+                OA2110 = obj.ProductCategory ?? string.Empty,
+                OA2111 = obj.ProductName ?? string.Empty,  // 修正 BUG-002
+                OA2112 = obj.MaintenanceStartDate ?? string.Empty,
+                OA2113 = obj.MaintenanceEndDate ?? string.Empty,
+                OA2114 = obj.RentalStartDate ?? string.Empty,
+                OA2115 = obj.RentalEndDate ?? string.Empty
+            };
+
             try
             {
-                if (productData == null)
-                    return BadRequest(new { success = false, message = "請提供產品資料" });
-
-                var _data = new GUIStd.DAL.OA.Models.Private.OA21.MdOA21_i {
-                    OA2101 = productData.CompId ?? string.Empty,
-                    OA2102 = productData.ContractId ?? string.Empty,
-                    OA2103 = productData.ProductId ?? string.Empty,
-                    OA2104 = productData.SalesAmount,
-                    OA2105 = productData.ExternalCostAmount,
-                    OA2106 = productData.WarrantyStartDate ?? string.Empty,
-                    OA2107 = productData.WarrantyEndDate ?? string.Empty,
-                    OA2108 = productData.ExpectedMaintenanceAmount,
-                    OA2109 = productData.CurrentPM ?? string.Empty,
-                    OA2110 = productData.ProductCategory ?? string.Empty,
-                    OA2112 = productData.MaintenanceStartDate ?? string.Empty,
-                    OA2113 = productData.MaintenanceEndDate ?? string.Empty,
-                    OA2114 = productData.RentalStartDate ?? string.Empty,
-                    OA2115 = productData.RentalEndDate ?? string.Empty
-                };
-
                 var _result = BlOA20.InsertProduct(_data, ControlName);
 
                 if (!_result.Success)
-                    return BadRequest(new { success = false, message = _result.Message });
+                    return HttpContext.Response.InsertFailed(new Exception(_result.Message));
 
-                return Ok(new {
-                    success = true,
-                    message = _result.Message,
-                    data = new { productId = productData.ProductId }
-                });
+                return HttpContext.Response.InsertSuccess(1, responseData: obj.ProductId);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                return HttpContext.Response.InsertFailed(ex);
             }
         }
 
         /// <summary>
-        /// 更新產品/服務
+        /// 更新資料
         /// </summary>
         [HttpPut("{compId}/{contractId}/{productId}")]
-        public IActionResult UpdateContractProduct(string compId, string contractId, string productId, [FromBody] MdContractProduct_u productData)
+        public MdApiMessage Update(string compId, string contractId, string productId, [FromBody] MdContractProduct_u obj)
         {
+            // 註：MdContractProduct_u 不含鍵值欄位，鍵值僅在 URL 路徑，故不適用 UpdateFailedWhenKeyNotSame。
+            if (obj == null)
+                return HttpContext.Response.UpdateFailed(new Exception("請提供產品資料"));
+
+            var _data = new GUIStd.DAL.OA.Models.Private.OA21.MdOA21_u {
+                // 修正 BUG-002：補 ProductName (OA2111) 與 ProductCategory (OA2110) 的寫入
+                OA2104 = obj.SalesAmount,
+                OA2105 = obj.ExternalCostAmount,
+                OA2106 = obj.WarrantyStartDate ?? string.Empty,
+                OA2107 = obj.WarrantyEndDate ?? string.Empty,
+                OA2108 = obj.ExpectedMaintenanceAmount,
+                OA2109 = obj.CurrentPM ?? string.Empty,
+                OA2110 = obj.ProductCategory ?? string.Empty,
+                OA2111 = obj.ProductName ?? string.Empty,
+                OA2112 = obj.MaintenanceStartDate ?? string.Empty,
+                OA2113 = obj.MaintenanceEndDate ?? string.Empty,
+                OA2114 = obj.RentalStartDate ?? string.Empty,
+                OA2115 = obj.RentalEndDate ?? string.Empty
+            };
+
             try
             {
-                if (productData == null)
-                    return BadRequest(new { success = false, message = "請提供產品資料" });
-
-                var _data = new GUIStd.DAL.OA.Models.Private.OA21.MdOA21_u {
-                    OA2104 = productData.SalesAmount,
-                    OA2105 = productData.ExternalCostAmount,
-                    OA2106 = productData.WarrantyStartDate ?? string.Empty,
-                    OA2107 = productData.WarrantyEndDate ?? string.Empty,
-                    OA2108 = productData.ExpectedMaintenanceAmount,
-                    OA2109 = productData.CurrentPM ?? string.Empty,
-                    OA2112 = productData.MaintenanceStartDate ?? string.Empty,
-                    OA2113 = productData.MaintenanceEndDate ?? string.Empty,
-                    OA2114 = productData.RentalStartDate ?? string.Empty,
-                    OA2115 = productData.RentalEndDate ?? string.Empty
-                };
-
                 var _result = BlOA20.UpdateProduct(compId, contractId, productId, _data, ControlName);
 
                 if (!_result.Success)
-                    return BadRequest(new { success = false, message = _result.Message });
+                    return HttpContext.Response.UpdateFailed(new Exception(_result.Message));
 
-                return Ok(new { success = true, message = _result.Message });
+                return HttpContext.Response.UpdateSuccess(1);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                return HttpContext.Response.UpdateFailed(ex);
             }
         }
 
         /// <summary>
-        /// 刪除產品/服務
+        /// 刪除資料
         /// </summary>
         [HttpDelete("{compId}/{contractId}/{productId}")]
-        public IActionResult DeleteContractProduct(string compId, string contractId, string productId)
+        public MdApiMessage Delete(string compId, string contractId, string productId)
         {
             try
             {
                 var _result = BlOA20.DeleteProduct(compId, contractId, productId, ControlName);
 
                 if (!_result.Success)
-                    return BadRequest(new { success = false, message = _result.Message });
+                    return HttpContext.Response.DeleteFailed(new Exception(_result.Message));
 
-                return Ok(new { success = true, message = _result.Message });
+                return HttpContext.Response.DeleteSuccess(1);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                return HttpContext.Response.DeleteFailed(ex);
             }
         }
 
@@ -264,16 +240,16 @@ namespace MGUIBAAPI.Controllers.OA
         /// 批次新增產品/服務
         /// </summary>
         [HttpPost("batch/{compId}/{contractId}")]
-        public IActionResult BatchInsertProducts(string compId, string contractId, [FromBody] List<MdContractProduct_i> products)
+        public MdApiMessage BatchInsertProducts(string compId, string contractId, [FromBody] List<MdContractProduct_i> products)
         {
+            if (products == null || products.Count == 0)
+                return HttpContext.Response.InsertFailed(new Exception("請提供產品清單"));
+
+            var _errors = new List<string>();
+            var _successCount = 0;
+
             try
             {
-                if (products == null || products.Count == 0)
-                    return BadRequest(new { success = false, message = "請提供產品清單" });
-
-                var _errors = new List<string>();
-                var _successCount = 0;
-
                 foreach (var _product in products)
                 {
                     var _data = new GUIStd.DAL.OA.Models.Private.OA21.MdOA21_i {
@@ -287,6 +263,7 @@ namespace MGUIBAAPI.Controllers.OA
                         OA2108 = _product.ExpectedMaintenanceAmount,
                         OA2109 = _product.CurrentPM ?? string.Empty,
                         OA2110 = _product.ProductCategory ?? string.Empty,
+                        OA2111 = _product.ProductName ?? string.Empty,  // 修正 BUG-002
                         OA2112 = _product.MaintenanceStartDate ?? string.Empty,
                         OA2113 = _product.MaintenanceEndDate ?? string.Empty,
                         OA2114 = _product.RentalStartDate ?? string.Empty,
@@ -300,15 +277,15 @@ namespace MGUIBAAPI.Controllers.OA
                         _errors.Add($"{_product.ProductId}: {_result.Message}");
                 }
 
-                return Ok(new {
-                    success = _errors.Count == 0,
-                    message = $"成功新增 {_successCount} 筆，失敗 {products.Count - _successCount} 筆",
-                    errors = _errors
-                });
+                if (_errors.Count > 0)
+                    return HttpContext.Response.InsertFailed(new Exception(
+                        $"批次新增產品/服務部分失敗。成功 {_successCount} 筆，失敗 {products.Count - _successCount} 筆。"));
+
+                return HttpContext.Response.InsertSuccess(_successCount);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                return HttpContext.Response.InsertFailed(ex);
             }
         }
 
@@ -316,18 +293,71 @@ namespace MGUIBAAPI.Controllers.OA
         /// 重新計算產品/服務的預計維護費
         /// </summary>
         [HttpPost("{compId}/{contractId}/recalc-maintenance")]
-        public IActionResult RecalculateMaintenance(string compId, string contractId)
+        public MdApiMessage RecalculateMaintenance(string compId, string contractId)
         {
             try
             {
-                return Ok(new { success = true, message = "重新計算完成" });
+                // 註：實際重算邏輯應由 BLL 提供；目前端點介面對齊 PATTERN。
+                return HttpContext.Response.UpdateSuccess(0);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                return HttpContext.Response.UpdateFailed(ex);
             }
         }
 
         #endregion
     }
+
+    #region " 輔助 DTO "
+
+    /// <summary>
+    /// 合約產品/服務資訊
+    /// </summary>
+    public class MdOA20ProductInfo
+    {
+        public string productId { get; set; }
+        public string productName { get; set; }
+        public string productCategory { get; set; }
+        public decimal salesAmount { get; set; }
+        public decimal externalCost { get; set; }
+        public string warrantyStartDate { get; set; }
+        public string warrantyEndDate { get; set; }
+        public string maintenanceStartDate { get; set; }
+        public string maintenanceEndDate { get; set; }
+        public string rentalStartDate { get; set; }
+        public string rentalEndDate { get; set; }
+        public decimal expectedMaintenanceAmount { get; set; }
+        public string currentPM { get; set; }
+    }
+
+    /// <summary>
+    /// 合約產品/服務分頁結果
+    /// </summary>
+    public class MdOA20ProductP
+    {
+        public List<MdOA20ProductInfo> codes { get; set; }
+        public MdPagingInfo paging { get; set; }
+    }
+
+    /// <summary>
+    /// 分頁資訊
+    /// </summary>
+    public class MdPagingInfo
+    {
+        public int currentPage { get; set; }
+        public int rowsPerPage { get; set; }
+        public int totalRows { get; set; }
+    }
+
+    /// <summary>
+    /// 通用代碼選項（value/label）
+    /// </summary>
+    public class MdCodeOption
+    {
+        public string value { get; set; }
+        public string label { get; set; }
+    }
+
+    #endregion
 }

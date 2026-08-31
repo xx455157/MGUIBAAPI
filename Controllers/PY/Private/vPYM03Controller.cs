@@ -55,11 +55,15 @@ namespace MGUIBAAPI.Controllers.PY
         /// </summary>
         /// <param name="query">查詢參數</param>
         /// <param name="pageNo">頁次</param>
+        /// <param name="rowsPerPage">一頁筆數；0 時由 SINI 取得</param>
         /// <returns>出勤資料分頁結果</returns>
         [HttpPost("query/pages/{pageNo}")]
-        public MdPYM03QueryList_p GetQueryData([FromBody] MdPYM03Query query, [DARange(1, int.MaxValue)] int pageNo)
+        public MdPYM03QueryList_p GetQueryData(
+            [FromBody] MdPYM03Query query,
+            [DARange(1, int.MaxValue)] int pageNo,
+            int rowsPerPage = 0)
         {
-            return BlPYM03.GetQueryData(query, ControlName, pageNo);
+            return BlPYM03.GetQueryData(query, ControlName, pageNo, ref rowsPerPage);
         }
 
         /// <summary>

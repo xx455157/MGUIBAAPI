@@ -24,7 +24,7 @@ using GUIStd.Models;
 namespace MGUIBAAPI.Controllers.PY
 {
     /// <summary>
-    /// 【需經驗證】PY系統補充保費計算控制器(Pattern開發模式)
+    /// PY 系統補充保費計算控制器
     /// </summary>
     [Route("py/[controller]")]
     public class CalculationController : GUIAppAuthController
@@ -39,7 +39,7 @@ namespace MGUIBAAPI.Controllers.PY
 
         #endregion
 
-        #region " 補充保費 - 查詢資料 "
+        #region " 共用函式 - 查詢資料 "
 
         /// <summary>
         /// 取得分頁補充保費資料
@@ -60,10 +60,6 @@ namespace MGUIBAAPI.Controllers.PY
             return BlCalculation.GetData(companyId, payrollDate, calculationType, employeeSocialId, ControlName, pageNo);
         }
 
-        #endregion
-
-        #region " 補充保費 - 執行計算 "
-
         /// <summary>
         /// 執行補充保費計算 - 回傳計算結果 (不寫入資料庫)
         /// </summary>
@@ -79,9 +75,9 @@ namespace MGUIBAAPI.Controllers.PY
             [FromQuery] string employeeSocialId)
         {
             var _results = BlCalculation.CalculateSupplementalInsurance(
-                companyId, 
-                payrollDate, 
-                calculationType, 
+                companyId,
+                payrollDate,
+                calculationType,
                 employeeSocialId
             );
 
@@ -100,39 +96,6 @@ namespace MGUIBAAPI.Controllers.PY
         }
 
         /// <summary>
-        /// 儲存補充保費計算結果 - 批次寫入資料庫
-        /// </summary>
-        /// <param name="request">計算結果請求物件</param>
-        /// <returns>系統規範訊息物件</returns>
-        [HttpPost("supplemental/save")]
-        public MdApiMessage SaveCalculationResults([FromBody] MdSupplementalInsuranceSaveRequest request)
-        {
-            try
-            {
-                // 呼叫商業元件執行儲存作業
-                int _result = BlCalculation.SaveCalculationResults(
-                    request.CalculationResults,
-                    request.CompanyId,
-                    request.PayrollDate,
-                    request.CalculationType,
-                    request.EmployeeSocialId
-                );
-
-                // 回應前端儲存成功訊息
-                return HttpContext.Response.InsertSuccess(_result);
-            }
-            catch (Exception ex)
-            {
-                // 回應前端儲存失敗訊息
-                return HttpContext.Response.InsertFailed(ex);
-            }
-        }
-
-        #endregion
-
-        #region " 補充保費 - 查詢參數 "
-
-        /// <summary>
         /// 查詢健保補充保費參數
         /// 比照 VB6: Get_HealthFee
         /// </summary>
@@ -146,5 +109,34 @@ namespace MGUIBAAPI.Controllers.PY
 
         #endregion
 
+        #region " 共用函式 - 異動資料 "
+
+        /// <summary>
+        /// 儲存補充保費計算結果 - 批次寫入資料庫
+        /// </summary>
+        /// <param name="request">計算結果請求物件</param>
+        /// <returns>系統規範訊息物件</returns>
+        [HttpPost("supplemental/save")]
+        public MdApiMessage SaveCalculationResults([FromBody] MdSupplementalInsuranceSaveRequest request)
+        {
+            try
+            {
+                int _result = BlCalculation.SaveCalculationResults(
+                    request.CalculationResults,
+                    request.CompanyId,
+                    request.PayrollDate,
+                    request.CalculationType,
+                    request.EmployeeSocialId
+                );
+
+                return HttpContext.Response.InsertSuccess(_result);
+            }
+            catch (Exception ex)
+            {
+                return HttpContext.Response.InsertFailed(ex);
+            }
+        }
+
+        #endregion
     }
 }

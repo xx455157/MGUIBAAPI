@@ -13,6 +13,7 @@ using GUICore.Web.Controllers;
 using GUIStd.BLL.AllNewHTL;
 using GUIStd.DAL.AllNewHTL.Models;
 using System.Collections.Generic;
+using GUIStd.Attributes;
 
 #endregion
 
@@ -73,7 +74,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         /// <param name="rowsPerPage">每頁資料筆數</param>
         /// <returns>分頁房間資料模型物件</returns>
         [HttpPost("query/pages/{pageNo}")]
-        public MdRoom_p GetDataForPaging(MdRoom_q obj, int pageNo, [FromQuery] int rowsPerPage)
+        public MdRoom_p GetDataForPaging(MdRoom_q obj, [DARange(1, int.MaxValue)] int pageNo, [FromQuery] int rowsPerPage)
         {
             return BlHTHK.GetDataForPaging(obj, pageNo, rowsPerPage);
         }

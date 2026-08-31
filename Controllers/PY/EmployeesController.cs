@@ -130,6 +130,29 @@ namespace MGUIBAAPI.Controllers.PY
         }
 
         /// <summary>
+        /// 取得完整員工分頁輔助資料（可選公司別；queryText 模糊比對員工編號／身分證／姓名；回傳含 PA05）
+        /// </summary>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="companyId">公司別（可選；有值時篩選 PA01）</param>
+        /// <param name="queryText">查詢文字（可選）</param>
+        /// <param name="sortByName">是否依名稱排序</param>
+        /// <returns>分頁輔助資料模型物件</returns>
+        [HttpGet("help/full/pages/{pageNo}")]
+        public MdEmployee_p GetHelpPagingFull(
+            [DARange(1, int.MaxValue)] int pageNo,
+            [FromQuery] string companyId = null,
+            [FromQuery] string queryText = null,
+            [FromQuery] bool sortByName = false)
+        {
+            return BlPA.GetHelpPagingFull(
+                companyId ?? string.Empty,
+                queryText ?? string.Empty,
+                ControlName,
+                pageNo,
+                sortByName);
+        }
+
+        /// <summary>
         /// 判斷身分證字號是否已存在（供 vMCP10 身分證字號變更檢核，比照 GUI EmployeesController IsExist）
         /// </summary>
         /// <param name="socialId">身分證字號路徑參數</param>

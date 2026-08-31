@@ -1,4 +1,4 @@
-﻿#region " 匯入的名稱空間：Framework "
+#region " 匯入的名稱空間：Framework "
 
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -19,6 +19,7 @@ using GUIStd.BLL.AllNewHTL;
 using GUIStd.DAL.AllNewGUI.Models;
 using GUIStd.DAL.AllNewHTL.Models;
 using GUIStd.DAL.AllNewHTL.Models.Private.vHTSetup;
+using GUIStd.DAL.AllNewHTL.Models.Private.CodeTable;
 
 #endregion
 
@@ -34,6 +35,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE
         
         private BlConfigs BlConfigs => new BlConfigs(ClientContent);
         private BlHTCA BlHTCA => new BlHTCA(ClientContent);
+        private BlCodes BlCodes => new BlCodes(ClientContent);
 
 
         #endregion
@@ -87,6 +89,27 @@ namespace MGUIBAAPI.Controllers.HTLPRE
             return BlConfigs.GetHTSetupUiDataRoomType();
         }
 
+        [HttpGet("page/maid/amenities")]
+        public MdHTSetupAmenities_h GetUIDataForAmenities()
+        {
+            return BlConfigs.GetHTSetupUiDataAmenities();
+        }
+
+        [HttpGet("page/maid/minibar")]
+        public MdHTSetupMinibars_h GetUIDataForMinibars()
+        {
+            return BlConfigs.GetHTSetupUiDataMinibars();
+        }
+
+        /// <summary>
+        /// 房務設備主檔維護 UIData
+        /// </summary>
+        [HttpGet("page/repair/equipment")]
+        public MdHTSetupRepairEquipment_h GetUIDataForRepairEquipment()
+        {
+            return BlConfigs.GetHTSetupUiDataRepairEquipment();
+        }
+
         #endregion
 
         #region " 共用函式 - 報表查詢 "
@@ -111,6 +134,25 @@ namespace MGUIBAAPI.Controllers.HTLPRE
                 return BadRequest(HttpContext.Response.SendReportFailed(_info.ErrorMessage));
 
             // 回傳查無符合條件資料
+            return BadRequest(HttpContext.Response.SendReportNoQueryData());
+        }
+
+        /// <summary>
+        /// 產生代碼彙總 Region 報表檔
+        /// </summary>
+        /// <param name="obj">查詢條件的模型物件</param>
+        /// <returns>報表檔案的資料流</returns>
+        [HttpPost("report/code")]
+        public async Task<IActionResult> GetCodeReport([FromBody] MdReportQuery<MdCodeHT_q> obj)
+        {
+            var _info = await BlCodes.GetReport(obj);
+
+            if (_info.Contents != null)
+                return HttpContext.Response.SendFile(_info.Contents, _info.FileName);
+
+            if (!string.IsNullOrWhiteSpace(_info.ErrorMessage))
+                return BadRequest(HttpContext.Response.SendReportFailed(_info.ErrorMessage));
+
             return BadRequest(HttpContext.Response.SendReportNoQueryData());
         }
 

@@ -33,15 +33,22 @@ namespace MGUIBAAPI.Controllers.PY
 
         /// <summary>
         /// 查詢 個人考勤資料
-        /// 
         /// </summary>
         /// <param name="startDate">查詢起日</param>
         /// <param name="endDate">查詢迄日</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="funcName">功能名稱</param>
+        /// <param name="rowsPerPage">一頁筆數；0 時由 SINI 取得</param>
         /// <returns></returns>
         [HttpGet("query/{startDate}/{endDate}/pages/{pageNo}")]
-        public MdPersonalAttendReport_p GetData(string startDate, string endDate ,[DARange(1, int.MaxValue)] int pageNo, [FromQuery] string funcName)
+        public MdPersonalAttendReport_p GetData(
+            string startDate,
+            string endDate,
+            [DARange(1, int.MaxValue)] int pageNo,
+            [FromQuery] string funcName,
+            int rowsPerPage = 0)
         {
-            return BlPersonalAttend.GetData(startDate, endDate, funcName, pageNo);
+            return BlPersonalAttend.GetData(startDate, endDate, funcName, pageNo, ref rowsPerPage);
         }
 
         #endregion

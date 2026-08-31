@@ -12,7 +12,8 @@ using GUICore.Web.Extensions;
 using GUIStd.Attributes;
 using GUIStd.Models;
 using GUIStd.DAL.AllNewPY.Models;
-using GUIStd.BLL.AllNewPY.Share;
+using GUIStd.BLL.AllNewPY;
+using GUIStd.Extensions;
 
 #endregion
 
@@ -38,7 +39,7 @@ namespace MGUIBAAPI.Controllers.PY
         #region " 共用函式 - 查詢資料 "
 
         /// <summary>
-        /// 取得假日設定資料
+        /// 取得假日設定資料 (目前未使用)
         /// </summary>
         /// <returns>假日設定模型物件</returns>
         [HttpGet("help")]
@@ -51,15 +52,16 @@ namespace MGUIBAAPI.Controllers.PY
         /// 取得指定年度的假日設定（用於設定畫面）
         /// </summary>
         /// <param name="year">年度 (YYYY)</param>
+        /// <param name="asTemplate">true=上年度範本：帶出 SM08=1/2 實際日期；false=當年：帶出 SM02=B</param>
         /// <returns>年度假日設定模型物件</returns>
         [HttpGet("year/{year}")]
-        public MdHolidayYearSettings GetYearSettings(string year)
+        public MdHolidayYearSettings GetYearSettings(string year, [FromQuery] bool asTemplate = false)
         {
-            return BlSM.GetYearSettings(year);
+            return BlSM.GetYearSettings(year, asTemplate);
         }
 
         /// <summary>
-        /// 取得分頁休假日設定資料
+        /// 取得分頁休假日設定資料 (目前未使用)
         /// </summary>
         /// <param name="startDate">開始日期(YYYYMMDD)</param>
         /// <param name="endDate">結束日期(YYYYMMDD)</param>
@@ -103,7 +105,7 @@ namespace MGUIBAAPI.Controllers.PY
         }
 
         /// <summary>
-        /// 修改假日設定資料
+        /// 修改假日設定資料 (目前未使用)
         /// </summary>
         /// <param name="date">日期 (SM01)</param>
         /// <param name="obj">更新請求物件</param>
@@ -111,6 +113,9 @@ namespace MGUIBAAPI.Controllers.PY
         [HttpPut("{date}")]
         public MdApiMessage Update(string date, [FromBody] MdHolidaySchedule obj)
         {
+            if (!date.EqualsIgnoreCase(obj.SM01))
+                return HttpContext.Response.UpdateFailedWhenKeyNotSame();
+
             try
             {
                 // 呼叫商業元件執行修改作業
@@ -127,7 +132,7 @@ namespace MGUIBAAPI.Controllers.PY
         }
 
         /// <summary>
-        /// 刪除假日設定資料
+        /// 刪除假日設定資料 (目前未使用)
         /// </summary>
         /// <param name="date">日期 (SM01)</param>
         /// <returns>系統規範訊息物件</returns>

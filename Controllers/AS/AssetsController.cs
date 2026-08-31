@@ -1,14 +1,17 @@
 ﻿#region " 匯入的名稱空間：Framework "
 
-using System;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 #endregion
 
 #region " 匯入的名稱空間：GoldenUp "
 
 using GUICore.Web.Controllers;
+using GUICore.Web.Attributes;
 using GUICore.Web.Extensions;
 using GUIStd;
 using GUIStd.Models;
@@ -21,9 +24,6 @@ using GUIStd.DAL.AllNewAS.Models.Private.vASR02;
 using BLL_GUI = GUIStd.BLL.GUI;
 using DAL_BASE_MODEL = GUIStd.DAL.Base.Models;
 using GUIStd.DAL.AllNewAS.Models.Private.Assets;
-using GUICore.Web.Attributes;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
 
 #endregion
 

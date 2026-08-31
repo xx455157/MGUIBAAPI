@@ -92,12 +92,34 @@ namespace MGUIBAAPI.Controllers.NetPY
         /// <param name="dates">起始日期</param>
         /// <param name="datee">截止日期</param>
         /// <param name="pageNo">查詢頁次</param>
+        /// <param name="rowsPerPage">每頁筆數（0＝依功能 SINI 預設）</param>
         /// <returns>加班單資料模型泛型集合物件</returns>
         [HttpGet("pages/{employeeId}/{dates}/{datee}/{pageNo}")]
         public MdOvertimeApplications_p GetDataByPage(string employeeId, string dates, string datee, 
-            [DARange(1, int.MaxValue)] int pageNo)
+            [DARange(1, int.MaxValue)] int pageNo, int rowsPerPage = 0)
         {
-            return BlOvertimeApplications.GetDataByPage(employeeId, dates, datee, pageNo, ControlName);
+            return BlOvertimeApplications.GetDataByPage(employeeId, dates, datee, pageNo, rowsPerPage, ControlName);
+        }
+
+        /// <summary>
+        /// 取得加班單申請紀錄(分頁，含簽核狀態篩選)
+        /// </summary>
+        /// <param name="employeeId">員工編號</param>
+        /// <param name="query">查詢條件（日期／分頁／statuses）</param>
+        /// <returns>加班單資料模型泛型集合物件</returns>
+        [HttpPost("pages/{employeeId}")]
+        public MdOvertimeApplications_p GetDataByPage(string employeeId, [FromBody] MdOvertimeApplications_q query)
+        {
+            if (query == null) return null;
+
+            return BlOvertimeApplications.GetDataByPage(
+                employeeId,
+                query.Dates,
+                query.Datee,
+                query.PageNo,
+                query.RowsPerPage,
+                ControlName,
+                query.Statuses);
         }
 
         /// <summary>

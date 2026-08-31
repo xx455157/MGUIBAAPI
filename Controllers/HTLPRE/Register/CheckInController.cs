@@ -50,13 +50,16 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Register
         #region " 共用函式 - 取得住客資料 "
 
         /// <summary>
-        /// 取得當日入住清單
-        /// </summary>        
-        /// <returns>當日入住資料模型物件</returns>
-        [HttpGet("arrivallist")]
-        public IEnumerable<MdArrivalList> GetData([FromQuery] string checkInDate = "")
+        /// 取得分頁頁次的當日入住清單
+        /// </summary>
+        /// <param name="checkInDate">入住日期</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="rowsPerPage">一頁筆數</param>
+        /// <returns>分頁當日入住資料模型物件</returns>
+        [HttpGet("arrivallist/pages/{pageNo}")]
+        public MdArrivalList_p GetData([DARange(1, int.MaxValue)] int pageNo, [FromQuery] string checkInDate = "", int rowsPerPage = 0)
         {
-            return BlArrivalList.GetArrivalListData(checkInDate);
+            return BlArrivalList.GetArrivalListData(checkInDate: checkInDate, funcName: ControlName, pageNo: pageNo, rowsPerPage: ref rowsPerPage);
         }        
 
         /// <summary>
@@ -82,15 +85,17 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Register
         /// <param name="roomNo">房號</param>
         /// <param name="ciStatus">入住狀態</param>
         /// <param name="pageNo">查詢頁次</param>
+        /// <param name="rowsPerPage">一頁筆數</param>
         /// <returns>分頁住客資料模型物件</returns>
         [HttpGet("visitdata/{checkInDate}/pages/{pageNo}")]
         public MdVisitData_p GetVisitData([FromRoute] string checkInDate, [DARange(1, int.MaxValue)] int pageNo,
-            [FromQuery] string guestName = "", [FromQuery] string mobileNo = "", [FromQuery] string eMail = "", 
-            [FromQuery] string rvNo = "", [FromQuery] string contractCompany = "", [FromQuery] string roomNo = "",
-            [FromQuery] string ciStatus = "")
+            int rowsPerPage = 0, [FromQuery] string guestName = "", [FromQuery] string mobileNo = "",
+            [FromQuery] string eMail = "", [FromQuery] string rvNo = "", [FromQuery] string contractCompany = "",
+            [FromQuery] string roomNo = "", [FromQuery] string ciStatus = "")
         {            
             return BlCheckIn.GetDataByPage(VS03:checkInDate, GR03:guestName,CN09: mobileNo,CN10: eMail, RV01:rvNo, 
-                RV10:contractCompany,VS06: roomNo,VS17: ciStatus, currentLang: CurrentLang, funcName: ControlName, pageNo: pageNo);
+                RV10:contractCompany,VS06: roomNo,VS17: ciStatus, currentLang: CurrentLang, funcName: ControlName, 
+                pageNo: pageNo, rowsPerPage: ref rowsPerPage);
         }
 
         /// <summary>

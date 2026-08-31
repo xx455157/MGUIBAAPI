@@ -65,12 +65,15 @@ namespace MGUIBAAPI.Controllers.NetPY
         /// </summary>
         /// <param name="employeeId">員工編號</param>
         /// <param name="pageNo">查詢頁次</param>
+        /// <param name="shiftDate">指定排班日期</param>
+        /// <param name="shiftId">指定班別代號</param>
+        /// <param name="rowsPerPage">每頁筆數（0＝依功能 SINI 預設）</param>
         /// <returns></returns>
         [HttpGet("pages/missingpunch/{employeeId}/{pageNo}")]
         public MdMissingPunch_p GetMissingPunchData(string employeeId, [DARange(1, int.MaxValue)] int pageNo,
-        [FromQuery] string shiftDate = "", [FromQuery] string shiftId = "")
+        [FromQuery] string shiftDate = "", [FromQuery] string shiftId = "", int rowsPerPage = 0)
         {
-            return BlLeaveApplications.GetMissingPunchData(employeeId, pageNo, ControlName, shiftDate, shiftId);
+            return BlLeaveApplications.GetMissingPunchData(employeeId, pageNo, ControlName, shiftDate, shiftId, rowsPerPage);
         }
 
 

@@ -38,14 +38,23 @@ namespace MGUIBAAPI.Controllers.AS
         #region " 共用函式 - 查詢資料 "
 
         /// <summary>
-        /// 取得資產存放位置
+        /// 取得資產存放位置清單（可選 Like 條件＋分頁；空白條件＝全檔）
         /// </summary>
+        /// <param name="queryParams">查詢條件（storedLocation）</param>
         /// <param name="pageNo">頁次</param>
-        /// <returns></returns>
-        [HttpGet("getdata/pages/{pageNo}")]
-        public MdCode_p GetData([DARange(1, int.MaxValue)] int pageNo)
+        /// <param name="rowsPerPage">每頁筆數（0 時由 SINI 取得）</param>
+        /// <returns>存放位置分頁資料</returns>
+        [HttpPost("getdata/{pageNo}")]
+        public MdCode_p GetData(
+            [FromBody] MdASM26_q queryParams,
+            [DARange(1, int.MaxValue)] int pageNo,
+            int rowsPerPage = 0)
         {
-            return BlStoredLocation.GetData(funcName: ControlName, pageNo: pageNo);
+            return BlStoredLocation.GetData(
+                queryParams,
+                funcName: ControlName,
+                pageNo: pageNo,
+                rowsPerPage: rowsPerPage);
         }
 
         /// <summary>

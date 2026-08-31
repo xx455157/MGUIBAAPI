@@ -16,7 +16,7 @@ using GUIStd.DAL.AllNewGUI.Models;
 namespace MGUIBAAPI.Controllers.GUI
 {
 	/// <summary>
-	/// 【需經驗證】公告資料資料控制器
+	/// 【需經驗證】公告資料控制器
 	/// </summary>
 	[Route("gui/[controller]")]
 	public class AnnounceController : GUIAppAuthController
@@ -40,14 +40,14 @@ namespace MGUIBAAPI.Controllers.GUI
         /// <param name="departmentId">部門別</param>
         /// <param name="content">內容</param>
         /// <param name="pageNo">分頁</param>
+        /// <param name="rowsPerPage">一頁筆數</param>
         /// <returns></returns>
-     
         [HttpGet("pages/{pageNo}")]
         public MdAnnounces_p GetData([FromQuery] string categoryId, [FromQuery] string startDate,
             [FromQuery] string endDate, [FromQuery] string departmentId, [FromQuery] string content,
-            [DARange(1, int.MaxValue)] int pageNo)
+            [DARange(1, int.MaxValue)] int pageNo, int rowsPerPage = 0)
         {
-            return BlA86.GetData(categoryId , startDate, endDate , departmentId , content, ControlName, pageNo );
+            return BlA86.GetData(categoryId , startDate, endDate , departmentId , content, ControlName, pageNo, ref rowsPerPage);
         }
         #endregion
     }

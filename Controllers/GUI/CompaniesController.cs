@@ -60,16 +60,19 @@ namespace MGUIBAAPI.Controllers.GUI
         /// 取得分頁頁次的公司基本資料
         /// </summary>
         /// <param name="pageNo">查詢頁次</param>
+        /// <param name="rowsPerPage">一頁筆數（0 時由 SINI 取得）</param>
         /// <param name="queryParams">查詢參數</param>
         /// <returns>分頁公司資料模型物件</returns>
         [HttpPost("query/pages/{pageNo}")]
-		public MdCompanies_p GetData([DARange(1, int.MaxValue)] int pageNo,[FromBody] MdCompany_q queryParams)
+		public MdCompanies_p GetData([DARange(1, int.MaxValue)] int pageNo, [FromBody] MdCompany_q queryParams, int rowsPerPage = 0)
 		{
             return BlA01.GetData(
-				string.IsNullOrWhiteSpace(queryParams.A0101) ? "" : queryParams.A0101, 
-				string.IsNullOrWhiteSpace(queryParams.A0102) ? "" : queryParams.A0102, 
+				string.IsNullOrWhiteSpace(queryParams.A0101) ? "" : queryParams.A0101,
+				string.IsNullOrWhiteSpace(queryParams.A0102) ? "" : queryParams.A0102,
+				string.IsNullOrWhiteSpace(queryParams.A0111) ? "" : queryParams.A0111,
 				ControlName,
-				pageNo
+				pageNo,
+				rowsPerPage
 			);
 		}
 
@@ -123,8 +126,8 @@ namespace MGUIBAAPI.Controllers.GUI
 				int _result = BlA01.ProcessInsert(obj);
 
                 // 回應前端新增成功訊息
-                //return HttpContext.Response.InsertSuccess(_result);
-                MdCompanies_p _A01s = BlA01.GetData(A0101:obj.A0101,A0102:"",  funcName:ControlName , pageNo:1);
+                //return HttpContext.Response.InsertSuccess(_result); S150629061
+                MdCompanies_p _A01s = BlA01.GetData(A0101: obj.A0101, A0102: "", A0111: "", funcName: ControlName, pageNo: 1);
 				if (_A01s.datas != null) {
 					if (_A01s.datas.Count() > 0)
 					{
@@ -165,7 +168,7 @@ namespace MGUIBAAPI.Controllers.GUI
                 int _result = BlA01.ProcessUpdate(companyId, obj);
 
                 // 回應前端修改成功訊息
-                MdCompanies_p _A01s = BlA01.GetData(A0101: obj.A0101, A0102: "", funcName: ControlName, pageNo: 1);
+                MdCompanies_p _A01s = BlA01.GetData(A0101: obj.A0101, A0102: "", A0111: "", funcName: ControlName, pageNo: 1);
                 if (_A01s.datas != null)
                 {
                     if (_A01s.datas.Count() > 0)

@@ -35,19 +35,20 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Reservations
         private BlHTRV BlHTRV => new BlHTRV(ClientContent);
         private BlBookings BlBookings => new BlBookings(ClientContent);
         private BlRoomsAnalysis BlRoomsAnalysis => new BlRoomsAnalysis(ClientContent);
+        private BlHTRT BlHTRT => new BlHTRT(ClientContent);
 
         #endregion
 
         #region " 共用函式 -  查詢資料 "
 
         /// <summary>
-        /// 取得飯店可用房型
+        /// 取得飯店可用房型清單
         /// </summary>
-        /// <returns></returns>
+        /// <returns>房型資料泛型集合物件（含房型代碼、中英文名稱及主檔欄位）</returns>
         [HttpGet("roomTypes")]
-        public object GetRoomTypes()
+        public IEnumerable<GUIStd.DAL.AllNewHTL.Models.MdRoomType> GetRoomTypes()
         {
-            return null;
+            return BlHTRT.GetData();
         }
 
         /// <summary>

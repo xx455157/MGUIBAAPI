@@ -1,8 +1,7 @@
 #region " 匯入的名稱空間：Framework "
 
-using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 #endregion
 
@@ -10,26 +9,18 @@ using Microsoft.AspNetCore.Mvc;
 
 using GUICore.Web.Controllers;
 using GUICore.Web.Extensions;
-using GUIStd;
-using GUIStd.Models;
 using GUIStd.BLL.AllNewHTL;
 using GUIStd.DAL.AllNewHTL.Models;
+using GUIStd.Models;
 
 #endregion
 
-namespace MGUIBAAPI.Controllers.HTLPRE.Register
+namespace MGUIBAAPI.Controllers.HTLPRE.Config
 {
     /// <summary>
     /// 班別資料控制器
     /// </summary>
-    /// <remarks>
-    /// 用於 vHTRGM09（客房平面圖）等前端頁面的班別資料查詢與異動。
-    /// 
-    /// API 端點：
-    ///   - GET  htlpre/register/Shifts - 取得當前班別（參數：bkDate, typeCode, workstation）
-    ///   - POST htlpre/register/Shifts - 新增/儲存班別設定
-    /// </remarks>
-    [Route("htlpre/register/[controller]")]
+    [Route("htlpre/Config/[controller]")]
     public class ShiftsController : GUIAppAuthController
     {
         #region " 私用屬性 "
@@ -44,33 +35,16 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Register
         #region " 共用函式 - 查詢資料 "
 
         /// <summary>
-        /// 取得飯店班別
+        /// 取得班別資料
         /// </summary>
         /// <param name="bkDate">會計日期（格式: YYYYMMDD）</param>
         /// <param name="typeCode">類型代碼</param>
         /// <param name="workstation">工作站/機台</param>
-        /// <returns>班別代碼（如 'A', 'B', 'C'...），若無資料則回傳空字串</returns>
-        [HttpGet()]
-        public string GetShift([FromQuery] string bkDate, [FromQuery] string typeCode, [FromQuery] string workstation)
+        /// <returns>班別代碼</returns>
+        [HttpGet("GetShift")]
+        public string Get([FromQuery] string bkDate, [FromQuery] string typeCode, [FromQuery] string workstation)
         {
-            try
-            {
-                // 防呆：若 bkDate 為空，使用當天日期
-                if (string.IsNullOrWhiteSpace(bkDate))
-                {
-                    bkDate = DateTime.Now.ToString("yyyyMMdd");
-                }
-
-                // 呼叫商業邏輯層取得班別
-                string shift = BlHTSH.GetHotelShift(bkDate, typeCode, workstation);
-                return shift ?? string.Empty;
-            }
-            catch (Exception ex)
-            {
-                // 發生錯誤時記錄並回傳空字串
-                Console.WriteLine($"[ShiftsController] GetShift error: {ex.Message}");
-                return string.Empty;
-            }
+            return BlHTSH.GetHotelShift(bkDate, typeCode, workstation);
         }
 
         #endregion
@@ -87,7 +61,7 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Register
         /// {
         ///     "SH02": "20251030",  // 會計日期
         ///     "SH03": "",          // 時間代碼（可選）
-        ///     "SH04": "I",         // 類型代碼
+        ///     "SH04": "O",         // 類型代碼
         ///     "SH05": "03",        // 固定為 '03'（班別類型）
         ///     "SH08": "A",         // 班別代碼
         ///     "SH09": "STATION01", // 工作站/機台
@@ -120,7 +94,6 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Register
                 return HttpContext.Response.InsertFailed(ex);
             }
         }
-
         #endregion
     }
 }

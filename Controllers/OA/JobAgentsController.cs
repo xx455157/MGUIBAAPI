@@ -75,16 +75,20 @@ namespace MGUIBAAPI.Controllers.OA
             return BlA95.GetSHelpApprover(queryText, ControlName, pageNo);
         }
 
-        /// <summary>0  
+        /// <summary>
         /// 查詢 工作代理人 資料
         /// </summary>
         /// <param name="query">查詢參數</param>
         /// <param name="pageNo">頁數</param>
+        /// <param name="rowsPerPage">一頁筆數；0 時由 SINI 取得</param>
         /// <returns></returns>
         [HttpPost("query/pages/{pageNo}")]
-        public MdQueryResult_p GetQueryData([FromBody] MdQueryParams query, [DARange(1, int.MaxValue)] int pageNo)
+        public MdQueryResult_p GetQueryData(
+            [FromBody] MdQueryParams query,
+            [DARange(1, int.MaxValue)] int pageNo,
+            int rowsPerPage = 0)
         {
-            return BlJobAgents.GetQueryData(query, ControlName, pageNo);
+            return BlJobAgents.GetQueryData(query, ControlName, pageNo, rowsPerPage);
         }
 
         /// <summary>

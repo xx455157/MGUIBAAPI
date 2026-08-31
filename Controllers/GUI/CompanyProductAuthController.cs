@@ -45,15 +45,17 @@ namespace MGUIBAAPI.Controllers.GUI
         /// <param name="systemId">系統別（可選，如：GL、AS、PY）</param>
         /// <param name="companyId">公司別（可選）</param>
         /// <param name="employeeId">員工編號（可選）</param>
+        /// <param name="rowsPerPage">前端指定每頁筆數（可選；<= 0 時改用功能設定）</param>
         /// <returns>分頁公司產品授權資料模型物件</returns>
         [HttpGet("help/pages/{pageNo}")]
         public MdCompanyProductAuth_p GetHelp(
             [DARange(0, int.MaxValue)] int pageNo,
             [FromQuery] string systemId = "",
             [FromQuery] string companyId = "",
-            [FromQuery] string employeeId = "")
+            [FromQuery] string employeeId = "",
+            [FromQuery] int rowsPerPage = 0)
         {
-            return BlMCF12.GetCompanyProductAuthHelp(ControlName, pageNo, systemId, companyId, employeeId);
+            return BlMCF12.GetCompanyProductAuthHelp(ControlName, pageNo, systemId, companyId, employeeId, rowsPerPage);
         }
 
         /// <summary>

@@ -1,0 +1,61 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../NexusForce"
+		},
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../../Packages/SRC"
+		}
+	],
+	"settings": {
+		"auto-run-command.rules": [
+			{
+				"condition": "always",
+				"command": "extension.liveServer.goOnline",
+				"message": "Running Go Live"
+			}
+		],
+		"liveServer.settings.NoBrowser": false,
+		"liveServer.settings.fullReload": true,
+		"liveServer.settings.root": "/FrontSite/Dev/GUIVueBA/",
+		"liveServer.settings.port": 23535,
+		"terminal.integrated.defaultProfile.windows": "PowerShell",
+		"terminal.integrated.profiles.windows": {
+			"PowerShell": {
+				"source": "PowerShell",
+				"icon": "terminal-powershell",
+				"args": [
+					"-NoExit",
+					"-NoProfile",
+					"-Command",
+					"chcp 65001 | Out-Null"
+				]
+			},
+			"Command Prompt": {
+				"path": [
+					"${env:windir}\\System32\\cmd.exe"
+				],
+				"args": [
+					"/K",
+					"chcp 65001"
+				],
+				"icon": "terminal-cmd"
+			}
+		},
+		"terminal.integrated.automationProfile.windows": {
+			"path": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass"
+			]
+		},
+		"workbench.editorAssociations": {
+			"*.md": "cweijan.markdownViewer"
+		},
+		"liveServer.settings.multiRootWorkspaceName": "NexusForce"
+	}
+}

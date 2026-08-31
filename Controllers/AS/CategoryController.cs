@@ -59,10 +59,11 @@ namespace MGUIBAAPI.Controllers.AS
         /// </summary>
         /// <param name="queryParams"></param>
         /// <param name="pageNo">查詢頁次</param>
+        /// <param name="rowsPerPage">一頁筆數（0 時由 SINI 取得）</param>
         [HttpPost("getdata/{pageNo}")]
-        public MdASM11_p GetData([FromBody] MdASM11_q queryParams, [DARange(1, int.MaxValue)] int pageNo)
+        public MdASM11_p GetData([FromBody] MdASM11_q queryParams, [DARange(1, int.MaxValue)] int pageNo, int rowsPerPage = 0)
         {
-            return BlCategory.GetData(queryParams, funcName: ControlName, pageNo: pageNo);
+            return BlCategory.GetData(queryParams, funcName: ControlName, pageNo: pageNo, rowsPerPage: rowsPerPage);
         }
 
 

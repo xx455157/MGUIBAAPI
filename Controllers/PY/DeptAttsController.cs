@@ -36,14 +36,20 @@ namespace MGUIBAAPI.Controllers.PY
 
         /// <summary>
         /// 查詢 部門出勤資料
-        /// 
         /// </summary>
         /// <param name="obj">查詢參數</param>
+        /// <param name="pageNo">查詢頁次</param>
+        /// <param name="funcName">功能名稱</param>
+        /// <param name="rowsPerPage">一頁筆數；0 時由 SINI 取得</param>
         /// <returns></returns>
         [HttpPost("query/pages/{pageNo}")]
-        public MdDeptAttsReport_p GetData([FromBody] MdDeptAttsQuery obj, [DARange(1, int.MaxValue)] int pageNo, [FromQuery] string funcName)
+        public MdDeptAttsReport_p GetData(
+            [FromBody] MdDeptAttsQuery obj,
+            [DARange(1, int.MaxValue)] int pageNo,
+            [FromQuery] string funcName,
+            int rowsPerPage = 0)
         {
-            return BlDeptAtts.GetData(obj, funcName, pageNo);
+            return BlDeptAtts.GetData(obj, funcName, pageNo, ref rowsPerPage);
         }
 
         #endregion

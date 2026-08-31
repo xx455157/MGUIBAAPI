@@ -25,7 +25,7 @@ using GUIStd.DAL.AllNewIV.DAO.Private;
 namespace MGUIBAAPI.Controllers.IV
 {
     /// <summary>
-    /// vMCF01 公司基本資料管理 程式資料控制器
+    /// vIVM16 發票號碼設定 程式資料控制器
     /// </summary>
     [Route("iv/private/[controller]")]
 	public class vIVM16Controller : GUIAppAuthController
@@ -80,11 +80,15 @@ namespace MGUIBAAPI.Controllers.IV
         /// </summary>
         /// <param name="pageNo">查詢頁次</param>
         /// <param name="queryParams">查詢參數</param>
+        /// <param name="rowsPerPage">每頁筆數（0 表示使用 SINI 設定值）</param>
         /// <returns>分頁發票設定資料模型物件</returns>
         [HttpPost("query/pages/{pageNo}")]
-        public MdIVM16QueryList_p GetQueryData([DARange(1, int.MaxValue)] int pageNo, [FromBody] MdIVM16Query queryParams)
+        public MdIVM16QueryList_p GetQueryData(
+            [DARange(1, int.MaxValue)] int pageNo,
+            [FromBody] MdIVM16Query queryParams,
+            int rowsPerPage = 0)
         {
-            return BlIVM16.GetQueryData(queryParams, ControlName, pageNo);
+            return BlIVM16.GetQueryData(queryParams, ControlName, pageNo, rowsPerPage);
         }
 
         /// <summary>

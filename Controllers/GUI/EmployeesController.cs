@@ -93,6 +93,15 @@ namespace MGUIBAAPI.Controllers.GUI
         }
 
         /// <summary>
+        /// 取得密碼輸入政策（安控層級最小/最大長度、是否僅數字；供 vMCF08 前端檢核）
+        /// </summary>
+        [HttpGet("passwordpolicy")]
+        public MdPasswordPolicy GetPasswordPolicy()
+        {
+            return BlA08.GetPasswordPolicy();
+        }
+
+        /// <summary>
         /// 判斷員工編號是否已存在（供新增時檢核）
         /// </summary>
         /// <param name="employeeId">員工編號路徑參數</param>
@@ -241,7 +250,7 @@ namespace MGUIBAAPI.Controllers.GUI
                 return HttpContext.Response.InsertFailed(new ArgumentException("employeeId required"));
             try
             {
-                int _a08 = BlA08.ProcessInsert(obj.Employee);
+                int _a08 = BlA08.ProcessInsert(obj.Employee, this.FrontKeyFile);
                 int _a62 = BlA62.SaveEmployeeGroups(obj.Employee.A0801, obj.GroupIds ?? new string[0]);
                 return HttpContext.Response.InsertSuccess(_a08 + _a62);
             }
@@ -327,7 +336,7 @@ namespace MGUIBAAPI.Controllers.GUI
                 return HttpContext.Response.UpdateFailedWhenKeyNotSame();
             try
             {
-                int _a08 = BlA08.ProcessUpdate(employeeId, obj.Employee);
+                int _a08 = BlA08.ProcessUpdate(employeeId, obj.Employee, this.FrontKeyFile);
                 int _a62 = BlA62.SaveEmployeeGroups(employeeId, obj.GroupIds ?? new string[0]);
                 return HttpContext.Response.UpdateSuccess(_a08 + _a62);
             }

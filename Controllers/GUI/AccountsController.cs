@@ -41,15 +41,15 @@ namespace MGUIBAAPI.Controllers.GUI
         /// 取得分頁頁次的輔助資料
         /// </summary>
         /// <param name="queryText">搜尋資料的關鍵字，允許空白</param>
-        /// <param name="CompanyId">公司別</param>
+        /// <param name="companyId">公司別</param>
         /// <param name="pageNo">查詢頁次</param>
         /// <param name="sortByName">是否依名稱排序</param>
         /// <returns>分頁輔助資料模型物件</returns>
-        [HttpGet("helpv2/pages/{pageNo}/{CompanyId}")]
-        public MdCode_p GetSHelpv2([DARange(1, int.MaxValue)] int pageNo, string CompanyId, [FromQuery] string queryText,
+        [HttpGet("helpv2/pages/{pageNo}/{companyId}")]
+        public MdCode_p GetSHelpv2([DARange(1, int.MaxValue)] int pageNo, string companyId, [FromQuery] string queryText,
             [FromQuery] bool sortByName)
         {
-            return BlA15.GetSHelpv2(CompanyId, new MdHelpPaging
+            return BlA15.GetSHelpv2(companyId, new MdHelpPaging
             {
                 QueryText = queryText,
                 FuncName = this.ControlName,

@@ -40,19 +40,10 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Register
         [HttpGet("dailyguestlist")]
 		public MdStatusRoomLists DailyGuestList()
 		{
-            Logging.Logger.LogDebug("[vHTRGM09] DailyGuestList API 呼叫開始");
 
-            try
-            {
                 var result = BlRoomStays.DailyGuestList();
-                Logging.Logger.LogDebug($"[vHTRGM09] DailyGuestList API 完成");
                 return result;
-            }
-            catch (Exception ex)
-            {
-                Logging.Logger.LogError($"[vHTRGM09] DailyGuestList API 發生錯誤：{ex.Message}", ex);
-                throw;
-            }
+
         }
 
         #endregion

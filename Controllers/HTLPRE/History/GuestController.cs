@@ -39,12 +39,13 @@ namespace MGUIBAAPI.Controllers.HTLPRE.Register
         /// 取得分頁頁次的旅客清單
         /// </summary>        
         /// <param name="pageNo">查詢頁次</param>
+        /// <param name="rowsPerPage">一頁筆數</param>
         /// <param name="obj">查詢條件物件</param>
         /// <returns>分頁旅客資料模型物件</returns>
         [HttpPost("guestdata/pages/{pageNo}")]
-        public MdGuestData_p GetData([DARange(1, int.MaxValue)] int pageNo,[FromBody] MdGuestData_q obj)
+        public MdGuestData_p GetData([DARange(1, int.MaxValue)] int pageNo, [FromBody] MdGuestData_q obj, int rowsPerPage = 0)
         {
-            return BlGuest.GetDataByPage(obj: obj, currentLang: CurrentLang, funcName: ControlName, pageNo: pageNo);            
+            return BlGuest.GetDataByPage(obj: obj, currentLang: CurrentLang, funcName: ControlName, pageNo: pageNo, rowsPerPage: ref rowsPerPage);            
 		}
 
         /// <summary>

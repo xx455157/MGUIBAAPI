@@ -37,11 +37,13 @@ namespace MGUIBAAPI.Controllers.PY
         {
             var _attendanceOptions = BlAnnualAttAppr.GetAttendanceOptions();
             var _companyOptions = BlAnnualAttAppr.GetCompanyOptions();
+            var _lessThanOneDay2Options = BlAnnualAttAppr.GetPartTimeLessThanOneDayOptions();
 
             return new CmPYConfigs()
             {
                 AttendanceOptions = _attendanceOptions,
-                CompanyOptions = _companyOptions
+                CompanyOptions = _companyOptions,
+                LessThanOneDay2Options = _lessThanOneDay2Options
             };
         }
 
@@ -61,6 +63,9 @@ namespace MGUIBAAPI.Controllers.PY
 
                 case "annualleave":
                     return BlAnnualAttAppr.GetAnnualLeaveConfig();
+
+                case "annualleavept":
+                    return BlAnnualAttAppr.GetPartTimeAnnualLeaveConfig();
 
                 case "overtime":
                     return BlAnnualAttAppr.GetOvertimeConfig();
@@ -94,6 +99,11 @@ namespace MGUIBAAPI.Controllers.PY
                 case "annualleave":
                     var _annualleave = data.ToObject<MdAnnualLeaveConfig>();
                     result = BlAnnualAttAppr.UpdateAnnualLeaveConfig(_annualleave);
+                    break;
+
+                case "annualleavept":
+                    var _annualleaveparttime = data.ToObject<MdPTAnnualLeaveConfig>();
+                    result = BlAnnualAttAppr.UpdatePartTimeAnnualLeaveConfig(_annualleaveparttime);
                     break;
 
                 case "overtime":
